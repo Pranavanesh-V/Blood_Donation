@@ -1,0 +1,28 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.BloodDonation" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="android:statusBarColor" tools:targetApi="21">?attr/colorPrimary</item>
+        <item name="android:background" tools:targetApi="21">?attr/background</item>
+    </style>
+
+    <style name="Theme.BloodDonation" parent="Base.Theme.BloodDonation" />
+
+    <style name="page8.Blood_Donation" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:textColorHint">@color/white</item>
+        <item name="boxBackgroundColor">@color/box_col</item>
+    </style>
+
+    <style name="page71.Blood_Donation" parent="Theme.MaterialComponents.NoActionBar">
+
+        <item name="colorPrimary">@color/white</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="colorOutline">@color/box_col</item>
+    </style>
+    <style name="MyTextInputLayout_FloatingLabel" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <!-- Set the color of the floating label text -->
+        <item name="android:textColor">@color/white</item>
+    </style>
+</resources>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/Head1"
+        android:layout_width="306dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="448dp"
+        android:gravity="center|top"
+        android:text="@string/Heading1"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="@+id/pages1"
+        app:layout_constraintHorizontal_bias="0.376"
+        app:layout_constraintStart_toStartOf="@+id/pages1"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck" />
+
+    <TextView
+        android:id="@+id/Desc1"
+        android:layout_width="328dp"
+        android:layout_height="47dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/Desc1"
+        android:textColor="@color/black1"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Head1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/Head1"
+        app:layout_constraintTop_toBottomOf="@+id/Head1"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="TextContrastCheck,TextSizeCheck" />
+
+    <ImageView
+        android:id="@+id/pages1"
+        android:layout_width="275dp"
+        android:layout_height="301dp"
+        android:importantForAccessibility="no"
+        app:layout_constraintBottom_toBottomOf="@+id/Desc1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.475"
+        app:srcCompat="@drawable/introimg1"
+        tools:ignore="ImageContrastCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

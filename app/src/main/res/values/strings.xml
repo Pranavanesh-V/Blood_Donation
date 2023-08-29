@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">Blood Donation</string>
+    <string name="blood_donation">Blood Donation</string>
+    <string name="register">Register</string>
+    <string name="pipe_Sys">|</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sing">A single drop of blood can make a huge difference </string>
+    <string name="ex_abcd_gma">EX: Abcd@gmail.com</string>
+    <string name="email_id">Email ID</string>
+    <string name="password">PASSWORD</string>
+    <string name="b_d">Blood \nDonation</string>
+    <string name="submit">Submit</string>
+    <string name="Heading1">Find Donors</string>
+    <string name="Heading2">Contact Your Donor</string>
+    <string name="Heading3">   \t\tBe a Hero \nBe a Donor</string>
+    <string name="Desc1">Efforts to make the zoo experience more enjoyable for everyone.</string>
+    <string name="continue1">Continue</string>
+    <string name="todo">todo\n</string>
+    <string name="Skip">Skip-></string>
+    <string name="successfully_Logged">Successfully Logged In</string>
+    <string name="forgot_password">forgot password?</string>
+    <string name="forgot_password1">Forgot Password</string>
+    <string name="ops">Opps. It happens to the best of us. Input \nyour Phone Number to fix the issue.</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="authy_verif">Authy Verification</string>
+    <string name="cop">Copy the verification code in your authy \napplication to verify this account recovery</string>
+    <string name="confirm_password">CONFIRM PASSWORD</string>
+    <string name="set_pass">Set new password</string>
+    <string name="new_pass">Enter your new password below and check \nthe hint while setting it.</string>
+    <string name="user_name">USER NAME</string>
+    <string name="name">NAME</string>
+    <string name="will_to_be_a_donor">Willing to be a donor?</string>
+    <string name="declaration">Declaration</string>
+    <string name="i_agree_to_the_above_declaration">I Agree to the above Declaration</string>
+    <string name="decline">Decline</string>
+    <string name="agree">Agree</string>
+    <string name="form">WHEREAS the OWNER herein is absolutely entitled to the property, land and building. bearing Door No.979, Old No.501, P.11. Road, Arumbakkam, Chennai 600 106, and the TENANT herein approached the OWNER to let out a portion of the property, the Second-floor of the said premises with 600, Sq.ft., built up area, more  fully described in the schedule hereunder, On monthly rental basis and the OWNER herein has agreed to let out the same, on the terms and conditions, as agreed by the parties hereto for a period of 2 years (two years), and it is by way of renewal, subject to the terms and conditions set out hereunder.
+NOW THIS RENTAL AGREEMENT WITNESSETH AS FOLLOWS:
+That the property agreed to be let out is the portion of the premises, 2nd floor with 600 Sq.ft., built up area at Door No.979, Old No.501, P.H. Road, Arumbakkam, Chennai-600 106, described in the schedule hereunder.
+That the monthly rent payable shall be at RS.12000/- (Rupees Twelve Thousand only) and the charges for the amenities provided shall be at RS.1000/- (Rupees One Thousand only) and the said consolidated sum of RS.13000/-(Rupees Thirteen Thousand only) shall be payable on or before 15th day of every succeeding English Calendar month.
+That the TENANT has on 26.06.2022, paid a sum of Rs.1,00,000/- (Rupees One Lakh only) paid in cash
+That it is hereby specifically agreed that the Rental Advance Cum Security Deposit shall not carry any interest and the same shall be returnable or adjustable at the time of termination of tenancy or vacating the tenanted premises and handing over vacant possession to the OWNER, whichever is later.
+
+That the TENANT shall not commit any default in payment of monthly rents and further the option shall be with the OWNER to evict/dispossess the TENANT, if they commit default continuously for two months.
+
+OWNER                                                                                                                                                   TENANT
+</string>
+    <string name="blood_group">Blood Group</string>
+    <string name="address1">Address 1</string>
+    <string name="state">State</string>
+    <string name="emergency_phone_no">Emergency Phone No</string>
+    <string name="city">City or Town</string>
+    <string name="phone_no">Phone No</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="gender">Gender</string>
+    <string name="abc_gmail_com">abc@gmail.com</string>
+
+</resources>

@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "553837001292",
+    "firebase_url": "https://mysql-3bcb9-default-rtdb.firebaseio.com",
+    "project_id": "mysql-3bcb9",
+    "storage_bucket": "mysql-3bcb9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553837001292:android:c592dc2e5bc480f63052e9",
+        "android_client_info": {
+          "package_name": "com.example.blooddonation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553837001292-ngsu7akpdr07ueko8pof4brtkbq69dtn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn1prHZqws3ii6gGnF5MZwMeFfDeUKX6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "553837001292-ngsu7akpdr07ueko8pof4brtkbq69dtn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553837001292:android:3e900c1817079e5d3052e9",
+        "android_client_info": {
+          "package_name": "com.example.mysql"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553837001292-ngsu7akpdr07ueko8pof4brtkbq69dtn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn1prHZqws3ii6gGnF5MZwMeFfDeUKX6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "553837001292-ngsu7akpdr07ueko8pof4brtkbq69dtn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
