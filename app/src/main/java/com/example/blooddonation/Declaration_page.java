@@ -23,12 +23,18 @@ public class Declaration_page extends AppCompatActivity {
         decline=findViewById(R.id.Decline);
         submit=findViewById(R.id.pro);
 
+        Intent i=getIntent();
+        String pass=i.getStringExtra("Password");
+        String name=i.getStringExtra("Name");
+
         submit.setOnClickListener(view -> {
             if (decline.isChecked())
             {
                 Intent intent=new Intent(Declaration_page.this, Full_Registration_page.class);
                 form="no";
                 intent.putExtra("form",form);
+                intent.putExtra("Password",pass);
+                intent.putExtra("Name",name);
                 startActivity(intent);
             }
             else if (agree.isChecked())
@@ -36,6 +42,8 @@ public class Declaration_page extends AppCompatActivity {
                 Intent intent=new Intent(Declaration_page.this, Full_Registration_page.class);
                 form="yes";
                 intent.putExtra("form",form);
+                intent.putExtra("Password",pass);
+                intent.putExtra("Name",name);
                 startActivity(intent);
             }
             else

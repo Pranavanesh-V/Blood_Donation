@@ -46,7 +46,7 @@ That the TENANT shall not commit any default in payment of monthly rents and fur
 OWNER                                                                                                                                                   TENANT
 </string>
     <string name="blood_group">Blood Group</string>
-    <string name="address1">Address 1</string>
+    <string name="address1">Address</string>
     <string name="state">State</string>
     <string name="emergency_phone_no">Emergency Phone No</string>
     <string name="city">City or Town</string>

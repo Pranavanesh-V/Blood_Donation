@@ -86,6 +86,8 @@ public class Register extends AppCompatActivity {
                         //data's must be passed her to next activity
                         //putExtra method to be used
                         Intent intent=new Intent(Register.this, Declaration_page.class);
+                        intent.putExtra("Password",S_password);
+                        intent.putExtra("Name",S_name);
                         startActivity(intent);
                     }
                     else

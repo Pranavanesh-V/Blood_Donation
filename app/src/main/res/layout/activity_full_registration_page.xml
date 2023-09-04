@@ -66,17 +66,24 @@
         android:hint="@string/blood_group"
         app:boxStrokeColor="@color/box_col"
         app:hintTextColor="@color/white"
+        android:clickable="true"
+        app:boxBackgroundMode="outline"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.92"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.388">
+        app:layout_constraintVertical_bias="0.388"
+        tools:ignore="KeyboardInaccessibleWidget">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/B_g"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:inputType="textPersonName"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:inputType="text"
             android:textColor="@color/white"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck,DuplicateClickableBoundsCheck"
             tools:layout_editor_absoluteX="26dp"
@@ -176,7 +183,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:inputType="textPersonName"
+            android:inputType="phone"
             android:textColor="@color/white"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
             tools:layout_editor_absoluteX="26dp"
@@ -201,7 +208,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:inputType="textPersonName"
+            android:inputType="phone"
             android:textColor="@color/white"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
             tools:layout_editor_absoluteX="26dp"
@@ -275,25 +282,25 @@
 
 
     <RadioGroup
+        android:id="@+id/Group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="horizontal"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.864"
         app:layout_constraintHorizontal_bias="0.9">
 
         <RadioButton
-            android:id="@+id/Agree"
+            android:id="@+id/male"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:text="@string/male" />
 
         <RadioButton
-            android:id="@+id/Decline"
+            android:id="@+id/female"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/female" />
