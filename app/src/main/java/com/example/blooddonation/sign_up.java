@@ -83,7 +83,7 @@ public class sign_up extends AppCompatActivity {
                         String S_password1;
                         if (datasnapshot.child(S_email_id).exists())
                         {
-                            S_password1 = datasnapshot.child(S_email_id).child("password").getValue(String.class);
+                            S_password1 = datasnapshot.child(S_email_id).child("Password").getValue(String.class);
                             if (S_password1.equals(S_password))
                             {
                                 //intro pages check

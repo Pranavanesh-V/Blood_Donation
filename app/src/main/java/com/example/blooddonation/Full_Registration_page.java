@@ -5,19 +5,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
@@ -28,7 +32,7 @@ public class Full_Registration_page extends AppCompatActivity {
     Button submit;
     TextInputLayout name, email, blood_g, address, city, state, phone, emergency, dob;//dob not included need to see on that
     RadioButton male, female;
-    String S_DOB,S_name,S_email,S_blood_g,S_address,S_city,S_state,S_phone,S_emergency,S_gender,form,Password,Name;
+    String S_DOB="",S_name="",S_email="",S_blood_g="",S_address="",S_city="",S_state="",S_phone="",S_emergency="",S_gender="",form="",Password="",Name="";
     TextInputEditText E_dob,B_G;
     RadioGroup group;
     @Override
@@ -51,28 +55,15 @@ public class Full_Registration_page extends AppCompatActivity {
         female=findViewById(R.id.female);
         E_dob=findViewById(R.id.E_dob);
         B_G=findViewById(R.id.B_g);
-        B_G.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopupMenu();
-            }
-        });
-        E_dob.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDatePicker();
-            }
-        });
+        B_G.setOnClickListener(view -> showPopupMenu());
+        E_dob.setOnClickListener(view -> showDatePicker());
 
-        group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                // Check which radio button is selected
-                RadioButton selectedRadioButton = findViewById(i);
+        group.setOnCheckedChangeListener((radioGroup, i) -> {
+            // Check which radio button is selected
+            RadioButton selectedRadioButton = findViewById(i);
 
-                if (selectedRadioButton != null) {
-                    S_gender= selectedRadioButton.getText().toString();
-                }
+            if (selectedRadioButton != null) {
+                S_gender= selectedRadioButton.getText().toString();
             }
         });
 
@@ -116,17 +107,53 @@ public class Full_Registration_page extends AppCompatActivity {
 
 
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i=getIntent();
-                form=i.getStringExtra("form");
-                Password=i.getStringExtra("Password");
-                Name=i.getStringExtra("Name");
-                System.out.println(S_name+"\n"+S_email+"\n"+S_DOB+"\n"+S_blood_g+"\n"+S_address+"\n"+S_city+"\n"+S_state+"\n"+S_phone+"\n"+S_emergency+"\n"+S_gender+"\n"+form+"\n"+Name+"\n"+Password);
-                Intent intent=new Intent(Full_Registration_page.this, home_page.class);
-                startActivity(intent);
+        submit.setOnClickListener(view -> {
+            Intent i=getIntent();
+            form=i.getStringExtra("form");
+            Password=i.getStringExtra("Password");
+            Name=i.getStringExtra("Name");
+
+            //insert it into database
+            if (S_name.isEmpty() || S_email.isEmpty() || S_DOB.isEmpty() || S_blood_g.isEmpty() || S_address.isEmpty() || S_city.isEmpty() || S_state.isEmpty() || S_phone.isEmpty() || S_emergency.isEmpty() || S_gender.isEmpty())
+            {
+                Toast.makeText(Full_Registration_page.this,"Empty Credentials",Toast.LENGTH_SHORT).show();
             }
+            else
+            {
+                DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                        // Push data to a new unique key
+                        reference.child(S_name).child("Password").setValue(Password);
+                        reference.child(S_name).child("Email").setValue(S_email);
+                        reference.child(S_name).child("DOB").setValue(S_DOB);
+                        reference.child(S_name).child("Blood Group").setValue(S_blood_g);
+                        reference.child(S_name).child("Address").setValue(S_address);
+                        reference.child(S_name).child("City").setValue(S_city);
+                        reference.child(S_name).child("State").setValue(S_state);
+                        reference.child(S_name).child("Phone No").setValue(S_phone);
+                        reference.child(S_name).child("Emergency").setValue(S_emergency);
+                        reference.child(S_name).child("Gender").setValue(S_gender);
+                        reference.child(S_name).child("Form").setValue(form);
+
+                        //display it
+                        Toast.makeText(Full_Registration_page.this,"Account Created",Toast.LENGTH_SHORT).show();
+
+                        //Navigate to login page
+                        Intent intent=new Intent(Full_Registration_page.this, Login_page.class);
+                        startActivity(intent);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+            System.out.println(S_name+"\n"+S_email+"\n"+S_DOB+"\n"+S_blood_g+"\n"+S_address+"\n"+S_city+"\n"+S_state+"\n"+S_phone+"\n"+S_emergency+"\n"+S_gender+"\n"+form+"\n"+Name+"\n"+Password);
+
         });
         //insert the data's into firebase database
 
@@ -140,12 +167,9 @@ public class Full_Registration_page extends AppCompatActivity {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(Full_Registration_page.this,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        S_DOB = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                        E_dob.setText(S_DOB);
-                    }
+                (view, year1, monthOfYear, dayOfMonth) -> {
+                    S_DOB = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1;
+                    E_dob.setText(S_DOB);
                 }, year, month, day);
         datePickerDialog.show();
     }
@@ -163,15 +187,12 @@ public class Full_Registration_page extends AppCompatActivity {
         popupMenu.getMenu().add("Ab-");
 
         // Set an item click listener for the PopupMenu
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                // Handle item selection here
-                S_blood_g = item.getTitle().toString();
-                //((TextInputLayout) blood_g.getChildAt(0)).getEditText().setText(selectedText);
-                B_G.setText(S_blood_g);
-                return true;
-            }
+        popupMenu.setOnMenuItemClickListener(item -> {
+            // Handle item selection here
+            S_blood_g = item.getTitle().toString();
+            //((TextInputLayout) blood_g.getChildAt(0)).getEditText().setText(selectedText);
+            B_G.setText(S_blood_g);
+            return true;
         });
         popupMenu.show();
     }

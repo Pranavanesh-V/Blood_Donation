@@ -3,6 +3,7 @@ package com.example.blooddonation;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -24,6 +25,7 @@ public class Register extends AppCompatActivity {
     Button submit;
 
     TextInputLayout name,email_id,password,conf_pass;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch yes_or_no;
 
     Boolean checked=false;
@@ -83,12 +85,32 @@ public class Register extends AppCompatActivity {
                 {
                     if (yes_or_no.isChecked())
                     {
-                        //data's must be passed her to next activity
-                        //putExtra method to be used
-                        Intent intent=new Intent(Register.this, Declaration_page.class);
-                        intent.putExtra("Password",S_password);
-                        intent.putExtra("Name",S_name);
-                        startActivity(intent);
+
+                        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
+                        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+
+                                if (datasnapshot.child(S_name).exists())
+                                {
+                                    Toast.makeText(Register.this,"\t\tThe user \n Already Exists",Toast.LENGTH_SHORT).show();
+                                }
+                                else
+                                {
+                                    //data's must be passed her to next activity
+                                    //putExtra method to be used
+                                    Intent intent=new Intent(Register.this, Declaration_page.class);
+                                    intent.putExtra("Password",S_password);
+                                    intent.putExtra("Name",S_name);
+                                    startActivity(intent);
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
+
+
                     }
                     else
                     {
