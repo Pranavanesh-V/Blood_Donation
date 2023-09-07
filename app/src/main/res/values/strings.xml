@@ -57,5 +57,8 @@ OWNER                                                                           
     <string name="gender">Gender</string>
     <string name="abc_gmail_com">abc@gmail.com</string>
     <string name="search">Search</string>
+    <string name="done">Done</string>
+    <string name="age">Age</string>
+    <string name="location">Location</string>
 
 </resources>
