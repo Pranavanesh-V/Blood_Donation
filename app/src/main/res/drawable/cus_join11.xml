@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Custom shape background -->
+    <item android:drawable="@drawable/cus11" />
+
+    <!-- Image -->
+    <item
+        android:drawable="@drawable/cus_img"
+        android:top="2dp"
+        android:bottom="2dp"
+        android:height="35dp"
+        android:width="30dp"
+        android:left="2dp"
+        android:right="2dp"
+        android:gravity="center" />
+</layer-list>

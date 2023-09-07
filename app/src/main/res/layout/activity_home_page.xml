@@ -91,7 +91,7 @@
         android:id="@+id/button"
         android:layout_width="92dp"
         android:layout_height="71dp"
-        android:background="@drawable/cus_join"
+        android:background="@drawable/cus_join1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.583"
