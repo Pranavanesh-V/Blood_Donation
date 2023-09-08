@@ -62,7 +62,7 @@ public class home_page extends AppCompatActivity {
             public void onClick(View view) {
                 // Create the floating window
                 //Menu.isFocused()
-                showPopupMenuForGender();
+                showPopupMenuForMenu();
             }
         });
 
@@ -91,7 +91,7 @@ public class home_page extends AppCompatActivity {
         finishAffinity();
     }
 
-    private void showPopupMenuForGender() {
+    private void showPopupMenuForMenu() {
         PopupMenu popupMenu = new PopupMenu(this, Menu);
         popupMenu.getMenu().add("Profile");
         popupMenu.getMenu().add("Personalisation");
