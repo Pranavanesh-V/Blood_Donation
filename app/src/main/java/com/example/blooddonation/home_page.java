@@ -78,8 +78,7 @@ public class home_page extends AppCompatActivity {
         E_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //call method
-                fetchDataFromFirebase();
+
             }
         });
 
@@ -129,6 +128,8 @@ public class home_page extends AppCompatActivity {
                 S_Blood_G=data.getStringExtra("Blood_group");
                 Gender=data.getStringExtra("Gender");
                 //E_search.setText(Gender);
+                //call method
+                fetchDataFromFirebase();
             }
         }
     }
@@ -204,7 +205,7 @@ public class home_page extends AppCompatActivity {
                             else
                             {
                                 System.out.println("Only opt2 is chosen");
-                                if (Blood_g.equals("B+"))
+                                if (Blood_g.equals(S_Blood_G))
                                 {
                                     DataClass item = new DataClass(name,phone,Blood_g);
                                     itemList.add(item);
