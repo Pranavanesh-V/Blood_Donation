@@ -5,13 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -165,66 +163,60 @@ public class home_page extends AppCompatActivity {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     // Parse data from the snapshot
-                    String name = snapshot.getKey();    
-                    String Blood_g = snapshot.child("Blood Group").getValue(String.class);
-                    String phone = snapshot.child("Phone No").getValue(String.class);
+                    String name = snapshot.getKey();
 
-                    if(!Objects.isNull(Age))
-                    {
-                        if(!Objects.isNull(S_Blood_G))
-                        {
-                            if(!Objects.isNull(Gender))
-                            {
-                                System.out.println("Everything is chosen");
+                    if(snapshot.child("Blood Group").exists() && snapshot.child("Phone No").exists()) {
+                        String Blood_g = snapshot.child("Blood Group").getValue(String.class);
+                        String phone = snapshot.child("Phone No").getValue(String.class);
+                        String S_Gender=snapshot.child("Gender").getValue(String.class);
+                        if (!Objects.isNull(Age)) {
+                            if (!Objects.isNull(S_Blood_G)) {
+                                if (!Objects.isNull(Gender)) {
+                                    System.out.println("Everything is chosen");
+                                } else {
+                                    System.out.println("Only opt1 and opt2 is chosen");
+                                }
+                            } else {
+                                if (!Objects.isNull(Gender)) {
+                                    System.out.println("opt1 and opt3 is chosen");
+                                } else {
+                                    System.out.println("Only opt1 is chosen");
+                                }
                             }
-                            else
-                            {
-                                System.out.println("Only opt1 and opt2 is chosen");
-                            }
-                        }
-                        else
-                        {
-                            if(!Objects.isNull(Gender))
-                            {
-                                System.out.println("opt1 and opt3 is chosen");
-                            }
-                            else
-                            {
-                                System.out.println("Only opt1 is chosen");
+                        } else {
+                            if (!Objects.isNull(S_Blood_G)) {
+                                if (!Objects.isNull(Gender)) {
+                                    System.out.println("opt2 and opt3 is chosen");
+                                    if (Blood_g.equals(S_Blood_G) && S_Gender.equals(Gender))
+                                    {
+                                        DataClass item = new DataClass(name, phone, Blood_g);
+                                        itemList.add(item);
+                                    }
+                                } else {
+                                    System.out.println("Only opt2 is chosen");
+                                    if (Blood_g.equals(S_Blood_G)) {
+                                        DataClass item = new DataClass(name, phone, Blood_g);
+                                        itemList.add(item);
+                                    }
+                                }
+                            } else {
+                                if (!Objects.isNull(Gender)) {
+                                    System.out.println("Opt3 is only chosen");
+                                    if (Gender.equals(S_Gender)) {
+                                        DataClass item = new DataClass(name, phone, Blood_g);
+                                        itemList.add(item);
+                                    }
+                                } else {
+                                    DataClass item = new DataClass(name, phone, Blood_g);
+                                    itemList.add(item);
+                                    System.out.println("No filter is chosen\n no opt chosen");
+                                }
                             }
                         }
                     }
                     else
                     {
-                        if(!Objects.isNull(S_Blood_G))
-                        {
-                            if(!Objects.isNull(Gender))
-                            {
-                                System.out.println("opt2 and opt3 is chosen");
-                            }
-                            else
-                            {
-                                System.out.println("Only opt2 is chosen");
-                                if (Blood_g.equals(S_Blood_G))
-                                {
-                                    DataClass item = new DataClass(name,phone,Blood_g);
-                                    itemList.add(item);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if(!Objects.isNull(Gender))
-                            {
-                                System.out.println("Opt3 is only chosen");
-                            }
-                            else
-                            {
-                                DataClass item = new DataClass(name,phone,Blood_g);
-                                itemList.add(item);
-                                System.out.println("No filter is chosen\n no opt chosen");
-                            }
-                        }
+
                     }
                 }
 
