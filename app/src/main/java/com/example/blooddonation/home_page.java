@@ -3,6 +3,8 @@ package com.example.blooddonation;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -37,6 +39,7 @@ public class home_page extends AppCompatActivity {
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
     String S_Blood_G,Age,Gender;
+    String inputText;
     private RecyclerViewAdapter adapter;
     private List<DataClass> itemList;
 
@@ -93,6 +96,35 @@ public class home_page extends AppCompatActivity {
                 // Create the floating window
                 //Menu.isFocused()
                 showPopupMenuForMenu();
+            }
+        });
+
+        // Add a TextWatcher to monitor changes in the text
+        E_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Do nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Do nothing while typing
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // The function you want to execute when text changes
+                // This function will be called when the user types in the EditText
+                 inputText= editable.toString();
+                // Check if the end icon was clicked (usually for clearing text)
+            }
+        });
+
+        Search.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                fetchDataFromFirebase();
             }
         });
 
@@ -169,6 +201,7 @@ public class home_page extends AppCompatActivity {
                         String Blood_g = snapshot.child("Blood Group").getValue(String.class);
                         String phone = snapshot.child("Phone No").getValue(String.class);
                         String S_Gender=snapshot.child("Gender").getValue(String.class);
+                        String S_Location=snapshot.child("Location").getValue(String.class);
                         if (!Objects.isNull(Age)) {
                             if (!Objects.isNull(S_Blood_G)) {
                                 if (!Objects.isNull(Gender)) {
