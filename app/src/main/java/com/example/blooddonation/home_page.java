@@ -159,7 +159,7 @@ public class home_page extends AppCompatActivity {
                 Gender=data.getStringExtra("Gender");
                 //E_search.setText(Gender);
                 //call method
-                fetchDataFromFirebase();
+                //fetchDataFromFirebase();
             }
         }
     }
@@ -201,48 +201,102 @@ public class home_page extends AppCompatActivity {
                         String Blood_g = snapshot.child("Blood Group").getValue(String.class);
                         String phone = snapshot.child("Phone No").getValue(String.class);
                         String S_Gender=snapshot.child("Gender").getValue(String.class);
-                        String S_Location=snapshot.child("Location").getValue(String.class);
-                        if (!Objects.isNull(Age)) {
-                            if (!Objects.isNull(S_Blood_G)) {
-                                if (!Objects.isNull(Gender)) {
-                                    System.out.println("Everything is chosen");
+                        String S_Location=snapshot.child("State").getValue(String.class);
+
+                        if (!Objects.isNull(inputText))
+                        {
+                            if (inputText.equals(S_Location))
+                            {
+                                if (!Objects.isNull(Age)) {
+                                    if (!Objects.isNull(S_Blood_G)) {
+                                        if (!Objects.isNull(Gender)) {
+                                            System.out.println("Everything is chosen");
+                                        } else {
+                                            System.out.println("Only opt1 and opt2 is chosen");
+                                        }
+                                    } else {
+                                        if (!Objects.isNull(Gender)) {
+                                            System.out.println("opt1 and opt3 is chosen");
+                                        } else {
+                                            System.out.println("Only opt1 is chosen");
+                                        }
+                                    }
                                 } else {
-                                    System.out.println("Only opt1 and opt2 is chosen");
-                                }
-                            } else {
-                                if (!Objects.isNull(Gender)) {
-                                    System.out.println("opt1 and opt3 is chosen");
-                                } else {
-                                    System.out.println("Only opt1 is chosen");
+                                    if (!Objects.isNull(S_Blood_G)) {
+                                        if (!Objects.isNull(Gender)) {
+                                            System.out.println("opt2 and opt3 is chosen");
+                                            if (Blood_g.equals(S_Blood_G) && S_Gender.equals(Gender))
+                                            {
+                                                DataClass item = new DataClass(name, phone, Blood_g);
+                                                itemList.add(item);
+                                            }
+                                        } else {
+                                            System.out.println("Only opt2 is chosen");
+                                            if (Blood_g.equals(S_Blood_G)) {
+                                                DataClass item = new DataClass(name, phone, Blood_g);
+                                                itemList.add(item);
+                                            }
+                                        }
+                                    } else {
+                                        if (!Objects.isNull(Gender)) {
+                                            System.out.println("Opt3 is only chosen");
+                                            if (Gender.equals(S_Gender)) {
+                                                DataClass item = new DataClass(name, phone, Blood_g);
+                                                itemList.add(item);
+                                            }
+                                        } else {
+                                            DataClass item = new DataClass(name, phone, Blood_g);
+                                            itemList.add(item);
+                                            System.out.println("No filter is chosen\n no opt chosen");
+                                        }
+                                    }
                                 }
                             }
-                        } else {
-                            if (!Objects.isNull(S_Blood_G)) {
-                                if (!Objects.isNull(Gender)) {
-                                    System.out.println("opt2 and opt3 is chosen");
-                                    if (Blood_g.equals(S_Blood_G) && S_Gender.equals(Gender))
-                                    {
-                                        DataClass item = new DataClass(name, phone, Blood_g);
-                                        itemList.add(item);
+                        }
+                        else
+                        {
+                            if (!Objects.isNull(Age)) {
+                                if (!Objects.isNull(S_Blood_G)) {
+                                    if (!Objects.isNull(Gender)) {
+                                        System.out.println("Everything is chosen");
+                                    } else {
+                                        System.out.println("Only opt1 and opt2 is chosen");
                                     }
                                 } else {
-                                    System.out.println("Only opt2 is chosen");
-                                    if (Blood_g.equals(S_Blood_G)) {
-                                        DataClass item = new DataClass(name, phone, Blood_g);
-                                        itemList.add(item);
+                                    if (!Objects.isNull(Gender)) {
+                                        System.out.println("opt1 and opt3 is chosen");
+                                    } else {
+                                        System.out.println("Only opt1 is chosen");
                                     }
                                 }
                             } else {
-                                if (!Objects.isNull(Gender)) {
-                                    System.out.println("Opt3 is only chosen");
-                                    if (Gender.equals(S_Gender)) {
-                                        DataClass item = new DataClass(name, phone, Blood_g);
-                                        itemList.add(item);
+                                if (!Objects.isNull(S_Blood_G)) {
+                                    if (!Objects.isNull(Gender)) {
+                                        System.out.println("opt2 and opt3 is chosen");
+                                        if (Blood_g.equals(S_Blood_G) && S_Gender.equals(Gender))
+                                        {
+                                            DataClass item = new DataClass(name, phone, Blood_g);
+                                            itemList.add(item);
+                                        }
+                                    } else {
+                                        System.out.println("Only opt2 is chosen");
+                                        if (Blood_g.equals(S_Blood_G)) {
+                                            DataClass item = new DataClass(name, phone, Blood_g);
+                                            itemList.add(item);
+                                        }
                                     }
                                 } else {
-                                    DataClass item = new DataClass(name, phone, Blood_g);
-                                    itemList.add(item);
-                                    System.out.println("No filter is chosen\n no opt chosen");
+                                    if (!Objects.isNull(Gender)) {
+                                        System.out.println("Opt3 is only chosen");
+                                        if (Gender.equals(S_Gender)) {
+                                            DataClass item = new DataClass(name, phone, Blood_g);
+                                            itemList.add(item);
+                                        }
+                                    } else {
+                                        DataClass item = new DataClass(name, phone, Blood_g);
+                                        itemList.add(item);
+                                        System.out.println("No filter is chosen\n no opt chosen");
+                                    }
                                 }
                             }
                         }

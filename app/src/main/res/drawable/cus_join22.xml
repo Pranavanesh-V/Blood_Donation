@@ -5,12 +5,12 @@
 
     <!-- Image -->
     <item
-        android:drawable="@drawable/cus_img"
-        android:top="2dp"
-        android:bottom="2dp"
+        android:drawable="@drawable/donate"
+        android:top="5dp"
+        android:bottom="8dp"
         android:height="35dp"
         android:width="30dp"
-        android:left="2dp"
-        android:right="2dp"
+        android:left="5dp"
+        android:right="8dp"
         android:gravity="center" />
 </layer-list>
