@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class home_page extends AppCompatActivity {
+public class home_page extends AppCompatActivity{
 
     TextInputLayout Search;
     TextInputEditText E_search;
@@ -39,7 +40,8 @@ public class home_page extends AppCompatActivity {
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
     String S_Blood_G,Age,Gender;
-    String inputText;
+    String inputText="";
+    ImageView empty_res;
     private RecyclerViewAdapter adapter;
     private List<DataClass> itemList;
 
@@ -48,6 +50,7 @@ public class home_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        empty_res=findViewById(R.id.empty_res);
         button=findViewById(R.id.button);
         button2=findViewById(R.id.button2);
         Filter=findViewById(R.id.Filter);
@@ -109,13 +112,14 @@ public class home_page extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // Do nothing while typing
+                inputText= E_search.getText().toString().trim();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
                 // The function you want to execute when text changes
                 // This function will be called when the user types in the EditText
-                 inputText= editable.toString();
+                //inputText= editable.toString().trim();
                 // Check if the end icon was clicked (usually for clearing text)
             }
         });
@@ -137,11 +141,6 @@ public class home_page extends AppCompatActivity {
         itemList = new ArrayList<>();
         adapter = new RecyclerViewAdapter(itemList);
         recyclerView.setAdapter(adapter);
-        /*itemList.add(new DataClass("Item 1", "Description 1","test"));
-        itemList.add(new DataClass("Item 2", "Description 2","test"));
-        // Add more items as needed
-        // Initialize the RecyclerViewAdapter with the list of items*/
-
 
 
     }
@@ -192,6 +191,7 @@ public class home_page extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 itemList.clear(); // Clear the list to avoid duplicates
+                empty_res.setVisibility(View.INVISIBLE);
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     // Parse data from the snapshot
@@ -203,7 +203,7 @@ public class home_page extends AppCompatActivity {
                         String S_Gender=snapshot.child("Gender").getValue(String.class);
                         String S_Location=snapshot.child("State").getValue(String.class);
 
-                        if (!Objects.isNull(inputText))
+                        if (!inputText.equals(""))
                         {
                             if (inputText.equals(S_Location))
                             {
@@ -227,13 +227,13 @@ public class home_page extends AppCompatActivity {
                                             System.out.println("opt2 and opt3 is chosen");
                                             if (Blood_g.equals(S_Blood_G) && S_Gender.equals(Gender))
                                             {
-                                                DataClass item = new DataClass(name, phone, Blood_g);
+                                                DataClass item = new DataClass(name, S_Location, Blood_g);
                                                 itemList.add(item);
                                             }
                                         } else {
                                             System.out.println("Only opt2 is chosen");
                                             if (Blood_g.equals(S_Blood_G)) {
-                                                DataClass item = new DataClass(name, phone, Blood_g);
+                                                DataClass item = new DataClass(name, S_Location, Blood_g);
                                                 itemList.add(item);
                                             }
                                         }
@@ -241,11 +241,11 @@ public class home_page extends AppCompatActivity {
                                         if (!Objects.isNull(Gender)) {
                                             System.out.println("Opt3 is only chosen");
                                             if (Gender.equals(S_Gender)) {
-                                                DataClass item = new DataClass(name, phone, Blood_g);
+                                                DataClass item = new DataClass(name, S_Location, Blood_g);
                                                 itemList.add(item);
                                             }
                                         } else {
-                                            DataClass item = new DataClass(name, phone, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g);
                                             itemList.add(item);
                                             System.out.println("No filter is chosen\n no opt chosen");
                                         }
@@ -275,13 +275,13 @@ public class home_page extends AppCompatActivity {
                                         System.out.println("opt2 and opt3 is chosen");
                                         if (Blood_g.equals(S_Blood_G) && S_Gender.equals(Gender))
                                         {
-                                            DataClass item = new DataClass(name, phone, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g);
                                             itemList.add(item);
                                         }
                                     } else {
                                         System.out.println("Only opt2 is chosen");
                                         if (Blood_g.equals(S_Blood_G)) {
-                                            DataClass item = new DataClass(name, phone, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g);
                                             itemList.add(item);
                                         }
                                     }
@@ -289,11 +289,11 @@ public class home_page extends AppCompatActivity {
                                     if (!Objects.isNull(Gender)) {
                                         System.out.println("Opt3 is only chosen");
                                         if (Gender.equals(S_Gender)) {
-                                            DataClass item = new DataClass(name, phone, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g);
                                             itemList.add(item);
                                         }
                                     } else {
-                                        DataClass item = new DataClass(name, phone, Blood_g);
+                                        DataClass item = new DataClass(name, S_Location, Blood_g);
                                         itemList.add(item);
                                         System.out.println("No filter is chosen\n no opt chosen");
                                     }
@@ -303,8 +303,11 @@ public class home_page extends AppCompatActivity {
                     }
                     else
                     {
-
                     }
+                }
+                if (itemList.isEmpty()) {
+                    empty_res.setVisibility(View.VISIBLE);
+                    Toast.makeText(home_page.this, "Empty results", Toast.LENGTH_SHORT).show();
                 }
 
                 // Notify the adapter that data has changed

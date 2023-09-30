@@ -30,12 +30,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.Blood_g.setText(item.getDataBlood());
         holder.Phone_no.setText(item.getDataPhone());
     }
-
     @Override
     public int getItemCount() {
         return itemList.size();
     }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView Name;
         TextView Blood_g;
