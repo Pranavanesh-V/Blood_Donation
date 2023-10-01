@@ -95,6 +95,7 @@ public class sign_up extends AppCompatActivity {
 
                                     //if app was opened for the first time
                                     Intent intent=new Intent(sign_up.this, home_page.class);
+                                    intent.putExtra("username",S_email_id);
                                     startActivity(intent);
                                 }
                                 else

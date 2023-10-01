@@ -2,12 +2,12 @@ package com.example.blooddonation;
 
 public class DataClass
 {
-    private String dataPhone;
+    private String dataLocation;
     private String dataName;
     private String dataBlood;
 
-    public String getDataPhone() {
-        return dataPhone;
+    public String getDataLocation() {
+        return dataLocation;
     }
 
     public String getDataName() {
@@ -19,10 +19,10 @@ public class DataClass
     }
 
 
-    public DataClass(String dataName,String dataPhone,String dataBlood)
+    public DataClass(String dataName,String dataLocation,String dataBlood)
     {
         this.dataName =dataName;
-        this.dataPhone =dataPhone;
+        this.dataLocation =dataLocation;
         this.dataBlood=dataBlood;
     }
 }

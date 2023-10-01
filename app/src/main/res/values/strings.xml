@@ -61,5 +61,7 @@ OWNER                                                                           
     <string name="age">Age</string>
     <string name="location">Location</string>
     <string name="description">Description</string>
+    <string name="hi">Hi,</string>
+    <string name="join_us_save_lives_together">Join Us,Save Lives \nTogether</string>
 
 </resources>

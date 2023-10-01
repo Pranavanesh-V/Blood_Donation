@@ -33,12 +33,11 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
 
     TextInputLayout Search;
     TextInputEditText E_search;
-    Button button,button2;
+    Button request_btn, donate_btn;
     ImageView Filter,Menu;
     RecyclerView recyclerView;
     List<DataClass> dataList;
     DatabaseReference databaseReference;
-    ValueEventListener eventListener;
     String S_Blood_G,Age,Gender;
     String inputText="";
     ImageView empty_res;
@@ -51,8 +50,8 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         setContentView(R.layout.activity_home_page);
 
         empty_res=findViewById(R.id.empty_res);
-        button=findViewById(R.id.button);
-        button2=findViewById(R.id.button2);
+        request_btn =findViewById(R.id.request_btn);
+        donate_btn =findViewById(R.id.donate_btn);
         Filter=findViewById(R.id.Filter);
         Menu=findViewById(R.id.Menu);
         Search=findViewById(R.id.Search);
@@ -62,20 +61,29 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         GridLayoutManager gridLayoutManager=new GridLayoutManager(home_page.this,1);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        Intent intent=getIntent();
+        String username=intent.getStringExtra("username");
+
+        request_btn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("UseCompatLoadingForDrawables")
             @Override
             public void onClick(View view) {
-                button.setBackground(getDrawable(R.drawable.cus_join11));
-                button2.setBackground(getDrawable(R.drawable.cus_join2));
+                request_btn.setBackground(getDrawable(R.drawable.cus_join11));
+                donate_btn.setBackground(getDrawable(R.drawable.cus_join2));
+                Search.setVisibility(View.VISIBLE);
+                Filter.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.VISIBLE);
             }
         });
-        button2.setOnClickListener(new View.OnClickListener() {
+        donate_btn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("UseCompatLoadingForDrawables")
             @Override
             public void onClick(View view) {
-                button.setBackground(getDrawable(R.drawable.cus_join1));
-                button2.setBackground(getDrawable(R.drawable.cus_join22));
+                request_btn.setBackground(getDrawable(R.drawable.cus_join1));
+                donate_btn.setBackground(getDrawable(R.drawable.cus_join22));
+                Search.setVisibility(View.INVISIBLE);
+                Filter.setVisibility(View.INVISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -142,7 +150,6 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         adapter = new RecyclerViewAdapter(itemList,this);
         recyclerView.setAdapter(adapter);
 
-
     }
 
     @Override
@@ -199,9 +206,8 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
 
                     if(snapshot.child("Blood Group").exists() && snapshot.child("Phone No").exists()) {
                         String Blood_g = snapshot.child("Blood Group").getValue(String.class);
-                        String phone = snapshot.child("Phone No").getValue(String.class);
                         String S_Gender=snapshot.child("Gender").getValue(String.class);
-                        String S_Location=snapshot.child("State").getValue(String.class);
+                        String S_Location=snapshot.child("City").getValue(String.class);
 
                         if (!inputText.equals(""))
                         {
@@ -325,7 +331,6 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         DataClass data=itemList.get(position);
         String name=data.getDataName();
         String blood= data.getDataBlood();
-        Toast.makeText(home_page.this, name, Toast.LENGTH_SHORT).show();
         Intent intent=new Intent(home_page.this,Donor_info_pg.class);
         intent.putExtra("Name",name);
         intent.putExtra("Blood",blood);

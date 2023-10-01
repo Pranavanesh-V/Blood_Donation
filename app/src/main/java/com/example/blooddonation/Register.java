@@ -126,7 +126,7 @@ public class Register extends AppCompatActivity {
                                 else
                                 {
                                     // Push data to a new unique key
-                                    reference.child(S_name).child("password").setValue(S_password);
+                                    reference.child(S_name).child("Password").setValue(S_password);
 
                                     Toast.makeText(Register.this,"Account Created",Toast.LENGTH_SHORT).show();
 

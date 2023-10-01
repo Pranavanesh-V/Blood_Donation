@@ -14,6 +14,7 @@
         android:layout_width="314dp"
         android:layout_height="68dp"
         android:hint="@string/search"
+        android:visibility="gone"
         app:boxStrokeColor="@color/box_col"
         app:counterEnabled="false"
         app:endIconCheckable="true"
@@ -38,7 +39,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/logo_home"
         android:layout_width="111dp"
         android:layout_height="110dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -68,6 +69,7 @@
         android:layout_width="409dp"
         android:layout_height="439dp"
         android:scrollbars="vertical"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="-0.001"
@@ -80,6 +82,7 @@
         android:layout_width="47dp"
         android:layout_height="61dp"
         android:src="@drawable/baseline_filter_list_24"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.98"
@@ -89,7 +92,7 @@
         tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/request_btn"
         android:layout_width="92dp"
         android:layout_height="71dp"
         android:background="@drawable/cus_join11"
@@ -102,7 +105,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/donate_btn"
         android:layout_width="92dp"
         android:layout_height="71dp"
         android:background="@drawable/cus_join2"
@@ -126,4 +129,69 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/introimg1"
         tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/Disp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="@string/hi"
+        android:textColor="@color/red"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.208" />
+
+    <TextView
+        android:id="@+id/Disp1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="@string/join_us_save_lives_together"
+        android:textColor="@color/red"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.27" />
+
+    <ImageView
+        android:id="@+id/user"
+        android:layout_width="138dp"
+        android:layout_height="126dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.941"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.204"
+        app:srcCompat="@drawable/user" />
+
+    <ImageView
+        android:id="@+id/heading"
+        android:layout_width="256dp"
+        android:layout_height="73dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.37"
+        app:srcCompat="@drawable/resource_do" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView1"
+        android:layout_width="411dp"
+        android:layout_height="464dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Search"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

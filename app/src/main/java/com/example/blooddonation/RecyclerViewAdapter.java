@@ -31,7 +31,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         DataClass item = itemList.get(position);
         holder.Name.setText(item.getDataName());
         holder.Blood_g.setText(item.getDataBlood());
-        holder.Phone_no.setText(item.getDataPhone());
+        holder.Location.setText(item.getDataLocation());
     }
     @Override
     public int getItemCount() {
@@ -40,13 +40,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView Name;
         TextView Blood_g;
-        TextView Phone_no;
+        TextView Location;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             Name = itemView.findViewById(R.id.recName);
             Blood_g = itemView.findViewById(R.id.recBlood);
-            Phone_no = itemView.findViewById(R.id.recPhoneNo);
+            Location = itemView.findViewById(R.id.recLocation);
 
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
