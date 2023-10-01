@@ -10,10 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    private List<DataClass> itemList;
+public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewAdapter1.ViewHolder> {
+    private List<DataClass2> itemList;
     private OnItemClickListener clickListener;
-    public RecyclerViewAdapter(List<DataClass> itemList, OnItemClickListener clickListener) {
+    public RecyclerViewAdapter1(List<DataClass2> itemList, OnItemClickListener clickListener)
+    {
         this.itemList = itemList;
         this.clickListener = clickListener;
     }
@@ -21,17 +22,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.request_lay, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        DataClass item = itemList.get(position);
+        DataClass2 item = itemList.get(position);
         holder.Name.setText(item.getDataName());
         holder.Blood_g.setText(item.getDataBlood());
         holder.Location.setText(item.getDataLocation());
+        holder.txt.setText(item.getTxt());
     }
+
+
     @Override
     public int getItemCount() {
         return itemList.size();
@@ -40,12 +44,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView Name;
         TextView Blood_g;
         TextView Location;
+        TextView txt;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             Name = itemView.findViewById(R.id.recName);
             Blood_g = itemView.findViewById(R.id.recBlood);
             Location = itemView.findViewById(R.id.recLocation);
+            txt=itemView.findViewById(R.id.recTxt);
 
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();

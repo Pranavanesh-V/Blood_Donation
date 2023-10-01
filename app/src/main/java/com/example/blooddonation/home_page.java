@@ -35,14 +35,15 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     TextInputEditText E_search;
     Button request_btn, donate_btn;
     ImageView Filter,Menu;
-    RecyclerView recyclerView;
-    List<DataClass> dataList;
+    RecyclerView recyclerView,recyclerView1;
     DatabaseReference databaseReference;
     String S_Blood_G,Age,Gender;
     String inputText="";
     ImageView empty_res;
     private RecyclerViewAdapter adapter;
+    private RecyclerViewAdapter1 adapter1;
     private List<DataClass> itemList;
+    private List<DataClass2> itemList1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +59,13 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         E_search=findViewById(R.id.E_search);
         //recycler views
         recyclerView=findViewById(R.id.recyclerView);
+        recyclerView1=findViewById(R.id.recyclerView1);
+
         GridLayoutManager gridLayoutManager=new GridLayoutManager(home_page.this,1);
         recyclerView.setLayoutManager(gridLayoutManager);
+
+        GridLayoutManager gridLayoutManager1=new GridLayoutManager(home_page.this,1);
+        recyclerView1.setLayoutManager(gridLayoutManager1);
 
         Intent intent=getIntent();
         String username=intent.getStringExtra("username");
@@ -147,8 +153,21 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
 
         //Recycler View
         itemList = new ArrayList<>();
+        itemList1=new ArrayList<>();
         adapter = new RecyclerViewAdapter(itemList,this);
+        adapter1= new RecyclerViewAdapter1(itemList1,this);
         recyclerView.setAdapter(adapter);
+        recyclerView1.setAdapter(adapter1);
+
+        DataClass2 item = new DataClass2("pranav", "S_Location", "Blood_g","txt");
+        DataClass2 item1 = new DataClass2("pranav", "S_Location", "Blood_g","txt");
+        DataClass2 item2 = new DataClass2("pranav", "S_Location", "Blood_g","txt");
+        DataClass2 item3 = new DataClass2("pranav", "S_Location", "Blood_g","txt");
+        itemList1.add(item);
+        itemList1.add(item1);
+        itemList1.add(item2);
+        itemList1.add(item3);
+        itemList1.add(item);
 
     }
 
