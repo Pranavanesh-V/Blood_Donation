@@ -353,4 +353,14 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         startActivity(intent);
 
     }
+
+    @Override
+    public void onItemClick1(int position) {
+        DataClass2 data=itemList1.get(position);
+        String name=data.getDataName();
+        String blood= data.getDataBlood();
+        String location=data.getDataLocation();
+        String txt= data.getTxt();
+        System.out.println(name+"\n"+blood+"\n"+location+"\n"+txt);
+    }
 }

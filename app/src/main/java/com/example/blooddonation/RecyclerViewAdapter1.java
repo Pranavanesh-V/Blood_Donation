@@ -56,7 +56,7 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewAdapt
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
-                    clickListener.onItemClick(position); // Pass the position to the listener
+                    clickListener.onItemClick1(position); // Pass the position to the listener
                 }
             });
         }
