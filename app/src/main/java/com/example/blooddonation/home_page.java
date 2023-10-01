@@ -160,13 +160,10 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         recyclerView1.setAdapter(adapter1);
 
         DataClass2 item = new DataClass2("pranav", "S_Location", "Blood_g","txt");
-        DataClass2 item1 = new DataClass2("pranav", "S_Location", "Blood_g","txt");
-        DataClass2 item2 = new DataClass2("pranav", "S_Location", "Blood_g","txt");
-        DataClass2 item3 = new DataClass2("pranav", "S_Location", "Blood_g","txt");
         itemList1.add(item);
-        itemList1.add(item1);
-        itemList1.add(item2);
-        itemList1.add(item3);
+        itemList1.add(item);
+        itemList1.add(item);
+        itemList1.add(item);
         itemList1.add(item);
 
     }
