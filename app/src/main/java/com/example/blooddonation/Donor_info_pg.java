@@ -1,14 +1,14 @@
 package com.example.blooddonation;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class Donor_info_pg extends AppCompatActivity {
 
-    TextView Name,Phone;
+    TextView Name,Phone,Blood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,10 +17,14 @@ public class Donor_info_pg extends AppCompatActivity {
 
         Name=findViewById(R.id.Name);
         Phone=findViewById(R.id.Phone_number);
+        Blood=findViewById(R.id.Blood_Group);
 
         Intent intent=getIntent();
-        String name=intent.getStringExtra("selectedItemTitle");
+        String name=intent.getStringExtra("Name");
+        String blood=intent.getStringExtra("Blood");
         Name.setText(name);
+        Blood.setText(blood);
+
 
     }
 }

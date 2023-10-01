@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class home_page extends AppCompatActivity{
+public class home_page extends AppCompatActivity implements OnItemClickListener{
 
     TextInputLayout Search;
     TextInputEditText E_search;
@@ -139,7 +139,7 @@ public class home_page extends AppCompatActivity{
 
         //Recycler View
         itemList = new ArrayList<>();
-        adapter = new RecyclerViewAdapter(itemList);
+        adapter = new RecyclerViewAdapter(itemList,this);
         recyclerView.setAdapter(adapter);
 
 
@@ -320,5 +320,16 @@ public class home_page extends AppCompatActivity{
             }
         });
     }
+    @Override
+    public void onItemClick(int position) {
+        DataClass data=itemList.get(position);
+        String name=data.getDataName();
+        String blood= data.getDataBlood();
+        Toast.makeText(home_page.this, name, Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(home_page.this,Donor_info_pg.class);
+        intent.putExtra("Name",name);
+        intent.putExtra("Blood",blood);
+        startActivity(intent);
 
+    }
 }
