@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,8 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     private RecyclerViewAdapter1 adapter1;
     private List<DataClass> itemList;
     private List<DataClass2> itemList1;
+    TextView Disp,Disp1;
+    ImageView user,heading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,10 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         Menu=findViewById(R.id.Menu);
         Search=findViewById(R.id.Search);
         E_search=findViewById(R.id.E_search);
+        user=findViewById(R.id.user);
+        Disp=findViewById(R.id.Disp);
+        Disp1=findViewById(R.id.Disp1);
+        heading=findViewById(R.id.heading);
         //recycler views
         recyclerView=findViewById(R.id.recyclerView);
         recyclerView1=findViewById(R.id.recyclerView1);
@@ -79,6 +86,12 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                 Search.setVisibility(View.VISIBLE);
                 Filter.setVisibility(View.VISIBLE);
                 recyclerView.setVisibility(View.VISIBLE);
+                user.setVisibility(View.INVISIBLE);
+                Disp.setVisibility(View.INVISIBLE);
+                Disp1.setVisibility(View.INVISIBLE);
+                recyclerView1.setVisibility(View.INVISIBLE);
+                heading.setVisibility(View.INVISIBLE);
+
             }
         });
         donate_btn.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +103,11 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                 Search.setVisibility(View.INVISIBLE);
                 Filter.setVisibility(View.INVISIBLE);
                 recyclerView.setVisibility(View.INVISIBLE);
+                user.setVisibility(View.VISIBLE);
+                Disp.setVisibility(View.VISIBLE);
+                Disp1.setVisibility(View.VISIBLE);
+                recyclerView1.setVisibility(View.VISIBLE);
+                heading.setVisibility(View.VISIBLE);
             }
         });
 
