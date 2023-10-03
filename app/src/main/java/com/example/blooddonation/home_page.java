@@ -380,7 +380,15 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         String location=data.getDataLocation();
         String txt= data.getTxt();
         Intent intent=new Intent(home_page.this, Request_donor_info.class);
+        intent.putExtra("Name",name);
+        intent.putExtra("Blood",blood);
+        intent.putExtra("Location",location);
         startActivity(intent);
         System.out.println(name+"\n"+blood+"\n"+location+"\n"+txt);
+    }
+
+    public void fetchData()
+    {
+
     }
 }

@@ -9,7 +9,7 @@
     android:theme="@style/page71.Blood_Donation">
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/display_req"
         android:layout_width="387dp"
         android:layout_height="580dp"
         android:src="@drawable/bg"
@@ -17,7 +17,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.689" />
+        app:layout_constraintVertical_bias="0.689"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/logo_home"
@@ -33,7 +34,7 @@
         tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <ImageView
-        android:id="@+id/Menu"
+        android:id="@+id/back_req"
         android:layout_width="54dp"
         android:layout_height="53dp"
         android:src="@drawable/back123"
@@ -46,7 +47,7 @@
         tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/heading_req"
         android:layout_width="257dp"
         android:layout_height="100dp"
         android:src="@drawable/request_details"
@@ -54,10 +55,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.201" />
+        app:layout_constraintVertical_bias="0.223"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/profile_req"
+        android:layout_width="134dp"
+        android:layout_height="125dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.368"
+        app:srcCompat="@drawable/user"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/donate"
         android:layout_width="200dp"
         android:layout_height="65dp"
         android:background="@drawable/donate_style"
@@ -72,5 +87,63 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.911" />
+
+    <TextView
+        android:id="@+id/Blood_group_req"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:letterSpacing="-0.01"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="@+id/display_req"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/display_req" />
+
+    <TextView
+        android:id="@+id/name_req"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:letterSpacing="-0.01"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/display_req"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/display_req"
+        app:layout_constraintVertical_bias="0.612" />
+
+    <TextView
+        android:id="@+id/city_req"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:letterSpacing="-0.01"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/display_req"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/display_req"
+        app:layout_constraintVertical_bias="0.72" />
+
+    <TextView
+        android:id="@+id/reason_req"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:letterSpacing="-0.02"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/display_req"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/display_req"
+        app:layout_constraintVertical_bias="0.826" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
