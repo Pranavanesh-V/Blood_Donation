@@ -28,9 +28,11 @@ public class Request_donor_info extends AppCompatActivity {
         String name=intent.getStringExtra("Name");
         String blood=intent.getStringExtra("Blood");
         String location= intent.getStringExtra("Location");
+        String TXT=intent.getStringExtra("Txt");
         Blood_group_req.setText(blood);
         name_req.setText(name);
         city_req.setText(location);
+        reason_req.setText(TXT);
 
         back_req.setOnClickListener(new View.OnClickListener() {
             @Override

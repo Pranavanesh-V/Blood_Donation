@@ -108,6 +108,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                 Disp1.setVisibility(View.VISIBLE);
                 recyclerView1.setVisibility(View.VISIBLE);
                 heading.setVisibility(View.VISIBLE);
+                request_fetch();
             }
         });
 
@@ -176,16 +177,38 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         adapter1= new RecyclerViewAdapter1(itemList1,this);
         recyclerView.setAdapter(adapter);
         recyclerView1.setAdapter(adapter1);
-
-        DataClass2 item = new DataClass2("pranav", "S_Location", "Blood_g","txt");
-        itemList1.add(item);
-        itemList1.add(item);
-        itemList1.add(item);
-        itemList1.add(item);
-        itemList1.add(item);
-
     }
 
+    public void request_fetch()
+    {
+        // Initialize Firebase Realtime Database
+        databaseReference = FirebaseDatabase.getInstance().getReference("test");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                itemList1.clear(); // Clear the list to avoid duplicates
+                empty_res.setVisibility(View.INVISIBLE);
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    // Parse data from the snapshot
+                    String name = snapshot.getKey();
+                    String desc=snapshot.child("dataDesc").getValue(String.class);
+                    String lang=snapshot.child("dataLang").getValue(String.class);
+                    String title=snapshot.child("dataTitle").getValue(String.class);
+
+                    DataClass2 item = new DataClass2(name,lang,title,desc);
+                    itemList1.add(item);
+                }
+                // Notify the adapter that data has changed
+                adapter1.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -383,6 +406,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         intent.putExtra("Name",name);
         intent.putExtra("Blood",blood);
         intent.putExtra("Location",location);
+        intent.putExtra("Txt",txt);
         startActivity(intent);
         System.out.println(name+"\n"+blood+"\n"+location+"\n"+txt);
     }

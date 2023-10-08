@@ -25,7 +25,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:padding="8dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             android:src="@drawable/logo_blood"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
@@ -59,12 +59,12 @@
 
         <TextView
             android:id="@+id/recTxt"
-            android:layout_width="113dp"
-            android:layout_height="33dp"
+            android:layout_width="237dp"
+            android:layout_height="34dp"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="18dp"
             android:layout_marginTop="65dp"
-            android:layout_marginEnd="177dp"
+            android:layout_marginEnd="52dp"
             android:layout_toEndOf="@+id/recImage"
             android:text="@string/reason"
             android:textColor="@color/white"
