@@ -13,7 +13,7 @@
         style="@style/page8.Blood_Donation"
         android:layout_width="314dp"
         android:layout_height="68dp"
-        android:hint="@string/search"
+        android:hint="@string/location"
         app:boxStrokeColor="@color/box_col"
         app:counterEnabled="false"
         app:endIconCheckable="true"
