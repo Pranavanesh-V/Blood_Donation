@@ -37,7 +37,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     Button request_btn, donate_btn;
     ImageView Filter,Menu;
     RecyclerView recyclerView,recyclerView1;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference,databaseReference1;
     String S_Blood_G,Age,Gender;
     String inputText="";
     ImageView empty_res;
@@ -91,6 +91,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                 Disp1.setVisibility(View.INVISIBLE);
                 recyclerView1.setVisibility(View.INVISIBLE);
                 heading.setVisibility(View.INVISIBLE);
+                empty_res.setVisibility(View.INVISIBLE);
 
             }
         });
@@ -182,24 +183,36 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     public void request_fetch()
     {
         // Initialize Firebase Realtime Database
-        databaseReference = FirebaseDatabase.getInstance().getReference("test");
+        databaseReference1 = FirebaseDatabase.getInstance().getReference("Request");
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference1.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 itemList1.clear(); // Clear the list to avoid duplicates
                 empty_res.setVisibility(View.INVISIBLE);
+                boolean flag=false;
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     // Parse data from the snapshot
-                    String name = snapshot.getKey();
-                    String desc=snapshot.child("dataDesc").getValue(String.class);
-                    String lang=snapshot.child("dataLang").getValue(String.class);
-                    String title=snapshot.child("dataTitle").getValue(String.class);
-
-                    DataClass2 item = new DataClass2(name,lang,title,desc);
-                    itemList1.add(item);
+                    String requesterName = snapshot.getKey();
+                    String requesterBloodGroup=snapshot.child("RequesterBloodGroup").getValue(String.class);
+                    String requesterLocation=snapshot.child("RequesterLocation").getValue(String.class);
+                    String requesterReason=snapshot.child("RequesterReason").getValue(String.class);
+                    if (snapshot.child("Received").getValue(String.class).equals("No"))
+                    {
+                        DataClass2 item = new DataClass2(requesterName,requesterLocation,requesterBloodGroup,requesterReason);
+                        itemList1.add(item);
+                        flag=true;
+                    }
+                }
+                if (!flag)
+                {
+                    empty_res.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    empty_res.setVisibility(View.INVISIBLE);
                 }
                 // Notify the adapter that data has changed
                 adapter1.notifyDataSetChanged();
