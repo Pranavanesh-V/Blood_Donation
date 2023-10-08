@@ -75,17 +75,64 @@
         app:layout_constraintVertical_bias="0.671"
         tools:ignore="SpeakableTextPresentCheck">
 
-
-        <TextView
-            android:id="@+id/textView4"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/poppins"
-            android:letterSpacing="0.07"
-            android:lineHeight="30sp"
-            android:text="@string/Declaration"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:letterSpacing="0.07"
+                android:lineHeight="30sp"
+                android:text="@string/Declaration"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:targetApi="p" />
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/agree_to_the_conditions"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/textView4"
+                app:layout_constraintEnd_toEndOf="@id/textView4"
+                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintStart_toStartOf="@id/textView4"
+                app:layout_constraintTop_toTopOf="@id/textView4"
+                app:layout_constraintVertical_bias="0.998" />
+
+            <RadioGroup
+                android:layout_width="70dp"
+                android:layout_height="25dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@id/textView4"
+                app:layout_constraintEnd_toEndOf="@id/textView4"
+                app:layout_constraintHorizontal_bias="0.65"
+                app:layout_constraintStart_toStartOf="@id/textView4"
+                app:layout_constraintTop_toTopOf="@id/textView4"
+                app:layout_constraintVertical_bias="0.998">
+
+                <RadioButton
+                    android:id="@+id/Agree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/agree" />
+
+                <RadioButton
+                    android:id="@+id/Decline"
+                    android:layout_width="114dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/decline" />
+            </RadioGroup>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
 
     <TextView
