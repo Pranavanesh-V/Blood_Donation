@@ -96,24 +96,24 @@
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_bold"
+                android:fontFamily="@font/poppins"
                 android:text="@string/agree_to_the_conditions"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@id/textView4"
                 app:layout_constraintEnd_toEndOf="@id/textView4"
-                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="@id/textView4"
                 app:layout_constraintTop_toTopOf="@id/textView4"
                 app:layout_constraintVertical_bias="0.998" />
 
             <RadioGroup
-                android:layout_width="70dp"
+                android:layout_width="140dp"
                 android:layout_height="25dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="@id/textView4"
                 app:layout_constraintEnd_toEndOf="@id/textView4"
-                app:layout_constraintHorizontal_bias="0.65"
+                app:layout_constraintHorizontal_bias="0.98"
                 app:layout_constraintStart_toStartOf="@id/textView4"
                 app:layout_constraintTop_toTopOf="@id/textView4"
                 app:layout_constraintVertical_bias="0.998">
@@ -126,7 +126,7 @@
 
                 <RadioButton
                     android:id="@+id/Decline"
-                    android:layout_width="114dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/decline" />
             </RadioGroup>

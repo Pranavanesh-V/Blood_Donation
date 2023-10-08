@@ -269,6 +269,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 itemList.clear(); // Clear the list to avoid duplicates
                 empty_res.setVisibility(View.INVISIBLE);
+                boolean flag=true;
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     // Parse data from the snapshot
@@ -369,8 +370,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                             itemList.add(item);
                                         }
                                     } else {
-                                        DataClass item = new DataClass(name, S_Location, Blood_g);
-                                        itemList.add(item);
+                                        flag=false;
                                         System.out.println("No filter is chosen\n no opt chosen");
                                     }
                                 }
@@ -381,9 +381,13 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                     {
                     }
                 }
-                if (itemList.isEmpty()) {
+                if (itemList.isEmpty() && flag) {
                     empty_res.setVisibility(View.VISIBLE);
                     Toast.makeText(home_page.this, "Empty results", Toast.LENGTH_SHORT).show();
+                }
+                if(!flag)
+                {
+                    Toast.makeText(home_page.this,"Empty Inputs",Toast.LENGTH_SHORT).show();
                 }
 
                 // Notify the adapter that data has changed
