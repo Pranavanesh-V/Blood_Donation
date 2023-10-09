@@ -272,7 +272,6 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             if (option.equals("Logout"))
             {
                 logout();
-                System.out.println();
             }
             return true;
         });
