@@ -116,7 +116,6 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                 request_fetch();
             }
         });
-
         E_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -253,6 +252,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     private void showPopupMenuForMenu() {
         PopupMenu popupMenu = new PopupMenu(this, Menu);
         popupMenu.getMenu().add("Profile");
+        popupMenu.getMenu().add("Request");
         popupMenu.getMenu().add("Personalisation");
         popupMenu.getMenu().add("Security");
         popupMenu.getMenu().add("About");
@@ -261,6 +261,13 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         // Set an item click listener for the PopupMenu
         popupMenu.setOnMenuItemClickListener(item -> {
             // Handle item selection here
+            String option=item.getTitle().toString();
+            if (option.equals("Request"))
+            {
+                Intent intent=new Intent(home_page.this, Request_page.class);
+                startActivity(intent);
+
+            }
             return true;
         });
         popupMenu.show();
@@ -296,13 +303,31 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                 if (!Objects.isNull(Age)) {
                                     if (!Objects.isNull(S_Blood_G)) {
                                         if (!Objects.isNull(Gender)) {
-                                            System.out.println("Everything is chosen");
+                                            boolean res=age_finder.equals_rt(age,Age);
+                                            if (Blood_g.equals(S_Blood_G) && res && S_Gender.equals(Gender)) {
+                                                System.out.println("Everything is chosen");
+                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                itemList.add(item);
+                                            }
                                         } else {
-                                            System.out.println("Only opt1 and opt2 is chosen");
+                                            boolean res=age_finder.equals_rt(age,Age);
+                                            if (Blood_g.equals(S_Blood_G) && res)
+                                            {
+                                                System.out.println("Only opt1 and opt2 is chosen");
+                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                itemList.add(item);
+                                            }
                                         }
                                     } else {
                                         if (!Objects.isNull(Gender)) {
-                                            System.out.println("opt1 and opt3 is chosen");
+                                            boolean res=age_finder.equals_rt(age,Age);
+                                            if (S_Gender.equals(Gender) && res)
+                                            {
+                                                System.out.println("opt1 and opt3 is chosen");
+                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                itemList.add(item);
+                                            }
+
                                         } else {
                                             boolean res=age_finder.equals_rt(age,Age);
                                             if (res)
@@ -350,13 +375,30 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                             if (!Objects.isNull(Age)) {
                                 if (!Objects.isNull(S_Blood_G)) {
                                     if (!Objects.isNull(Gender)) {
-                                        System.out.println("Everything is chosen");
+                                        boolean res=age_finder.equals_rt(age,Age);
+                                        if (Blood_g.equals(S_Blood_G) && res && S_Gender.equals(Gender)) {
+                                            System.out.println("Everything is chosen");
+                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            itemList.add(item);
+                                        }
                                     } else {
-                                        System.out.println("Only opt1 and opt2 is chosen");
+                                        boolean res=age_finder.equals_rt(age,Age);
+                                        if (Blood_g.equals(S_Blood_G) && res)
+                                        {
+                                            System.out.println("Only opt1 and opt2 is chosen");
+                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            itemList.add(item);
+                                        }
                                     }
                                 } else {
                                     if (!Objects.isNull(Gender)) {
-                                        System.out.println("opt1 and opt3 is chosen");
+                                        boolean res=age_finder.equals_rt(age,Age);
+                                        if (S_Gender.equals(Gender) && res)
+                                        {
+                                            System.out.println("opt1 and opt3 is chosen");
+                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            itemList.add(item);
+                                        }
                                     } else {
                                         boolean res=age_finder.equals_rt(age,Age);
                                         if (res)

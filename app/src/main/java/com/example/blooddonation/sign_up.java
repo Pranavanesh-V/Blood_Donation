@@ -1,5 +1,6 @@
 package com.example.blooddonation;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -23,7 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 public class sign_up extends AppCompatActivity {
 
     Button submit;
-
+    private SharedPreferences sharedPreferences;
+    private static final String PREFS_NAME = "MyPrefs";
     TextInputLayout email_id,password;
     String S_email_id,S_password;
     int time = 0;
@@ -41,6 +43,7 @@ public class sign_up extends AppCompatActivity {
         password=findViewById(R.id.password);
         forgot=findViewById(R.id.forgot);
 
+        initSharedPreferences();
 
 
         EditText E_email_id=email_id.getEditText();
@@ -86,26 +89,13 @@ public class sign_up extends AppCompatActivity {
                             S_password1 = datasnapshot.child(S_email_id).child("Password").getValue(String.class);
                             if (S_password1.equals(S_password))
                             {
-                                //intro pages check
-                                SharedPreferences preferences=getSharedPreferences("PREFERENCE",MODE_PRIVATE);
-                                String FirstTime=preferences.getString("FirstTimeInstall","");
-
-                                if(FirstTime.equals("Yes"))
-                                {
-
-                                    //if app was opened for the first time
-                                    Intent intent=new Intent(sign_up.this, home_page.class);
-                                    intent.putExtra("username",S_email_id);
-                                    startActivity(intent);
-                                }
-                                else
-                                {
-                                    SharedPreferences.Editor editor= preferences.edit();
-                                    editor.putString("FirstTimeInstall","Yes");
-                                    editor.apply();
-                                }
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("username", S_email_id);
+                                editor.putString("password", S_password1);
+                                editor.apply();
                                 Intent intent=new Intent(sign_up.this, home_page.class);
                                 startActivity(intent);
+                                finish();
                             }
                             else
                             {
@@ -148,4 +138,8 @@ public class sign_up extends AppCompatActivity {
 
 
     }
+    private void initSharedPreferences() {
+        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+    }
+
 }
