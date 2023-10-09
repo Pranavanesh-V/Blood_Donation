@@ -46,7 +46,6 @@ public class Login_page extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finishAffinity();
-        System.exit(0);
     }
 
     private boolean isUserLoggedIn() {

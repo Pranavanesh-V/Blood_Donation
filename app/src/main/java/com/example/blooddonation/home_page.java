@@ -1,7 +1,9 @@
 package com.example.blooddonation;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -36,7 +38,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
 
     TextInputLayout Search;
     Integer age;
-
+    private static final String PREFS_NAME = "MyPrefs";
     TextInputEditText E_search;
     Button request_btn, donate_btn;
     ImageView Filter,Menu;
@@ -245,7 +247,6 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         finishAffinity();
     }
 
@@ -255,6 +256,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         popupMenu.getMenu().add("Request");
         popupMenu.getMenu().add("Personalisation");
         popupMenu.getMenu().add("Security");
+        popupMenu.getMenu().add("Logout");
         popupMenu.getMenu().add("About");
 
 
@@ -266,7 +268,10 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             {
                 Intent intent=new Intent(home_page.this, Request_page.class);
                 startActivity(intent);
-
+            }
+            if (option.equals("Logout"))
+            {
+                logout();
             }
             return true;
         });
@@ -491,8 +496,15 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         System.out.println(name+"\n"+blood+"\n"+location+"\n"+txt);
     }
 
-    public void fetchData()
-    {
-
+    private void logout() {
+        // Clear the saved credentials
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("username");
+        editor.remove("password");
+        editor.apply();
+        Intent intent=new Intent(home_page.this, Login_page.class);
+        startActivity(intent);
     }
+
 }
