@@ -2,6 +2,7 @@ package com.example.blooddonation;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +35,8 @@ import java.util.Objects;
 public class home_page extends AppCompatActivity implements OnItemClickListener{
 
     TextInputLayout Search;
+    Integer age;
+
     TextInputEditText E_search;
     Button request_btn, donate_btn;
     ImageView Filter,Menu;
@@ -264,6 +268,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
 
     private void fetchDataFromFirebase() {
         databaseReference.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -275,10 +280,14 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                     // Parse data from the snapshot
                     String name = snapshot.getKey();
 
-                    if(snapshot.child("Blood Group").exists() && snapshot.child("Phone No").exists()) {
+
+                    if(snapshot.child("Blood Group").exists() && snapshot.child("Phone No").exists() && snapshot.child("DOB").exists()) {
                         String Blood_g = snapshot.child("Blood Group").getValue(String.class);
                         String S_Gender=snapshot.child("Gender").getValue(String.class);
                         String S_Location=snapshot.child("City").getValue(String.class);
+                        String S_dob=snapshot.child("DOB").getValue(String.class);
+                        age_finder age_finder=new age_finder();
+                        age=age_finder.age_Cals(S_dob);
 
                         if (!inputText.equals(""))
                         {
@@ -295,7 +304,13 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                         if (!Objects.isNull(Gender)) {
                                             System.out.println("opt1 and opt3 is chosen");
                                         } else {
-                                            System.out.println("Only opt1 is chosen");
+                                            boolean res=age_finder.equals_rt(age,Age);
+                                            if (res)
+                                            {
+                                                System.out.println("Only opt1 is chosen");
+                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                itemList.add(item);
+                                            }
                                         }
                                     }
                                 } else {
@@ -343,7 +358,13 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                     if (!Objects.isNull(Gender)) {
                                         System.out.println("opt1 and opt3 is chosen");
                                     } else {
-                                        System.out.println("Only opt1 is chosen");
+                                        boolean res=age_finder.equals_rt(age,Age);
+                                        if (res)
+                                        {
+                                            System.out.println("Only opt1 is chosen");
+                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            itemList.add(item);
+                                        }
                                     }
                                 }
                             } else {

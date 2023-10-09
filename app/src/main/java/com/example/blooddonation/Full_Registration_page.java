@@ -168,7 +168,7 @@ public class Full_Registration_page extends AppCompatActivity {
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(Full_Registration_page.this,
                 (view, year1, monthOfYear, dayOfMonth) -> {
-                    S_DOB = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1;
+                    S_DOB = year1 + "/" + (monthOfYear + 1) + "/" + dayOfMonth;
                     E_dob.setText(S_DOB);
                 }, year, month, day);
         datePickerDialog.show();
