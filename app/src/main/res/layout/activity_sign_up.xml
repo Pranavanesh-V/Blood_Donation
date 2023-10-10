@@ -72,7 +72,7 @@
         android:id="@+id/mail_id"
         android:layout_height="wrap_content"
         style="@style/page8.Blood_Donation"
-        android:hint="@string/email_id"
+        android:hint="@string/user_name"
         app:boxStrokeColor="@color/box_col"
         app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

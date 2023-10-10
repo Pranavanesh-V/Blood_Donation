@@ -19,9 +19,11 @@ public class age_finder
         /*int birthYear = dob_l.getYear();
         int birthMonth =dob_l.getMonthValue(); // January is represented as 0
         int birthDay = dob_l.getDayOfMonth();*/
-        int birthYear =Integer.parseInt(dob.substring(0,4));
-        int birthMonth =Integer.parseInt(dob.substring(5,7));
-        int birthDay=Integer.parseInt(dob.substring(8,10));
+        String date[]=dob.split("/",3);
+            int birthYear =Integer.parseInt(date[0]);
+            int birthMonth =Integer.parseInt(date[1]);
+            int birthDay=Integer.parseInt(date[2]);
+
 
         // Get the current date
         Calendar currentDate = Calendar.getInstance();
