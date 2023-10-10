@@ -26,7 +26,7 @@ public class Request_page extends AppCompatActivity {
     TextInputLayout name,Address,Phone_no,Reason,Desc_Reason,blood_g;
     Button submit;
     TextInputEditText B_G;
-    ImageView back_req3;
+    Button back_req3;
     String S_name="",S_address="",S_phone="",S_Reason="",S_Desc_Reason="",S_blood_g="";
 
     @Override
@@ -41,7 +41,7 @@ public class Request_page extends AppCompatActivity {
         Desc_Reason=findViewById(R.id.Desc_Reason);
         submit=findViewById(R.id.submit2);
         B_G=findViewById(R.id.B_g);
-        back_req3=findViewById(R.id.back_req3);
+        back_req3=findViewById(R.id.back7);
 
         B_G.setOnClickListener(view -> showPopupMenu());
         back_req3.setOnClickListener(new View.OnClickListener() {

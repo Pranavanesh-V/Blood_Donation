@@ -125,24 +125,24 @@ public class Full_Registration_page extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                         // Push data to a new unique key
-                        reference.child(S_name).child("Password").setValue(Password);
-                        reference.child(S_name).child("Email").setValue(S_email);
-                        reference.child(S_name).child("DOB").setValue(S_DOB);
-                        reference.child(S_name).child("Blood Group").setValue(S_blood_g);
-                        reference.child(S_name).child("Address").setValue(S_address);
-                        reference.child(S_name).child("City").setValue(S_city);
-                        reference.child(S_name).child("State").setValue(S_state);
-                        reference.child(S_name).child("Phone No").setValue(S_phone);
-                        reference.child(S_name).child("Emergency").setValue(S_emergency);
-                        reference.child(S_name).child("Gender").setValue(S_gender);
-                        reference.child(S_name).child("Form").setValue(form);
+                            reference.child(S_name).child("Password").setValue(Password);
+                            reference.child(S_name).child("Email").setValue(S_email);
+                            reference.child(S_name).child("DOB").setValue(S_DOB);
+                            reference.child(S_name).child("Blood Group").setValue(S_blood_g);
+                            reference.child(S_name).child("Address").setValue(S_address);
+                            reference.child(S_name).child("City").setValue(S_city);
+                            reference.child(S_name).child("State").setValue(S_state);
+                            reference.child(S_name).child("Phone No").setValue(S_phone);
+                            reference.child(S_name).child("Emergency").setValue(S_emergency);
+                            reference.child(S_name).child("Gender").setValue(S_gender);
+                            reference.child(S_name).child("Form").setValue(form);
 
-                        //display it
-                        Toast.makeText(Full_Registration_page.this,"Account Created",Toast.LENGTH_SHORT).show();
+                            //display it
+                            Toast.makeText(Full_Registration_page.this, "Account Created", Toast.LENGTH_SHORT).show();
 
-                        //Navigate to login page
-                        Intent intent=new Intent(Full_Registration_page.this, Login_page.class);
-                        startActivity(intent);
+                            //Navigate to login page
+                            Intent intent = new Intent(Full_Registration_page.this, Login_page.class);
+                            startActivity(intent);
 
                     }
 

@@ -8,18 +8,18 @@
     android:background="@color/grey_black"
     android:theme="@style/page71.Blood_Donation">
 
-    <ImageView
-        android:id="@+id/back_req4"
-        android:layout_width="54dp"
-        android:layout_height="53dp"
-        android:src="@drawable/back123"
+    <Button
+        android:id="@+id/back6"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/back_join"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintHorizontal_bias="0.088"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.068"
-        tools:ignore="ContentDescription,ImageContrastCheck" />
+        app:layout_constraintVertical_bias="0.071"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/heading_pro"

@@ -19,17 +19,16 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Request_donor_info extends AppCompatActivity {
 
-    ImageView back_req;
     String name,phone_no;
     TextView Blood_group_req,name_req,city_req,reason_req;
-    Button donate;
+    Button donate,back_req;
     DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_donor_info);
 
-        back_req=findViewById(R.id.back_req);
+        back_req=findViewById(R.id.back8);
         Blood_group_req=findViewById(R.id.Blood_group_req);
         name_req=findViewById(R.id.name_req);
         city_req=findViewById(R.id.city_req);

@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,7 +28,7 @@ public class Profile_page extends AppCompatActivity {
     private static final String PREFS_NAME = "MyPrefs";
     DatabaseReference databaseReference;
     String savedUsername;
-    ImageView back_req4;
+    Button back_req4;
     TextView blood_Group,name2,mail_id2,Address,Edit;
 
     @Override
@@ -35,7 +36,7 @@ public class Profile_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
 
-        back_req4=findViewById(R.id.back_req4);
+        back_req4=findViewById(R.id.back6);
         blood_Group=findViewById(R.id.blood_Group);
         name2=findViewById(R.id.name2);
         mail_id2=findViewById(R.id.mail_id2);
