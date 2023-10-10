@@ -39,6 +39,8 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     TextInputLayout Search;
     Integer age;
     private static final String PREFS_NAME = "MyPrefs";
+    private SharedPreferences sharedPreferences;
+    String savedUsername;
     TextInputEditText E_search;
     Button request_btn, donate_btn;
     ImageView Filter,Menu;
@@ -83,6 +85,9 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         Intent intent=getIntent();
         String username=intent.getStringExtra("username");
 
+        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        savedUsername = sharedPreferences.getString("username", "");
+
         request_btn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("UseCompatLoadingForDrawables")
             @Override
@@ -115,6 +120,8 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                 Disp1.setVisibility(View.VISIBLE);
                 recyclerView1.setVisibility(View.VISIBLE);
                 heading.setVisibility(View.VISIBLE);
+                //Disp.setText(R.string.hi + savedUsername);
+                Disp.setText(getResources().getText(R.string.hi)+" "+savedUsername);
                 request_fetch();
             }
         });
