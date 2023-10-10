@@ -119,7 +119,7 @@ public class confirm_password extends AppCompatActivity {
                     {
                         if (S_new_pass.equals(S_conf_pass)) {
                             // Replace data using set value method
-                            reference.child(S_username).child("password").setValue(S_conf_pass);
+                            reference.child(S_username).child("Password").setValue(S_conf_pass);
                             //Message confirmation
                             Toast.makeText(confirm_password.this,"Password Updated",Toast.LENGTH_SHORT).show();
                             //To sign in page

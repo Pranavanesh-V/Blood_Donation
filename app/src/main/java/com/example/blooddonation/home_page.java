@@ -254,10 +254,10 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         PopupMenu popupMenu = new PopupMenu(this, Menu);
         popupMenu.getMenu().add("Profile");
         popupMenu.getMenu().add("Request");
-        popupMenu.getMenu().add("Personalisation");
+        popupMenu.getMenu().add("Registration");
         popupMenu.getMenu().add("Security");
-        popupMenu.getMenu().add("Logout");
         popupMenu.getMenu().add("About");
+        popupMenu.getMenu().add("Logout");
 
 
         // Set an item click listener for the PopupMenu
@@ -269,10 +269,31 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                 Intent intent=new Intent(home_page.this, Request_page.class);
                 startActivity(intent);
             }
-            if (option.equals("Logout"))
+            else if (option.equals("Logout"))
             {
                 logout();
             }
+            else if (option.equals("Profile"))
+            {
+                Intent intent=new Intent(home_page.this, Profile_page.class);
+                startActivity(intent);
+            }
+            else if (option.equals("About"))
+            {
+                Intent intent=new Intent(home_page.this, About_page.class);
+                startActivity(intent);
+            }
+            else if (option.equals("Registration"))
+            {
+                Intent intent=new Intent(home_page.this, Full_Registration_page.class);
+                startActivity(intent);
+            }
+            else if (option.equals("Security"))
+            {
+                Intent intent=new Intent(home_page.this, Security_page.class);
+                startActivity(intent);
+            }
+
             return true;
         });
         popupMenu.show();

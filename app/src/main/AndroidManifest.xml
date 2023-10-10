@@ -23,6 +23,18 @@
         android:theme="@style/Theme.BloodDonation"
         tools:targetApi="31">
         <activity
+            android:name=".Security_page"
+            android:exported="false" />
+        <activity
+            android:name=".Edit_profile_page"
+            android:exported="false" />
+        <activity
+            android:name=".About_page"
+            android:exported="false" />
+        <activity
+            android:name=".Profile_page"
+            android:exported="false" />
+        <activity
             android:name=".Request_page"
             android:exported="false" />
         <activity
