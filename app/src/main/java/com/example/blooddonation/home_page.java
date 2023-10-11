@@ -84,7 +84,8 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
 
         Intent intent=getIntent();
         String username=intent.getStringExtra("username");
-
+        Disp.setText(getResources().getText(R.string.hi)+" "+username);
+        request_fetch();
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedUsername = sharedPreferences.getString("username", "");
 

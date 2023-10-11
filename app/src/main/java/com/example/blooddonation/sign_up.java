@@ -94,6 +94,7 @@ public class sign_up extends AppCompatActivity {
                                 editor.putString("password", S_password1);
                                 editor.apply();
                                 Intent intent=new Intent(sign_up.this, home_page.class);
+                                intent.putExtra("username",S_email_id);
                                 startActivity(intent);
                                 finish();
                             }

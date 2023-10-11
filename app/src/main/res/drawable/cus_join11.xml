@@ -5,11 +5,11 @@
 
     <!-- Image -->
     <item
-        android:drawable="@drawable/drop"
+        android:drawable="@drawable/baseline_search"
         android:top="5dp"
         android:bottom="5dp"
         android:height="35dp"
-        android:width="30dp"
+        android:width="35dp"
         android:left="5dp"
         android:right="5dp"
         android:gravity="center" />
