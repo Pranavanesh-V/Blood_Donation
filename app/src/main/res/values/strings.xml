@@ -112,4 +112,6 @@ OWNER                                                                           
     <string name="sp9">If you ever come across a security concern or believe your account has been compromised, please contact our security team immediately at [Security Email/Phone]. We take all reports seriously and will investigate promptly.</string>
     <string name="sp10">Your trust in Blood Donation is our most valuable asset. We are dedicated to maintaining the highest standards of security and privacy in every aspect of our app. If you have any questions or concerns regarding the security of your data, please don\'t hesitate to contact us.</string>
     <string name="sp11">Thank you for being a part of our community and for entrusting us with your information.\n\n\n</string>
+    <string name="save">Save</string>
+    <string name="blood_group125">Blood Group</string>
 </resources>

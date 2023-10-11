@@ -29,6 +29,7 @@ public class Profile_page extends AppCompatActivity {
     DatabaseReference databaseReference;
     String savedUsername;
     Button back_req4;
+    int flag;
     TextView blood_Group,name2,mail_id2,Address,Edit;
 
     @Override
@@ -59,6 +60,7 @@ public class Profile_page extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(Profile_page.this, Edit_profile_page.class);
+                intent.putExtra("Flag",flag);
                 startActivity(intent);
             }
         });
@@ -81,9 +83,20 @@ public class Profile_page extends AppCompatActivity {
                         String mail = dataSnapshot.child(savedUsername).child("Email").getValue(String.class);
                         String City = dataSnapshot.child(savedUsername).child("City").getValue(String.class);
                         name2.setText(savedUsername);
-                        blood_Group.setText(blood);
-                        Address.setText(String.format("%s,%s", address, City));
+                        if (blood.equals(""))
+                        {
+                            blood_Group.setText(R.string.blood_group);
+                            blood_Group.setTextColor(Color.GRAY);
+                        }
+                        else
+                        {
+                            blood_Group.setText(blood);
+                            blood_Group.setTextColor(Color.WHITE);
+                        }
+
+                        Address.setText(String.format("%s\n%s", address, City));
                         mail_id2.setText(mail);
+                        flag=1;
                     }
                     else
                     {
@@ -94,6 +107,7 @@ public class Profile_page extends AppCompatActivity {
                             mail_id2.setText(mail);
                             blood_Group.setTextColor(Color.GRAY);
                             Address.setTextColor(Color.GRAY);
+                            flag=0;
                         }
                     }
             }

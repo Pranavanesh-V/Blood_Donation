@@ -32,14 +32,13 @@
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.186" />
+        app:layout_constraintVertical_bias="0.151" />
 
     <ScrollView
-        android:layout_width="380dp"
-        android:layout_height="601dp"
+        android:layout_width="372dp"
+        android:layout_height="411dp"
         android:foregroundGravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -222,6 +221,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
+
             <TextView
                 android:id="@+id/textView17"
                 android:layout_width="match_parent"
@@ -343,8 +343,8 @@
                 android:layout_marginEnd="10dp"
                 android:letterSpacing="-0.02"
                 android:lineSpacingExtra="4sp"
-                android:textAlignment="center"
                 android:text="@string/sp11"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
@@ -352,4 +352,17 @@
 
 
     </ScrollView>
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="255dp"
+        android:layout_height="266dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.275"
+        app:srcCompat="@drawable/secure_shield"
+        tools:ignore="ContentDescription" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

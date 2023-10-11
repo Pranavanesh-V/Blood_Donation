@@ -82,12 +82,15 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         GridLayoutManager gridLayoutManager1=new GridLayoutManager(home_page.this,1);
         recyclerView1.setLayoutManager(gridLayoutManager1);
 
-        Intent intent=getIntent();
-        String username=intent.getStringExtra("username");
-        Disp.setText(getResources().getText(R.string.hi)+" "+username);
-        request_fetch();
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedUsername = sharedPreferences.getString("username", "");
+
+        Intent intent=getIntent();
+
+        String username=intent.getStringExtra("username");
+        Disp.setText(getResources().getText(R.string.hi)+" "+savedUsername);
+        request_fetch();
+
 
         request_btn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("UseCompatLoadingForDrawables")

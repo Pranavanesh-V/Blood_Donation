@@ -47,9 +47,6 @@
             android:name=".Donor_info_pg"
             android:exported="false" />
         <activity
-            android:name=".Profile"
-            android:exported="false" />
-        <activity
             android:name=".Filter_page"
             android:exported="false" />
         <activity
