@@ -258,6 +258,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         finishAffinity();
     }
 
