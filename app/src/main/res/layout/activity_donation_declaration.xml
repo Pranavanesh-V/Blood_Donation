@@ -52,6 +52,7 @@
         android:layout_height="65dp"
         android:background="@drawable/donate_style"
         android:elevation="40dp"
+        android:enabled="false"
         android:letterSpacing="-0.01"
         android:text="@string/donate"
         android:textColor="@color/red"
@@ -108,8 +109,8 @@
                 app:layout_constraintVertical_bias="0.998" />
 
             <RadioGroup
-                android:layout_width="140dp"
-                android:layout_height="25dp"
+                android:layout_width="77dp"
+                android:layout_height="26dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="@id/textView4"
                 app:layout_constraintEnd_toEndOf="@id/textView4"
@@ -122,13 +123,8 @@
                     android:id="@+id/Agree"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/agree" />
-
-                <RadioButton
-                    android:id="@+id/Decline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/decline" />
+                    android:text="@string/agree"
+                    tools:ignore="TouchTargetSizeCheck" />
             </RadioGroup>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

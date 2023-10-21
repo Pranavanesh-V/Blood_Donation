@@ -7,6 +7,7 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -54,8 +55,13 @@ public class otp_auth extends AppCompatActivity {
         String number=intent.getStringExtra("number");
         OTP=intent.getStringExtra("OTP");
 
-
+        //Edit text objects
         EditText E_otp1=otp1.getEditText();
+        EditText E_otp2=otp2.getEditText();
+        EditText E_otp3=otp3.getEditText();
+        EditText E_otp4=otp4.getEditText();
+
+        //otp 1
         assert E_otp1 != null;
         E_otp1.setInputType(InputType.TYPE_CLASS_NUMBER);
         E_otp1.setFilters(new InputFilter[]{new InputFilter.LengthFilter(1)});
@@ -68,6 +74,9 @@ public class otp_auth extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 S_otp1=E_otp1.getText().toString().trim();
+                if (s.length() == 1) { // Example condition: move focus after 3 characters
+                    E_otp2.requestFocus();
+                }
             }
             @Override
             public void afterTextChanged(Editable s) {
@@ -88,9 +97,7 @@ public class otp_auth extends AppCompatActivity {
         };
         E_otp1.addTextChangedListener(l1);
 
-
         //otp2
-        EditText E_otp2=otp2.getEditText();
         assert E_otp2 != null;
         E_otp2.setInputType(InputType.TYPE_CLASS_NUMBER);
         E_otp2.setFilters(new InputFilter[]{new InputFilter.LengthFilter(1)});
@@ -103,6 +110,9 @@ public class otp_auth extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 S_otp2=E_otp2.getText().toString().trim();
+                if (s.length() == 1) { // Example condition: move focus after 3 characters
+                    E_otp3.requestFocus();
+                }
             }
             @Override
             public void afterTextChanged(Editable s) {
@@ -123,9 +133,7 @@ public class otp_auth extends AppCompatActivity {
         };
         E_otp2.addTextChangedListener(l2);
 
-
         //otp3
-        EditText E_otp3=otp3.getEditText();
         assert E_otp3 != null;
         E_otp3.setInputType(InputType.TYPE_CLASS_NUMBER);
         E_otp3.setFilters(new InputFilter[]{new InputFilter.LengthFilter(1)});
@@ -138,6 +146,9 @@ public class otp_auth extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 S_otp3=E_otp3.getText().toString().trim();
+                if (s.length() == 1) { // Example condition: move focus after 3 characters
+                    E_otp4.requestFocus();
+                }
             }
             @Override
             public void afterTextChanged(Editable s) {
@@ -159,7 +170,6 @@ public class otp_auth extends AppCompatActivity {
         E_otp3.addTextChangedListener(l3);
 
         //otp4
-        EditText E_otp4=otp4.getEditText();
         assert E_otp4 != null;
         E_otp4.setInputType(InputType.TYPE_CLASS_NUMBER);
         E_otp4.setFilters(new InputFilter[]{new InputFilter.LengthFilter(1)});
@@ -190,6 +200,7 @@ public class otp_auth extends AppCompatActivity {
                 }
             }
         };
+        E_otp4.setImeOptions(EditorInfo.IME_ACTION_DONE);
         E_otp4.addTextChangedListener(l4);
 
 

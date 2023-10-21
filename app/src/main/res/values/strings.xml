@@ -114,4 +114,5 @@ OWNER                                                                           
     <string name="sp11">Thank you for being a part of our community and for entrusting us with your information.\n\n\n</string>
     <string name="save">Save</string>
     <string name="blood_group125">Blood Group</string>
+    <string name="spaces_space_id_entries">spaces/{space_id}/entries</string>
 </resources>

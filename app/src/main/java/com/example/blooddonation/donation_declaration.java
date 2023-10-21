@@ -5,11 +5,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class donation_declaration extends AppCompatActivity {
     Button donate2,back_req2;
+    RadioButton agree;
     String Phone_number;
 
     @Override
@@ -19,6 +21,12 @@ public class donation_declaration extends AppCompatActivity {
 
         donate2=findViewById(R.id.donate2);
         back_req2=findViewById(R.id.back9);
+        agree=findViewById(R.id.Agree);
+
+        if (agree.isChecked())
+        {
+            donate2.setEnabled(true);
+        }
 
         Intent intent=getIntent();
         Phone_number=intent.getStringExtra("Phone");
