@@ -69,7 +69,8 @@
             android:exported="false" />
         <activity
             android:name=".home_page"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".sign_up"
             android:exported="false" />

@@ -215,11 +215,14 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                     String requesterBloodGroup=snapshot.child("RequesterBloodGroup").getValue(String.class);
                     String requesterLocation=snapshot.child("RequesterLocation").getValue(String.class);
                     String requesterReason=snapshot.child("RequesterReason").getValue(String.class);
-                    if (snapshot.child("Received").getValue(String.class).equals("No"))
+                    if (snapshot.child("Received").exists())
                     {
-                        DataClass2 item = new DataClass2(requesterName,requesterLocation,requesterBloodGroup,requesterReason);
-                        itemList1.add(item);
-                        flag=true;
+                        if (snapshot.child("Received").getValue(String.class).equals("No"))
+                        {
+                            DataClass2 item = new DataClass2(requesterName,requesterLocation,requesterBloodGroup,requesterReason);
+                            itemList1.add(item);
+                            flag=true;
+                        }
                     }
                 }
                 if (!flag)
