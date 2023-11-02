@@ -13,7 +13,6 @@ public class donation_declaration extends AppCompatActivity {
     Button donate2,back_req2;
     RadioButton agree;
     String Phone_number;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,17 +22,14 @@ public class donation_declaration extends AppCompatActivity {
         back_req2=findViewById(R.id.back9);
         agree=findViewById(R.id.Agree);
 
-
         Intent intent=getIntent();
         Phone_number=intent.getStringExtra("Phone");
-
         back_req2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-
         donate2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,7 +42,5 @@ public class donation_declaration extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 }
