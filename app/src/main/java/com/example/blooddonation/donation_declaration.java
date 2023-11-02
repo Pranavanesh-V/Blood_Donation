@@ -23,10 +23,6 @@ public class donation_declaration extends AppCompatActivity {
         back_req2=findViewById(R.id.back9);
         agree=findViewById(R.id.Agree);
 
-        if (agree.isChecked())
-        {
-            donate2.setEnabled(true);
-        }
 
         Intent intent=getIntent();
         Phone_number=intent.getStringExtra("Phone");
@@ -41,9 +37,13 @@ public class donation_declaration extends AppCompatActivity {
         donate2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Intent.ACTION_DIAL,
-                        Uri.parse("tel:"+Phone_number));
-                startActivity(intent);
+                if (agree.isChecked())
+                {
+                    System.out.println(Phone_number);
+                    Intent intent=new Intent(Intent.ACTION_DIAL,
+                            Uri.parse("tel:"+Phone_number));
+                    startActivity(intent);
+                }
             }
         });
 

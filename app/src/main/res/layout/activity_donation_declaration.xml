@@ -52,7 +52,6 @@
         android:layout_height="65dp"
         android:background="@drawable/donate_style"
         android:elevation="40dp"
-        android:enabled="false"
         android:letterSpacing="-0.01"
         android:text="@string/donate"
         android:textColor="@color/red"
