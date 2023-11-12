@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -28,6 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class Edit_profile_page extends AppCompatActivity {
 
@@ -36,9 +38,10 @@ public class Edit_profile_page extends AppCompatActivity {
     DatabaseReference databaseReference,databaseReference1;
     EditText blood_Group2,mail_id3,address2;
     TextView name3;
-    Button back10,save,cancel,f_device;
+    Button back10,save,cancel,f_device,camera;
     String savedUsername;
     ImageView profile2;
+    private static final int PICK_IMAGE_REQUEST=1;
     private Uri image_uri;
     ConstraintLayout layout;
 
@@ -97,6 +100,8 @@ public class Edit_profile_page extends AppCompatActivity {
         int width= ViewGroup.LayoutParams.MATCH_PARENT;
         int height=ViewGroup.LayoutParams.MATCH_PARENT;
         boolean focusable=true;
+        f_device=popupView.findViewById(R.id.from_device);
+        camera=popupView.findViewById(R.id.from_camera);
         cancel=popupView.findViewById(R.id.cancel_button);
 
         PopupWindow popupWindow=new PopupWindow(popupView,width,height,focusable);
@@ -106,6 +111,20 @@ public class Edit_profile_page extends AppCompatActivity {
             popupWindow.dismiss();
             return true;
         });
+        f_device.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openFileChooser();
+                popupWindow.dismiss();
+            }
+        });
+    }
+    public void openFileChooser()
+    {
+        Intent intent=new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,PICK_IMAGE_REQUEST);
     }
 
     public Boolean fetch(){
@@ -146,5 +165,25 @@ public class Edit_profile_page extends AppCompatActivity {
             }
         });
     return flag[0];
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==PICK_IMAGE_REQUEST &&
+                resultCode==RESULT_OK &&
+                data!=null && data.getData()!=null)
+        {
+            image_uri=data.getData();
+            Picasso.with(this).load(image_uri).into(profile2);
+            profile2.setImageURI(data.getData());
+        }
+        else
+        {
+            if (data.getData()!=null) {
+                Toast.makeText(Edit_profile_page.this, data.getData().toString(), Toast.LENGTH_SHORT).show();
+                System.out.println(data.getData());
+            }
+        }
     }
 }
