@@ -115,4 +115,7 @@ OWNER                                                                           
     <string name="save">Save</string>
     <string name="blood_group125">Blood Group</string>
     <string name="spaces_space_id_entries">spaces/{space_id}/entries</string>
+    <string name="choose_from_device">choose from device</string>
+    <string name="camera">Camera</string>
+    <string name="cancel">Cancel</string>
 </resources>

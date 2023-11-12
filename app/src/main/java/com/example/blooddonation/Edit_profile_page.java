@@ -1,29 +1,33 @@
 package com.example.blooddonation;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 public class Edit_profile_page extends AppCompatActivity {
 
@@ -32,8 +36,11 @@ public class Edit_profile_page extends AppCompatActivity {
     DatabaseReference databaseReference,databaseReference1;
     EditText blood_Group2,mail_id3,address2;
     TextView name3;
-    Button back10,save;
+    Button back10,save,cancel,f_device;
     String savedUsername;
+    ImageView profile2;
+    private Uri image_uri;
+    ConstraintLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +53,11 @@ public class Edit_profile_page extends AppCompatActivity {
         address2=findViewById(R.id.address2);
         back10=findViewById(R.id.back10);
         save=findViewById(R.id.Save);
+        layout=findViewById(R.id.R_layout);
+        profile2=findViewById(R.id.profile2);
 
         Intent intent=getIntent();
-        Integer integer=intent.getIntExtra("Flag",0);
+        int integer=intent.getIntExtra("Flag",0);
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedUsername = sharedPreferences.getString("username", "");
         name3.setText(savedUsername);
@@ -65,25 +74,37 @@ public class Edit_profile_page extends AppCompatActivity {
             address2.setEnabled(false);
             mail_id3.setEnabled(true);
         }
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean res=fetch();
-                if (res)
-                {
-                    Toast.makeText(Edit_profile_page.this,"Unsuccessfully updated",Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(Edit_profile_page.this,"Successfully updated",Toast.LENGTH_SHORT).show();
-                }
+        save.setOnClickListener(view -> {
+            boolean res=fetch();
+            if (res)
+            {
+                Toast.makeText(Edit_profile_page.this,"Unsuccessfully updated",Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(Edit_profile_page.this,"Successfully updated",Toast.LENGTH_SHORT).show();
             }
         });
-        back10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
+        back10.setOnClickListener(view -> finish());
+        profile2.setOnClickListener(view -> createPopUpWindow());
+    }
+    @SuppressLint("ClickableViewAccessibility")
+    public void createPopUpWindow()
+    {
+        LayoutInflater inflater= (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        @SuppressLint("InflateParams") View popupView=inflater.inflate(R.layout.mainpopup,null);
+
+        int width= ViewGroup.LayoutParams.MATCH_PARENT;
+        int height=ViewGroup.LayoutParams.MATCH_PARENT;
+        boolean focusable=true;
+        cancel=popupView.findViewById(R.id.cancel_button);
+
+        PopupWindow popupWindow=new PopupWindow(popupView,width,height,focusable);
+        layout.post(() -> popupWindow.showAtLocation(layout, Gravity.BOTTOM,1,1));
+        cancel.setOnClickListener(view -> popupWindow.dismiss());
+        popupView.setOnTouchListener((view, motionEvent) -> {
+            popupWindow.dismiss();
+            return true;
         });
     }
 
