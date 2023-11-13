@@ -7,29 +7,31 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class Edit_profile_page extends AppCompatActivity {
 
@@ -44,6 +46,7 @@ public class Edit_profile_page extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST=1;
     private Uri image_uri;
     ConstraintLayout layout;
+    ActivityResultLauncher<Intent> imagePickLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,44 +92,35 @@ public class Edit_profile_page extends AppCompatActivity {
             }
         });
         back10.setOnClickListener(view -> finish());
-        profile2.setOnClickListener(view -> createPopUpWindow());
-    }
-    @SuppressLint("ClickableViewAccessibility")
-    public void createPopUpWindow()
-    {
-        LayoutInflater inflater= (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        @SuppressLint("InflateParams") View popupView=inflater.inflate(R.layout.mainpopup,null);
-
-        int width= ViewGroup.LayoutParams.MATCH_PARENT;
-        int height=ViewGroup.LayoutParams.MATCH_PARENT;
-        boolean focusable=true;
-        f_device=popupView.findViewById(R.id.from_device);
-        camera=popupView.findViewById(R.id.from_camera);
-        cancel=popupView.findViewById(R.id.cancel_button);
-
-        PopupWindow popupWindow=new PopupWindow(popupView,width,height,focusable);
-        layout.post(() -> popupWindow.showAtLocation(layout, Gravity.BOTTOM,1,1));
-        cancel.setOnClickListener(view -> popupWindow.dismiss());
-        popupView.setOnTouchListener((view, motionEvent) -> {
-            popupWindow.dismiss();
-            return true;
-        });
-        f_device.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openFileChooser();
-                popupWindow.dismiss();
-            }
-        });
+        imagePickLauncher=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                result->{
+                    if (result.getResultCode()==RESULT_OK)
+                    {
+                        Intent data=result.getData();
+                        if (data!=null && data.getData()!=null)
+                        {
+                            image_uri=data.getData();
+                            Glide.with(this).load(image_uri)
+                                    .apply(RequestOptions.circleCropTransform())
+                                    .into(profile2);
+                        }
+                    }
+                }
+                );
+        profile2.setOnClickListener(view -> openFileChooser());
     }
     public void openFileChooser()
     {
-        Intent intent=new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,PICK_IMAGE_REQUEST);
+        ImagePicker.with(this).cropSquare().compress(512)
+                .maxResultSize(512,512)
+                .createIntent(new Function1<Intent, Unit>() {
+                    @Override
+                    public Unit invoke(Intent intent) {
+                        imagePickLauncher.launch(intent);
+                        return null;
+                    }
+                });
     }
-
     public Boolean fetch(){
 
         final boolean[] flag = {false};
@@ -174,16 +168,10 @@ public class Edit_profile_page extends AppCompatActivity {
                 resultCode==RESULT_OK &&
                 data!=null && data.getData()!=null)
         {
-            image_uri=data.getData();
-            Picasso.with(this).load(image_uri).into(profile2);
-            profile2.setImageURI(data.getData());
-        }
-        else
-        {
-            if (data.getData()!=null) {
-                Toast.makeText(Edit_profile_page.this, data.getData().toString(), Toast.LENGTH_SHORT).show();
-                System.out.println(data.getData());
-            }
+            image_uri = data.getData();
+
+            // Set the selected image to the ImageView
+            profile2.setImageURI(image_uri);
         }
     }
 }
