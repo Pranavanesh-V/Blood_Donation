@@ -40,6 +40,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:21.5.0'
     implementation 'com.google.firebase:firebase-auth:22.2.0'
     implementation 'com.google.firebase:firebase-storage-ktx:20.3.0'
+    implementation 'com.google.firebase:firebase-storage:20.1.0'
 // Replace with the latest version
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

@@ -80,6 +80,11 @@ public class Edit_profile_page extends AppCompatActivity {
             address2.setEnabled(false);
             mail_id3.setEnabled(true);
         }
+        profile_up_down pub=new profile_up_down();
+        Uri uri=pub.downloadImage(savedUsername);
+        Glide.with(this).load(uri)
+                .apply(RequestOptions.circleCropTransform())
+                .into(profile2);
         save.setOnClickListener(view -> {
             boolean res=fetch();
             if (res)
@@ -88,6 +93,8 @@ public class Edit_profile_page extends AppCompatActivity {
             }
             else
             {
+                profile_up_down pud=new profile_up_down();
+                pud.uploadImage(image_uri,savedUsername);
                 Toast.makeText(Edit_profile_page.this,"Successfully updated",Toast.LENGTH_SHORT).show();
             }
         });
