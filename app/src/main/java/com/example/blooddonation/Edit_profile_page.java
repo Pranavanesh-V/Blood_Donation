@@ -133,6 +133,8 @@ public class Edit_profile_page extends AppCompatActivity {
 
                 if (dataSnapshot.child(savedUsername).child("Blood Group").exists() && dataSnapshot.child(savedUsername).child("Address").exists() && dataSnapshot.child(savedUsername).child("Email").exists())
                 {
+                    //to check if the user doesn't changes the existing data but changes the profile
+                    //if he changes the data handel it else just update the profile
                     String blood=blood_Group2.getText().toString().trim();
                     String mail=mail_id3.getText().toString().trim();
                     String Address=address2.getText().toString().trim();
