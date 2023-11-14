@@ -56,6 +56,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     TextView Disp,Disp1;
     ImageView user,heading;
 
+    @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,65 +92,50 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         Disp.setText(getResources().getText(R.string.hi)+" "+savedUsername);
         request_fetch();
 
+        profile_up_down pub=new profile_up_down();
+        pub.downloadImage(savedUsername,home_page.this,user);
 
-        request_btn.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("UseCompatLoadingForDrawables")
-            @Override
-            public void onClick(View view) {
-                request_btn.setBackground(getDrawable(R.drawable.cus_join11));
-                donate_btn.setBackground(getDrawable(R.drawable.cus_join2));
-                Search.setVisibility(View.VISIBLE);
-                Filter.setVisibility(View.VISIBLE);
-                recyclerView.setVisibility(View.VISIBLE);
-                user.setVisibility(View.INVISIBLE);
-                Disp.setVisibility(View.INVISIBLE);
-                Disp1.setVisibility(View.INVISIBLE);
-                recyclerView1.setVisibility(View.INVISIBLE);
-                heading.setVisibility(View.INVISIBLE);
-                empty_res.setVisibility(View.INVISIBLE);
+        request_btn.setOnClickListener(view -> {
+            request_btn.setBackground(getDrawable(R.drawable.cus_join11));
+            donate_btn.setBackground(getDrawable(R.drawable.cus_join2));
+            Search.setVisibility(View.VISIBLE);
+            Filter.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.VISIBLE);
+            user.setVisibility(View.INVISIBLE);
+            Disp.setVisibility(View.INVISIBLE);
+            Disp1.setVisibility(View.INVISIBLE);
+            recyclerView1.setVisibility(View.INVISIBLE);
+            heading.setVisibility(View.INVISIBLE);
+            empty_res.setVisibility(View.INVISIBLE);
 
-            }
         });
-        donate_btn.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("UseCompatLoadingForDrawables")
-            @Override
-            public void onClick(View view) {
-                request_btn.setBackground(getDrawable(R.drawable.cus_join1));
-                donate_btn.setBackground(getDrawable(R.drawable.cus_join22));
-                Search.setVisibility(View.INVISIBLE);
-                Filter.setVisibility(View.INVISIBLE);
-                recyclerView.setVisibility(View.INVISIBLE);
-                user.setVisibility(View.VISIBLE);
-                Disp.setVisibility(View.VISIBLE);
-                Disp1.setVisibility(View.VISIBLE);
-                recyclerView1.setVisibility(View.VISIBLE);
-                heading.setVisibility(View.VISIBLE);
-                //Disp.setText(R.string.hi + savedUsername);
-                Disp.setText(getResources().getText(R.string.hi)+" "+savedUsername);
-                request_fetch();
-            }
+        donate_btn.setOnClickListener(view -> {
+            request_btn.setBackground(getDrawable(R.drawable.cus_join1));
+            donate_btn.setBackground(getDrawable(R.drawable.cus_join22));
+            Search.setVisibility(View.INVISIBLE);
+            Filter.setVisibility(View.INVISIBLE);
+            recyclerView.setVisibility(View.INVISIBLE);
+            user.setVisibility(View.VISIBLE);
+            Disp.setVisibility(View.VISIBLE);
+            Disp1.setVisibility(View.VISIBLE);
+            recyclerView1.setVisibility(View.VISIBLE);
+            heading.setVisibility(View.VISIBLE);
+            //Disp.setText(R.string.hi + savedUsername);
+            Disp.setText(getResources().getText(R.string.hi)+" "+savedUsername);
+            request_fetch();
         });
-        E_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        E_search.setOnClickListener(view -> {
 
-            }
         });
 
-        Filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(home_page.this, Filter_page.class);
-                startActivityForResult(intent,1);
-            }
+        Filter.setOnClickListener(view -> {
+            Intent intent1 =new Intent(home_page.this, Filter_page.class);
+            startActivityForResult(intent1,1);
         });
-        Menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Create the floating window
-                //Menu.isFocused()
-                showPopupMenuForMenu();
-            }
+        Menu.setOnClickListener(view -> {
+            // Create the floating window
+            //Menu.isFocused()
+            showPopupMenuForMenu();
         });
 
         // Add a TextWatcher to monitor changes in the text
@@ -174,13 +160,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             }
         });
 
-        Search.setEndIconOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                fetchDataFromFirebase();
-            }
-        });
+        Search.setEndIconOnClickListener(view -> fetchDataFromFirebase());
 
 
         // Initialize Firebase Realtime Database

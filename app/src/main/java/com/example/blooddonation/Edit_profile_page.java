@@ -30,9 +30,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
-
 public class Edit_profile_page extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
@@ -67,7 +64,9 @@ public class Edit_profile_page extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedUsername = sharedPreferences.getString("username", "");
         name3.setText(savedUsername);
-
+        profile_up_down pub=new profile_up_down();
+        pub.downloadImage(savedUsername,Edit_profile_page.this,profile2);
+        //System.out.println(i);
         if (integer==1)
         {
             blood_Group2.setEnabled(true);
@@ -80,11 +79,6 @@ public class Edit_profile_page extends AppCompatActivity {
             address2.setEnabled(false);
             mail_id3.setEnabled(true);
         }
-        profile_up_down pub=new profile_up_down();
-        Uri uri=pub.downloadImage(savedUsername);
-        Glide.with(this).load(uri)
-                .apply(RequestOptions.circleCropTransform())
-                .into(profile2);
         save.setOnClickListener(view -> {
             boolean res=fetch();
             if (res)
@@ -120,12 +114,9 @@ public class Edit_profile_page extends AppCompatActivity {
     {
         ImagePicker.with(this).cropSquare().compress(512)
                 .maxResultSize(512,512)
-                .createIntent(new Function1<Intent, Unit>() {
-                    @Override
-                    public Unit invoke(Intent intent) {
-                        imagePickLauncher.launch(intent);
-                        return null;
-                    }
+                .createIntent(intent -> {
+                    imagePickLauncher.launch(intent);
+                    return null;
                 });
     }
     public Boolean fetch(){
