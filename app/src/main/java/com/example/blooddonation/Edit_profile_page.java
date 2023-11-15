@@ -80,7 +80,70 @@ public class Edit_profile_page extends AppCompatActivity {
             mail_id3.setEnabled(true);
         }
         save.setOnClickListener(view -> {
-            boolean res=fetch();
+            int[] data={0,0,0};
+            if(blood_Group2.getText().toString().trim().isEmpty())
+            {
+                if (mail_id3.getText().toString().trim().isEmpty())
+                {
+                    if (address2.getText().toString().trim().isEmpty())
+                    {
+                        System.out.println("no change");
+                    }
+                    else
+                    {
+                        data[2]=1;
+                        System.out.println("Address only");
+                    }
+                }
+                else
+                {
+                    if (address2.getText().toString().trim().isEmpty())
+                    {
+                        data[1]=1;
+                        System.out.println("only mail_id");
+                    }
+                    else
+                    {
+                        data[1]=1;
+                        data[2]=1;
+                        System.out.println("mail_id and address");
+                    }
+                }
+            }
+            else
+            {
+                if (mail_id3.getText().toString().trim().isEmpty())
+                {
+                    if (address2.getText().toString().trim().isEmpty())
+                    {
+                        data[0]=1;
+                        System.out.println("only blood_g");
+                    }
+                    else
+                    {
+                        data[0]=1;
+                        data[2]=1;
+                        System.out.println("blood_g and address only");
+                    }
+                }
+                else
+                {
+                    if (address2.getText().toString().trim().isEmpty())
+                    {
+                        data[0]=1;
+                        data[1]=1;
+                        System.out.println("blood_g and mail_id");
+                    }
+                    else
+                    {
+                        data[0]=1;
+                        data[1]=1;
+                        data[2]=1;
+                        System.out.println("all options");
+                    }
+                }
+            }
+            boolean res=fetch(data);
             if (res)
             {
                 Toast.makeText(Edit_profile_page.this,"Unsuccessfully updated",Toast.LENGTH_SHORT).show();
@@ -119,7 +182,7 @@ public class Edit_profile_page extends AppCompatActivity {
                     return null;
                 });
     }
-    public Boolean fetch(){
+    public Boolean fetch(int[] d){
 
         final boolean[] flag = {false};
         // Initialize Firebase Realtime Database
@@ -135,23 +198,42 @@ public class Edit_profile_page extends AppCompatActivity {
                 {
                     //to check if the user doesn't changes the existing data but changes the profile
                     //if he changes the data handel it else just update the profile
-                    String blood=blood_Group2.getText().toString().trim();
-                    String mail=mail_id3.getText().toString().trim();
-                    String Address=address2.getText().toString().trim();
-
-                    databaseReference.child(savedUsername).child("Blood Group").setValue(blood);
-                    databaseReference.child(savedUsername).child("Address").setValue(Address);
-                    databaseReference.child(savedUsername).child("Email").setValue(mail);
-                    flag[0] =true;
-                    finish();
+                    String blood,mail,Address;
+                    if(d[0]==1 || d[1]==1 || d[2]==1)
+                    {
+                        if(d[0]==1)
+                        {
+                            blood= blood_Group2.getText().toString().trim();
+                            databaseReference.child(savedUsername).child("Blood Group").setValue(blood);
+                            System.out.println("place 1");
+                        }
+                        if(d[1]==1)
+                        {
+                            mail = mail_id3.getText().toString().trim();
+                            databaseReference.child(savedUsername).child("Email").setValue(mail);
+                            System.out.println("place 2");
+                        }
+                        if(d[2]==1)
+                        {
+                            Address = address2.getText().toString().trim();
+                            databaseReference.child(savedUsername).child("Address").setValue(Address);
+                            System.out.println("place 3");
+                        }
+                    }
+                    else
+                    {
+                        //do nothing
+                    }
                 }
                 else {
-                    String mail=mail_id3.getText().toString().trim();
-                    databaseReference.child(savedUsername).child("Email").setValue(mail);
-                    flag[0] =true;
-                    finish();
+                    if (d[1]==1) {
+                        String mail = mail_id3.getText().toString().trim();
+                        databaseReference.child(savedUsername).child("Email").setValue(mail);
+                        System.out.println("Email_id");
+                    }
                 }
-
+                flag[0] =true;
+                finish();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -173,5 +255,10 @@ public class Edit_profile_page extends AppCompatActivity {
             // Set the selected image to the ImageView
             profile2.setImageURI(image_uri);
         }
+    }
+    private void refreshActivity() {
+        // Create an intent to start the current activity
+        Intent intent = getIntent();
+        startActivity(intent); // Start a new instance
     }
 }

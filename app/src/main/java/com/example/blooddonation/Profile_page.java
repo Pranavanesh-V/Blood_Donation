@@ -1,9 +1,5 @@
 package com.example.blooddonation;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,12 +31,14 @@ public class Profile_page extends AppCompatActivity {
     Button back_req4;
     int flag;
     TextView blood_Group,name2,mail_id2,Address,Edit;
+    ImageView profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
 
+        profile=findViewById(R.id.profile);
         back_req4=findViewById(R.id.back6);
         blood_Group=findViewById(R.id.blood_Group);
         name2=findViewById(R.id.name2);
@@ -46,6 +48,8 @@ public class Profile_page extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedUsername = sharedPreferences.getString("username", "");
+
+        //refreshActivity();
 
         fetchDataFromFirebase();
 
@@ -68,6 +72,8 @@ public class Profile_page extends AppCompatActivity {
     }
     private void fetchDataFromFirebase() {
         // Initialize Firebase Realtime Database
+        profile_up_down pub=new profile_up_down();
+        pub.downloadImage(savedUsername,Profile_page.this,profile);
         databaseReference = FirebaseDatabase.getInstance().getReference("Donars");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
