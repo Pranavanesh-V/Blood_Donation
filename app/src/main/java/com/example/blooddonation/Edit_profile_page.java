@@ -16,7 +16,6 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -34,7 +33,7 @@ public class Edit_profile_page extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "MyPrefs";
-    DatabaseReference databaseReference,databaseReference1;
+    DatabaseReference databaseReference;
     EditText blood_Group2,mail_id3,address2;
     TextView name3;
     Button back10,save,cancel,f_device,camera;
@@ -64,9 +63,9 @@ public class Edit_profile_page extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedUsername = sharedPreferences.getString("username", "");
         name3.setText(savedUsername);
-        profile_up_down pub=new profile_up_down();
-        pub.downloadImage(savedUsername,Edit_profile_page.this,profile2);
-        //System.out.println(i);
+
+        download download=new download();
+        download.down(this,profile2,savedUsername);
         if (integer==1)
         {
             blood_Group2.setEnabled(true);
@@ -150,8 +149,9 @@ public class Edit_profile_page extends AppCompatActivity {
             }
             else
             {
-                profile_up_down pud=new profile_up_down();
-                pud.uploadImage(image_uri,savedUsername);
+                String img_uri=image_uri.toString();
+                databaseReference = FirebaseDatabase.getInstance().getReference("Donars");
+                databaseReference.child(savedUsername).child("Profile").setValue(img_uri);
                 Toast.makeText(Edit_profile_page.this,"Successfully updated",Toast.LENGTH_SHORT).show();
             }
         });
@@ -167,6 +167,7 @@ public class Edit_profile_page extends AppCompatActivity {
                             Glide.with(this).load(image_uri)
                                     .apply(RequestOptions.circleCropTransform())
                                     .into(profile2);
+                            System.out.println(image_uri);
                         }
                     }
                 }
@@ -241,24 +242,5 @@ public class Edit_profile_page extends AppCompatActivity {
             }
         });
     return flag[0];
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==PICK_IMAGE_REQUEST &&
-                resultCode==RESULT_OK &&
-                data!=null && data.getData()!=null)
-        {
-            image_uri = data.getData();
-
-            // Set the selected image to the ImageView
-            profile2.setImageURI(image_uri);
-        }
-    }
-    private void refreshActivity() {
-        // Create an intent to start the current activity
-        Intent intent = getIntent();
-        startActivity(intent); // Start a new instance
     }
 }

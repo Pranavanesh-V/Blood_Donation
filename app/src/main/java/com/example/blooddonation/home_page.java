@@ -92,8 +92,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         Disp.setText(getResources().getText(R.string.hi)+" "+savedUsername);
         request_fetch();
 
-        profile_up_down pub=new profile_up_down();
-        pub.downloadImage(savedUsername,home_page.this,user);
+
 
         request_btn.setOnClickListener(view -> {
             request_btn.setBackground(getDrawable(R.drawable.cus_join11));

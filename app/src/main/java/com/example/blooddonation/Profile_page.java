@@ -72,8 +72,7 @@ public class Profile_page extends AppCompatActivity {
     }
     private void fetchDataFromFirebase() {
         // Initialize Firebase Realtime Database
-        profile_up_down pub=new profile_up_down();
-        pub.downloadImage(savedUsername,Profile_page.this,profile);
+
         databaseReference = FirebaseDatabase.getInstance().getReference("Donars");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
