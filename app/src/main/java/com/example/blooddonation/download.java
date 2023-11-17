@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,10 +29,10 @@ public class download
                 if (dataSnapshot.child(savedUsername).child("Profile").exists()) {
                     String S_uri = dataSnapshot.child(savedUsername).child("Profile").getValue(String.class);
                     Uri uri = Uri.parse(S_uri);
-                    Glide.with(context).load(uri)
+                    /*Glide.with(context).load(uri)
                             .apply(RequestOptions.circleCropTransform())
-                            .into(imageView);
-                    //imageView.setImageURI(uri);
+                            .into(imageView);*/
+                    imageView.setImageURI(uri);
                     System.out.println(uri);
                 }
             }
