@@ -49,8 +49,8 @@ public class Profile_page extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedUsername = sharedPreferences.getString("username", "");
 
-        //refreshActivity();
-
+        download d=new download();
+        d.down(this,profile,savedUsername);
         fetchDataFromFirebase();
 
         back_req4.setOnClickListener(new View.OnClickListener() {

@@ -29,9 +29,6 @@ public class download
                 if (dataSnapshot.child(savedUsername).child("Profile").exists()) {
                     String S_uri = dataSnapshot.child(savedUsername).child("Profile").getValue(String.class);
                     Uri uri = Uri.parse(S_uri);
-                    /*Glide.with(context).load(uri)
-                            .apply(RequestOptions.circleCropTransform())
-                            .into(imageView);*/
                     imageView.setImageURI(uri);
                     System.out.println(uri);
                 }

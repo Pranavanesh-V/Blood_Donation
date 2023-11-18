@@ -3,6 +3,7 @@ package com.example.blooddonation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.Name.setText(item.getDataName());
         holder.Blood_g.setText(item.getDataBlood());
         holder.Location.setText(item.getDataLocation());
+        holder.recImage.setImageURI(item.getUri());
     }
     @Override
     public int getItemCount() {
@@ -40,12 +42,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView Name;
         TextView Blood_g;
         TextView Location;
+        ImageView recImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             Name = itemView.findViewById(R.id.recName);
             Blood_g = itemView.findViewById(R.id.recBlood);
             Location = itemView.findViewById(R.id.recLocation);
+            recImage=itemView.findViewById(R.id.recImage);
 
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();

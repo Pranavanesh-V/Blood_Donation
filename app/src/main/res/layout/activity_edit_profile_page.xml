@@ -31,12 +31,9 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.287"
+        app:layout_constraintVertical_bias="0.255"
         app:shapeAppearanceOverlay="@style/circular"
         android:src="@drawable/user"
-        app:strokeColor="@color/white"
-        app:strokeWidth="5dp"
-        android:padding="10dp"
         tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <TextView

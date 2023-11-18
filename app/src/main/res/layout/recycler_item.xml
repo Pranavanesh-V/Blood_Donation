@@ -26,7 +26,7 @@
             android:padding="8dp"
             android:scaleType="centerCrop"
             android:src="@drawable/logo_blood"
-            app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+            app:shapeAppearanceOverlay="@style/circular"/>
 
         <TextView
             android:id="@+id/recName"

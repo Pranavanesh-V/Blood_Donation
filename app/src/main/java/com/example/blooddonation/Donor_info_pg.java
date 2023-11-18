@@ -6,8 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +24,7 @@ public class Donor_info_pg extends AppCompatActivity {
     DatabaseReference databaseReference;
     Button back;
     String Phone,Email_id,Address,S_Location;
+    ImageView imageView8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +37,17 @@ public class Donor_info_pg extends AppCompatActivity {
         T_Mail_id =findViewById(R.id.Mail_id);
         T_Address =findViewById(R.id.Address);
         back=findViewById(R.id.back);
+        imageView8=findViewById(R.id.imageView8);
 
         //get the intent values
         Intent intent = getIntent();
         String S_name = intent.getStringExtra("Name");
         String blood = intent.getStringExtra("Blood");
+        String S_uri=intent.getStringExtra("Image_uri");
+        Uri uri=Uri.parse(S_uri);
         T_Name.setText(S_name);
         T_Blood.setText(blood);
+        imageView8.setImageURI(uri);
         // Initialize Firebase Realtime Database
         databaseReference = FirebaseDatabase.getInstance().getReference("Donars");
         databaseReference.addValueEventListener(new ValueEventListener() {

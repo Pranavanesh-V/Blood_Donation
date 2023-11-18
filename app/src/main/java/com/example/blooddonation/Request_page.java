@@ -1,17 +1,18 @@
 package com.example.blooddonation;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -27,6 +28,9 @@ public class Request_page extends AppCompatActivity {
     Button submit;
     TextInputEditText B_G;
     Button back_req3;
+    String img_uri;
+    private static final String PREFS_NAME = "MyPrefs";
+    private SharedPreferences sharedPreferences;
     String S_name="",S_address="",S_phone="",S_Reason="",S_Desc_Reason="",S_blood_g="";
 
     @Override
@@ -98,12 +102,16 @@ public class Request_page extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                             // Push data to a new unique key
+                            sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+                            img_uri = sharedPreferences.getString("Image_u", "");
+
                             reference.child(S_name).child("RequesterLocation").setValue(S_address);
                             reference.child(S_name).child("Requester Phone").setValue(S_phone);
                             reference.child(S_name).child("RequesterReason").setValue(S_Reason);
                             reference.child(S_name).child("Desc Reason").setValue(S_Desc_Reason);
                             reference.child(S_name).child("RequesterBloodGroup").setValue(S_blood_g);
                             reference.child(S_name).child("Received").setValue("No");
+                            reference.child(S_name).child("Profile").setValue(img_uri);
                         }
 
                         @Override

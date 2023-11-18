@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -45,7 +46,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     Button request_btn, donate_btn;
     ImageView Filter,Menu;
     RecyclerView recyclerView,recyclerView1;
-    DatabaseReference databaseReference,databaseReference1;
+    DatabaseReference databaseReference,databaseReference1,databaseReference2;
     String S_Blood_G,Age,Gender;
     String inputText="";
     ImageView empty_res;
@@ -86,13 +87,13 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedUsername = sharedPreferences.getString("username", "");
 
+        test();
+
         Intent intent=getIntent();
 
         String username=intent.getStringExtra("username");
         Disp.setText(getResources().getText(R.string.hi)+" "+savedUsername);
         request_fetch();
-
-
 
         request_btn.setOnClickListener(view -> {
             request_btn.setBackground(getDrawable(R.drawable.cus_join11));
@@ -194,11 +195,19 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                     String requesterBloodGroup=snapshot.child("RequesterBloodGroup").getValue(String.class);
                     String requesterLocation=snapshot.child("RequesterLocation").getValue(String.class);
                     String requesterReason=snapshot.child("RequesterReason").getValue(String.class);
-                    if (snapshot.child("Received").exists())
+                    if (snapshot.child("Received").exists() && snapshot.child("Profile").exists())
                     {
-                        if (snapshot.child("Received").getValue(String.class).equals("No"))
+                        if (snapshot.child("Received").getValue(String.class).equals("No") && !snapshot.child("Profile").getValue(String.class).isEmpty())
                         {
-                            DataClass2 item = new DataClass2(requesterName,requesterLocation,requesterBloodGroup,requesterReason);
+                            String S_uri=snapshot.child("Profile").getValue(String.class);
+                            Uri uri=Uri.parse(S_uri);
+                            DataClass2 item = new DataClass2(requesterName,requesterLocation,requesterBloodGroup,requesterReason,uri);
+                            itemList1.add(item);
+                            flag=true;
+                        }
+                        else {
+                            Uri uri=null;
+                            DataClass2 item = new DataClass2(requesterName,requesterLocation,requesterBloodGroup,requesterReason,uri);
                             itemList1.add(item);
                             flag=true;
                         }
@@ -231,9 +240,6 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                 Age=data.getStringExtra("Age");
                 S_Blood_G=data.getStringExtra("Blood_group");
                 Gender=data.getStringExtra("Gender");
-                //E_search.setText(Gender);
-                //call method
-                //fetchDataFromFirebase();
             }
         }
     }
@@ -292,6 +298,28 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         });
         popupMenu.show();
     }
+    public void test() {
+        databaseReference2 = FirebaseDatabase.getInstance().getReference("Donars");
+        databaseReference2.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (snapshot.getKey().equals(savedUsername)) {
+                        if (!snapshot.child("Profile").getValue(String.class).isEmpty()) {
+                            download d = new download();
+                            d.down(home_page.this, user, savedUsername);
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
     private void fetchDataFromFirebase() {
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -308,13 +336,19 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                     String name = snapshot.getKey();
 
 
-                    if(snapshot.child("Blood Group").exists() && snapshot.child("Phone No").exists() && snapshot.child("DOB").exists()) {
+                    if(snapshot.child("Blood Group").exists() && snapshot.child("Phone No").exists() && snapshot.child("DOB").exists() && snapshot.child("Profile").exists()) {
                         String Blood_g = snapshot.child("Blood Group").getValue(String.class);
                         String S_Gender=snapshot.child("Gender").getValue(String.class);
                         String S_Location=snapshot.child("City").getValue(String.class);
                         String S_dob=snapshot.child("DOB").getValue(String.class);
                         age_finder age_finder=new age_finder();
                         age=age_finder.age_Cals(S_dob);
+                        Uri uri=null;
+                        if (!snapshot.child("Profile").getValue(String.class).isEmpty())
+                        {
+                            String S_uri=snapshot.child("Profile").getValue(String.class);
+                            uri=Uri.parse(S_uri);
+                        }
 
                         if (!inputText.equals(""))
                         {
@@ -326,7 +360,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                             boolean res=age_finder.equals_rt(age,Age);
                                             if (Blood_g.equals(S_Blood_G) && res && S_Gender.equals(Gender)) {
                                                 System.out.println("Everything is chosen");
-                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                DataClass item = new DataClass(name, S_Location, Blood_g,uri);
                                                 itemList.add(item);
                                             }
                                         } else {
@@ -334,7 +368,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                             if (Blood_g.equals(S_Blood_G) && res)
                                             {
                                                 System.out.println("Only opt1 and opt2 is chosen");
-                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                DataClass item = new DataClass(name, S_Location, Blood_g,uri);
                                                 itemList.add(item);
                                             }
                                         }
@@ -344,7 +378,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                             if (S_Gender.equals(Gender) && res)
                                             {
                                                 System.out.println("opt1 and opt3 is chosen");
-                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                DataClass item = new DataClass(name, S_Location, Blood_g,uri);
                                                 itemList.add(item);
                                             }
 
@@ -353,7 +387,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                             if (res)
                                             {
                                                 System.out.println("Only opt1 is chosen");
-                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                DataClass item = new DataClass(name, S_Location, Blood_g,uri);
                                                 itemList.add(item);
                                             }
                                         }
@@ -364,13 +398,13 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                             System.out.println("opt2 and opt3 is chosen");
                                             if (Blood_g.equals(S_Blood_G) && S_Gender.equals(Gender))
                                             {
-                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                DataClass item = new DataClass(name, S_Location, Blood_g,uri);
                                                 itemList.add(item);
                                             }
                                         } else {
                                             System.out.println("Only opt2 is chosen");
                                             if (Blood_g.equals(S_Blood_G)) {
-                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                DataClass item = new DataClass(name, S_Location, Blood_g,uri);
                                                 itemList.add(item);
                                             }
                                         }
@@ -378,11 +412,11 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                         if (!Objects.isNull(Gender)) {
                                             System.out.println("Opt3 is only chosen");
                                             if (Gender.equals(S_Gender)) {
-                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                DataClass item = new DataClass(name, S_Location, Blood_g,uri);
                                                 itemList.add(item);
                                             }
                                         } else {
-                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g,uri);
                                             itemList.add(item);
                                             System.out.println("No filter is chosen\n no opt chosen");
                                         }
@@ -398,7 +432,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                         boolean res=age_finder.equals_rt(age,Age);
                                         if (Blood_g.equals(S_Blood_G) && res && S_Gender.equals(Gender)) {
                                             System.out.println("Everything is chosen");
-                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g,uri);
                                             itemList.add(item);
                                         }
                                     } else {
@@ -406,7 +440,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                         if (Blood_g.equals(S_Blood_G) && res)
                                         {
                                             System.out.println("Only opt1 and opt2 is chosen");
-                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g,uri);
                                             itemList.add(item);
                                         }
                                     }
@@ -416,7 +450,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                         if (S_Gender.equals(Gender) && res)
                                         {
                                             System.out.println("opt1 and opt3 is chosen");
-                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g,uri);
                                             itemList.add(item);
                                         }
                                     } else {
@@ -424,7 +458,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                         if (res)
                                         {
                                             System.out.println("Only opt1 is chosen");
-                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g,uri);
                                             itemList.add(item);
                                         }
                                     }
@@ -435,13 +469,13 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                         System.out.println("opt2 and opt3 is chosen");
                                         if (Blood_g.equals(S_Blood_G) && S_Gender.equals(Gender))
                                         {
-                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g,uri);
                                             itemList.add(item);
                                         }
                                     } else {
                                         System.out.println("Only opt2 is chosen");
                                         if (Blood_g.equals(S_Blood_G)) {
-                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g,uri);
                                             itemList.add(item);
                                         }
                                     }
@@ -449,7 +483,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                     if (!Objects.isNull(Gender)) {
                                         System.out.println("Opt3 is only chosen");
                                         if (Gender.equals(S_Gender)) {
-                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g,uri);
                                             itemList.add(item);
                                         }
                                     } else {
@@ -491,22 +525,31 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         Intent intent=new Intent(home_page.this,Donor_info_pg.class);
         intent.putExtra("Name",name);
         intent.putExtra("Blood",blood);
+        Uri uri=data.getUri();
+        String S_uri=uri.toString();
+        intent.putExtra("Image_uri",S_uri);
         startActivity(intent);
 
     }
 
     @Override
     public void onItemClick1(int position) {
+        String S_uri="";
         DataClass2 data=itemList1.get(position);
         String name=data.getDataName();
         String blood= data.getDataBlood();
         String location=data.getDataLocation();
         String txt= data.getTxt();
+        if (!Objects.isNull(data.getUri())) {
+            Uri uri = data.getUri();
+            S_uri = uri.toString();
+        }
         Intent intent=new Intent(home_page.this, Request_donor_info.class);
         intent.putExtra("Name",name);
         intent.putExtra("Blood",blood);
         intent.putExtra("Location",location);
         intent.putExtra("Txt",txt);
+        intent.putExtra("Image_uri",S_uri);
         startActivity(intent);
         System.out.println(name+"\n"+blood+"\n"+location+"\n"+txt);
     }

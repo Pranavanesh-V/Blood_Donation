@@ -26,8 +26,8 @@
             android:layout_marginTop="20dp"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/logo_blood"
-            app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+            app:shapeAppearanceOverlay="@style/circular"
+            android:src="@drawable/logo_blood" />
 
         <TextView
             android:id="@+id/recName"
@@ -74,14 +74,15 @@
         <TextView
             android:id="@+id/recLocation"
             android:layout_width="100dp"
-            android:layout_height="31dp"
+            android:layout_height="53dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="43dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="46dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="24dp"
             android:layout_toEndOf="@id/recName"
             android:text="@string/location"
             android:textAlignment="center"
+            android:gravity="center"
             android:textColor="@color/white"
             android:textSize="16sp" />
 

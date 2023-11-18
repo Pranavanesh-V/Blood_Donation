@@ -20,8 +20,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -152,6 +150,8 @@ public class Edit_profile_page extends AppCompatActivity {
                 String img_uri=image_uri.toString();
                 databaseReference = FirebaseDatabase.getInstance().getReference("Donars");
                 databaseReference.child(savedUsername).child("Profile").setValue(img_uri);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("Image_u",img_uri).apply();
                 Toast.makeText(Edit_profile_page.this,"Successfully updated",Toast.LENGTH_SHORT).show();
             }
         });
@@ -164,9 +164,7 @@ public class Edit_profile_page extends AppCompatActivity {
                         if (data!=null && data.getData()!=null)
                         {
                             image_uri=data.getData();
-                            Glide.with(this).load(image_uri)
-                                    .apply(RequestOptions.circleCropTransform())
-                                    .into(profile2);
+                            profile2.setImageURI(image_uri);
                             System.out.println(image_uri);
                         }
                     }
@@ -242,5 +240,8 @@ public class Edit_profile_page extends AppCompatActivity {
             }
         });
     return flag[0];
+    }
+    private void initSharedPreferences() {
+        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }
 }
