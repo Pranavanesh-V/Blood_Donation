@@ -518,14 +518,17 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     }
     @Override
     public void onItemClick(int position) {
+        String S_uri="";
         DataClass data=itemList.get(position);
         String name=data.getDataName();
         String blood= data.getDataBlood();
+        if (!Objects.isNull(data.getUri())) {
+            Uri uri = data.getUri();
+            S_uri = uri.toString();
+        }
         Intent intent=new Intent(home_page.this,Donor_info_pg.class);
         intent.putExtra("Name",name);
         intent.putExtra("Blood",blood);
-        Uri uri=data.getUri();
-        String S_uri=uri.toString();
         intent.putExtra("Image_uri",S_uri);
         startActivity(intent);
 

@@ -44,10 +44,13 @@ public class Donor_info_pg extends AppCompatActivity {
         String S_name = intent.getStringExtra("Name");
         String blood = intent.getStringExtra("Blood");
         String S_uri=intent.getStringExtra("Image_uri");
-        Uri uri=Uri.parse(S_uri);
+        if (!S_uri.equals(""))
+        {
+            Uri uri=Uri.parse(S_uri);
+            imageView8.setImageURI(uri);
+        }
         T_Name.setText(S_name);
         T_Blood.setText(blood);
-        imageView8.setImageURI(uri);
         // Initialize Firebase Realtime Database
         databaseReference = FirebaseDatabase.getInstance().getReference("Donars");
         databaseReference.addValueEventListener(new ValueEventListener() {
