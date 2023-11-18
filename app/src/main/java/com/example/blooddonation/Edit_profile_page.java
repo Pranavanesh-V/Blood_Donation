@@ -31,7 +31,7 @@ public class Edit_profile_page extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "MyPrefs";
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference,databaseReference1;
     EditText blood_Group2,mail_id3,address2;
     TextView name3;
     Button back10,save,cancel,f_device,camera;
@@ -40,6 +40,7 @@ public class Edit_profile_page extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST=1;
     private Uri image_uri;
     ConstraintLayout layout;
+    int[] data={0,0,0,0};
     ActivityResultLauncher<Intent> imagePickLauncher;
 
     @Override
@@ -76,7 +77,7 @@ public class Edit_profile_page extends AppCompatActivity {
             mail_id3.setEnabled(true);
         }
         save.setOnClickListener(view -> {
-            int[] data={0,0,0};
+
             if(blood_Group2.getText().toString().trim().isEmpty())
             {
                 if (mail_id3.getText().toString().trim().isEmpty())
@@ -147,8 +148,8 @@ public class Edit_profile_page extends AppCompatActivity {
             else
             {
                 String img_uri=image_uri.toString();
-                databaseReference = FirebaseDatabase.getInstance().getReference("Donars");
-                databaseReference.child(savedUsername).child("Profile").setValue(img_uri);
+                databaseReference1 = FirebaseDatabase.getInstance().getReference("Donars");
+                databaseReference1.child(savedUsername).child("Profile").setValue(img_uri);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("Image_u",img_uri).apply();
                 Toast.makeText(Edit_profile_page.this,"Successfully updated",Toast.LENGTH_SHORT).show();
@@ -159,11 +160,12 @@ public class Edit_profile_page extends AppCompatActivity {
                 result->{
                     if (result.getResultCode()==RESULT_OK)
                     {
-                        Intent data=result.getData();
-                        if (data!=null && data.getData()!=null)
+                        Intent d=result.getData();
+                        if (d!=null && d.getData()!=null)
                         {
-                            image_uri=data.getData();
+                            image_uri=d.getData();
                             profile2.setImageURI(image_uri);
+                            data[3]=1;
                             System.out.println(image_uri);
                         }
                     }
