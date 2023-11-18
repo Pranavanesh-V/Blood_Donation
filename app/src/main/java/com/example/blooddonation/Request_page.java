@@ -1,7 +1,5 @@
 package com.example.blooddonation;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,7 +28,6 @@ public class Request_page extends AppCompatActivity {
     Button back_req3;
     String img_uri;
     private static final String PREFS_NAME = "MyPrefs";
-    private SharedPreferences sharedPreferences;
     String S_name="",S_address="",S_phone="",S_Reason="",S_Desc_Reason="",S_blood_g="";
 
     @Override
@@ -102,8 +99,6 @@ public class Request_page extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                             // Push data to a new unique key
-                            sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-                            img_uri = sharedPreferences.getString("Image_u", "");
 
                             reference.child(S_name).child("RequesterLocation").setValue(S_address);
                             reference.child(S_name).child("Requester Phone").setValue(S_phone);
@@ -111,7 +106,6 @@ public class Request_page extends AppCompatActivity {
                             reference.child(S_name).child("Desc Reason").setValue(S_Desc_Reason);
                             reference.child(S_name).child("RequesterBloodGroup").setValue(S_blood_g);
                             reference.child(S_name).child("Received").setValue("No");
-                            reference.child(S_name).child("Profile").setValue(img_uri);
                         }
 
                         @Override

@@ -14,13 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -62,8 +60,6 @@ public class Edit_profile_page extends AppCompatActivity {
         savedUsername = sharedPreferences.getString("username", "");
         name3.setText(savedUsername);
 
-        download download=new download();
-        download.down(this,profile2,savedUsername);
         if (integer==1)
         {
             blood_Group2.setEnabled(true);
@@ -147,39 +143,10 @@ public class Edit_profile_page extends AppCompatActivity {
             }
             else
             {
-                String img_uri=image_uri.toString();
-                databaseReference = FirebaseDatabase.getInstance().getReference("Donars");
-                databaseReference.child(savedUsername).child("Profile").setValue(img_uri);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("Image_uri",img_uri).apply();
                 Toast.makeText(Edit_profile_page.this,"Successfully updated",Toast.LENGTH_SHORT).show();
             }
         });
         back10.setOnClickListener(view -> finish());
-        imagePickLauncher=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                result->{
-                    if (result.getResultCode()==RESULT_OK)
-                    {
-                        Intent data=result.getData();
-                        if (data!=null && data.getData()!=null)
-                        {
-                            image_uri=data.getData();
-                            profile2.setImageURI(image_uri);
-                            System.out.println(image_uri);
-                        }
-                    }
-                }
-                );
-        profile2.setOnClickListener(view -> openFileChooser());
-    }
-    public void openFileChooser()
-    {
-        ImagePicker.with(this).cropSquare().compress(512)
-                .maxResultSize(512,512)
-                .createIntent(intent -> {
-                    imagePickLauncher.launch(intent);
-                    return null;
-                });
     }
     public Boolean fetch(int[] d){
 
