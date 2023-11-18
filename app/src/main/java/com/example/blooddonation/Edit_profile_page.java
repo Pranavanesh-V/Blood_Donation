@@ -62,8 +62,7 @@ public class Edit_profile_page extends AppCompatActivity {
         savedUsername = sharedPreferences.getString("username", "");
         name3.setText(savedUsername);
 
-        download download=new download();
-        download.down(this,profile2,savedUsername);
+        test();
         if (integer==1)
         {
             blood_Group2.setEnabled(true);
@@ -243,5 +242,27 @@ public class Edit_profile_page extends AppCompatActivity {
     }
     private void initSharedPreferences() {
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+    }
+    public void test() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("Donars");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (snapshot.getKey().equals(savedUsername)) {
+                        if (!snapshot.child("Profile").getValue(String.class).isEmpty()) {
+                            download d = new download();
+                            d.down(Edit_profile_page.this, profile2, savedUsername);
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

@@ -49,8 +49,7 @@ public class Profile_page extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedUsername = sharedPreferences.getString("username", "");
 
-        download d=new download();
-        d.down(this,profile,savedUsername);
+        test();
         fetchDataFromFirebase();
 
         back_req4.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +114,28 @@ public class Profile_page extends AppCompatActivity {
                             flag=0;
                         }
                     }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void test() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("Donars");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (snapshot.getKey().equals(savedUsername)) {
+                        if (!snapshot.child("Profile").getValue(String.class).isEmpty()) {
+                            download d = new download();
+                            d.down(Profile_page.this, profile, savedUsername);
+                        }
+                    }
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
