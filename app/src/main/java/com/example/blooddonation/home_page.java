@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +31,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -86,6 +92,11 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedUsername = sharedPreferences.getString("username", "");
 
+        try {
+            downloadImage();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         Intent intent=getIntent();
 
@@ -231,6 +242,45 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                 Gender=data.getStringExtra("Gender");
             }
         }
+        if (requestCode==2)
+        {
+            if (requestCode==2)
+            {
+                try {
+                    downloadImage();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
+    public void downloadImage() throws IOException {
+        // Get a reference to the Firebase Storage
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+
+        String savedU;
+        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        savedU = sharedPreferences.getString("username", "");
+        // Reference to the image file
+        StorageReference imageRef = storageRef.child("Profile/"+savedU+"/"+savedU + ".jpg");
+        System.out.println(savedU);
+        // Download the image into a local file
+        File localFile = File.createTempFile("images", "jpg");
+
+        imageRef.getFile(localFile)
+                .addOnSuccessListener(taskSnapshot -> {
+                    // Image downloaded successfully
+                    // Now, load the image into ImageView using Glide
+                    Glide.with(this).load(localFile)
+                            .into(user);
+                })
+                .addOnFailureListener(exception -> {
+                    // Handle errors
+                    Log.e("Firebase", "Error downloading image: " + exception.getMessage());
+                });
+
     }
 
     @Override
@@ -265,7 +315,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             else if (option.equals("Profile"))
             {
                 Intent intent=new Intent(home_page.this, Profile_page.class);
-                startActivity(intent);
+                startActivityForResult(intent,2);
             }
             else if (option.equals("About"))
             {

@@ -5,22 +5,36 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 
 public class Profile_page extends AppCompatActivity {
 
@@ -32,6 +46,7 @@ public class Profile_page extends AppCompatActivity {
     int flag;
     TextView blood_Group,name2,mail_id2,Address,Edit;
     ImageView profile;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +60,12 @@ public class Profile_page extends AppCompatActivity {
         mail_id2=findViewById(R.id.mail_id2);
         Address=findViewById(R.id.address);
         Edit=findViewById(R.id.Edit);
-
+        progressBar=findViewById(R.id.progressBar);
+        try {
+            downloadImage();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedUsername = sharedPreferences.getString("username", "");
 
@@ -63,11 +83,25 @@ public class Profile_page extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent=new Intent(Profile_page.this, Edit_profile_page.class);
                 intent.putExtra("Flag",flag);
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
         });
 
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode==1)
+        {
+            try {
+                downloadImage();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     private void fetchDataFromFirebase() {
         // Initialize Firebase Realtime Database
 
@@ -119,5 +153,46 @@ public class Profile_page extends AppCompatActivity {
 
             }
         });
+    }
+    public void downloadImage() throws IOException {
+        // Get a reference to the Firebase Storage
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+
+        String savedU;
+        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        savedU = sharedPreferences.getString("username", "");
+        // Reference to the image file
+        StorageReference imageRef = storageRef.child("Profile/"+savedU+"/"+savedU + ".jpg");
+        System.out.println(savedU);
+        // Download the image into a local file
+        File localFile = File.createTempFile("images", "jpg");
+
+        imageRef.getFile(localFile)
+                .addOnSuccessListener(taskSnapshot -> {
+                    // Image downloaded successfully
+                    // Now, load the image into ImageView using Glide
+                    Glide.with(this).load(localFile)
+                            .listener(new RequestListener<Drawable>() {
+                                @Override
+                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                    // Hide the loading indicator in case of a failure
+                                    progressBar.setVisibility(View.GONE);
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                    // Hide the loading indicator when the image is ready
+                                    progressBar.setVisibility(View.GONE);
+                                    return false;
+                                }
+                            }).into(profile);
+                })
+                .addOnFailureListener(exception -> {
+                    // Handle errors
+                    Log.e("Firebase", "Error downloading image: " + exception.getMessage());
+                });
+
     }
 }
