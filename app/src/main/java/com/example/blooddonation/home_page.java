@@ -203,14 +203,13 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                             Uri uri=Uri.parse(S_uri);
                             DataClass2 item = new DataClass2(requesterName,requesterLocation,requesterBloodGroup,requesterReason,uri);
                             itemList1.add(item);
-                            flag=true;
                         }
                         else {
                             Uri uri=null;
                             DataClass2 item = new DataClass2(requesterName,requesterLocation,requesterBloodGroup,requesterReason,uri);
                             itemList1.add(item);
-                            flag=true;
                         }
+                        flag=true;
                     }
                 }
                 if (!flag)
