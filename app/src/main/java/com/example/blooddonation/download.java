@@ -30,7 +30,6 @@ public class download
                     String S_uri = dataSnapshot.child(savedUsername).child("Profile").getValue(String.class);
                     Uri uri = Uri.parse(S_uri);
                     imageView.setImageURI(uri);
-                    System.out.println(uri);
                 }
             }
             @Override

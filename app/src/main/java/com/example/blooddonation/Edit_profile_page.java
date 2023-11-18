@@ -31,7 +31,7 @@ public class Edit_profile_page extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "MyPrefs";
-    DatabaseReference databaseReference,databaseReference1;
+    DatabaseReference databaseReference;
     EditText blood_Group2,mail_id3,address2;
     TextView name3;
     Button back10,save,cancel,f_device,camera;
@@ -40,7 +40,6 @@ public class Edit_profile_page extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST=1;
     private Uri image_uri;
     ConstraintLayout layout;
-    int[] data={0,0,0,0};
     ActivityResultLauncher<Intent> imagePickLauncher;
 
     @Override
@@ -63,7 +62,8 @@ public class Edit_profile_page extends AppCompatActivity {
         savedUsername = sharedPreferences.getString("username", "");
         name3.setText(savedUsername);
 
-        test();
+        download download=new download();
+        download.down(this,profile2,savedUsername);
         if (integer==1)
         {
             blood_Group2.setEnabled(true);
@@ -77,7 +77,7 @@ public class Edit_profile_page extends AppCompatActivity {
             mail_id3.setEnabled(true);
         }
         save.setOnClickListener(view -> {
-
+            int[] data={0,0,0};
             if(blood_Group2.getText().toString().trim().isEmpty())
             {
                 if (mail_id3.getText().toString().trim().isEmpty())
@@ -148,10 +148,10 @@ public class Edit_profile_page extends AppCompatActivity {
             else
             {
                 String img_uri=image_uri.toString();
-                databaseReference1 = FirebaseDatabase.getInstance().getReference("Donars");
-                databaseReference1.child(savedUsername).child("Profile").setValue(img_uri);
+                databaseReference = FirebaseDatabase.getInstance().getReference("Donars");
+                databaseReference.child(savedUsername).child("Profile").setValue(img_uri);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("Image_u",img_uri).apply();
+                editor.putString("Image_uri",img_uri).apply();
                 Toast.makeText(Edit_profile_page.this,"Successfully updated",Toast.LENGTH_SHORT).show();
             }
         });
@@ -160,12 +160,11 @@ public class Edit_profile_page extends AppCompatActivity {
                 result->{
                     if (result.getResultCode()==RESULT_OK)
                     {
-                        Intent d=result.getData();
-                        if (d!=null && d.getData()!=null)
+                        Intent data=result.getData();
+                        if (data!=null && data.getData()!=null)
                         {
-                            image_uri=d.getData();
+                            image_uri=data.getData();
                             profile2.setImageURI(image_uri);
-                            data[3]=1;
                             System.out.println(image_uri);
                         }
                     }
@@ -193,47 +192,40 @@ public class Edit_profile_page extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-
-                if (dataSnapshot.child(savedUsername).child("Blood Group").exists() && dataSnapshot.child(savedUsername).child("Address").exists() && dataSnapshot.child(savedUsername).child("Email").exists())
-                {
-                    //to check if the user doesn't changes the existing data but changes the profile
-                    //if he changes the data handel it else just update the profile
-                    String blood,mail,Address;
-                    if(d[0]==1 || d[1]==1 || d[2]==1)
-                    {
-                        if(d[0]==1)
-                        {
-                            blood= blood_Group2.getText().toString().trim();
-                            databaseReference.child(savedUsername).child("Blood Group").setValue(blood);
-                            System.out.println("place 1");
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (snapshot.child(savedUsername).child("Blood Group").exists() && snapshot.child(savedUsername).child("Address").exists() && snapshot.child(savedUsername).child("Email").exists()) {
+                        //to check if the user doesn't changes the existing data but changes the profile
+                        //if he changes the data handel it else just update the profile
+                        String blood, mail, Address;
+                        if (d[0] == 1 || d[1] == 1 || d[2] == 1) {
+                            if (d[0] == 1) {
+                                blood = blood_Group2.getText().toString().trim();
+                                databaseReference.child(savedUsername).child("Blood Group").setValue(blood);
+                                System.out.println("place 1");
+                            }
+                            if (d[1] == 1) {
+                                mail = mail_id3.getText().toString().trim();
+                                databaseReference.child(savedUsername).child("Email").setValue(mail);
+                                System.out.println("place 2");
+                            }
+                            if (d[2] == 1) {
+                                Address = address2.getText().toString().trim();
+                                databaseReference.child(savedUsername).child("Address").setValue(Address);
+                                System.out.println("place 3");
+                            }
+                        } else {
+                            //do nothing
                         }
-                        if(d[1]==1)
-                        {
-                            mail = mail_id3.getText().toString().trim();
+                    } else {
+                        if (d[1] == 1) {
+                            String mail = mail_id3.getText().toString().trim();
                             databaseReference.child(savedUsername).child("Email").setValue(mail);
-                            System.out.println("place 2");
-                        }
-                        if(d[2]==1)
-                        {
-                            Address = address2.getText().toString().trim();
-                            databaseReference.child(savedUsername).child("Address").setValue(Address);
-                            System.out.println("place 3");
+                            System.out.println("Email_id");
                         }
                     }
-                    else
-                    {
-                        //do nothing
-                    }
+                    flag[0] = true;
+                    finish();
                 }
-                else {
-                    if (d[1]==1) {
-                        String mail = mail_id3.getText().toString().trim();
-                        databaseReference.child(savedUsername).child("Email").setValue(mail);
-                        System.out.println("Email_id");
-                    }
-                }
-                flag[0] =true;
-                finish();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -244,27 +236,5 @@ public class Edit_profile_page extends AppCompatActivity {
     }
     private void initSharedPreferences() {
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-    }
-    public void test() {
-        databaseReference = FirebaseDatabase.getInstance().getReference("Donars");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    if (snapshot.getKey().equals(savedUsername)) {
-                        if (!snapshot.child("Profile").getValue(String.class).isEmpty()) {
-                            download d = new download();
-                            d.down(Edit_profile_page.this, profile2, savedUsername);
-                        }
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 }
