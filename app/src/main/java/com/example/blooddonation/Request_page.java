@@ -1,5 +1,7 @@
 package com.example.blooddonation;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,7 +28,7 @@ public class Request_page extends AppCompatActivity {
     Button submit;
     TextInputEditText B_G;
     Button back_req3;
-    String img_uri;
+    private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "MyPrefs";
     String S_name="",S_address="",S_phone="",S_Reason="",S_Desc_Reason="",S_blood_g="";
 
@@ -43,6 +45,10 @@ public class Request_page extends AppCompatActivity {
         submit=findViewById(R.id.submit2);
         B_G=findViewById(R.id.B_g);
         back_req3=findViewById(R.id.back7);
+
+        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        String savedUsername=sharedPreferences.getString("username","");
+
 
         B_G.setOnClickListener(view -> showPopupMenu());
         back_req3.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +112,7 @@ public class Request_page extends AppCompatActivity {
                             reference.child(S_name).child("Desc Reason").setValue(S_Desc_Reason);
                             reference.child(S_name).child("RequesterBloodGroup").setValue(S_blood_g);
                             reference.child(S_name).child("Received").setValue("No");
+                            reference.child(S_name).child("Profile").setValue(savedUsername);
                         }
 
                         @Override

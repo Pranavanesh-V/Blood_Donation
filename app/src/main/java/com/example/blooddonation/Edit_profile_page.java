@@ -305,11 +305,6 @@ public class Edit_profile_page extends AppCompatActivity {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
 
-        String S_imageUri=imageUri.toString();
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("IMAGE_URI", S_imageUri);
-        editor.apply();
-
         // Generate a unique name for the image
         String imageName = savedUsername + ".jpg";
         //path
