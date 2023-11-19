@@ -6,6 +6,13 @@ public class DataClass2
     private String dataName;
     private String dataBlood;
     private String txt;
+
+
+
+    public String uri;
+    public String getUri() {
+        return uri;
+    }
     public String getTxt() {
         return txt;
     }
@@ -23,11 +30,12 @@ public class DataClass2
     }
 
 
-    public DataClass2(String dataName,String dataLocation,String dataBlood,String txt)
+    public DataClass2(String dataName,String dataLocation,String dataBlood,String txt,String uri)
     {
         this.dataName =dataName;
         this.dataLocation =dataLocation;
         this.dataBlood=dataBlood;
         this.txt=txt;
+        this.uri=uri;
     }
 }

@@ -351,7 +351,6 @@ public class Edit_profile_page extends AppCompatActivity {
         System.out.println(savedU);
         // Download the image into a local file
         File localFile = File.createTempFile("images", "jpg");
-
         imageRef.getFile(localFile)
                 .addOnSuccessListener(taskSnapshot -> {
                     // Image downloaded successfully

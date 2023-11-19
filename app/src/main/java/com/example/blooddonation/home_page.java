@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -24,6 +25,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -44,6 +47,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
 
     TextInputLayout Search;
     Integer age;
+    String uri="";
     private static final String PREFS_NAME = "MyPrefs";
     private SharedPreferences sharedPreferences;
     String savedUsername;
@@ -180,7 +184,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         itemList = new ArrayList<>();
         itemList1=new ArrayList<>();
         adapter = new RecyclerViewAdapter(itemList,this);
-        adapter1= new RecyclerViewAdapter1(itemList1,this);
+        adapter1= new RecyclerViewAdapter1(itemList1,this,this);
         recyclerView.setAdapter(adapter);
         recyclerView1.setAdapter(adapter1);
     }
@@ -204,10 +208,39 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                     String requesterBloodGroup=snapshot.child("RequesterBloodGroup").getValue(String.class);
                     String requesterLocation=snapshot.child("RequesterLocation").getValue(String.class);
                     String requesterReason=snapshot.child("RequesterReason").getValue(String.class);
-                    if (snapshot.child("Received").exists())
+                    if (snapshot.child("Received").exists() && snapshot.child("Profile").exists())
                     {
-                        if (snapshot.child("Received").getValue(String.class).equals("No")) {
-                            DataClass2 item = new DataClass2(requesterName, requesterLocation, requesterBloodGroup, requesterReason);
+                        String savedName=snapshot.child("Profile").getValue(String.class);
+                        System.out.println(savedName+requesterName);
+                        if (snapshot.child("Received").getValue(String.class).equals("No") && !savedName.equals("no")) {
+                            // Replace "images/image.jpg" with your actual Firebase Storage path
+                            StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("Profile/" + savedName + "/" + savedName + ".jpg");
+
+                            // Download the image and get its URI
+                            storageRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> uriTask) {
+                                    if (uriTask.isSuccessful()) {
+                                        // Get the URI for the image
+                                        Uri imageUrl = uriTask.getResult();
+                                        if (!Objects.isNull(imageUrl.toString())) {
+                                            uri = imageUrl.toString();
+                                        }
+                                        // Now imageUrl contains the URI of the downloaded image
+                                        // You can use it as needed
+                                    } else {
+                                        // Handle the error in getting URI
+                                    }
+                                }
+                            });
+                            DataClass2 item = new DataClass2(requesterName, requesterLocation, requesterBloodGroup, requesterReason,uri);
+                            itemList1.add(item);
+                            flag = true;
+                        }
+                        else
+                        {
+                            String uri1="no";
+                            DataClass2 item = new DataClass2(requesterName, requesterLocation, requesterBloodGroup, requesterReason,uri1);
                             itemList1.add(item);
                             flag = true;
                         }

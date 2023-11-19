@@ -1,22 +1,28 @@
 package com.example.blooddonation;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewAdapter1.ViewHolder> {
     private List<DataClass2> itemList;
     private OnItemClickListener clickListener;
-    public RecyclerViewAdapter1(List<DataClass2> itemList, OnItemClickListener clickListener)
+    private Context context;
+    public RecyclerViewAdapter1(List<DataClass2> itemList, OnItemClickListener clickListener, Context context)
     {
         this.itemList = itemList;
         this.clickListener = clickListener;
+        this.context=context;
     }
 
     @NonNull
@@ -33,6 +39,34 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewAdapt
         holder.Blood_g.setText(item.getDataBlood());
         holder.Location.setText(item.getDataLocation());
         holder.txt.setText(item.getTxt());
+        if (!item.getUri().equals("no"))
+        {
+            System.out.println(item.getUri());
+            Glide.with(context)
+                    .load(item.getUri())
+                    .into(holder.recImage);
+        }
+        else
+        {
+            holder.recImage.setImageResource(R.drawable.logo_blood);
+        }
+        /*String name=item.getDataName();
+        test t=new test();
+        Uri uri;
+        String S_uri=t.downloadImage(name);
+        System.out.println(S_uri);
+        if (!Objects.isNull(S_uri)) {
+            uri = Uri.parse(S_uri);
+            Glide.with(context)
+                    .load(uri)
+                    .into(holder.recImage);
+        }
+            System.out.println(uri);
+            if (!Objects.isNull(uri)){
+                Glide.with(context)
+                        .load(uri)
+                        .into(holder.recImage);
+            }*/
     }
 
 
@@ -45,6 +79,7 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewAdapt
         TextView Blood_g;
         TextView Location;
         TextView txt;
+        ImageView recImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -52,6 +87,7 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewAdapt
             Blood_g = itemView.findViewById(R.id.recBlood);
             Location = itemView.findViewById(R.id.recLocation);
             txt=itemView.findViewById(R.id.recTxt);
+            recImage=itemView.findViewById(R.id.recImage);
 
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
