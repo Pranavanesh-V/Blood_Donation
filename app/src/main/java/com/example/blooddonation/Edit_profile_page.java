@@ -172,10 +172,14 @@ public class Edit_profile_page extends AppCompatActivity {
             }
             else
             {
+                setResult(RESULT_OK);
                 Toast.makeText(Edit_profile_page.this,"Successfully updated",Toast.LENGTH_SHORT).show();
             }
         });
-        back10.setOnClickListener(view -> finish());
+        back10.setOnClickListener(view -> {
+            finish();
+            setResult(RESULT_CANCELED);
+        });
         profile2.setOnClickListener(this::onChooseImageClick);
     }
     public Boolean fetch(int[] d){
@@ -297,9 +301,14 @@ public class Edit_profile_page extends AppCompatActivity {
     // Continue from the previous code...
 
     // Upload the selected image to Firebase Storage
-    private void uploadImage(Uri imageUri) {
+    private void uploadImage(@NonNull Uri imageUri) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
+
+        String S_imageUri=imageUri.toString();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("IMAGE_URI", S_imageUri);
+        editor.apply();
 
         // Generate a unique name for the image
         String imageName = savedUsername + ".jpg";
@@ -374,4 +383,5 @@ public class Edit_profile_page extends AppCompatActivity {
                     Log.e("Firebase", "Error downloading image: " + exception.getMessage());
                 });
 
-    }}
+    }
+}
