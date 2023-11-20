@@ -50,23 +50,6 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewAdapt
         {
             holder.recImage.setImageResource(R.drawable.logo_blood);
         }
-        /*String name=item.getDataName();
-        test t=new test();
-        Uri uri;
-        String S_uri=t.downloadImage(name);
-        System.out.println(S_uri);
-        if (!Objects.isNull(S_uri)) {
-            uri = Uri.parse(S_uri);
-            Glide.with(context)
-                    .load(uri)
-                    .into(holder.recImage);
-        }
-            System.out.println(uri);
-            if (!Objects.isNull(uri)){
-                Glide.with(context)
-                        .load(uri)
-                        .into(holder.recImage);
-            }*/
     }
 
 
