@@ -39,9 +39,8 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewAdapt
         holder.Blood_g.setText(item.getDataBlood());
         holder.Location.setText(item.getDataLocation());
         holder.txt.setText(item.getTxt());
-        if (!item.getUri().equals("no"))
+        if (!item.getUri().equals("No"))
         {
-            System.out.println(item.getUri());
             Glide.with(context)
                     .load(item.getUri())
                     .into(holder.recImage);

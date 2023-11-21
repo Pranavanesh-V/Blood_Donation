@@ -136,6 +136,7 @@ public class Full_Registration_page extends AppCompatActivity {
                             reference.child(S_name).child("Emergency").setValue(S_emergency);
                             reference.child(S_name).child("Gender").setValue(S_gender);
                             reference.child(S_name).child("Form").setValue(form);
+                            reference.child(S_name).child("Profile").setValue("No");
 
                             //display it
                             Toast.makeText(Full_Registration_page.this, "Account Created", Toast.LENGTH_SHORT).show();

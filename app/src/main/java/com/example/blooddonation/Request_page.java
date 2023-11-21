@@ -48,6 +48,7 @@ public class Request_page extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String savedUsername=sharedPreferences.getString("username","");
+        String profile=sharedPreferences.getString("url","No");
 
 
         B_G.setOnClickListener(view -> showPopupMenu());
@@ -112,7 +113,7 @@ public class Request_page extends AppCompatActivity {
                             reference.child(S_name).child("Desc Reason").setValue(S_Desc_Reason);
                             reference.child(S_name).child("RequesterBloodGroup").setValue(S_blood_g);
                             reference.child(S_name).child("Received").setValue("No");
-                            reference.child(S_name).child("Profile").setValue(savedUsername);
+                            reference.child(S_name).child("Profile").setValue(profile);
                         }
 
                         @Override

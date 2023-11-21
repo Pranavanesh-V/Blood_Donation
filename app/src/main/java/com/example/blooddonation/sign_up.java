@@ -114,7 +114,7 @@ public class sign_up extends AppCompatActivity {
                         }
                         else
                         {
-                            Toast.makeText(sign_up.this,"\tNew User \n create user",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(sign_up.this,"\tNew User \n Create Account",Toast.LENGTH_SHORT).show();
                             E_email_id.setText("");
                             finish();
                         }

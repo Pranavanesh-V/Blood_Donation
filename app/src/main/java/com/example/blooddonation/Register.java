@@ -1,8 +1,5 @@
 package com.example.blooddonation;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -128,7 +128,7 @@ public class Register extends AppCompatActivity {
                                     // Push data to a new unique key
                                     reference.child(S_name).child("Password").setValue(S_password);
                                     reference.child(S_name).child("Email").setValue(S_email_id);
-
+                                    reference.child(S_name).child("Profile").setValue("No");
                                     Toast.makeText(Register.this,"Account Created",Toast.LENGTH_SHORT).show();
 
                                     Intent intent=new Intent(Register.this, Login_page.class);

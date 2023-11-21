@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -37,7 +36,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +51,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     String savedUsername;
     TextInputEditText E_search;
     Button request_btn, donate_btn;
+    Boolean res=false;
     ImageView Filter,Menu;
     RecyclerView recyclerView,recyclerView1;
     DatabaseReference databaseReference,databaseReference1,databaseReference2;
@@ -210,41 +209,12 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                     String requesterReason=snapshot.child("RequesterReason").getValue(String.class);
                     if (snapshot.child("Received").exists() && snapshot.child("Profile").exists())
                     {
-                        String savedName=snapshot.child("Profile").getValue(String.class);
-                        System.out.println(savedName+requesterName);
-                        if (snapshot.child("Received").getValue(String.class).equals("No") && !savedName.equals("no")) {
-                            // Replace "images/image.jpg" with your actual Firebase Storage path
-                            StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("Profile/" + savedName + "/" + savedName + ".jpg");
-
-                            // Download the image and get its URI
-                            storageRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Uri> uriTask) {
-                                    if (uriTask.isSuccessful()) {
-                                        // Get the URI for the image
-                                        Uri imageUrl = uriTask.getResult();
-                                        if (!Objects.isNull(imageUrl.toString())) {
-                                            uri = imageUrl.toString();
-                                        }
-                                        // Now imageUrl contains the URI of the downloaded image
-                                        // You can use it as needed
-                                    } else {
-                                        // Handle the error in getting URI
-                                    }
-                                }
-                            });
-                            DataClass2 item = new DataClass2(requesterName, requesterLocation, requesterBloodGroup, requesterReason,uri);
-                            itemList1.add(item);
-                            flag = true;
-                        }
-                        else
-                        {
-                            String uri1="no";
-                            DataClass2 item = new DataClass2(requesterName, requesterLocation, requesterBloodGroup, requesterReason,uri1);
-                            itemList1.add(item);
-                            flag = true;
-                        }
+                        String url=snapshot.child("Profile").getValue(String.class);
+                        DataClass2 item = new DataClass2(requesterName, requesterLocation, requesterBloodGroup, requesterReason,url);
+                        itemList1.add(item);
+                        flag = true;
                     }
+
                 }
                 if (!flag)
                 {
@@ -289,30 +259,58 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     }
 
     public void downloadImage() throws IOException {
-        // Get a reference to the Firebase Storage
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
 
-        String savedU;
-        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        savedU = sharedPreferences.getString("username", "");
-        // Reference to the image file
-        StorageReference imageRef = storageRef.child("Profile/"+savedU+"/"+savedU + ".jpg");
-        System.out.println(savedU);
-        // Download the image into a local file
-        File localFile = File.createTempFile("images", "jpg");
+        //check if profile is present or not
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                // Push data to a new unique key
+                if (datasnapshot.child(savedUsername).child("Profile").exists())
+                {
+                    String val=datasnapshot.child(savedUsername).child("Profile").getValue(String.class);
+                    res= val.equals("Yes");
+                    if (res) {
+                        // Get a reference to the Firebase Storage
+                        FirebaseStorage storage = FirebaseStorage.getInstance();
+                        StorageReference storageRef = storage.getReference();
 
-        imageRef.getFile(localFile)
-                .addOnSuccessListener(taskSnapshot -> {
-                    // Image downloaded successfully
-                    // Now, load the image into ImageView using Glide
-                    Glide.with(this).load(localFile)
-                            .into(user);
-                })
-                .addOnFailureListener(exception -> {
-                    // Handle errors
-                    Log.e("Firebase", "Error downloading image: " + exception.getMessage());
-                });
+                        String savedU;
+                        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+                        savedU = sharedPreferences.getString("username", "");
+                        // Reference to the image file
+                        StorageReference imageRef = storageRef.child("Profile/" + savedU + "/" + savedU + ".jpg");
+                        System.out.println(savedU);
+                        // Download the image into a local file
+
+                        imageRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> uriTask) {
+                                if (uriTask.isSuccessful()) {
+                                    // Get the URI for the image
+                                    Uri imageUrl = uriTask.getResult();
+                                    String S_imageUrl=imageUrl.toString();
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("url",S_imageUrl).apply();
+                                    Glide.with(home_page.this).load(imageUrl)
+                                            .into(user);
+                                    // Now imageUrl contains the URI of the downloaded image
+                                    // You can use it as needed
+                                } else {
+                                    // Handle the error in getting URI
+                                }
+                            }
+                        });
+                    }
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
 
     }
 

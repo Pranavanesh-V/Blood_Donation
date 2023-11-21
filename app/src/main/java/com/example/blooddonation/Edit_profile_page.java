@@ -54,6 +54,7 @@ public class Edit_profile_page extends AppCompatActivity {
     DatabaseReference databaseReference;
     EditText blood_Group2,mail_id3,address2;
     TextView name3;
+    Boolean res=true;
     Button back10,save,cancel,f_device,camera;
     String savedUsername;
     ImageView profile2;
@@ -320,12 +321,31 @@ public class Edit_profile_page extends AppCompatActivity {
                     // You can get the download URL of the image if needed:
                     userRef.getDownloadUrl().addOnSuccessListener(uri -> {
                         String downloadUrl = uri.toString();
+                        res=true;
                         // Now you can store the downloadUrl in your database or use it as needed
                     });
                 })
                 .addOnFailureListener(e -> {
+                    res=false;
                     // Handle any errors during upload
                 });
+        if (res)
+        {
+            DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                    // Push data to a new unique key
+                    reference.child(savedUsername).child("Profile").setValue("Yes");
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    reference.child(savedUsername).child("Profile").setValue("No");
+                }
+
+            });
+        }
     }
     private void startCropActivity(Uri sourceUri) {
         // UCrop configuration
