@@ -257,7 +257,6 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             }
         }
     }
-
     public void downloadImage() throws IOException {
 
         //check if profile is present or not
@@ -597,5 +596,4 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         Intent intent=new Intent(home_page.this, Login_page.class);
         startActivity(intent);
     }
-
 }
