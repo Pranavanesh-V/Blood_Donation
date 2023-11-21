@@ -25,7 +25,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:padding="8dp"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/circular"
             android:src="@drawable/logo_blood" />
 

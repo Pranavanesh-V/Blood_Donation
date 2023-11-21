@@ -182,7 +182,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         //Recycler View
         itemList = new ArrayList<>();
         itemList1=new ArrayList<>();
-        adapter = new RecyclerViewAdapter(itemList,this);
+        adapter = new RecyclerViewAdapter(itemList,this,this);
         adapter1= new RecyclerViewAdapter1(itemList1,this,this);
         recyclerView.setAdapter(adapter);
         recyclerView1.setAdapter(adapter1);
@@ -382,12 +382,13 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                     // Parse data from the snapshot
                     String name = snapshot.getKey();
 
-
-                    if(snapshot.child("Blood Group").exists() && snapshot.child("Phone No").exists() && snapshot.child("DOB").exists()) {
+                    if(snapshot.child("Blood Group").exists() && snapshot.child("Phone No").exists() && snapshot.child("DOB").exists() && snapshot.child("Profile Value").exists()) {
                         String Blood_g = snapshot.child("Blood Group").getValue(String.class);
                         String S_Gender=snapshot.child("Gender").getValue(String.class);
                         String S_Location=snapshot.child("City").getValue(String.class);
                         String S_dob=snapshot.child("DOB").getValue(String.class);
+                        String S_profile=snapshot.child("Profile Value").getValue(String.class);
+                        System.out.println(S_profile);
                         age_finder age_finder=new age_finder();
                         age=age_finder.age_Cals(S_dob);
 
@@ -401,7 +402,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                             boolean res=age_finder.equals_rt(age,Age);
                                             if (Blood_g.equals(S_Blood_G) && res && S_Gender.equals(Gender)) {
                                                 System.out.println("Everything is chosen");
-                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                DataClass item = new DataClass(name, S_Location, Blood_g, S_profile);
                                                 itemList.add(item);
                                             }
                                         } else {
@@ -409,7 +410,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                             if (Blood_g.equals(S_Blood_G) && res)
                                             {
                                                 System.out.println("Only opt1 and opt2 is chosen");
-                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                DataClass item = new DataClass(name, S_Location, Blood_g, S_profile);
                                                 itemList.add(item);
                                             }
                                         }
@@ -419,7 +420,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                             if (S_Gender.equals(Gender) && res)
                                             {
                                                 System.out.println("opt1 and opt3 is chosen");
-                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                DataClass item = new DataClass(name, S_Location, Blood_g, S_profile);
                                                 itemList.add(item);
                                             }
 
@@ -428,7 +429,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                             if (res)
                                             {
                                                 System.out.println("Only opt1 is chosen");
-                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                DataClass item = new DataClass(name, S_Location, Blood_g, S_profile);
                                                 itemList.add(item);
                                             }
                                         }
@@ -439,13 +440,13 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                             System.out.println("opt2 and opt3 is chosen");
                                             if (Blood_g.equals(S_Blood_G) && S_Gender.equals(Gender))
                                             {
-                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                DataClass item = new DataClass(name, S_Location, Blood_g, S_profile);
                                                 itemList.add(item);
                                             }
                                         } else {
                                             System.out.println("Only opt2 is chosen");
                                             if (Blood_g.equals(S_Blood_G)) {
-                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                DataClass item = new DataClass(name, S_Location, Blood_g, S_profile);
                                                 itemList.add(item);
                                             }
                                         }
@@ -453,13 +454,13 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                         if (!Objects.isNull(Gender)) {
                                             System.out.println("Opt3 is only chosen");
                                             if (Gender.equals(S_Gender)) {
-                                                DataClass item = new DataClass(name, S_Location, Blood_g);
+                                                DataClass item = new DataClass(name, S_Location, Blood_g, S_profile);
                                                 itemList.add(item);
                                             }
                                         } else {
-                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g, S_profile);
                                             itemList.add(item);
-                                            System.out.println("No filter is chosen\n no opt chosen");
+                                            //System.out.println("No filter is chosen\n no opt chosen");
                                         }
                                     }
                                 }
@@ -473,7 +474,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                         boolean res=age_finder.equals_rt(age,Age);
                                         if (Blood_g.equals(S_Blood_G) && res && S_Gender.equals(Gender)) {
                                             System.out.println("Everything is chosen");
-                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g, S_profile);
                                             itemList.add(item);
                                         }
                                     } else {
@@ -481,7 +482,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                         if (Blood_g.equals(S_Blood_G) && res)
                                         {
                                             System.out.println("Only opt1 and opt2 is chosen");
-                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g, S_profile);
                                             itemList.add(item);
                                         }
                                     }
@@ -491,7 +492,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                         if (S_Gender.equals(Gender) && res)
                                         {
                                             System.out.println("opt1 and opt3 is chosen");
-                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g, S_profile);
                                             itemList.add(item);
                                         }
                                     } else {
@@ -499,7 +500,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                         if (res)
                                         {
                                             System.out.println("Only opt1 is chosen");
-                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g, S_profile);
                                             itemList.add(item);
                                         }
                                     }
@@ -510,13 +511,13 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                         System.out.println("opt2 and opt3 is chosen");
                                         if (Blood_g.equals(S_Blood_G) && S_Gender.equals(Gender))
                                         {
-                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g, S_profile);
                                             itemList.add(item);
                                         }
                                     } else {
                                         System.out.println("Only opt2 is chosen");
                                         if (Blood_g.equals(S_Blood_G)) {
-                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g, S_profile);
                                             itemList.add(item);
                                         }
                                     }
@@ -524,12 +525,12 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                     if (!Objects.isNull(Gender)) {
                                         System.out.println("Opt3 is only chosen");
                                         if (Gender.equals(S_Gender)) {
-                                            DataClass item = new DataClass(name, S_Location, Blood_g);
+                                            DataClass item = new DataClass(name, S_Location, Blood_g, S_profile);
                                             itemList.add(item);
                                         }
                                     } else {
                                         flag=false;
-                                        System.out.println("No filter is chosen\n no opt chosen");
+                                        //System.out.println("No filter is chosen\n no opt chosen");
                                     }
                                 }
                             }

@@ -4,7 +4,6 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
@@ -44,11 +43,6 @@ public class age_finder
             ageYears--;
             ageMonths += 12;
         }
-
-        System.out.println("Exact Age:");
-        System.out.println("Years: " + ageYears);
-        System.out.println("Months: " + ageMonths);
-        System.out.println("Days: " + ageDays);
 
         return ageYears;
     }

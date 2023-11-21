@@ -5,7 +5,10 @@ public class DataClass
     private String dataLocation;
     private String dataName;
     private String dataBlood;
-
+    private String dataURL;
+    public String getDataURL() {
+        return dataURL;
+    }
     public String getDataLocation() {
         return dataLocation;
     }
@@ -19,10 +22,11 @@ public class DataClass
     }
 
 
-    public DataClass(String dataName,String dataLocation,String dataBlood)
+    public DataClass(String dataName,String dataLocation,String dataBlood,String dataURL)
     {
         this.dataName =dataName;
         this.dataLocation =dataLocation;
         this.dataBlood=dataBlood;
+        this.dataURL=dataURL;
     }
 }
