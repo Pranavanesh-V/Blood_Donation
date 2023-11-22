@@ -24,8 +24,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -282,22 +280,19 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                         System.out.println(savedU);
                         // Download the image into a local file
 
-                        imageRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Uri> uriTask) {
-                                if (uriTask.isSuccessful()) {
-                                    // Get the URI for the image
-                                    Uri imageUrl = uriTask.getResult();
-                                    String S_imageUrl=imageUrl.toString();
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putString("url",S_imageUrl).apply();
-                                    Glide.with(home_page.this).load(imageUrl)
-                                            .into(user);
-                                    // Now imageUrl contains the URI of the downloaded image
-                                    // You can use it as needed
-                                } else {
-                                    // Handle the error in getting URI
-                                }
+                        imageRef.getDownloadUrl().addOnCompleteListener(uriTask -> {
+                            if (uriTask.isSuccessful()) {
+                                // Get the URI for the image
+                                Uri imageUrl = uriTask.getResult();
+                                String S_imageUrl=imageUrl.toString();
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("url",S_imageUrl).apply();
+                                Glide.with(home_page.this).load(imageUrl)
+                                        .into(user);
+                                // Now imageUrl contains the URI of the downloaded image
+                                // You can use it as needed
+                            } else {
+                                // Handle the error in getting URI
                             }
                         });
                     }

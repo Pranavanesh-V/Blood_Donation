@@ -15,10 +15,7 @@ public class age_finder
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         //LocalDate dob_l = LocalDate.parse(dob, formatter);
-        /*int birthYear = dob_l.getYear();
-        int birthMonth =dob_l.getMonthValue(); // January is represented as 0
-        int birthDay = dob_l.getDayOfMonth();*/
-        String date[]=dob.split("/",3);
+        String[] date =dob.split("/",3);
             int birthYear =Integer.parseInt(date[0]);
             int birthMonth =Integer.parseInt(date[1]);
             int birthDay=Integer.parseInt(date[2]);

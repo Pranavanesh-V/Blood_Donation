@@ -1,7 +1,6 @@
 package com.example.blooddonation;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,11 +15,6 @@ public class About_page extends AppCompatActivity {
         setContentView(R.layout.activity_about_page);
 
         back4=findViewById(R.id.back4);
-        back4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        back4.setOnClickListener(view -> finish());
     }
 }

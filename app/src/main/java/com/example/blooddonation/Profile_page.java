@@ -71,20 +71,12 @@ public class Profile_page extends AppCompatActivity {
 
         fetchDataFromFirebase();
 
-        back_req4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        back_req4.setOnClickListener(view -> finish());
 
-        Edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(Profile_page.this, Edit_profile_page.class);
-                intent.putExtra("Flag",flag);
-                startActivityForResult(intent,1);
-            }
+        Edit.setOnClickListener(view -> {
+            Intent intent=new Intent(Profile_page.this, Edit_profile_page.class);
+            intent.putExtra("Flag",flag);
+            startActivityForResult(intent,1);
         });
 
     }
@@ -164,7 +156,6 @@ public class Profile_page extends AppCompatActivity {
         savedU = sharedPreferences.getString("username", "");
         // Reference to the image file
         StorageReference imageRef = storageRef.child("Profile/"+savedU+"/"+savedU + ".jpg");
-        System.out.println(savedU);
         // Download the image into a local file
         File localFile = File.createTempFile("images", "jpg");
 

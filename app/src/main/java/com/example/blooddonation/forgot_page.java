@@ -10,7 +10,6 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -93,40 +92,37 @@ public class forgot_page extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION_REQUEST_CODE);
         }
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
-                reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                        String num=datasnapshot.child(username).child("Phone No").getValue(String.class);
-                        if (num.equals(S_phone))
-                        {
-                            System.out.println(username+" forgot Page");
-                            //send sms
-                            sendSms();
-                            Intent intent=new Intent(forgot_page.this, otp_auth.class);
-                            intent.putExtra("number",S_phone);
-                            intent.putExtra("OTP",MESSAGE);
-                            intent.putExtra("U_name",username);
-                            startActivity(intent);
-                        }
-                        else
-                        {
-                            E_phone.setText("");
-                            Toast.makeText(forgot_page.this, "Invalid Number", Toast.LENGTH_SHORT).show();
-                        }
-
+        submit.setOnClickListener(view -> {
+            DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                    String num=datasnapshot.child(username).child("Phone No").getValue(String.class);
+                    if (num.equals(S_phone))
+                    {
+                        System.out.println(username+" forgot Page");
+                        //send sms
+                        sendSms();
+                        Intent intent1 =new Intent(forgot_page.this, otp_auth.class);
+                        intent1.putExtra("number",S_phone);
+                        intent1.putExtra("OTP",MESSAGE);
+                        intent1.putExtra("U_name",username);
+                        startActivity(intent1);
+                    }
+                    else
+                    {
+                        E_phone.setText("");
+                        Toast.makeText(forgot_page.this, "Invalid Number", Toast.LENGTH_SHORT).show();
                     }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                }
 
-                    }
-                });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
+                }
+            });
+
         });
     }
 

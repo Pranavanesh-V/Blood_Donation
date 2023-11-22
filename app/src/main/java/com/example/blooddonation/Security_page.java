@@ -1,10 +1,9 @@
 package com.example.blooddonation;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Security_page extends AppCompatActivity {
 
@@ -16,11 +15,6 @@ public class Security_page extends AppCompatActivity {
         setContentView(R.layout.activity_security_page);
 
         back5=findViewById(R.id.back5);
-        back5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        back5.setOnClickListener(view -> finish());
     }
 }

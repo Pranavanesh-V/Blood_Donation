@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -61,19 +60,11 @@ public class Request_donor_info extends AppCompatActivity {
 
         request_fetch();
 
-        back_req.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-        donate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent1=new Intent(Request_donor_info.this, donation_declaration.class);
-                intent1.putExtra("Phone",phone_no);
-                startActivity(intent1);
-            }
+        back_req.setOnClickListener(view -> finish());
+        donate.setOnClickListener(view -> {
+            Intent intent1=new Intent(Request_donor_info.this, donation_declaration.class);
+            intent1.putExtra("Phone",phone_no);
+            startActivity(intent1);
         });
 
     }

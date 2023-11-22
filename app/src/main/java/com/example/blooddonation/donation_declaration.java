@@ -3,7 +3,6 @@ package com.example.blooddonation;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -25,26 +24,18 @@ public class donation_declaration extends AppCompatActivity {
 
         Intent intent=getIntent();
         Phone_number=intent.getStringExtra("Phone");
-        back_req2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
+        back_req2.setOnClickListener(view -> finish());
+        donate2.setOnClickListener(view -> {
+            if (agree.isChecked())
+            {
+                System.out.println(Phone_number);
+                Intent intent1 =new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:"+Phone_number));
+                startActivity(intent1);
             }
-        });
-        donate2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (agree.isChecked())
-                {
-                    System.out.println(Phone_number);
-                    Intent intent=new Intent(Intent.ACTION_DIAL,
-                            Uri.parse("tel:"+Phone_number));
-                    startActivity(intent);
-                }
-                else
-                {
-                    Toast.makeText(donation_declaration.this, R.string.please_agree_to_our_declaration, Toast.LENGTH_SHORT).show();
-                }
+            else
+            {
+                Toast.makeText(donation_declaration.this, R.string.please_agree_to_our_declaration, Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -85,29 +84,18 @@ public class Donor_info_pg extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {}
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
+        back.setOnClickListener(view -> finish());
+
+        T_Address.setOnClickListener(view -> {
+            String address=T_Address.getText().toString().trim();
+            Intent intent1 =new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("geo:0,0?q="+address));
+            startActivity(intent1);
         });
 
-        T_Address.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String address=T_Address.getText().toString().trim();
-                Intent intent=new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("geo:0,0?q="+address));
-                startActivity(intent);
-            }
-        });
-
-        T_Phone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent =new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+Phone));
-                startActivity(intent);
-            }
+        T_Phone.setOnClickListener(view -> {
+            Intent intent12 =new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+Phone));
+            startActivity(intent12);
         });
     }
 }

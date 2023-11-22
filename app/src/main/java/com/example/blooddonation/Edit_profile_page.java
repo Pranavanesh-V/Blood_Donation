@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +54,7 @@ public class Edit_profile_page extends AppCompatActivity {
     private static final String PREFS_NAME = "MyPrefs";
     DatabaseReference databaseReference;
     EditText blood_Group2,mail_id3,address2;
+    String S_blood_g="";
     TextView name3;
     Boolean res=true;
     Button back10,save,cancel,f_device,camera;
@@ -102,6 +104,30 @@ public class Edit_profile_page extends AppCompatActivity {
             address2.setEnabled(false);
             mail_id3.setEnabled(true);
         }
+        blood_Group2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(Edit_profile_page.this, blood_Group2);
+                popupMenu.getMenu().add("O+");
+                popupMenu.getMenu().add("O-");
+                popupMenu.getMenu().add("A+");
+                popupMenu.getMenu().add("A-");
+                popupMenu.getMenu().add("B+");
+                popupMenu.getMenu().add("B-");
+                popupMenu.getMenu().add("AB+");
+                popupMenu.getMenu().add("Ab-");
+
+                // Set an item click listener for the PopupMenu
+                popupMenu.setOnMenuItemClickListener(item -> {
+                    // Handle item selection here
+                    S_blood_g = item.getTitle().toString();
+                    //((TextInputLayout) blood_g.getChildAt(0)).getEditText().setText(selectedText);
+                    blood_Group2.setText(S_blood_g);
+                    return true;
+                });
+                popupMenu.show();
+            }
+        });
         save.setOnClickListener(view -> {
             int[] data={0,0,0};
             if(blood_Group2.getText().toString().trim().isEmpty())
@@ -140,7 +166,7 @@ public class Edit_profile_page extends AppCompatActivity {
                     if (address2.getText().toString().trim().isEmpty())
                     {
                         data[0]=1;
-                        System.out.println("only blood_g");
+                        System.out.println("only blood_g"+blood_Group2.getText().toString());
                     }
                     else
                     {
@@ -170,11 +196,13 @@ public class Edit_profile_page extends AppCompatActivity {
             if (res)
             {
                 Toast.makeText(Edit_profile_page.this,"Unsuccessfully updated",Toast.LENGTH_SHORT).show();
+                finish();
             }
             else
             {
                 setResult(RESULT_OK);
                 Toast.makeText(Edit_profile_page.this,"Successfully updated",Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
         back10.setOnClickListener(view -> {
@@ -184,8 +212,7 @@ public class Edit_profile_page extends AppCompatActivity {
         profile2.setOnClickListener(this::onChooseImageClick);
     }
     public Boolean fetch(int[] d){
-
-        final boolean[] flag = {false};
+        final boolean []flag = {false};
         // Initialize Firebase Realtime Database
         databaseReference = FirebaseDatabase.getInstance().getReference("Donars");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -195,38 +222,68 @@ public class Edit_profile_page extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    if (snapshot.child(savedUsername).child("Blood Group").exists() && snapshot.child(savedUsername).child("Address").exists() && snapshot.child(savedUsername).child("Email").exists()) {
+                    if (snapshot.child("Blood Group").exists() && snapshot.child("Address").exists() && snapshot.child("Email").exists()) {
                         //to check if the user doesn't changes the existing data but changes the profile
                         //if he changes the data handel it else just update the profile
                         String blood, mail, Address;
-                        if (d[0] == 1 || d[1] == 1 || d[2] == 1) {
-                            if (d[0] == 1) {
-                                blood = blood_Group2.getText().toString().trim();
-                                databaseReference.child(savedUsername).child("Blood Group").setValue(blood);
-                                System.out.println("place 1");
-                            }
-                            if (d[1] == 1) {
-                                mail = mail_id3.getText().toString().trim();
-                                databaseReference.child(savedUsername).child("Email").setValue(mail);
-                                System.out.println("place 2");
-                            }
-                            if (d[2] == 1) {
-                                Address = address2.getText().toString().trim();
-                                databaseReference.child(savedUsername).child("Address").setValue(Address);
-                                System.out.println("place 3");
-                            }
-                        } else {
-                            //do nothing
+                        Address = address2.getText().toString().trim();
+                        mail = mail_id3.getText().toString().trim();
+                        blood = blood_Group2.getText().toString().trim();
+                        if (d[0] == 0 && d[1] == 0 && d[2] == 1)
+                        {
+                            databaseReference.child(savedUsername).child("Address").setValue(Address);
+                            flag[0] = true;
+                            break;
+                        }
+                        else if (d[0] == 0 && d[1] == 1 && d[2] == 0)
+                        {
+                            databaseReference.child(savedUsername).child("Email").setValue(mail);
+                            flag[0] = true;
+                            break;
+                        }
+                        else if (d[0] == 0 && d[1] == 1 && d[2] == 1)
+                        {
+                            databaseReference.child(savedUsername).child("Email").setValue(mail);
+                            databaseReference.child(savedUsername).child("Address").setValue(Address);
+                            flag[0] = true;
+                            break;
+                        }
+                        else if (d[0] == 1 && d[1] == 0 && d[2] == 0)
+                        {
+                            databaseReference.child(savedUsername).child("Blood Group").setValue(blood);
+                            flag[0] = true;
+                            break;
+                        }
+                        else if (d[0] == 1 && d[1] == 0 && d[2] == 1)
+                        {
+                            databaseReference.child(savedUsername).child("Blood Group").setValue(blood);
+                            databaseReference.child(savedUsername).child("Address").setValue(Address);
+                            flag[0] = true;
+                            break;
+                        }
+                        else if (d[0] == 1 && d[1] == 1 && d[2] == 0)
+                        {
+                            databaseReference.child(savedUsername).child("Blood Group").setValue(blood);
+                            databaseReference.child(savedUsername).child("Email").setValue(mail);
+                            flag[0] = true;
+                            break;
+                        }
+                        else if (d[0] == 1 && d[1] == 1 && d[2] == 1)
+                        {
+                            databaseReference.child(savedUsername).child("Blood Group").setValue(blood);
+                            databaseReference.child(savedUsername).child("Email").setValue(mail);
+                            databaseReference.child(savedUsername).child("Address").setValue(Address);
+                            flag[0] = true;
+                            break;
                         }
                     } else {
                         if (d[1] == 1) {
                             String mail = mail_id3.getText().toString().trim();
                             databaseReference.child(savedUsername).child("Email").setValue(mail);
+                            flag[0] = true;
                             System.out.println("Email_id");
                         }
                     }
-                    flag[0] = true;
-                    finish();
                 }
             }
             @Override
@@ -400,5 +457,26 @@ public class Edit_profile_page extends AppCompatActivity {
                     Log.e("Firebase", "Error downloading image: " + exception.getMessage());
                 });
 
+    }
+    private void showPopupMenu() {
+        PopupMenu popupMenu = new PopupMenu(this, blood_Group2);
+        popupMenu.getMenu().add("O+");
+        popupMenu.getMenu().add("O-");
+        popupMenu.getMenu().add("A+");
+        popupMenu.getMenu().add("A-");
+        popupMenu.getMenu().add("B+");
+        popupMenu.getMenu().add("B-");
+        popupMenu.getMenu().add("AB+");
+        popupMenu.getMenu().add("Ab-");
+
+        // Set an item click listener for the PopupMenu
+        popupMenu.setOnMenuItemClickListener(item -> {
+            // Handle item selection here
+            S_blood_g = item.getTitle().toString();
+            //((TextInputLayout) blood_g.getChildAt(0)).getEditText().setText(selectedText);
+            blood_Group2.setText(S_blood_g);
+            return true;
+        });
+        popupMenu.show();
     }
 }

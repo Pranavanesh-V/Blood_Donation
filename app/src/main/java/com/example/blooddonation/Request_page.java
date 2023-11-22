@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
@@ -52,12 +51,7 @@ public class Request_page extends AppCompatActivity {
 
 
         B_G.setOnClickListener(view -> showPopupMenu());
-        back_req3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        back_req3.setOnClickListener(view -> finish());
 
         EditText E_name=name.getEditText();
         EditText E_Address=Address.getEditText();
@@ -91,39 +85,36 @@ public class Request_page extends AppCompatActivity {
         E_Reason.addTextChangedListener(login);
         E_Desc_Reason.addTextChangedListener(login);
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println(S_name + " " + S_address + " " + S_phone + " " + S_Reason + " " + S_Desc_Reason);
+        submit.setOnClickListener(view -> {
+            System.out.println(S_name + " " + S_address + " " + S_phone + " " + S_Reason + " " + S_Desc_Reason);
 
-                if (S_name.isEmpty()||S_address.isEmpty()||S_phone.isEmpty()||S_blood_g.isEmpty()||S_Reason.isEmpty()||S_Desc_Reason.isEmpty())
-                {
-                    Toast.makeText(Request_page.this,"Empty Credentials",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Request");
-                    reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                            // Push data to a new unique key
+            if (S_name.isEmpty()||S_address.isEmpty()||S_phone.isEmpty()||S_blood_g.isEmpty()||S_Reason.isEmpty()||S_Desc_Reason.isEmpty())
+            {
+                Toast.makeText(Request_page.this,"Empty Credentials",Toast.LENGTH_SHORT).show();
+            }
+            else {
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Request");
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                        // Push data to a new unique key
 
-                            reference.child(S_name).child("RequesterLocation").setValue(S_address);
-                            reference.child(S_name).child("Requester Phone").setValue(S_phone);
-                            reference.child(S_name).child("RequesterReason").setValue(S_Reason);
-                            reference.child(S_name).child("Desc Reason").setValue(S_Desc_Reason);
-                            reference.child(S_name).child("RequesterBloodGroup").setValue(S_blood_g);
-                            reference.child(S_name).child("Received").setValue("No");
-                            reference.child(S_name).child("Profile").setValue(profile);
-                        }
+                        reference.child(S_name).child("RequesterLocation").setValue(S_address);
+                        reference.child(S_name).child("Requester Phone").setValue(S_phone);
+                        reference.child(S_name).child("RequesterReason").setValue(S_Reason);
+                        reference.child(S_name).child("Desc Reason").setValue(S_Desc_Reason);
+                        reference.child(S_name).child("RequesterBloodGroup").setValue(S_blood_g);
+                        reference.child(S_name).child("Received").setValue("No");
+                        reference.child(S_name).child("Profile").setValue(profile);
+                    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                        }
-                    });
-                    Toast.makeText(Request_page.this,"Request Generated Successfully",Toast.LENGTH_SHORT).show();
-                    finish();
-                }
+                    }
+                });
+                Toast.makeText(Request_page.this,"Request Generated Successfully",Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }
