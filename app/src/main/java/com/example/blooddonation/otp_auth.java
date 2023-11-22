@@ -54,6 +54,7 @@ public class otp_auth extends AppCompatActivity {
         Intent intent=getIntent();
         String number=intent.getStringExtra("number");
         OTP=intent.getStringExtra("OTP");
+        String O_Username=intent.getStringExtra("U_name");
 
         //Edit text objects
         EditText E_otp1=otp1.getEditText();
@@ -238,6 +239,8 @@ public class otp_auth extends AppCompatActivity {
                 {
                     Toast.makeText(otp_auth.this,"Authentication Successful",Toast.LENGTH_SHORT).show();
                     Intent i=new Intent(otp_auth.this,confirm_password.class);
+                    System.out.println(O_Username+" Otp auth");
+                    i.putExtra("Otp_username",O_Username);
                     startActivity(i);
                 }
             }

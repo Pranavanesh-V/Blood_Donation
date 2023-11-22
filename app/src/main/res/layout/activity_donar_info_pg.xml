@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/g"
-    android:theme="@style/page71.Blood_Donation"
+    android:theme="@style/page72.Blood_Donation"
     tools:context=".Donor_info_pg">
 
     <ImageView
@@ -133,16 +133,15 @@
         android:id="@+id/Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/name"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="36sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.673"
+        app:layout_constraintHorizontal_bias="0.63"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.523" />
+        app:layout_constraintVertical_bias="0.525" />
 
     <TextView
         android:id="@+id/Address"
@@ -163,13 +162,14 @@
         android:id="@+id/Mail_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/email_id"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"
+        android:maxLines="2"
+        android:ellipsize="end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintHorizontal_bias="0.7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.612" />
@@ -178,16 +178,15 @@
         android:id="@+id/Blood_Group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/blood_group"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintHorizontal_bias="0.656"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.437"
+        app:layout_constraintVertical_bias="0.439"
         tools:ignore="TextSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

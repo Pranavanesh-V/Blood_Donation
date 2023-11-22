@@ -564,9 +564,11 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         DataClass data=itemList.get(position);
         String name=data.getDataName();
         String blood= data.getDataBlood();
+        String profile_url=data.getDataURL();
         Intent intent=new Intent(home_page.this,Donor_info_pg.class);
         intent.putExtra("Name",name);
         intent.putExtra("Blood",blood);
+        intent.putExtra("URL_P",profile_url);
         startActivity(intent);
 
     }
@@ -578,11 +580,13 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         String blood= data.getDataBlood();
         String location=data.getDataLocation();
         String txt= data.getTxt();
+        String profile_url=data.getUri();
         Intent intent=new Intent(home_page.this, Request_donor_info.class);
         intent.putExtra("Name",name);
         intent.putExtra("Blood",blood);
         intent.putExtra("Location",location);
         intent.putExtra("Txt",txt);
+        intent.putExtra("URL_P",profile_url);
         startActivity(intent);
         System.out.println(name+"\n"+blood+"\n"+location+"\n"+txt);
     }

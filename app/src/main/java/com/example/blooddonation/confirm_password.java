@@ -19,6 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class confirm_password extends AppCompatActivity {
 
     Button submit;
@@ -37,7 +39,9 @@ public class confirm_password extends AppCompatActivity {
         confirm_pass=findViewById(R.id.confirm_pass);
         new_pass=findViewById(R.id.new_pass);
 
-
+        Intent intent=getIntent();
+        String Username=intent.getStringExtra("Otp_username");
+        System.out.println(Username+" con");
         EditText E_pass_new= new_pass.getEditText();
         assert E_pass_new != null;
         E_pass_new.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
@@ -108,32 +112,33 @@ public class confirm_password extends AppCompatActivity {
 
 
         submit.setOnClickListener(view -> {
-
+            System.out.println(Username);
             // Initialize Firebase
             DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-
-                    if (datasnapshot.child(S_username).exists())
-                    {
-                        if (S_new_pass.equals(S_conf_pass)) {
-                            // Replace data using set value method
-                            reference.child(S_username).child("Password").setValue(S_conf_pass);
-                            //Message confirmation
-                            Toast.makeText(confirm_password.this,"Password Updated",Toast.LENGTH_SHORT).show();
-                            //To sign in page
-                            Intent intent=new Intent(confirm_password.this, sign_up.class);
-                            startActivity(intent);
-                            finishAffinity();
-                        }
-                        else {
-                            Toast.makeText(confirm_password.this,"Password MisMatch",Toast.LENGTH_SHORT).show();
+                    if (!(Objects.isNull(S_username) || Objects.isNull(S_conf_pass) || Objects.isNull(S_new_pass))) {
+                        if (datasnapshot.child(S_username).exists() && S_username.equals(Username)) {
+                            if (S_new_pass.equals(S_conf_pass)) {
+                                // Replace data using set value method
+                                reference.child(S_username).child("Password").setValue(S_conf_pass);
+                                //Message confirmation
+                                Toast.makeText(confirm_password.this, "Password Updated", Toast.LENGTH_SHORT).show();
+                                //To sign in page
+                                Intent intent = new Intent(confirm_password.this, sign_up.class);
+                                startActivity(intent);
+                                finishAffinity();
+                            } else {
+                                Toast.makeText(confirm_password.this, "Password MisMatch", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(confirm_password.this, "User Not found", Toast.LENGTH_SHORT).show();
                         }
                     }
                     else
                     {
-                        Toast.makeText(confirm_password.this,"User Not found",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(confirm_password.this, "Empty Credentials", Toast.LENGTH_SHORT).show();
                     }
                 }
 

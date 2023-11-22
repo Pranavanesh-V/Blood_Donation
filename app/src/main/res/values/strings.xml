@@ -118,4 +118,5 @@ OWNER                                                                           
     <string name="choose_from_device">choose from device</string>
     <string name="camera">Camera</string>
     <string name="cancel">Cancel</string>
+    <string name="please_agree_to_our_declaration">Please Agree to Our Declaration</string>
 </resources>

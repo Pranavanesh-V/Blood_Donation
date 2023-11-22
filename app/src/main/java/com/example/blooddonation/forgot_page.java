@@ -21,6 +21,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class forgot_page extends AppCompatActivity {
 
@@ -43,7 +48,8 @@ public class forgot_page extends AppCompatActivity {
         //get the otp here and send it
         otp_generator otp_generator=new otp_generator();
         MESSAGE = otp_generator.generate();
-
+        Intent intent=getIntent();
+        String username=intent.getStringExtra("Username");
 
         EditText E_phone=phone.getEditText();
         assert E_phone != null;
@@ -90,13 +96,36 @@ public class forgot_page extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                        String num=datasnapshot.child(username).child("Phone No").getValue(String.class);
+                        if (num.equals(S_phone))
+                        {
+                            System.out.println(username+" forgot Page");
+                            //send sms
+                            sendSms();
+                            Intent intent=new Intent(forgot_page.this, otp_auth.class);
+                            intent.putExtra("number",S_phone);
+                            intent.putExtra("OTP",MESSAGE);
+                            intent.putExtra("U_name",username);
+                            startActivity(intent);
+                        }
+                        else
+                        {
+                            E_phone.setText("");
+                            Toast.makeText(forgot_page.this, "Invalid Number", Toast.LENGTH_SHORT).show();
+                        }
 
-                //send sms
-                sendSms();
-                Intent intent=new Intent(forgot_page.this, otp_auth.class);
-                intent.putExtra("number",S_phone);
-                intent.putExtra("OTP",MESSAGE);
-                startActivity(intent);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
             }
         });
     }

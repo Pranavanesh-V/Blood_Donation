@@ -21,13 +21,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class sign_up extends AppCompatActivity {
 
     Button submit;
     private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "MyPrefs";
     TextInputLayout email_id,password;
-    String S_email_id,S_password;
+    String S_Username,S_password;
     int time = 0;
 
 
@@ -57,7 +59,7 @@ public class sign_up extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                S_email_id=E_email_id.getText().toString().trim();
+                S_Username =E_email_id.getText().toString().trim();
                 S_password=E_password.getText().toString().trim();
             }
 
@@ -84,17 +86,17 @@ public class sign_up extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
 
                         String S_password1;
-                        if (datasnapshot.child(S_email_id).exists())
+                        if (datasnapshot.child(S_Username).exists())
                         {
-                            S_password1 = datasnapshot.child(S_email_id).child("Password").getValue(String.class);
+                            S_password1 = datasnapshot.child(S_Username).child("Password").getValue(String.class);
                             if (S_password1.equals(S_password))
                             {
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("username", S_email_id);
+                                editor.putString("username", S_Username);
                                 editor.putString("password", S_password1);
                                 editor.apply();
                                 Intent intent=new Intent(sign_up.this, home_page.class);
-                                intent.putExtra("username",S_email_id);
+                                intent.putExtra("username", S_Username);
                                 startActivity(intent);
                                 finish();
                             }
@@ -129,9 +131,16 @@ public class sign_up extends AppCompatActivity {
         });
 
         forgot.setOnClickListener(view -> {
-
-            Intent intent= new Intent(sign_up.this, forgot_page.class);
-            startActivity(intent);
+            if (!Objects.isNull(S_Username)) {
+                Intent intent = new Intent(sign_up.this, forgot_page.class);
+                System.out.println(S_Username+" sign in page");
+                intent.putExtra("Username", S_Username);
+                startActivity(intent);
+            }
+            else
+            {
+                Toast.makeText(this, "Username Required", Toast.LENGTH_SHORT).show();
+            }
         });
 
 

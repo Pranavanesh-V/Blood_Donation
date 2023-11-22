@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -39,6 +40,10 @@ public class donation_declaration extends AppCompatActivity {
                     Intent intent=new Intent(Intent.ACTION_DIAL,
                             Uri.parse("tel:"+Phone_number));
                     startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(donation_declaration.this, R.string.please_agree_to_our_declaration, Toast.LENGTH_SHORT).show();
                 }
             }
         });
