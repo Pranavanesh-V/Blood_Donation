@@ -212,7 +212,6 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                         itemList1.add(item);
                         flag = true;
                     }
-
                 }
                 if (!flag)
                 {
@@ -295,6 +294,13 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                 // Handle the error in getting URI
                             }
                         });
+                    }
+                    else
+                    {
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("url","No").apply();
+                        String val1="https://firebasestorage.googleapis.com/v0/b/mysql-3bcb9.appspot.com/o/Profile%2FUser_Test%2FUser_Test.jpg?alt=media&token=e5e40c07-d38a-4588-9da9-f57c3ea236030";
+                        Glide.with(home_page.this).load(val1).into(user);
                     }
                 }
 

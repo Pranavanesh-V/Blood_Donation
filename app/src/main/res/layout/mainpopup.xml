@@ -6,7 +6,7 @@
     android:gravity="bottom">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="200dp"
         android:layout_margin="10dp"
         android:background="@drawable/popupbg"
@@ -29,9 +29,10 @@
 
             <Button
                 android:id="@+id/from_device"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="match_parent"
-                android:background="@color/grey"
+                android:background="@drawable/popbtn"
+                android:layout_marginStart="8dp"
                 android:fontFamily="@font/poppins"
                 android:gravity="center"
                 android:text="@string/choose_from_device"
@@ -52,16 +53,17 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="4dp"
                 android:importantForAccessibility="no"
-                android:src="@drawable/camera" />
+                android:src="@drawable/delete" />
 
             <Button
-                android:id="@+id/from_camera"
-                android:layout_width="match_parent"
+                android:id="@+id/Delete_pro"
+                android:layout_width="300dp"
                 android:layout_height="match_parent"
-                android:background="@color/grey"
+                android:background="@drawable/popbtn"
                 android:fontFamily="@font/poppins"
                 android:gravity="center"
-                android:text="@string/camera"
+                android:layout_marginStart="8dp"
+                android:text="@string/delete_profile"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 tools:ignore="VisualLintButtonSize" />

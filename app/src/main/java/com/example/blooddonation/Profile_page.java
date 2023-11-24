@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -154,36 +155,63 @@ public class Profile_page extends AppCompatActivity {
         String savedU;
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedU = sharedPreferences.getString("username", "");
-        // Reference to the image file
-        StorageReference imageRef = storageRef.child("Profile/"+savedU+"/"+savedU + ".jpg");
-        // Download the image into a local file
-        File localFile = File.createTempFile("images", "jpg");
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                // Push data to a new unique key
+                String p_val=datasnapshot.child(savedUsername).child("Profile").getValue(String.class);
+                System.out.println(p_val);
+                if (p_val.equals("Yes"))
+                {
+                    System.out.println("its in");
+                    // Reference to the image file
+                    StorageReference imageRef = storageRef.child("Profile/"+savedU+"/"+savedU + ".jpg");
+                    // Download the image into a local file
+                    File localFile = null;
+                    try {
+                        localFile = File.createTempFile("images", "jpg");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
 
-        imageRef.getFile(localFile)
-                .addOnSuccessListener(taskSnapshot -> {
-                    // Image downloaded successfully
-                    // Now, load the image into ImageView using Glide
-                    Glide.with(this).load(localFile)
-                            .listener(new RequestListener<Drawable>() {
-                                @Override
-                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                    // Hide the loading indicator in case of a failure
-                                    progressBar.setVisibility(View.GONE);
-                                    return false;
-                                }
+                    File finalLocalFile = localFile;
+                    imageRef.getFile(localFile)
+                            .addOnSuccessListener((FileDownloadTask.TaskSnapshot taskSnapshot) -> {
+                                // Image downloaded successfully
+                                // Now, load the image into ImageView using Glide
+                                Glide.with(Profile_page.this).load(finalLocalFile)
+                                        .listener(new RequestListener<Drawable>() {
+                                            @Override
+                                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                                // Hide the loading indicator in case of a failure
+                                                progressBar.setVisibility(View.GONE);
+                                                return false;
+                                            }
 
-                                @Override
-                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                    // Hide the loading indicator when the image is ready
-                                    progressBar.setVisibility(View.GONE);
-                                    return false;
-                                }
-                            }).into(profile);
-                })
-                .addOnFailureListener(exception -> {
-                    // Handle errors
-                    Log.e("Firebase", "Error downloading image: " + exception.getMessage());
-                });
+                                            @Override
+                                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                                // Hide the loading indicator when the image is ready
+                                                progressBar.setVisibility(View.GONE);
+                                                return false;
+                                            }
+                                        }).into(profile);
+                            })
+                            .addOnFailureListener(exception -> {
+                                // Handle errors
+                                Log.e("Firebase", "Error downloading image: " + exception.getMessage());
+                            });
+                }
+                else
+                {
+                    String val="https://firebasestorage.googleapis.com/v0/b/mysql-3bcb9.appspot.com/o/Profile%2FUser_Test%2FUser_Test.jpg?alt=media&token=e5e40c07-d38a-4588-9da9-f57c3ea236030";
+                    Glide.with(Profile_page.this).load(val).into(profile);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
     }
 }

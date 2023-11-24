@@ -40,6 +40,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.Location.setText(item.getDataLocation());
         if (!item.getDataURL().equals("No"))
         {
+            System.out.println(item.getDataURL());
             Glide.with(context)
                     .load(item.getDataURL())
                     .into(holder.recImage);

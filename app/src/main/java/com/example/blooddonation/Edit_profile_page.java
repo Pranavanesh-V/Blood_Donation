@@ -12,11 +12,15 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +37,8 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -65,6 +71,9 @@ public class Edit_profile_page extends AppCompatActivity {
     private Uri imageUri;
     ConstraintLayout layout;
     ProgressBar progressBar1;
+    int[] data={0,0,0};
+    String blood, mail, Address;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,32 +113,28 @@ public class Edit_profile_page extends AppCompatActivity {
             address2.setEnabled(false);
             mail_id3.setEnabled(true);
         }
-        blood_Group2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(Edit_profile_page.this, blood_Group2);
-                popupMenu.getMenu().add("O+");
-                popupMenu.getMenu().add("O-");
-                popupMenu.getMenu().add("A+");
-                popupMenu.getMenu().add("A-");
-                popupMenu.getMenu().add("B+");
-                popupMenu.getMenu().add("B-");
-                popupMenu.getMenu().add("AB+");
-                popupMenu.getMenu().add("Ab-");
+        blood_Group2.setOnClickListener(view -> {
+            PopupMenu popupMenu = new PopupMenu(Edit_profile_page.this, blood_Group2);
+            popupMenu.getMenu().add("O+");
+            popupMenu.getMenu().add("O-");
+            popupMenu.getMenu().add("A+");
+            popupMenu.getMenu().add("A-");
+            popupMenu.getMenu().add("B+");
+            popupMenu.getMenu().add("B-");
+            popupMenu.getMenu().add("AB+");
+            popupMenu.getMenu().add("Ab-");
 
-                // Set an item click listener for the PopupMenu
-                popupMenu.setOnMenuItemClickListener(item -> {
-                    // Handle item selection here
-                    S_blood_g = item.getTitle().toString();
-                    //((TextInputLayout) blood_g.getChildAt(0)).getEditText().setText(selectedText);
-                    blood_Group2.setText(S_blood_g);
-                    return true;
-                });
-                popupMenu.show();
-            }
+            // Set an item click listener for the PopupMenu
+            popupMenu.setOnMenuItemClickListener(item -> {
+                // Handle item selection here
+                S_blood_g = item.getTitle().toString();
+                //((TextInputLayout) blood_g.getChildAt(0)).getEditText().setText(selectedText);
+                blood_Group2.setText(S_blood_g);
+                return true;
+            });
+            popupMenu.show();
         });
         save.setOnClickListener(view -> {
-            int[] data={0,0,0};
             if(blood_Group2.getText().toString().trim().isEmpty())
             {
                 if (mail_id3.getText().toString().trim().isEmpty())
@@ -209,12 +214,95 @@ public class Edit_profile_page extends AppCompatActivity {
             finish();
             setResult(RESULT_CANCELED);
         });
-        profile2.setOnClickListener(this::onChooseImageClick);
+        profile2.setOnClickListener(view -> CreatePopUp());
+    }
+
+    public void CreatePopUp()
+    {
+        LayoutInflater inflater=(LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        @SuppressLint("InflateParams") View popUpView=inflater.inflate(R.layout.mainpopup,null);
+
+        int width= ViewGroup.LayoutParams.MATCH_PARENT;
+        int height=ViewGroup.LayoutParams.WRAP_CONTENT;
+        boolean focusable=true;
+        PopupWindow popupWindow=new PopupWindow(popUpView,width,height,focusable);
+        layout.post(() -> popupWindow.showAtLocation(layout, Gravity.BOTTOM,0,0));
+        Button from_device,Delete_pro,cancel;
+        from_device=popUpView.findViewById(R.id.from_device);
+        Delete_pro=popUpView.findViewById(R.id.Delete_pro);
+        cancel=popUpView.findViewById(R.id.cancel_button);
+        from_device.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onChooseImageClick(view);
+                popupWindow.dismiss();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+            }
+        });
+        Delete_pro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                delete_profile();
+                popupWindow.dismiss();
+            }
+        });
+    }
+
+    public void delete_profile()
+    {
+        String val="https://firebasestorage.googleapis.com/v0/b/mysql-3bcb9.appspot.com/o/Profile%2FUser_Test%2FUser_Test.jpg?alt=media&token=e5e40c07-d38a-4588-9da9-f57c3ea236030";
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReference();
+        String imageName = savedUsername + ".jpg";
+        //path
+        System.out.println(savedUsername);
+        String S_path="Profile/"+savedUsername+"/";
+        // Assume storageReference is the StorageReference to your image in Firebase Storage
+        StorageReference imageRef = storageReference.child(S_path + imageName);
+
+        // Delete the file
+        imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                // File deleted successfully
+                Log.d("FirebaseStorage", "File deleted successfully");
+                Toast.makeText(Edit_profile_page.this, "Profile Removed", Toast.LENGTH_SHORT).show();
+
+                DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                        // Push data to a new unique key
+                        reference.child(savedUsername).child("Profile").setValue("No");
+                        reference.child(savedUsername).child("Profile Value").setValue("No");
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("url","No").apply();
+                        Glide.with(Edit_profile_page.this).load(val).into(profile2);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Uh-oh, an error occurred!
+                Log.e("FirebaseStorage", "Error deleting file: " + exception.getMessage());
+                Toast.makeText(Edit_profile_page.this, "Profile can't be Removed", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     public Boolean fetch(int[] d){
         final boolean []flag = {false};
         // Initialize Firebase Realtime Database
-        databaseReference = FirebaseDatabase.getInstance().getReference("Donars");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Donars");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @SuppressLint("NotifyDataSetChanged")
@@ -225,7 +313,6 @@ public class Edit_profile_page extends AppCompatActivity {
                     if (snapshot.child("Blood Group").exists() && snapshot.child("Address").exists() && snapshot.child("Email").exists()) {
                         //to check if the user doesn't changes the existing data but changes the profile
                         //if he changes the data handel it else just update the profile
-                        String blood, mail, Address;
                         Address = address2.getText().toString().trim();
                         mail = mail_id3.getText().toString().trim();
                         blood = blood_Group2.getText().toString().trim();
@@ -312,7 +399,7 @@ public class Edit_profile_page extends AppCompatActivity {
             File photoFile = createImageFile();
 
             if (photoFile != null) {
-                imageUri = FileProvider.getUriForFile(this, "your.package.name.fileprovider", photoFile);
+                imageUri = FileProvider.getUriForFile(this, "com.example.blooddonation.Edit_profile_page", photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             }
