@@ -106,6 +106,8 @@ public class Request_page extends AppCompatActivity {
                         reference.child(S_name).child("RequesterBloodGroup").setValue(S_blood_g);
                         reference.child(S_name).child("Received").setValue("No");
                         reference.child(S_name).child("Profile").setValue(profile);
+                        Sms_sender sms_sender=new Sms_sender();
+                        sms_sender.send(S_blood_g);
                     }
 
                     @Override

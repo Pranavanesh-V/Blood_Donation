@@ -90,28 +90,27 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="360dp"
         android:id="@+id/password"
-        android:layout_height="wrap_content"
         style="@style/page8.Blood_Donation"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
         android:hint="@string/password"
         app:boxStrokeColor="@color/box_col"
+        app:endIconMode="password_toggle"
         app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:startIconDrawable="@drawable/baseline_lock_24"
-        app:endIconDrawable="@drawable/baseline_remove_red_eye_24"
-        app:endIconMode="password_toggle"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.625">
+        app:layout_constraintVertical_bias="0.625"
+        app:startIconDrawable="@drawable/baseline_lock_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:inputType="textPassword"
             android:imeOptions="actionDone"
+            android:inputType="textPassword"
             android:textColor="@color/white"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
