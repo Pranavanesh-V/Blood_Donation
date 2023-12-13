@@ -64,6 +64,7 @@ public class Request_donor_info extends AppCompatActivity {
         donate.setOnClickListener(view -> {
             Intent intent1=new Intent(Request_donor_info.this, donation_declaration.class);
             intent1.putExtra("Phone",phone_no);
+            intent1.putExtra("Name",name);
             startActivity(intent1);
         });
 
