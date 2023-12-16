@@ -1,5 +1,6 @@
 package com.example.blooddonation;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,11 +16,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.Timestamp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Request_page extends AppCompatActivity {
 
@@ -95,9 +101,30 @@ public class Request_page extends AppCompatActivity {
             else {
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Request");
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @SuppressLint("NewApi")
                     @Override
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                         // Push data to a new unique key
+
+                        Timestamp firebaseTimestamp = Timestamp.now();
+
+                        // Convert Firebase Timestamp to java.util.Date
+                        Date date = firebaseTimestamp.toDate();
+
+                        // Add 8 hours to the time
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(date);
+                        calendar.add(Calendar.HOUR_OF_DAY, 8);
+
+                        // Convert the updated time back to a Date
+                        Date updatedDate = calendar.getTime();
+
+                        // Create a formatter for a readable date and time format
+                        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        // Format and display the original and updated timestamps
+                        String formattedOriginalTimestamp = formatter.format(date);
+                        String formattedUpdatedTimestamp = formatter.format(updatedDate);
+
 
                         reference.child(S_name).child("RequesterLocation").setValue(S_address);
                         reference.child(S_name).child("Requester Phone").setValue(S_phone);
@@ -106,8 +133,10 @@ public class Request_page extends AppCompatActivity {
                         reference.child(S_name).child("RequesterBloodGroup").setValue(S_blood_g);
                         reference.child(S_name).child("Received").setValue("No");
                         reference.child(S_name).child("Profile").setValue(profile);
-                        Sms_sender sms_sender=new Sms_sender();
-                        sms_sender.send(S_blood_g);
+                        reference.child(S_name).child("Time Uploaded").setValue(formattedOriginalTimestamp);
+                        reference.child(S_name).child("Time Remove").setValue(formattedUpdatedTimestamp);
+                        /*Sms_sender sms_sender=new Sms_sender();
+                        sms_sender.send(S_blood_g);*/
                     }
 
                     @Override

@@ -24,8 +24,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.Timestamp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,7 +38,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -199,17 +204,58 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                 empty_res.setVisibility(View.INVISIBLE);
                 boolean flag=false;
 
+                Timestamp firebaseTimestamp = Timestamp.now();
+
+                // Convert Firebase Timestamp to java.util.Date
+                Date date = firebaseTimestamp.toDate();
+                // Create a formatter for a readable date and time format
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                // Format and display the original and updated timestamps
+                String formattedOriginalTimestamp = formatter.format(date);
+                //Toast.makeText(home_page.this, formattedOriginalTimestamp, Toast.LENGTH_SHORT).show();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     // Parse data from the snapshot
                     String requesterName = snapshot.getKey();
                     String requesterBloodGroup=snapshot.child("RequesterBloodGroup").getValue(String.class);
                     String requesterLocation=snapshot.child("RequesterLocation").getValue(String.class);
                     String requesterReason=snapshot.child("RequesterReason").getValue(String.class);
-                    if (snapshot.child("Received").exists() && snapshot.child("Profile").exists())
-                    {
-                        String url=snapshot.child("Profile").getValue(String.class);
-                        DataClass2 item = new DataClass2(requesterName, requesterLocation, requesterBloodGroup, requesterReason,url);
-                        itemList1.add(item);
+                    if (snapshot.child("Received").exists() && snapshot.child("Profile").exists())      //remember to change the condition
+                    {                                                                                             // meaning remove the timestamp existing condition
+                        if (snapshot.child("Time Remove").exists()) {
+                            String time = snapshot.child("Time Remove").getValue(String.class);
+                            //getting the result to check if the requester to be deleted or not
+                            int res = time.compareTo(formattedOriginalTimestamp);
+                            //check the condition
+                            if (res > 0) {
+                                String url = snapshot.child("Profile").getValue(String.class);
+                                DataClass2 item = new DataClass2(requesterName, requesterLocation, requesterBloodGroup, requesterReason, url);
+                                itemList1.add(item);
+                            }
+                            if (res < 0) {
+                                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Request");
+                                DatabaseReference nodeToDeleteRef = databaseReference.child(requesterName);
+
+                                // Delete the node
+                                nodeToDeleteRef.removeValue()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                // Node deleted successfully
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                            }
+                                        });
+                            }
+                        }
+                        else
+                        {
+                            String url = snapshot.child("Profile").getValue(String.class);
+                            DataClass2 item = new DataClass2(requesterName, requesterLocation, requesterBloodGroup, requesterReason, url);
+                            itemList1.add(item);
+                        }
                         flag = true;
                     }
                 }
