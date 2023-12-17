@@ -37,8 +37,6 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -209,7 +207,7 @@ public class Edit_profile_page extends AppCompatActivity {
             {
                 setResult(RESULT_OK);
                 Toast.makeText(Edit_profile_page.this, "Successfully updated", Toast.LENGTH_SHORT).show();
-                finish();
+                onBackPressed();
             }
         });
         back10.setOnClickListener(view -> {
@@ -233,25 +231,14 @@ public class Edit_profile_page extends AppCompatActivity {
         from_device=popUpView.findViewById(R.id.from_device);
         Delete_pro=popUpView.findViewById(R.id.Delete_pro);
         cancel=popUpView.findViewById(R.id.cancel_button);
-        from_device.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onChooseImageClick(view);
-                popupWindow.dismiss();
-            }
+        from_device.setOnClickListener(view -> {
+            onChooseImageClick(view);
+            popupWindow.dismiss();
         });
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popupWindow.dismiss();
-            }
-        });
-        Delete_pro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                delete_profile();
-                popupWindow.dismiss();
-            }
+        cancel.setOnClickListener(view -> popupWindow.dismiss());
+        Delete_pro.setOnClickListener(view -> {
+            delete_profile();
+            popupWindow.dismiss();
         });
     }
 
@@ -268,37 +255,31 @@ public class Edit_profile_page extends AppCompatActivity {
         StorageReference imageRef = storageReference.child(S_path + imageName);
 
         // Delete the file
-        imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                // File deleted successfully
-                Log.d("FirebaseStorage", "File deleted successfully");
-                Toast.makeText(Edit_profile_page.this, "Profile Removed", Toast.LENGTH_SHORT).show();
+        imageRef.delete().addOnSuccessListener(aVoid -> {
+            // File deleted successfully
+            Log.d("FirebaseStorage", "File deleted successfully");
+            Toast.makeText(Edit_profile_page.this, "Profile Removed", Toast.LENGTH_SHORT).show();
 
-                DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
-                reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                        // Push data to a new unique key
-                        reference.child(savedUsername).child("Profile").setValue("No");
-                        reference.child(savedUsername).child("Profile Value").setValue("No");
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("url","No").apply();
-                        Glide.with(Edit_profile_page.this).load(val).into(profile2);
-                    }
+            DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                    // Push data to a new unique key
+                    reference.child(savedUsername).child("Profile").setValue("No");
+                    reference.child(savedUsername).child("Profile Value").setValue("No");
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("url","No").apply();
+                    Glide.with(Edit_profile_page.this).load(val).into(profile2);
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Uh-oh, an error occurred!
-                Log.e("FirebaseStorage", "Error deleting file: " + exception.getMessage());
-                Toast.makeText(Edit_profile_page.this, "Profile can't be Removed", Toast.LENGTH_SHORT).show();
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+        }).addOnFailureListener(exception -> {
+            // Uh-oh, an error occurred!
+            Log.e("FirebaseStorage", "Error deleting file: " + exception.getMessage());
+            Toast.makeText(Edit_profile_page.this, "Profile can't be Removed", Toast.LENGTH_SHORT).show();
         });
     }
     public Boolean fetch(int[] d){
