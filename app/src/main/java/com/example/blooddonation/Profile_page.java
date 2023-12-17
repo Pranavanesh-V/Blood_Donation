@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +26,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.google.firebase.Timestamp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +38,8 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Profile_page extends AppCompatActivity {
 
@@ -75,9 +79,58 @@ public class Profile_page extends AppCompatActivity {
         back_req4.setOnClickListener(view -> finish());
 
         Edit.setOnClickListener(view -> {
-            Intent intent=new Intent(Profile_page.this, Edit_profile_page.class);
-            intent.putExtra("Flag",flag);
-            startActivityForResult(intent,1);
+            // Initialize Firebase Realtime Database
+            databaseReference = FirebaseDatabase.getInstance().getReference("Donars");
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @SuppressLint("NotifyDataSetChanged")
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    Timestamp firebaseTimestamp = Timestamp.now();
+
+                    // Convert Firebase Timestamp to java.util.Date
+                    Date date = firebaseTimestamp.toDate();
+                    // Create a formatter for a readable date and time format
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    // Format and display the original and updated timestamps
+                    String formattedOriginalTimestamp = formatter.format(date);
+
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        // Parse data from the snapshot
+                        //the if statement is for the people who have already updated
+                        String name=snapshot.getKey();
+                        //Toast.makeText(Profile_page.this, name, Toast.LENGTH_SHORT).show();
+
+                        if (name.equals(savedUsername)) {
+                            if (snapshot.child("Time Remove").exists()) {
+                                String time = snapshot.child("Time Remove").getValue(String.class);
+
+                                int res = time.compareTo(formattedOriginalTimestamp);
+                                res=-1;
+                                if (res < 0) {
+                                    Intent intent = new Intent(Profile_page.this, Edit_profile_page.class);
+                                    intent.putExtra("Flag", flag);
+                                    startActivityForResult(intent, 1);
+                                }
+                                if (res > 0) {
+                                    Toast.makeText(Profile_page.this, "You have updated your profile \n Recently wait for some Time", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            //the else part is for the first time updaters
+                            else {
+                                Toast.makeText(Profile_page.this, "else", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(Profile_page.this, Edit_profile_page.class);
+                                intent.putExtra("Flag", flag);
+                                startActivityForResult(intent,1);
+                            }
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         });
 
     }
@@ -85,7 +138,7 @@ public class Profile_page extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode==1&&resultCode==RESULT_OK)
+        if (requestCode==1 && resultCode==RESULT_OK)
         {
             try {
                 downloadImage();

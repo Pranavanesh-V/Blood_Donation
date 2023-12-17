@@ -24,8 +24,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.Timestamp;
@@ -237,16 +235,10 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
 
                                 // Delete the node
                                 nodeToDeleteRef.removeValue()
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                // Node deleted successfully
-                                            }
+                                        .addOnSuccessListener(aVoid -> {
+                                            // Node deleted successfully
                                         })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                            }
+                                        .addOnFailureListener(e -> {
                                         });
                             }
                         }
