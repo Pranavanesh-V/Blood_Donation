@@ -39,6 +39,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,6 +52,7 @@ import com.yalantis.ucrop.UCrop;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -206,13 +208,13 @@ public class Edit_profile_page extends AppCompatActivity {
             else
             {
                 setResult(RESULT_OK);
-                Toast.makeText(Edit_profile_page.this,"Successfully updated",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Edit_profile_page.this, "Successfully updated", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
         back10.setOnClickListener(view -> {
-            finish();
             setResult(RESULT_CANCELED);
+            onBackPressed();
         });
         profile2.setOnClickListener(view -> CreatePopUp());
     }
@@ -301,6 +303,26 @@ public class Edit_profile_page extends AppCompatActivity {
     }
     public Boolean fetch(int[] d){
         final boolean []flag = {false};
+
+        Timestamp firebaseTimestamp = Timestamp.now();
+
+        // Convert Firebase Timestamp to java.util.Date
+        Date date = firebaseTimestamp.toDate();
+
+        // Add 8 hours to the time
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.HOUR_OF_DAY, 8);
+
+        // Convert the updated time back to a Date
+        Date updatedDate = calendar.getTime();
+
+        // Create a formatter for a readable date and time format
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // Format and display the original and updated timestamps
+        String formattedOriginalTimestamp = formatter.format(date);
+        String formattedUpdatedTimestamp = formatter.format(updatedDate);
+
         // Initialize Firebase Realtime Database
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Donars");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -319,12 +341,16 @@ public class Edit_profile_page extends AppCompatActivity {
                         if (d[0] == 0 && d[1] == 0 && d[2] == 1)
                         {
                             databaseReference.child(savedUsername).child("Address").setValue(Address);
+                            databaseReference.child(savedUsername).child("Time uploaded").setValue(formattedOriginalTimestamp);
+                            databaseReference.child(savedUsername).child("Time Remove").setValue(formattedUpdatedTimestamp);
                             flag[0] = true;
                             break;
                         }
                         else if (d[0] == 0 && d[1] == 1 && d[2] == 0)
                         {
                             databaseReference.child(savedUsername).child("Email").setValue(mail);
+                            databaseReference.child(savedUsername).child("Time uploaded").setValue(formattedOriginalTimestamp);
+                            databaseReference.child(savedUsername).child("Time Remove").setValue(formattedUpdatedTimestamp);
                             flag[0] = true;
                             break;
                         }
@@ -332,12 +358,16 @@ public class Edit_profile_page extends AppCompatActivity {
                         {
                             databaseReference.child(savedUsername).child("Email").setValue(mail);
                             databaseReference.child(savedUsername).child("Address").setValue(Address);
+                            databaseReference.child(savedUsername).child("Time uploaded").setValue(formattedOriginalTimestamp);
+                            databaseReference.child(savedUsername).child("Time Remove").setValue(formattedUpdatedTimestamp);
                             flag[0] = true;
                             break;
                         }
                         else if (d[0] == 1 && d[1] == 0 && d[2] == 0)
                         {
                             databaseReference.child(savedUsername).child("Blood Group").setValue(blood);
+                            databaseReference.child(savedUsername).child("Time uploaded").setValue(formattedOriginalTimestamp);
+                            databaseReference.child(savedUsername).child("Time Remove").setValue(formattedUpdatedTimestamp);
                             flag[0] = true;
                             break;
                         }
@@ -345,6 +375,8 @@ public class Edit_profile_page extends AppCompatActivity {
                         {
                             databaseReference.child(savedUsername).child("Blood Group").setValue(blood);
                             databaseReference.child(savedUsername).child("Address").setValue(Address);
+                            databaseReference.child(savedUsername).child("Time uploaded").setValue(formattedOriginalTimestamp);
+                            databaseReference.child(savedUsername).child("Time Remove").setValue(formattedUpdatedTimestamp);
                             flag[0] = true;
                             break;
                         }
@@ -352,6 +384,8 @@ public class Edit_profile_page extends AppCompatActivity {
                         {
                             databaseReference.child(savedUsername).child("Blood Group").setValue(blood);
                             databaseReference.child(savedUsername).child("Email").setValue(mail);
+                            databaseReference.child(savedUsername).child("Time uploaded").setValue(formattedOriginalTimestamp);
+                            databaseReference.child(savedUsername).child("Time Remove").setValue(formattedUpdatedTimestamp);
                             flag[0] = true;
                             break;
                         }
@@ -360,6 +394,8 @@ public class Edit_profile_page extends AppCompatActivity {
                             databaseReference.child(savedUsername).child("Blood Group").setValue(blood);
                             databaseReference.child(savedUsername).child("Email").setValue(mail);
                             databaseReference.child(savedUsername).child("Address").setValue(Address);
+                            databaseReference.child(savedUsername).child("Time uploaded").setValue(formattedOriginalTimestamp);
+                            databaseReference.child(savedUsername).child("Time Remove").setValue(formattedUpdatedTimestamp);
                             flag[0] = true;
                             break;
                         }
@@ -367,6 +403,8 @@ public class Edit_profile_page extends AppCompatActivity {
                         if (d[1] == 1) {
                             String mail = mail_id3.getText().toString().trim();
                             databaseReference.child(savedUsername).child("Email").setValue(mail);
+                            databaseReference.child(savedUsername).child("Time uploaded").setValue(formattedOriginalTimestamp);
+                            databaseReference.child(savedUsername).child("Time Remove").setValue(formattedUpdatedTimestamp);
                             flag[0] = true;
                             System.out.println("Email_id");
                         }
