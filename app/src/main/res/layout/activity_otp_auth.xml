@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_black"
     android:theme="@style/page71.Blood_Donation"
     tools:context=".otp_auth">
 
@@ -52,7 +51,6 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         app:boxStrokeColor="@color/box_col"
-        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:nextFocusRight="@id/otp2"
@@ -68,7 +66,7 @@
             android:gravity="center"
             android:imeOptions="actionNext"
             android:inputType="number"
-            android:textColor="@color/white"
+            style="@style/page8.Blood_Donation"
             android:textSize="30sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck,SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -79,7 +77,6 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         app:boxStrokeColor="@color/box_col"
-        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:nextFocusRight="@id/otp3"
@@ -94,7 +91,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:inputType="number"
-            android:textColor="@color/white"
+            style="@style/page8.Blood_Donation"
             android:imeOptions="actionNext"
             android:textSize="30sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck,SpeakableTextPresentCheck" />
@@ -106,7 +103,6 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         app:boxStrokeColor="@color/box_col"
-        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:nextFocusRight="@id/otp4"
@@ -122,7 +118,7 @@
             android:gravity="center"
             android:imeOptions="actionNext"
             android:inputType="number"
-            android:textColor="@color/white"
+            style="@style/page8.Blood_Donation"
             android:textSize="30sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck,SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -133,7 +129,6 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         app:boxStrokeColor="@color/box_col"
-        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -146,7 +141,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:inputType="number"
-            android:textColor="@color/white"
+            style="@style/page8.Blood_Donation"
             android:textSize="30sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck,SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -154,6 +149,7 @@
     <Button
         android:id="@+id/submit"
         android:layout_width="186dp"
+        style="@style/button_attr"
         android:layout_height="61dp"
         android:background="@drawable/btn_style"
         android:fontFamily="@font/poppins_extralight"

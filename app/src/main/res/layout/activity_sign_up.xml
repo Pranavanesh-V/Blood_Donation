@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_black"
     android:theme="@style/page71.Blood_Donation"
     tools:context=".sign_up">
 
@@ -74,7 +73,6 @@
         android:layout_height="wrap_content"
         android:hint="@string/user_name"
         app:boxStrokeColor="@color/box_col"
-        app:hintTextColor="@color/white"
         app:startIconDrawable="@drawable/baseline_person_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,8 +82,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
             android:inputType="textPersonName"
-            android:textColor="@color/white"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,7 +96,6 @@
         android:hint="@string/password"
         app:boxStrokeColor="@color/box_col"
         app:endIconMode="password_toggle"
-        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
@@ -111,7 +109,8 @@
             android:layout_height="55dp"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
-            android:textColor="@color/white"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -119,6 +118,7 @@
     <Button
         android:id="@+id/submit"
         android:layout_width="186dp"
+        style="@style/button_attr"
         android:layout_height="61dp"
         android:background="@drawable/btn_style"
         android:fontFamily="@font/poppins_extralight"

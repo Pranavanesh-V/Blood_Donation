@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Filter_page"
-    android:theme="@style/page71.Blood_Donation"
-    android:background="@color/grey_black">
+    android:theme="@style/page71.Blood_Donation">
 
 
     <ImageView
@@ -33,7 +32,6 @@
         app:endIconCheckable="true"
         app:endIconDrawable="@drawable/baseline_keyboard_arrow_down_24"
         app:endIconMode="custom"
-        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.477"
@@ -47,8 +45,9 @@
             android:layout_height="55dp"
             android:clickable="false"
             android:focusable="false"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
             android:inputType="textPersonName"
-            android:textColor="@color/white"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
             tools:layout_editor_absoluteX="21dp"
             tools:layout_editor_absoluteY="280dp" />
@@ -65,7 +64,6 @@
         app:endIconCheckable="true"
         app:endIconDrawable="@drawable/baseline_keyboard_arrow_down_24"
         app:endIconMode="custom"
-        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.477"
@@ -80,7 +78,8 @@
             android:clickable="false"
             android:focusable="false"
             android:inputType="textPersonName"
-            android:textColor="@color/white"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,7 +94,6 @@
         app:endIconCheckable="true"
         app:endIconDrawable="@drawable/baseline_keyboard_arrow_down_24"
         app:endIconMode="custom"
-        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.477"
@@ -110,12 +108,14 @@
             android:focusable="false"
             android:layout_height="55dp"
             android:inputType="textPersonName"
-            android:textColor="@color/white"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/Done"
+        style="@style/button_attr"
         android:layout_width="186dp"
         android:layout_height="61dp"
         android:background="@drawable/btn_style"

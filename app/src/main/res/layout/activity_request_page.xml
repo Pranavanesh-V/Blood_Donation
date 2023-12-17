@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Request_page"
-    android:background="@color/grey_black"
     android:theme="@style/page71.Blood_Donation">
 
     <Button
@@ -66,7 +65,8 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:inputType="textPersonName"
-            android:textColor="@color/white"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck,DuplicateSpeakableTextCheck,DuplicateClickableBoundsCheck"
             tools:layout_editor_absoluteX="26dp"
             tools:layout_editor_absoluteY="307dp" />
@@ -79,7 +79,6 @@
         android:layout_height="wrap_content"
         android:hint="@string/name"
         app:boxStrokeColor="@color/box_col"
-        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
@@ -91,13 +90,15 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:inputType="textPersonName"
-            android:textColor="@color/white"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck,DuplicateSpeakableTextCheck,DuplicateClickableBoundsCheck"
             tools:layout_editor_absoluteX="26dp"
             tools:layout_editor_absoluteY="307dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        style="@style/button_attr"
         android:id="@+id/submit2"
         android:layout_width="186dp"
         android:layout_height="61dp"
@@ -121,7 +122,6 @@
         android:layout_height="wrap_content"
         android:hint="@string/descriptive_reason"
         app:boxStrokeColor="@color/box_col"
-        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.549"
@@ -133,7 +133,8 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:inputType="textPersonName"
-            android:textColor="@color/white"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck,DuplicateSpeakableTextCheck,DuplicateClickableBoundsCheck"
             tools:layout_editor_absoluteX="26dp"
             tools:layout_editor_absoluteY="307dp" />
@@ -146,7 +147,6 @@
         android:layout_height="wrap_content"
         android:hint="@string/reason"
         app:boxStrokeColor="@color/box_col"
-        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.549"
@@ -158,7 +158,8 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:inputType="textPersonName"
-            android:textColor="@color/white"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck,DuplicateSpeakableTextCheck,DuplicateClickableBoundsCheck"
             tools:layout_editor_absoluteX="26dp"
             tools:layout_editor_absoluteY="307dp" />
@@ -171,7 +172,6 @@
         android:layout_height="wrap_content"
         android:hint="@string/phone_no"
         app:boxStrokeColor="@color/box_col"
-        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
@@ -183,7 +183,8 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:inputType="phone"
-            android:textColor="@color/white"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck,DuplicateSpeakableTextCheck"
             tools:layout_editor_absoluteX="26dp"
             tools:layout_editor_absoluteY="307dp" />
@@ -198,7 +199,6 @@
         android:hint="@string/blood_group"
         app:boxBackgroundMode="outline"
         app:boxStrokeColor="@color/box_col"
-        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -215,7 +215,8 @@
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:inputType="text"
-            android:textColor="@color/white"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck,DuplicateClickableBoundsCheck"
             tools:layout_editor_absoluteX="26dp"
             tools:layout_editor_absoluteY="307dp" />

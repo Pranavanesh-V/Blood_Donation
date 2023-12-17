@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_black"
     android:gravity="center|center_horizontal"
     tools:context=".MainActivity">
 
@@ -44,7 +43,7 @@
         android:fontFamily="@font/bowlby_one"
         android:gravity="center|center_horizontal"
         android:text="@string/blood_donation"
-        android:textColor="@color/white"
+        android:textColor="@color/red"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

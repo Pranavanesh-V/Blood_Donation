@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Security_page"
-    android:background="@color/grey_black"
     android:theme="@style/page71.Blood_Donation">
 
     <Button
@@ -65,7 +64,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sh1"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp"
                 tools:targetApi="p" />
 
@@ -80,7 +78,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sp1"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -94,7 +91,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sh2"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -108,7 +104,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sp2"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -122,7 +117,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sh3"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -136,7 +130,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sp3"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -150,7 +143,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sh4"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -163,7 +155,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sp4"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -177,7 +168,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sh5"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -191,7 +181,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sp5"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -205,7 +194,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sh6"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -219,7 +207,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sp6"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -233,7 +220,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sh7"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -247,7 +233,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sp7"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -261,7 +246,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sh8"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -275,7 +259,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sp8"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -289,7 +272,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sh9"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -303,7 +285,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sp9"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -317,7 +298,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sh10"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -331,7 +311,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sp10"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
@@ -345,7 +324,6 @@
                 android:lineSpacingExtra="4sp"
                 android:text="@string/sp11"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="18sp" />
 
         </LinearLayout>

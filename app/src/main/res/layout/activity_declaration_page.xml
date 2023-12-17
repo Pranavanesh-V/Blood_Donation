@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_black"
     android:theme="@style/page71.Blood_Donation"
     tools:context=".Declaration_page">
 
@@ -89,7 +88,6 @@
                 android:letterSpacing="0.07"
                 android:lineHeight="30sp"
                 android:text="@string/Declaration"
-                android:textColor="@color/white"
                 android:textSize="15sp"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:targetApi="p" />
@@ -100,7 +98,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:text="@string/agree_to_the_conditions"
-                android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/textView4"
                 app:layout_constraintEnd_toEndOf="@id/textView4"
@@ -119,7 +116,6 @@
         android:fontFamily="@font/poppins_bold"
         android:text="@string/i_agree_to_the_above_declaration"
         android:textSize="12sp"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
@@ -131,6 +127,7 @@
         android:id="@+id/pro"
         android:layout_width="186dp"
         android:layout_height="61dp"
+        style="@style/button_attr"
         android:background="@drawable/btn_style"
         android:fontFamily="@font/poppins_extralight"
         android:text="@string/submit"
@@ -156,12 +153,14 @@
         app:layout_constraintHorizontal_bias="0.9">
 
         <RadioButton
+            style="@style/radio_attr"
             android:id="@+id/Agree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/agree" />
 
         <RadioButton
+            style="@style/radio_attr"
             android:id="@+id/Decline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

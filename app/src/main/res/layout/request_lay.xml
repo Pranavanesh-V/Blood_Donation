@@ -16,7 +16,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/box_col">
+        style="@style/bg1">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/recImage"
@@ -39,7 +39,6 @@
             android:layout_marginBottom="15dp"
             android:layout_toEndOf="@id/recImage"
             android:text="@string/name"
-            android:textColor="@color/white"
             android:textSize="16sp"
             tools:ignore="TextSizeCheck" />
 
@@ -53,7 +52,6 @@
             android:layout_marginBottom="15dp"
             android:layout_toEndOf="@id/recImage"
             android:text="@string/blood_group"
-            android:textColor="@color/white"
             android:textSize="16sp"
             tools:ignore="TextSizeCheck" />
 
@@ -67,7 +65,6 @@
             android:layout_marginEnd="52dp"
             android:layout_toEndOf="@+id/recImage"
             android:text="@string/reason"
-            android:textColor="@color/white"
             android:textSize="16sp"
             tools:ignore="TextSizeCheck" />
 
@@ -83,7 +80,6 @@
             android:text="@string/location"
             android:textAlignment="center"
             android:gravity="center"
-            android:textColor="@color/white"
             android:textSize="16sp" />
 
 

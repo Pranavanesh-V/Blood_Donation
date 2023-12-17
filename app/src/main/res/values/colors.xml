@@ -12,4 +12,5 @@
     <color name="grey">#848482</color>
     <color name="grey_cancel">#d8d8d8</color>
     <color name="g">#2d2b2b</color>
+    <color name="white_bg">#EDEDED</color>
 </resources>

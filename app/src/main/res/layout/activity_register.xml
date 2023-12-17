@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_black"
     android:theme="@style/page71.Blood_Donation"
     tools:context=".Register">
 
@@ -73,7 +72,6 @@
         android:layout_height="wrap_content"
         android:hint="@string/name"
         app:boxStrokeColor="@color/box_col"
-        app:hintTextColor="@color/white"
         app:startIconDrawable="@drawable/baseline_person_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,8 +83,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
             android:inputType="textPersonName"
-            android:textColor="@color/white"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
             tools:layout_editor_absoluteX="26dp"
             tools:layout_editor_absoluteY="307dp" />
@@ -99,7 +98,6 @@
         android:layout_height="wrap_content"
         android:hint="@string/email_id"
         app:boxStrokeColor="@color/box_col"
-        app:hintTextColor="@color/white"
         app:startIconDrawable="@drawable/baseline_mail_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,8 +110,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:inputType="textPersonName"
-            android:textColor="@color/white"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
+            android:inputType="textEmailAddress"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
             tools:layout_editor_absoluteX="25dp"
             tools:layout_editor_absoluteY="385dp" />
@@ -126,12 +125,10 @@
         android:layout_height="wrap_content"
         android:hint="@string/password"
         app:boxStrokeColor="@color/box_col"
-        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:startIconDrawable="@drawable/baseline_lock_24"
-        app:endIconDrawable="@drawable/baseline_remove_red_eye_24"
         app:endIconMode="password_toggle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -140,8 +137,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
             android:inputType="textPassword"
-            android:textColor="@color/white"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -152,9 +150,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/confirm_password"
         app:boxStrokeColor="@color/box_col"
-        app:hintTextColor="@color/white"
         app:startIconDrawable="@drawable/baseline_lock_24"
-        app:endIconDrawable="@drawable/baseline_remove_red_eye_24"
         app:endIconMode="password_toggle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -166,8 +162,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
             android:inputType="textPassword"
-            android:textColor="@color/white"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -186,6 +183,7 @@
         app:layout_constraintVertical_bias="0.773" />
 
     <Switch
+        style="@style/page8.Blood_Donation"
         android:id="@+id/yes_or_no"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -201,6 +199,7 @@
 
     <Button
         android:id="@+id/submit"
+        style="@style/button_attr"
         android:layout_width="186dp"
         android:layout_height="61dp"
         android:background="@drawable/btn_style"

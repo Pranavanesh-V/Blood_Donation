@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_black"
     android:theme="@style/page71.Blood_Donation"
     tools:context=".forgot_page">
 
@@ -43,6 +42,7 @@
 
     <Button
         android:id="@+id/submit"
+        style="@style/button_attr"
         android:layout_width="186dp"
         android:layout_height="61dp"
         android:background="@drawable/btn_style"
@@ -66,7 +66,6 @@
         style="@style/page8.Blood_Donation"
         android:hint="@string/phone_number"
         app:boxStrokeColor="@color/box_col"
-        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +75,8 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:inputType="number"
-            android:textColor="@color/white"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 

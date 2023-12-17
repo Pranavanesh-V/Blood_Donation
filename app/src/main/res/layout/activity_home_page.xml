@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_black"
     android:theme="@style/page71.Blood_Donation"
     tools:context=".home_page">
 
@@ -20,7 +19,6 @@
         app:endIconCheckable="true"
         app:endIconDrawable="@drawable/baseline_search_24"
         app:endIconMode="custom"
-        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.3"
@@ -34,7 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:inputType="textPersonName"
-            android:textColor="@color/white"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,6 +77,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
+        style="@style/bg"
         android:id="@+id/Filter"
         android:layout_width="47dp"
         android:layout_height="61dp"
@@ -172,6 +172,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.204"
         app:shapeAppearanceOverlay="@style/circular"
+        android:elevation="5dp"
         android:src="@drawable/user"
         tools:ignore="ContentDescription,ImageContrastCheck" />
 
