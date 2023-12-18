@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_black"
-    android:theme="@style/page72.Blood_Donation"
+    android:theme="@style/page71.Blood_Donation"
     tools:context=".Donor_info_pg">
 
     <ImageView
@@ -36,10 +35,10 @@
         tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <Button
+        style="@style/blood_img6"
         android:id="@+id/back"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/back_join"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.088"
@@ -49,20 +48,8 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="360dp"
-        android:layout_height="147dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.627"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.905"
-        app:srcCompat="@drawable/ad"
-        tools:ignore="ContentDescription" />
-
-    <ImageView
         android:id="@+id/imageView12"
+        style="@style/blood_img1"
         android:layout_width="355dp"
         android:layout_height="67dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -71,11 +58,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.437"
-        app:srcCompat="@drawable/bld"
         tools:ignore="ContentDescription" />
 
     <ImageView
-        android:id="@+id/imageView16"
+        style="@style/blood_img2"
+        android:id="@+id/imageView13"
         android:layout_width="355dp"
         android:layout_height="67dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -83,24 +70,11 @@
         app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.712"
-        app:srcCompat="@drawable/md"
-        tools:ignore="ContentDescription" />
-
-    <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="355dp"
-        android:layout_height="69dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.528"
-        app:srcCompat="@drawable/nd"
         tools:ignore="ContentDescription" />
 
     <ImageView
+        style="@style/blood_img3"
         android:id="@+id/imageView14"
         android:layout_width="355dp"
         android:layout_height="78dp"
@@ -110,16 +84,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.621"
-        app:srcCompat="@drawable/ed"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        style="@style/blood_img4"
+        android:id="@+id/imageView16"
+        android:layout_width="355dp"
+        android:layout_height="67dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.712"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        style="@style/blood_img5"
+        android:id="@+id/imageView15"
+        android:layout_width="360dp"
+        android:layout_height="147dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.627"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.905"
         tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/Phone_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/phone_number"
         android:textAlignment="center"
-        android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +131,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -147,9 +143,7 @@
         android:id="@+id/Address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/address1"
         android:textAlignment="center"
-        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -163,7 +157,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textColor="@color/white"
         android:textSize="20sp"
         android:maxLines="2"
         android:ellipsize="end"
@@ -179,7 +172,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textColor="@color/white"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -178,6 +178,7 @@
 
     <ImageView
         android:id="@+id/heading"
+        style="@style/donation_bg"
         android:layout_width="200dp"
         android:layout_height="73dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -185,7 +186,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.34"
-        app:srcCompat="@drawable/resource_do"
         tools:ignore="ContentDescription" />
 
     <androidx.recyclerview.widget.RecyclerView

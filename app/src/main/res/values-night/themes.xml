@@ -19,6 +19,51 @@
         <item name="tint">@color/white</item>
     </style>
 
+    <style name="donation_bg" parent="page8.Blood_Donation">
+        <item name="android:src">@drawable/resource_do</item>
+    </style>
+
+    <style name="blood_img1" parent="page8.Blood_Donation">
+        <item name="android:src">@drawable/bld</item>
+    </style>
+
+    <style name="blood_img2" parent="page8.Blood_Donation">
+        <item name="android:src">@drawable/nd</item>
+    </style>
+
+    <style name="blood_img3" parent="page8.Blood_Donation">
+        <item name="android:src">@drawable/ed</item>
+    </style>
+
+    <style name="blood_img4" parent="page8.Blood_Donation">
+        <item name="android:src">@drawable/md</item>
+    </style>
+
+    <style name="edit_hint" parent="page8.Blood_Donation">
+        <item name="hintTextColor">@color/black</item>
+        <item name="backgroundTint">@color/white_bg</item>
+    </style>
+
+    <style name="blood_img5" parent="page8.Blood_Donation">
+        <item name="android:src">@drawable/ad</item>
+    </style>
+
+    <style name="blood_img6" parent="page8.Blood_Donation">
+        <item name="android:background">@drawable/back_join</item>
+    </style>
+
+    <style name="blood_img7" parent="page8.Blood_Donation">
+        <item name="android:tint">@color/box_col</item>
+    </style>
+
+    <style name="blood_img8" parent="page8.Blood_Donation">
+        <item name="android:src">@drawable/request_details</item>
+    </style>
+
+    <style name="blood_img9" parent="page8.Blood_Donation">
+        <item name="tint">@color/box_col</item>
+    </style>
+
     <style name="bg1" parent="page8.Blood_Donation">
         <item name="android:background">@color/box_col</item>
     </style>

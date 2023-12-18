@@ -1,7 +1,9 @@
 package com.example.blooddonation;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,22 +19,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.Timestamp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Full_Registration_page extends AppCompatActivity {
 
-
+    private SharedPreferences sharedPreferences;
+    private static final String PREFS_NAME = "MyPrefs";
     Calendar myCalendar=Calendar.getInstance();
     Button submit;
     TextInputLayout name, email, blood_g, address, city, state, phone, emergency, dob;//dob not included need to see on that
     RadioButton male, female;
-    String S_DOB="",S_name="",S_email="",S_blood_g="",S_address="",S_city="",S_state="",S_phone="",S_emergency="",S_gender="",form="",Password="",Name="";
+    String S_DOB="",S_name="",S_email="",S_blood_g="",S_address="",S_city="",S_state="",S_phone="",S_emergency="",S_gender="",form="",Password="",Name="",savedUsername;
     TextInputEditText E_dob,B_G;
     RadioGroup group;
     @Override
@@ -120,24 +126,47 @@ public class Full_Registration_page extends AppCompatActivity {
             }
             else
             {
+
+                Timestamp firebaseTimestamp = Timestamp.now();
+
+                // Convert Firebase Timestamp to java.util.Date
+                Date date = firebaseTimestamp.toDate();
+
+                // Add 8 hours to the time
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(date);
+                calendar.add(Calendar.HOUR_OF_DAY, 24);
+
+                // Convert the updated time back to a Date
+                Date updatedDate = calendar.getTime();
+
+                // Create a formatter for a readable date and time format
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                // Format and display the original and updated timestamps
+                String formattedOriginalTimestamp = formatter.format(date);
+                String formattedUpdatedTimestamp = formatter.format(updatedDate);
+
                 DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                         // Push data to a new unique key
-                            reference.child(S_name).child("Password").setValue(Password);
-                            reference.child(S_name).child("Email").setValue(S_email);
-                            reference.child(S_name).child("DOB").setValue(S_DOB);
-                            reference.child(S_name).child("Blood Group").setValue(S_blood_g);
-                            reference.child(S_name).child("Address").setValue(S_address);
-                            reference.child(S_name).child("City").setValue(S_city);
-                            reference.child(S_name).child("State").setValue(S_state);
-                            reference.child(S_name).child("Phone No").setValue(S_phone);
-                            reference.child(S_name).child("Emergency").setValue(S_emergency);
-                            reference.child(S_name).child("Gender").setValue(S_gender);
-                            reference.child(S_name).child("Form").setValue(form);
-                            reference.child(S_name).child("Profile").setValue("No");
-                            reference.child(S_name).child("Profile Value").setValue("No");
+                            reference.child(Name).child("User name").setValue(S_name);
+                            reference.child(Name).child("Password").setValue(Password);
+                            reference.child(Name).child("Email").setValue(S_email);
+                            reference.child(Name).child("DOB").setValue(S_DOB);
+                            reference.child(Name).child("Blood Group").setValue(S_blood_g);
+                            reference.child(Name).child("Address").setValue(S_address);
+                            reference.child(Name).child("City").setValue(S_city);
+                            reference.child(Name).child("State").setValue(S_state);
+                            reference.child(Name).child("Phone No").setValue(S_phone);
+                            reference.child(Name).child("Emergency").setValue(S_emergency);
+                            reference.child(Name).child("Gender").setValue(S_gender);
+                            reference.child(Name).child("Form").setValue(form);
+                            reference.child(Name).child("Profile").setValue("No");
+                            reference.child(Name).child("Profile Value").setValue("No");
+                            reference.child(Name).child("Time uploaded").setValue(formattedOriginalTimestamp);
+                            reference.child(Name).child("Time Remove").setValue(formattedUpdatedTimestamp);
 
                             //display it
                             Toast.makeText(Full_Registration_page.this, "Account Created", Toast.LENGTH_SHORT).show();

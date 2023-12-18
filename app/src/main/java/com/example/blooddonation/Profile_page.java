@@ -93,6 +93,8 @@ public class Profile_page extends AppCompatActivity {
             if (!time.isEmpty())
             {
                 int res = time.compareTo(formattedOriginalTimestamp);
+                System.out.println(res);
+                System.out.println(time);
                 if (res < 0) {
                     Intent intent = new Intent(Profile_page.this, Edit_profile_page.class);
                     intent.putExtra("Flag", flag);
@@ -102,12 +104,7 @@ public class Profile_page extends AppCompatActivity {
                     Toast.makeText(Profile_page.this, "You have updated your profile \n Recently wait for some Time", Toast.LENGTH_SHORT).show();
                 }
             }
-            else
-            {
-                Intent intent = new Intent(Profile_page.this, Edit_profile_page.class);
-                intent.putExtra("Flag", flag);
-                startActivityForResult(intent, 1);
-            }
+
         });
     }
 
@@ -168,12 +165,10 @@ public class Profile_page extends AppCompatActivity {
                         if (blood.equals(""))
                         {
                             blood_Group.setText(R.string.blood_group);
-                            blood_Group.setTextColor(Color.GRAY);
                         }
                         else
                         {
                             blood_Group.setText(blood);
-                            blood_Group.setTextColor(Color.WHITE);
                         }
 
                         Address.setText(String.format("%s\n%s", address, City));
