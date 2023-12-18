@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,11 +32,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -195,39 +193,36 @@ public class Profile_page extends AppCompatActivity {
         });
     }
     public void downloadImage() throws IOException {
-        // Get a reference to the Firebase Storage
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
-
-        String savedU;
-        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        savedU = sharedPreferences.getString("username", "");
+        //check if profile is present or not
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                 // Push data to a new unique key
-                String p_val=datasnapshot.child(savedUsername).child("Profile").getValue(String.class);
-                System.out.println(p_val);
-                if (p_val.equals("Yes"))
+                if (datasnapshot.child(savedUsername).child("Profile").exists())
                 {
-                    System.out.println("its in");
-                    // Reference to the image file
-                    StorageReference imageRef = storageRef.child("Profile/"+savedU+"/"+savedU + ".jpg");
-                    // Download the image into a local file
-                    File localFile = null;
-                    try {
-                        localFile = File.createTempFile("images", "jpg");
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                    String val=datasnapshot.child(savedUsername).child("Profile").getValue(String.class);
+                    boolean res= val.equals("Yes");
+                    if (res) {
+                        // Get a reference to the Firebase Storage
+                        FirebaseStorage storage = FirebaseStorage.getInstance();
+                        StorageReference storageRef = storage.getReference();
 
-                    File finalLocalFile = localFile;
-                    imageRef.getFile(localFile)
-                            .addOnSuccessListener((FileDownloadTask.TaskSnapshot taskSnapshot) -> {
+                        String savedU;
+                        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+                        savedU = sharedPreferences.getString("username", "");
+                        // Reference to the image file
+                        StorageReference imageRef = storageRef.child("Profile/" + savedU + "/" + savedU + ".jpg");
+                        System.out.println(savedU);
+                        // Download the image into a local file
+
+                        imageRef.getDownloadUrl().addOnCompleteListener(uriTask -> {
+                            if (uriTask.isSuccessful()) {
                                 // Image downloaded successfully
                                 // Now, load the image into ImageView using Glide
-                                Glide.with(Profile_page.this).load(finalLocalFile)
+                                Uri imageUrl = uriTask.getResult();
+                                String S_imageUrl=imageUrl.toString();
+                                Glide.with(Profile_page.this).load(imageUrl)
                                         .listener(new RequestListener<Drawable>() {
                                             @Override
                                             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -243,18 +238,20 @@ public class Profile_page extends AppCompatActivity {
                                                 return false;
                                             }
                                         }).into(profile);
-                            })
-                            .addOnFailureListener(exception -> {
-                                // Handle errors
-                                Log.e("Firebase", "Error downloading image: " + exception.getMessage());
+                            } else {
+                                // Handle the error in getting URI
                                 profile.setImageResource(R.drawable.user);
                                 progressBar.setVisibility(View.INVISIBLE);
-                            });
-                }
-                else
-                {
-                    String val="https://firebasestorage.googleapis.com/v0/b/mysql-3bcb9.appspot.com/o/Profile%2FUser_Test%2FUser_Test.jpg?alt=media&token=e5e40c07-d38a-4588-9da9-f57c3ea236030";
-                    Glide.with(Profile_page.this).load(val).into(profile);
+                            }
+                        });
+                    }
+                    else
+                    {
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("url","No").apply();
+                        String val1="https://firebasestorage.googleapis.com/v0/b/mysql-3bcb9.appspot.com/o/Profile%2FUser_Test%2FUser_Test.jpg?alt=media&token=e5e40c07-d38a-4588-9da9-f57c3ea236030";
+                        Glide.with(Profile_page.this).load(val1).into(profile);
+                    }
                 }
             }
             @Override

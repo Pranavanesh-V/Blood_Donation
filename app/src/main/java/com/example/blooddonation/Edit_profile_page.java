@@ -207,7 +207,8 @@ public class Edit_profile_page extends AppCompatActivity {
             {
                 setResult(RESULT_OK);
                 Toast.makeText(Edit_profile_page.this, "Successfully updated", Toast.LENGTH_SHORT).show();
-                onBackPressed();
+                Intent intent1=new Intent(Edit_profile_page.this, home_page.class);
+                startActivity(intent1);
             }
         });
         back10.setOnClickListener(view -> {
@@ -394,7 +395,7 @@ public class Edit_profile_page extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(Edit_profile_page.this, "Changes Not Made", Toast.LENGTH_SHORT).show();
             }
         });
     return flag[0];
@@ -495,12 +496,14 @@ public class Edit_profile_page extends AppCompatActivity {
                                     // Push data to a new unique key
                                     reference.child(savedUsername).child("Profile").setValue("Yes");
                                     reference.child(savedUsername).child("Profile Value").setValue(downloadUrl);
+                                    setResult(RESULT_OK);
                                 }
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {
                                     reference.child(savedUsername).child("Profile").setValue("No");
                                     reference.child(savedUsername).child("Profile Value").setValue("No");
+                                    setResult(RESULT_CANCELED);
                                 }
 
                             });
@@ -509,6 +512,7 @@ public class Edit_profile_page extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> {
                     res=false;
+                    setResult(RESULT_CANCELED);
                     // Handle any errors during upload
                 });
 
@@ -561,6 +565,8 @@ public class Edit_profile_page extends AppCompatActivity {
                 .addOnFailureListener(exception -> {
                     // Handle errors
                     Log.e("Firebase", "Error downloading image: " + exception.getMessage());
+                    profile2.setImageResource(R.drawable.user);
+                    progressBar1.setVisibility(View.INVISIBLE);
                 });
 
     }
