@@ -247,6 +247,8 @@ public class Profile_page extends AppCompatActivity {
                             .addOnFailureListener(exception -> {
                                 // Handle errors
                                 Log.e("Firebase", "Error downloading image: " + exception.getMessage());
+                                profile.setImageResource(R.drawable.user);
+                                progressBar.setVisibility(View.INVISIBLE);
                             });
                 }
                 else
