@@ -185,6 +185,7 @@
             android:inputType="phone"
             style="@style/page8.Blood_Donation"
             android:textSize="18sp"
+            android:maxLength="10"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck,DuplicateSpeakableTextCheck"
             tools:layout_editor_absoluteX="26dp"
             tools:layout_editor_absoluteY="307dp" />

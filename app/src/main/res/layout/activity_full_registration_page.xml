@@ -182,6 +182,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:inputType="phone"
+            android:maxLength="10"
             style="@style/page8.Blood_Donation"
             android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
@@ -209,6 +210,7 @@
             android:inputType="phone"
             style="@style/page8.Blood_Donation"
             android:textSize="18sp"
+            android:maxLength="10"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
             tools:layout_editor_absoluteX="26dp"
             tools:layout_editor_absoluteY="307dp" />
