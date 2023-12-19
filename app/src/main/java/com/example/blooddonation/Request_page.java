@@ -136,7 +136,7 @@ public class Request_page extends AppCompatActivity {
                         reference.child(S_name).child("Time Uploaded").setValue(formattedOriginalTimestamp);
                         reference.child(S_name).child("Time Remove").setValue(formattedUpdatedTimestamp);
                         Sms_sender sms_sender=new Sms_sender();
-                        sms_sender.send(S_blood_g);
+                        sms_sender.send(S_blood_g,S_name);
                     }
 
                     @Override
