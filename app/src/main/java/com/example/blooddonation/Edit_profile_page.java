@@ -205,15 +205,17 @@ public class Edit_profile_page extends AppCompatActivity {
             }
             else
             {
+                Intent intent1=new Intent();
                 setResult(RESULT_OK);
+                onBackPressed();
                 Toast.makeText(Edit_profile_page.this, "Successfully updated", Toast.LENGTH_SHORT).show();
-                Intent intent1=new Intent(Edit_profile_page.this, home_page.class);
-                startActivity(intent1);
+                //Edit_profile_page.this.finish();
             }
         });
         back10.setOnClickListener(view -> {
+            Intent intent1=new Intent();
             setResult(RESULT_CANCELED);
-            onBackPressed();
+            Edit_profile_page.this.finish();
         });
         profile2.setOnClickListener(view -> CreatePopUp());
     }
@@ -245,7 +247,7 @@ public class Edit_profile_page extends AppCompatActivity {
 
     public void delete_profile()
     {
-        String val="https://firebasestorage.googleapis.com/v0/b/mysql-3bcb9.appspot.com/o/Profile%2FUser_Test%2FUser_Test.jpg?alt=media&token=e5e40c07-d38a-4588-9da9-f57c3ea236030";
+        String val="https://firebasestorage.googleapis.com/v0/b/mysql-3bcb9.appspot.com/o/Profile%2Fuser_admin%2Fuser_admin.jpg?alt=media&token=806038cd-611b-49fd-b37b-7dd707043ba8";
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
         String imageName = savedUsername + ".jpg";

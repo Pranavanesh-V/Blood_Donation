@@ -9,9 +9,15 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -38,6 +45,8 @@ import com.google.firebase.storage.StorageReference;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Profile_page extends AppCompatActivity {
 
@@ -47,6 +56,7 @@ public class Profile_page extends AppCompatActivity {
     String savedUsername;
     Button back_req4;
     int flag;
+    ConstraintLayout layout;
     String time="";
     TextView blood_Group,name2,mail_id2,Address,Edit;
     ImageView profile;
@@ -64,12 +74,9 @@ public class Profile_page extends AppCompatActivity {
         mail_id2=findViewById(R.id.mail_id2);
         Address=findViewById(R.id.address);
         Edit=findViewById(R.id.Edit);
+        layout=findViewById(R.id.Layout_profile);
         progressBar=findViewById(R.id.progressBar);
-        try {
-            downloadImage();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        downloadImage();
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedUsername = sharedPreferences.getString("username", "");
 
@@ -127,18 +134,42 @@ public class Profile_page extends AppCompatActivity {
         return time;
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode==1 && resultCode==RESULT_OK)
+        if (requestCode==1)
         {
-            try {
-                downloadImage();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if (resultCode==RESULT_OK)
+            {
+                LayoutInflater inflater=(LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                @SuppressLint("InflateParams") View popUpView=inflater.inflate(R.layout.loading_lay,null);
+
+                int width= ViewGroup.LayoutParams.MATCH_PARENT;
+                int height=ViewGroup.LayoutParams.WRAP_CONTENT;
+                boolean focusable=true;
+                PopupWindow popupWindow=new PopupWindow(popUpView,width,height,focusable);
+                layout.post(() -> popupWindow.showAtLocation(layout, Gravity.CENTER,0,0));
+                ProgressBar progressBar1;
+                progressBar1=popUpView.findViewById(R.id.prof);
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar1.setVisibility(View.GONE);
+                        popupWindow.dismiss();
+                        Toast.makeText(Profile_page.this, "Successfully Updated", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                },5000);
+
             }
+            if (resultCode==RESULT_CANCELED)
+            {
+                Toast.makeText(this, "Changes Not Made", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -192,7 +223,7 @@ public class Profile_page extends AppCompatActivity {
             }
         });
     }
-    public void downloadImage() throws IOException {
+    public void downloadImage()  {
         //check if profile is present or not
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -204,53 +235,47 @@ public class Profile_page extends AppCompatActivity {
                     String val=datasnapshot.child(savedUsername).child("Profile").getValue(String.class);
                     boolean res= val.equals("Yes");
                     if (res) {
-                        // Get a reference to the Firebase Storage
-                        FirebaseStorage storage = FirebaseStorage.getInstance();
-                        StorageReference storageRef = storage.getReference();
+                        String val_url=datasnapshot.child(savedUsername).child("Profile Value").getValue(String.class);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("url",val_url).apply();
+                        Glide.with(Profile_page.this).load(val_url)
+                                .listener(new RequestListener<Drawable>() {
+                                    @Override
+                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                        // Hide the loading indicator in case of a failure
+                                        progressBar.setVisibility(View.GONE);
+                                        return false;
+                                    }
 
-                        String savedU;
-                        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-                        savedU = sharedPreferences.getString("username", "");
-                        // Reference to the image file
-                        StorageReference imageRef = storageRef.child("Profile/" + savedU + "/" + savedU + ".jpg");
-                        System.out.println(savedU);
-                        // Download the image into a local file
-
-                        imageRef.getDownloadUrl().addOnCompleteListener(uriTask -> {
-                            if (uriTask.isSuccessful()) {
-                                // Image downloaded successfully
-                                // Now, load the image into ImageView using Glide
-                                Uri imageUrl = uriTask.getResult();
-                                String S_imageUrl=imageUrl.toString();
-                                Glide.with(Profile_page.this).load(imageUrl)
-                                        .listener(new RequestListener<Drawable>() {
-                                            @Override
-                                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                                // Hide the loading indicator in case of a failure
-                                                progressBar.setVisibility(View.GONE);
-                                                return false;
-                                            }
-
-                                            @Override
-                                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                                // Hide the loading indicator when the image is ready
-                                                progressBar.setVisibility(View.GONE);
-                                                return false;
-                                            }
-                                        }).into(profile);
-                            } else {
-                                // Handle the error in getting URI
-                                profile.setImageResource(R.drawable.user);
-                                progressBar.setVisibility(View.INVISIBLE);
-                            }
-                        });
+                                    @Override
+                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                        // Hide the loading indicator when the image is ready
+                                        progressBar.setVisibility(View.GONE);
+                                        return false;
+                                    }
+                                }).into(profile);
                     }
                     else
                     {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("url","No").apply();
-                        String val1="https://firebasestorage.googleapis.com/v0/b/mysql-3bcb9.appspot.com/o/Profile%2FUser_Test%2FUser_Test.jpg?alt=media&token=e5e40c07-d38a-4588-9da9-f57c3ea236030";
-                        Glide.with(Profile_page.this).load(val1).into(profile);
+                        String val1="https://firebasestorage.googleapis.com/v0/b/mysql-3bcb9.appspot.com/o/Profile%2Fuser_admin%2Fuser_admin.jpg?alt=media&token=806038cd-611b-49fd-b37b-7dd707043ba8";
+                        Glide.with(Profile_page.this).load(val1)
+                                .listener(new RequestListener<Drawable>() {
+                                    @Override
+                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                        // Hide the loading indicator in case of a failure
+                                        progressBar.setVisibility(View.GONE);
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                        // Hide the loading indicator when the image is ready
+                                        progressBar.setVisibility(View.GONE);
+                                        return false;
+                                    }
+                                }).into(profile);
                     }
                 }
             }

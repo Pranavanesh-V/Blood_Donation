@@ -133,7 +133,6 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             Disp1.setVisibility(View.VISIBLE);
             recyclerView1.setVisibility(View.VISIBLE);
             heading.setVisibility(View.VISIBLE);
-            //Disp.setText(R.string.hi + savedUsername);
             Disp.setText(getResources().getText(R.string.hi)+" "+savedUsername);
             request_fetch();
         });
@@ -280,15 +279,12 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                 Gender=data.getStringExtra("Gender");
             }
         }
-        if (requestCode==2)
+        else
         {
-            if (requestCode==2)
-            {
-                try {
-                    downloadImage();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+            try {
+                downloadImage();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
     }
@@ -305,39 +301,16 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                     String val=datasnapshot.child(savedUsername).child("Profile").getValue(String.class);
                     res= val.equals("Yes");
                     if (res) {
-                        // Get a reference to the Firebase Storage
-                        FirebaseStorage storage = FirebaseStorage.getInstance();
-                        StorageReference storageRef = storage.getReference();
-
-                        String savedU;
-                        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-                        savedU = sharedPreferences.getString("username", "");
-                        // Reference to the image file
-                        StorageReference imageRef = storageRef.child("Profile/" + savedU + "/" + savedU + ".jpg");
-                        System.out.println(savedU);
-                        // Download the image into a local file
-
-                        imageRef.getDownloadUrl().addOnCompleteListener(uriTask -> {
-                            if (uriTask.isSuccessful()) {
-                                // Get the URI for the image
-                                Uri imageUrl = uriTask.getResult();
-                                String S_imageUrl=imageUrl.toString();
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("url",S_imageUrl).apply();
-                                Glide.with(home_page.this).load(imageUrl)
-                                        .into(user);
-                                // Now imageUrl contains the URI of the downloaded image
-                                // You can use it as needed
-                            } else {
-                                // Handle the error in getting URI
-                            }
-                        });
+                        String val_url=datasnapshot.child(savedUsername).child("Profile Value").getValue(String.class);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("url",val_url).apply();
+                        Glide.with(home_page.this).load(val_url).into(user);
                     }
                     else
                     {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("url","No").apply();
-                        String val1="https://firebasestorage.googleapis.com/v0/b/mysql-3bcb9.appspot.com/o/Profile%2FUser_Test%2FUser_Test.jpg?alt=media&token=e5e40c07-d38a-4588-9da9-f57c3ea236030";
+                        String val1="https://firebasestorage.googleapis.com/v0/b/mysql-3bcb9.appspot.com/o/Profile%2Fuser_admin%2Fuser_admin.jpg?alt=media&token=806038cd-611b-49fd-b37b-7dd707043ba8";
                         Glide.with(home_page.this).load(val1).into(user);
                     }
                 }
