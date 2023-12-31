@@ -61,7 +61,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     private List<DataClass> itemList;
     private List<DataClass2> itemList1;
     TextView Disp,Disp1;
-    ImageView user,heading;
+    ImageView user,heading,heading1;
     boolean reg_check;
 
     @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
@@ -81,6 +81,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         Disp=findViewById(R.id.Disp);
         Disp1=findViewById(R.id.Disp1);
         heading=findViewById(R.id.heading);
+        heading1=findViewById(R.id.heading1);
         //recycler views
         recyclerView=findViewById(R.id.recyclerView);
         recyclerView1=findViewById(R.id.recyclerView1);
@@ -111,6 +112,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             donate_btn.setBackground(getDrawable(R.drawable.cus_join2));
             Search.setVisibility(View.VISIBLE);
             Filter.setVisibility(View.VISIBLE);
+            heading1.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.VISIBLE);
             user.setVisibility(View.INVISIBLE);
             Disp.setVisibility(View.INVISIBLE);
@@ -125,6 +127,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             donate_btn.setBackground(getDrawable(R.drawable.cus_join22));
             Search.setVisibility(View.INVISIBLE);
             Filter.setVisibility(View.INVISIBLE);
+            heading1.setVisibility(View.INVISIBLE);
             recyclerView.setVisibility(View.INVISIBLE);
             user.setVisibility(View.VISIBLE);
             Disp.setVisibility(View.VISIBLE);

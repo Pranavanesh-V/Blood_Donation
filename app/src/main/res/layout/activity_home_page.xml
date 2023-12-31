@@ -7,36 +7,6 @@
     android:theme="@style/page71.Blood_Donation"
     tools:context=".home_page">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/Search"
-        style="@style/page8.Blood_Donation"
-        android:layout_width="314dp"
-        android:layout_height="68dp"
-        android:hint="@string/location"
-        android:visibility="gone"
-        app:boxStrokeColor="@color/box_col"
-        app:counterEnabled="false"
-        app:endIconCheckable="true"
-        app:endIconDrawable="@drawable/baseline_search_24"
-        app:endIconMode="custom"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.218"
-        app:placeholderText="@string/location">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/E_search"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:inputType="textPersonName"
-            style="@style/page8.Blood_Donation"
-            android:textSize="18sp"
-            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
     <ImageView
         android:id="@+id/logo_home"
         android:layout_width="111dp"
@@ -63,6 +33,65 @@
         app:layout_constraintVertical_bias="0.068"
         tools:ignore="ContentDescription,ImageContrastCheck" />
 
+    <ImageView
+        android:id="@+id/heading1"
+        style="@style/donation_bg"
+        android:layout_width="200dp"
+        android:layout_height="73dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.131"
+        tools:ignore="ContentDescription" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Search"
+        style="@style/page8.Blood_Donation"
+        android:layout_width="314dp"
+        android:layout_height="68dp"
+        android:hint="@string/location"
+        android:visibility="gone"
+        app:boxStrokeColor="@color/box_col"
+        app:counterEnabled="false"
+        app:endIconCheckable="true"
+        app:endIconDrawable="@drawable/baseline_search_24"
+        app:endIconMode="custom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.218"
+        app:placeholderText="@string/location">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/E_search"
+            style="@style/page8.Blood_Donation"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:inputType="textPersonName"
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/Filter"
+        style="@style/bg"
+        android:layout_width="47dp"
+        android:layout_height="61dp"
+        android:src="@drawable/baseline_filter_list_24"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.219"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="406dp"
@@ -76,20 +105,75 @@
         app:layout_constraintTop_toBottomOf="@+id/Search"
         app:layout_constraintVertical_bias="1.0" />
 
-    <ImageView
-        style="@style/bg"
-        android:id="@+id/Filter"
-        android:layout_width="47dp"
-        android:layout_height="61dp"
-        android:src="@drawable/baseline_filter_list_24"
-        android:visibility="gone"
+    <TextView
+        android:id="@+id/Disp1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="@string/join_us_save_lives_together"
+        android:textColor="@color/red"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.219"
+        app:layout_constraintVertical_bias="0.247" />
+
+    <TextView
+        android:id="@+id/Disp"
+        android:layout_width="275dp"
+        android:layout_height="55dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/hi"
+        android:textColor="@color/red"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.183"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.178"
+        tools:ignore="TextSizeCheck" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/user"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:elevation="5dp"
+        android:src="@drawable/user"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.941"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.204"
+        app:shapeAppearanceOverlay="@style/circular"
         tools:ignore="ContentDescription,ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/heading"
+        style="@style/donation_bg"
+        android:layout_width="200dp"
+        android:layout_height="73dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.34"
+        tools:ignore="ContentDescription" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView1"
+        android:layout_width="411dp"
+        android:layout_height="464dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="-0.001"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Search"
+        app:layout_constraintVertical_bias="0.99" />
 
     <Button
         android:id="@+id/request_btn"
@@ -130,74 +214,4 @@
         app:layout_constraintVertical_bias="0.601"
         app:srcCompat="@drawable/empty"
         tools:ignore="ContentDescription" />
-
-    <TextView
-        android:id="@+id/Disp1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins"
-        android:text="@string/join_us_save_lives_together"
-        android:textColor="@color/red"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.247" />
-
-    <TextView
-        android:id="@+id/Disp"
-        android:layout_width="275dp"
-        android:layout_height="55dp"
-        android:fontFamily="@font/poppins"
-        android:text="@string/hi"
-        android:textColor="@color/red"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.183"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.178"
-        tools:ignore="TextSizeCheck" />
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/user"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.941"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.204"
-        app:shapeAppearanceOverlay="@style/circular"
-        android:elevation="5dp"
-        android:src="@drawable/user"
-        tools:ignore="ContentDescription,ImageContrastCheck" />
-
-    <ImageView
-        android:id="@+id/heading"
-        style="@style/donation_bg"
-        android:layout_width="200dp"
-        android:layout_height="73dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.34"
-        tools:ignore="ContentDescription" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView1"
-        android:layout_width="411dp"
-        android:layout_height="464dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="-0.001"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Search"
-        app:layout_constraintVertical_bias="0.99" />
 </androidx.constraintlayout.widget.ConstraintLayout>

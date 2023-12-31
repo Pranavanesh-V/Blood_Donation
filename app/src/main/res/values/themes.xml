@@ -11,6 +11,9 @@
         <item name="android:src">@drawable/donation_req_white</item>
     </style>
 
+    <style name="donor_bg" parent="page8.Blood_Donation">
+        <item name="android:src">@drawable/filter_white</item>
+    </style>
 
     <style name="Theme.BloodDonation" parent="Base.Theme.BloodDonation" />
 
