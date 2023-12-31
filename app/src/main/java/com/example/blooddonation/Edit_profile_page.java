@@ -208,8 +208,6 @@ public class Edit_profile_page extends AppCompatActivity {
                 Intent intent1=new Intent();
                 setResult(RESULT_OK);
                 onBackPressed();
-                Toast.makeText(Edit_profile_page.this, "Successfully updated", Toast.LENGTH_SHORT).show();
-                //Edit_profile_page.this.finish();
             }
         });
         back10.setOnClickListener(view -> {

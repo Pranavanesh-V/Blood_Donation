@@ -122,4 +122,5 @@ OWNER                                                                           
     <string name="delete_profile">Delete Profile</string>
     <string name="choose_from_n_device">Choose from \n Device</string>
     <string name="Mic">Mic check 1 2</string>
+    <string name="loading">Loading…</string>
 </resources>

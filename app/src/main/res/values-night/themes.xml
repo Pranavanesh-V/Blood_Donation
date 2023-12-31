@@ -23,6 +23,11 @@
         <item name="android:src">@drawable/resource_do</item>
     </style>
 
+    <style name="loading_style" parent="page8.Blood_Donation">
+        <item name="android:background">@drawable/loading</item>
+        <item name="android:backgroundTint">#8c848482</item>
+    </style>
+
     <style name="donor_bg" parent="page8.Blood_Donation">
         <item name="android:src">@drawable/filter</item>
     </style>
