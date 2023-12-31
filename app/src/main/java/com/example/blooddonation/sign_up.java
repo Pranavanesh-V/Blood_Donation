@@ -94,6 +94,16 @@ public class sign_up extends AppCompatActivity {
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("username", S_Username);
                                 editor.putString("password", S_password1);
+                                String val;
+                                if (datasnapshot.child(S_Username).child("Form").exists())
+                                {
+                                    val="yes";
+                                }
+                                else
+                                {
+                                    val="no";
+                                }
+                                editor.putString("Register", val).apply();
                                 editor.apply();
                                 Intent intent=new Intent(sign_up.this, home_page.class);
                                 intent.putExtra("username", S_Username);

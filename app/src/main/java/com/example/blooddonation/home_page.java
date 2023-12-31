@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -32,8 +31,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -49,7 +46,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     String uri="";
     private static final String PREFS_NAME = "MyPrefs";
     private SharedPreferences sharedPreferences;
-    String savedUsername;
+    String savedUsername,register;
     TextInputEditText E_search;
     Button request_btn, donate_btn;
     Boolean res=false;
@@ -65,6 +62,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     private List<DataClass2> itemList1;
     TextView Disp,Disp1;
     ImageView user,heading;
+    boolean reg_check;
 
     @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
     @Override
@@ -332,10 +330,17 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     }
 
     private void showPopupMenuForMenu() {
+
+        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        register=sharedPreferences.getString("Register","no");
         PopupMenu popupMenu = new PopupMenu(this, Menu);
         popupMenu.getMenu().add("Profile");
         popupMenu.getMenu().add("Request");
-        popupMenu.getMenu().add("Registration");
+        System.out.println(register);
+        if (register.equals("no"))
+        {
+            popupMenu.getMenu().add("Registration");
+        }
         popupMenu.getMenu().add("Security");
         popupMenu.getMenu().add("About");
         popupMenu.getMenu().add("Logout");
@@ -366,7 +371,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             }
             else if (option.equals("Registration"))
             {
-                Intent intent=new Intent(home_page.this, Full_Registration_page.class);
+                Intent intent=new Intent(home_page.this, home_page_Declaration.class);
                 startActivity(intent);
             }
             else if (option.equals("Security"))

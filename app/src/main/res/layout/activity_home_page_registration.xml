@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/page71.Blood_Donation"
+    tools:context=".home_page_Registration">
+
+
+    <TextView
+        android:id="@+id/reg2"
+        android:layout_width="170dp"
+        android:layout_height="54dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:lineHeight="54sp"
+        android:text="@string/register"
+        android:textAlignment="center"
+        android:textColor="@color/red"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.085"
+        tools:ignore="TextSizeCheck"
+        tools:targetApi="p" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Dob"
+        style="@style/page8.Blood_Donation"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/date_of_birth"
+        app:boxStrokeColor="@color/box_col"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.388">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/E_dob"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
+            android:focusable="false"
+            android:clickable="true"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="307dp"
+            tools:ignore="KeyboardInaccessibleWidget" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/blood_G"
+        style="@style/page8.Blood_Donation"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/blood_group"
+        app:boxStrokeColor="@color/box_col"
+        android:clickable="true"
+        app:boxBackgroundMode="outline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.388"
+        tools:ignore="KeyboardInaccessibleWidget">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/B_g"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:inputType="text"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck,DuplicateClickableBoundsCheck"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="307dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Add1"
+        style="@style/page8.Blood_Donation"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/address1"
+        app:boxStrokeColor="@color/box_col"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.489">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:inputType="textPersonName"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="307dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/city"
+        style="@style/page8.Blood_Donation"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/city"
+        app:boxStrokeColor="@color/box_col"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.588">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:inputType="textPersonName"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="307dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/state"
+        style="@style/page8.Blood_Donation"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/state"
+        app:boxStrokeColor="@color/box_col"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.689">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:inputType="textPersonName"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="307dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Phone_no"
+        style="@style/page8.Blood_Donation"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/phone_no"
+        app:boxStrokeColor="@color/box_col"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.788">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:inputType="phone"
+            android:maxLength="10"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="307dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Emergency"
+        style="@style/page8.Blood_Donation"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/emergency_phone_no"
+        app:boxStrokeColor="@color/box_col"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.788">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:inputType="phone"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
+            android:maxLength="10"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="307dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Mail"
+        style="@style/page8.Blood_Donation"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/email_id"
+        app:boxStrokeColor="@color/box_col"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.289">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:inputType="textPersonName"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="307dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name"
+        style="@style/page8.Blood_Donation"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/name"
+        app:boxStrokeColor="@color/box_col"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.191">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:inputType="textPersonName"
+            style="@style/page8.Blood_Donation"
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck,DuplicateSpeakableTextCheck,DuplicateClickableBoundsCheck"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="307dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="@string/gender"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.86" />
+
+
+    <RadioGroup
+        android:id="@+id/Group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.864"
+        app:layout_constraintHorizontal_bias="0.9">
+
+        <RadioButton
+            android:id="@+id/male"
+            style="@style/radio_attr"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/male" />
+
+        <RadioButton
+            android:id="@+id/female"
+            style="@style/radio_attr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/female" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/submit"
+        style="@style/button_attr"
+        android:layout_width="186dp"
+        android:layout_height="61dp"
+        android:background="@drawable/btn_style"
+        android:fontFamily="@font/poppins_extralight"
+        android:text="@string/submit"
+        android:textColor="@color/red"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.956"
+        tools:ignore="TextContrastCheck" />
+</androidx.constraintlayout.widget.ConstraintLayout>
