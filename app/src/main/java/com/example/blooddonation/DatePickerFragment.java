@@ -12,6 +12,7 @@ import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment
 {
+    //This is for Popping up the calendar to choose the dates in certain pages
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {

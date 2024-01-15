@@ -73,6 +73,7 @@ public class Full_Registration_page extends AppCompatActivity {
             }
         });
 
+        //Set the EditText to get the string value of the user inputs
         EditText E_name=name.getEditText();
         EditText E_email=email.getEditText();
         EditText E_Address=address.getEditText();
@@ -111,8 +112,7 @@ public class Full_Registration_page extends AppCompatActivity {
         E_phone.addTextChangedListener(login);
         E_emergency.addTextChangedListener(login);
 
-
-
+        //once the data is collected it is stored in the firebase
         submit.setOnClickListener(view -> {
             Intent i=getIntent();
             form=i.getStringExtra("form");
@@ -126,7 +126,7 @@ public class Full_Registration_page extends AppCompatActivity {
             }
             else
             {
-
+                //Once the data is stored the user can change the data for certain time
                 Timestamp firebaseTimestamp = Timestamp.now();
 
                 // Convert Firebase Timestamp to java.util.Date
@@ -183,13 +183,9 @@ public class Full_Registration_page extends AppCompatActivity {
                     }
                 });
             }
-            System.out.println(S_name+"\n"+S_email+"\n"+S_DOB+"\n"+S_blood_g+"\n"+S_address+"\n"+S_city+"\n"+S_state+"\n"+S_phone+"\n"+S_emergency+"\n"+S_gender+"\n"+form+"\n"+Name+"\n"+Password);
-
         });
-        //insert the data's into firebase database
-
-
     }
+
     //For Date
     private void showDatePicker() {
         Calendar calendar = Calendar.getInstance();

@@ -39,13 +39,15 @@ public class confirm_password extends AppCompatActivity {
         confirm_pass=findViewById(R.id.confirm_pass);
         new_pass=findViewById(R.id.new_pass);
 
+        //Get the Username of the user
         Intent intent=getIntent();
         String Username=intent.getStringExtra("Otp_username");
-        System.out.println(Username+" con");
+
+        //Assign the edittext to get the string value of the new password
+        //This is for New Password
         EditText E_pass_new= new_pass.getEditText();
         assert E_pass_new != null;
         E_pass_new.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
-        //E_pass_new.setKeyListener(DigitsKeyListener.getInstance("1234567890"));
         TextWatcher login=new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -66,11 +68,11 @@ public class confirm_password extends AppCompatActivity {
         E_pass_new.addTextChangedListener(login);
 
 
-        //confirm password
+        //Assign the edittext to get the string value of the new password
+        //This is for Confirm Password
         EditText E_conf_pass= confirm_pass.getEditText();
         assert E_conf_pass != null;
         E_conf_pass.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
-        //E_conf_pass.setKeyListener(DigitsKeyListener.getInstance("1234567890"));
         TextWatcher login2=new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -91,7 +93,8 @@ public class confirm_password extends AppCompatActivity {
         E_conf_pass.addTextChangedListener(login2);
 
 
-        //Get username
+        //Assign the edittext to get the string value of the Username
+        //Get Username
         EditText E_Username= user_name.getEditText();
         assert E_Username != null;
         TextWatcher login3=new TextWatcher() {
@@ -111,39 +114,58 @@ public class confirm_password extends AppCompatActivity {
         E_Username.addTextChangedListener(login3);
 
 
+        //This submit button is used to change the password
         submit.setOnClickListener(view -> {
-            System.out.println(Username);
-            // Initialize Firebase
+            // Initialize Firebase reference
             DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+
+                    //Check if the values or null or not
                     if (!(Objects.isNull(S_username) || Objects.isNull(S_conf_pass) || Objects.isNull(S_new_pass))) {
+
+                        //Check if the user exists and the username is correct
                         if (datasnapshot.child(S_username).exists() && S_username.equals(Username)) {
+
+                            //The new password and confirm password must be same
                             if (S_new_pass.equals(S_conf_pass)) {
+
                                 // Replace data using set value method
                                 reference.child(S_username).child("Password").setValue(S_conf_pass);
+
                                 //Message confirmation
                                 Toast.makeText(confirm_password.this, "Password Updated", Toast.LENGTH_SHORT).show();
+
                                 //To sign in page
                                 Intent intent = new Intent(confirm_password.this, sign_up.class);
                                 startActivity(intent);
                                 finishAffinity();
+
                             } else {
+                                //Password mismatch message
                                 Toast.makeText(confirm_password.this, "Password MisMatch", Toast.LENGTH_SHORT).show();
                             }
                         } else {
+                            //User not found message
                             Toast.makeText(confirm_password.this, "User Not found", Toast.LENGTH_SHORT).show();
                         }
                     }
                     else
                     {
+                        //Empty credentials
                         Toast.makeText(confirm_password.this, "Empty Credentials", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
+
+                    //if the process is canceled
+                    Toast.makeText(confirm_password.this, "Password Not Changed", Toast.LENGTH_SHORT).show();
+                    Intent intent1=new Intent(confirm_password.this, sign_up.class);
+                    startActivity(intent1);
+                    finish();
 
                 }
             });

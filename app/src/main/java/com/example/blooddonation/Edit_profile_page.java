@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -30,7 +29,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -60,11 +58,10 @@ public class Edit_profile_page extends AppCompatActivity {
     private static final String PREFS_NAME = "MyPrefs";
     DatabaseReference databaseReference;
     EditText blood_Group2,mail_id3,address2;
-    String S_blood_g="";
+    String S_blood_g="",blood, mail, Address,savedUsername;
     TextView name3;
     Boolean res=true;
     Button back10,save,cancel,f_device,camera;
-    String savedUsername;
     ImageView profile2;
     private static final int PICK_IMAGE_REQUEST=1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
@@ -72,7 +69,6 @@ public class Edit_profile_page extends AppCompatActivity {
     ConstraintLayout layout;
     ProgressBar progressBar1;
     int[] data={0,0,0};
-    String blood, mail, Address;
 
 
     @Override
@@ -90,17 +86,24 @@ public class Edit_profile_page extends AppCompatActivity {
         profile2=findViewById(R.id.profile2);
         progressBar1=findViewById(R.id.progressBar1);
 
+        //Get the flags and other data from Intents
         Intent intent=getIntent();
         int integer=intent.getIntExtra("Flag",0);
+
+        //The below code is for Displaying Profile picture of the user if stored in firebase
         try {
             downloadImage();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        //Get the username from the shared preference
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedUsername = sharedPreferences.getString("username", "");
         name3.setText(savedUsername);
 
+        //This is to check if the user has given address and blood group
+        //Using flags
         if (integer==1)
         {
             blood_Group2.setEnabled(true);
@@ -113,6 +116,8 @@ public class Edit_profile_page extends AppCompatActivity {
             address2.setEnabled(false);
             mail_id3.setEnabled(true);
         }
+
+        //Popup box for selecting the blood group
         blood_Group2.setOnClickListener(view -> {
             PopupMenu popupMenu = new PopupMenu(Edit_profile_page.this, blood_Group2);
             popupMenu.getMenu().add("O+");
@@ -134,19 +139,25 @@ public class Edit_profile_page extends AppCompatActivity {
             });
             popupMenu.show();
         });
+
+        //Save the data and store it them in the firebase database
         save.setOnClickListener(view -> {
+
+            //The below code is for to see the list of possibilities of making changes by the user
+            //There are around 8 possibilities
+            //Consider the changes and set in list 'data'
             if(blood_Group2.getText().toString().trim().isEmpty())
             {
                 if (mail_id3.getText().toString().trim().isEmpty())
                 {
                     if (address2.getText().toString().trim().isEmpty())
                     {
-                        System.out.println("no change");
+                        Log.d("output","No changes");
                     }
                     else
                     {
                         data[2]=1;
-                        System.out.println("Address only");
+                        Log.d("output","Only Address");
                     }
                 }
                 else
@@ -154,13 +165,13 @@ public class Edit_profile_page extends AppCompatActivity {
                     if (address2.getText().toString().trim().isEmpty())
                     {
                         data[1]=1;
-                        System.out.println("only mail_id");
+                        Log.d("output","Only Mail Id");
                     }
                     else
                     {
                         data[1]=1;
                         data[2]=1;
-                        System.out.println("mail_id and address");
+                        Log.d("output","Mail Id and Address");
                     }
                 }
             }
@@ -171,13 +182,13 @@ public class Edit_profile_page extends AppCompatActivity {
                     if (address2.getText().toString().trim().isEmpty())
                     {
                         data[0]=1;
-                        System.out.println("only blood_g"+blood_Group2.getText().toString());
+                        Log.d("output","Only Blood Group");
                     }
                     else
                     {
                         data[0]=1;
                         data[2]=1;
-                        System.out.println("blood_g and address only");
+                        Log.d("output","Blood Group and Address");
                     }
                 }
                 else
@@ -186,17 +197,20 @@ public class Edit_profile_page extends AppCompatActivity {
                     {
                         data[0]=1;
                         data[1]=1;
-                        System.out.println("blood_g and mail_id");
+                        Log.d("output","Blood Group and Mail Id");
                     }
                     else
                     {
                         data[0]=1;
                         data[1]=1;
                         data[2]=1;
-                        System.out.println("all options");
+                        Log.d("output","All Options");
                     }
                 }
             }
+
+            //See if the Changes are updated successfully or not
+            //If success then displays a loading screen and goes to home screen
             boolean res=fetch(data);
             if (res)
             {
@@ -210,33 +224,52 @@ public class Edit_profile_page extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        //To see if the user is discard the changes
         back10.setOnClickListener(view -> {
             Intent intent1=new Intent();
             setResult(RESULT_CANCELED);
             Edit_profile_page.this.finish();
         });
+
+        //For choosing a new Profile Picture
         profile2.setOnClickListener(view -> CreatePopUp());
     }
 
+    //Displays the pop up with options delete cancel and choose from device
     public void CreatePopUp()
     {
+        //Gets the permission to display the popup layout
         LayoutInflater inflater=(LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         @SuppressLint("InflateParams") View popUpView=inflater.inflate(R.layout.mainpopup,null);
 
+        //Set the Layout parameters
         int width= ViewGroup.LayoutParams.MATCH_PARENT;
         int height=ViewGroup.LayoutParams.WRAP_CONTENT;
         boolean focusable=true;
+
+        //popup window to access the functions
         PopupWindow popupWindow=new PopupWindow(popUpView,width,height,focusable);
+
+        //this posts the layout in the screen
         layout.post(() -> popupWindow.showAtLocation(layout, Gravity.BOTTOM,0,0));
+
+        //Buttons displayed in the popup layout
         Button from_device,Delete_pro,cancel;
         from_device=popUpView.findViewById(R.id.from_device);
         Delete_pro=popUpView.findViewById(R.id.Delete_pro);
         cancel=popUpView.findViewById(R.id.cancel_button);
+
+        //Choose the picture from device
         from_device.setOnClickListener(view -> {
             onChooseImageClick(view);
             popupWindow.dismiss();
         });
+
+        //Dismiss the popup layout
         cancel.setOnClickListener(view -> popupWindow.dismiss());
+
+        //Delete the current the profile and set the default image
         Delete_pro.setOnClickListener(view -> {
             delete_profile();
             popupWindow.dismiss();
@@ -245,13 +278,19 @@ public class Edit_profile_page extends AppCompatActivity {
 
     public void delete_profile()
     {
+        //The below val holds the default profile picture
         String val="https://firebasestorage.googleapis.com/v0/b/mysql-3bcb9.appspot.com/o/Profile%2Fuser_admin%2Fuser_admin.jpg?alt=media&token=806038cd-611b-49fd-b37b-7dd707043ba8";
+
+        //Get the firebase reference to the storage service
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
+
+        //Image name
         String imageName = savedUsername + ".jpg";
+
         //path
-        System.out.println(savedUsername);
         String S_path="Profile/"+savedUsername+"/";
+
         // Assume storageReference is the StorageReference to your image in Firebase Storage
         StorageReference imageRef = storageReference.child(S_path + imageName);
 
@@ -261,6 +300,7 @@ public class Edit_profile_page extends AppCompatActivity {
             Log.d("FirebaseStorage", "File deleted successfully");
             Toast.makeText(Edit_profile_page.this, "Profile Removed", Toast.LENGTH_SHORT).show();
 
+            //Once the image is deleted then the changes are needed to be made in RealTime database for later uses
             DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -278,7 +318,7 @@ public class Edit_profile_page extends AppCompatActivity {
                 }
             });
         }).addOnFailureListener(exception -> {
-            // Uh-oh, an error occurred!
+            // An error occurred!
             Log.e("FirebaseStorage", "Error deleting file: " + exception.getMessage());
             Toast.makeText(Edit_profile_page.this, "Profile can't be Removed", Toast.LENGTH_SHORT).show();
         });
@@ -286,6 +326,7 @@ public class Edit_profile_page extends AppCompatActivity {
     public Boolean fetch(int[] d){
         final boolean []flag = {false};
 
+        //The below time related code displays the time limit and time when the user can make changes again
         Timestamp firebaseTimestamp = Timestamp.now();
 
         // Convert Firebase Timestamp to java.util.Date
@@ -411,20 +452,6 @@ public class Edit_profile_page extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
-    public void onCameraClick(View view)
-    {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create a file to save the image
-            File photoFile = createImageFile();
-
-            if (photoFile != null) {
-                imageUri = FileProvider.getUriForFile(this, "com.example.blooddonation.Edit_profile_page", photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-            }
-        }
-    }
 
     // Create a file to save the image
     private File createImageFile() {
@@ -463,7 +490,6 @@ public class Edit_profile_page extends AppCompatActivity {
             }
         }
     }
-    // Continue from the previous code...
 
     // Upload the selected image to Firebase Storage
     private void uploadImage(@NonNull Uri imageUri) {
@@ -472,9 +498,10 @@ public class Edit_profile_page extends AppCompatActivity {
 
         // Generate a unique name for the image
         String imageName = savedUsername + ".jpg";
+
         //path
-        System.out.println(savedUsername);
         String S_path="Profile/"+savedUsername+"/";
+
         // Get a reference to the image in the "users" folder (replace "user1" with the actual user identifier)
         StorageReference userRef = storageRef.child(S_path + imageName);
 
@@ -498,14 +525,12 @@ public class Edit_profile_page extends AppCompatActivity {
                                     reference.child(savedUsername).child("Profile Value").setValue(downloadUrl);
                                     setResult(RESULT_OK);
                                 }
-
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {
                                     reference.child(savedUsername).child("Profile").setValue("No");
                                     reference.child(savedUsername).child("Profile Value").setValue("No");
                                     setResult(RESULT_CANCELED);
                                 }
-
                             });
                         }
                     });
@@ -515,8 +540,8 @@ public class Edit_profile_page extends AppCompatActivity {
                     setResult(RESULT_CANCELED);
                     // Handle any errors during upload
                 });
-
     }
+    //Crop the image to store in database
     private void startCropActivity(Uri sourceUri) {
         // UCrop configuration
         UCrop.Options options = new UCrop.Options();
@@ -528,17 +553,21 @@ public class Edit_profile_page extends AppCompatActivity {
                 .withOptions(options)
                 .start(this);
     }
+
+    //To download the image from the Firebase storage service
     public void downloadImage() throws IOException {
         // Get a reference to the Firebase Storage
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
 
+        //Get the username to fetch the profile picture
         String savedU;
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedU = sharedPreferences.getString("username", "");
+
         // Reference to the image file
         StorageReference imageRef = storageRef.child("Profile/"+savedU+"/"+savedU + ".jpg");
-        System.out.println(savedU);
+
         // Download the image into a local file
         File localFile = File.createTempFile("images", "jpg");
         imageRef.getFile(localFile)
@@ -568,8 +597,9 @@ public class Edit_profile_page extends AppCompatActivity {
                     profile2.setImageResource(R.drawable.user);
                     progressBar1.setVisibility(View.INVISIBLE);
                 });
-
     }
+
+    //PopUp Menu for displaying Blood Groups for Changes
     private void showPopupMenu() {
         PopupMenu popupMenu = new PopupMenu(this, blood_Group2);
         popupMenu.getMenu().add("O+");
@@ -583,11 +613,14 @@ public class Edit_profile_page extends AppCompatActivity {
 
         // Set an item click listener for the PopupMenu
         popupMenu.setOnMenuItemClickListener(item -> {
+
             // Handle item selection here
             S_blood_g = item.getTitle().toString();
+
             //((TextInputLayout) blood_g.getChildAt(0)).getEditText().setText(selectedText);
             blood_Group2.setText(S_blood_g);
             return true;
+
         });
         popupMenu.show();
     }

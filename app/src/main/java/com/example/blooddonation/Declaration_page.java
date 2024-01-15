@@ -23,11 +23,13 @@ public class Declaration_page extends AppCompatActivity {
         decline=findViewById(R.id.Decline);
         submit=findViewById(R.id.pro);
 
+        //Get the password and username from the intent
         Intent i=getIntent();
         String pass=i.getStringExtra("Password");
         String name=i.getStringExtra("Name");
 
         submit.setOnClickListener(view -> {
+            //check if the user has checked the form and accepted the declaration
             if (decline.isChecked())
             {
                 Intent intent=new Intent(Declaration_page.this, Full_Registration_page.class);

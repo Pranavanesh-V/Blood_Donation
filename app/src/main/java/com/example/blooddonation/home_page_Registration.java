@@ -42,6 +42,10 @@ public class home_page_Registration extends AppCompatActivity {
     String S_DOB="",S_name="",S_email="",S_blood_g="",S_address="",S_city="",S_state="",S_phone="",S_emergency="",S_gender="",form="",Password="",Name="";
     TextInputEditText E_dob,B_G;
     RadioGroup group;
+
+    //This class is to see if the user is a donor or not
+    //If he is a donor then the Registration option is not show
+    //Else the option is shown
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +78,7 @@ public class home_page_Registration extends AppCompatActivity {
             }
         });
 
+        //To get data from the user in string data type
         EditText E_name=name.getEditText();
         EditText E_email=email.getEditText();
         EditText E_Address=address.getEditText();
@@ -115,6 +120,8 @@ public class home_page_Registration extends AppCompatActivity {
 
 
         submit.setOnClickListener(view -> {
+
+            //Store the data in the Firebase
             Intent i=getIntent();
             form=i.getStringExtra("form");
             sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -129,6 +136,7 @@ public class home_page_Registration extends AppCompatActivity {
             else
             {
 
+                //Once the data is stored the user can change the data for certain time
                 Timestamp firebaseTimestamp = Timestamp.now();
 
                 // Convert Firebase Timestamp to java.util.Date
@@ -192,12 +200,7 @@ public class home_page_Registration extends AppCompatActivity {
                     }
                 });
             }
-            System.out.println(S_name+"\n"+S_email+"\n"+S_DOB+"\n"+S_blood_g+"\n"+S_address+"\n"+S_city+"\n"+S_state+"\n"+S_phone+"\n"+S_emergency+"\n"+S_gender+"\n"+form+"\n"+Name+"\n"+Password);
-
         });
-        //insert the data's into firebase database
-
-
     }
     //For Date
     private void showDatePicker() {
@@ -213,8 +216,7 @@ public class home_page_Registration extends AppCompatActivity {
                 }, year, month, day);
         datePickerDialog.show();
     }
-
-    //For Blood_g
+    //For Blood Group
     private void showPopupMenu() {
         PopupMenu popupMenu = new PopupMenu(this, blood_g);
         popupMenu.getMenu().add("O+");

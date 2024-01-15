@@ -15,10 +15,8 @@ import androidx.viewpager.widget.ViewPager;
 public class intro_pages extends AppCompatActivity {
 
     ViewPager mSlideViewPager;
-
     LinearLayout mDotLayout;
     Button Start;
-
     TextView[] dots;
     ViewPageAdapter viewPagerAdapter;
     TextView skip;

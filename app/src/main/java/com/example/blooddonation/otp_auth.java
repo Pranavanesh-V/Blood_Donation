@@ -19,12 +19,10 @@ public class otp_auth extends AppCompatActivity {
 
 
     private static String S_otp1,S_otp2,S_otp3,S_otp4;
-
     Button submit;
     TextInputLayout otp1,otp2,otp3,otp4;
     String OTP;
     ArrayList<String> flag=new ArrayList<>(3);
-    //String flag[]={"null","null","null","null"};
     ArrayList<String> MESSAGE=new ArrayList<>(3);
     Boolean res=false;
     Boolean ot=false;
@@ -41,28 +39,34 @@ public class otp_auth extends AppCompatActivity {
         otp4=findViewById(R.id.otp4);
         submit=findViewById(R.id.submit);
 
+        //flags to check if the TextInputLayout is empty or has any value
         flag.add("null");
         flag.add("null");
         flag.add("null");
         flag.add("null");
 
+        //This denotes the otp value of single TextInputLayout
         MESSAGE.add("null");
         MESSAGE.add("null");
         MESSAGE.add("null");
         MESSAGE.add("null");
 
+        //Get the intent values
         Intent intent=getIntent();
+        //The number
         String number=intent.getStringExtra("number");
+        //The OTP
         OTP=intent.getStringExtra("OTP");
+        //The username
         String O_Username=intent.getStringExtra("U_name");
 
-        //Edit text objects
+        //Edit text objects for each TextInputLayout
         EditText E_otp1=otp1.getEditText();
         EditText E_otp2=otp2.getEditText();
         EditText E_otp3=otp3.getEditText();
         EditText E_otp4=otp4.getEditText();
 
-        //otp 1
+        //otp 1 TextInputLayout to get the value of first otp value
         assert E_otp1 != null;
         E_otp1.setInputType(InputType.TYPE_CLASS_NUMBER);
         E_otp1.setFilters(new InputFilter[]{new InputFilter.LengthFilter(1)});
@@ -81,6 +85,8 @@ public class otp_auth extends AppCompatActivity {
             }
             @Override
             public void afterTextChanged(Editable s) {
+                //The below code is to mention only one value is applicable
+                //and empty is set empty and set respective flags
                 if (s.length() > 1) {
                     s.delete(1, s.length());
                 }
@@ -98,7 +104,7 @@ public class otp_auth extends AppCompatActivity {
         };
         E_otp1.addTextChangedListener(l1);
 
-        //otp2
+        //otp 2 TextInputLayout to get the value of second otp value
         assert E_otp2 != null;
         E_otp2.setInputType(InputType.TYPE_CLASS_NUMBER);
         E_otp2.setFilters(new InputFilter[]{new InputFilter.LengthFilter(1)});
@@ -117,6 +123,8 @@ public class otp_auth extends AppCompatActivity {
             }
             @Override
             public void afterTextChanged(Editable s) {
+                //The below code is to mention only one value is applicable
+                //and empty is set empty and set respective flags
                 if (s.length() > 1) {
                     s.delete(1, s.length());
                 }
@@ -134,7 +142,7 @@ public class otp_auth extends AppCompatActivity {
         };
         E_otp2.addTextChangedListener(l2);
 
-        //otp3
+        //otp 3 TextInputLayout to get the value of third otp value
         assert E_otp3 != null;
         E_otp3.setInputType(InputType.TYPE_CLASS_NUMBER);
         E_otp3.setFilters(new InputFilter[]{new InputFilter.LengthFilter(1)});
@@ -153,6 +161,8 @@ public class otp_auth extends AppCompatActivity {
             }
             @Override
             public void afterTextChanged(Editable s) {
+                //The below code is to mention only one value is applicable
+                //and empty is set empty and set respective flags
                 if (s.length() > 1) {
                     s.delete(1, s.length());
                 }
@@ -170,7 +180,7 @@ public class otp_auth extends AppCompatActivity {
         };
         E_otp3.addTextChangedListener(l3);
 
-        //otp4
+        //otp 4 TextInputLayout to get the value of fourth otp value
         assert E_otp4 != null;
         E_otp4.setInputType(InputType.TYPE_CLASS_NUMBER);
         E_otp4.setFilters(new InputFilter[]{new InputFilter.LengthFilter(1)});
@@ -186,6 +196,8 @@ public class otp_auth extends AppCompatActivity {
             }
             @Override
             public void afterTextChanged(Editable s) {
+                //The below code is to mention only one value is applicable
+                //and empty is set empty and set respective flags
                 if (s.length() > 1) {
                     s.delete(1, s.length());
                 }
@@ -206,11 +218,12 @@ public class otp_auth extends AppCompatActivity {
 
 
 
+        //To navigate and check if the entered OTP and sent otp is correct
         submit.setOnClickListener(view -> {
-
-            //setting the flags
+            //getting the flags
             for (String i:flag)
             {
+                //check the flags
                 if (!i.equals("1"))
                 {
                     Toast.makeText(otp_auth.this,"Empty Credentials",Toast.LENGTH_SHORT).show();
@@ -223,14 +236,17 @@ public class otp_auth extends AppCompatActivity {
                 }
             }
 
-
+            //if the for loop completes normally and res is true
+            //this below code will execute
             if (res)
             {
                 String C_Message="";
+                //get the entered otp from the list to a single string
                 for(String o:MESSAGE)
                 {
                     C_Message+=o;
                 }
+                //check the otp is correct
                 if (!C_Message.equals(OTP))
                 {
                     Toast.makeText(otp_auth.this,"Invalid OTP",Toast.LENGTH_SHORT).show();

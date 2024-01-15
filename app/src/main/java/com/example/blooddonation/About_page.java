@@ -15,6 +15,8 @@ public class About_page extends AppCompatActivity {
         setContentView(R.layout.activity_about_page);
 
         back4=findViewById(R.id.back4);
+
+        //back button in the about page
         back4.setOnClickListener(view -> finish());
     }
 }

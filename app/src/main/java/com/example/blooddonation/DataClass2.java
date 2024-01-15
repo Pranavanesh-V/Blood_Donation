@@ -2,6 +2,7 @@ package com.example.blooddonation;
 
 public class DataClass2
 {
+    //This class is for Getting the Requesters Information
     private String dataLocation;
     private String dataName;
     private String dataBlood;

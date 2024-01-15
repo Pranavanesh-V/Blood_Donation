@@ -14,6 +14,9 @@ public class home_page_Declaration extends AppCompatActivity {
     Button submit;
     String form;
 
+    //This class is to see if the user is a donor or not
+    //If he is a donor then the Registration option is not show
+    //Else the option is shown
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

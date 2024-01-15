@@ -39,6 +39,7 @@ public class Filter_page extends AppCompatActivity {
 
         E_Age.setOnClickListener(view -> showPopupMenuForAge());
 
+        //When done is clicked the Data is transferred to the previous activity
         Done.setOnClickListener(view -> {
             Intent intent=new Intent();
             intent.putExtra("Age",S_Age);
@@ -47,9 +48,6 @@ public class Filter_page extends AppCompatActivity {
             setResult(RESULT_OK,intent);
             finish();
         });
-
-
-
 
     }
 
@@ -65,8 +63,6 @@ public class Filter_page extends AppCompatActivity {
         popupMenu.getMenu().add("B-");
         popupMenu.getMenu().add("AB+");
         popupMenu.getMenu().add("Ab-");
-
-
 
         // Set an item click listener for the PopupMenu
         popupMenu.setOnMenuItemClickListener(item -> {
@@ -95,7 +91,6 @@ public class Filter_page extends AppCompatActivity {
         popupMenu.getMenu().add("45-54");
         popupMenu.getMenu().add("55 Above");
 
-
         // Set an item click listener for the PopupMenu
         popupMenu.setOnMenuItemClickListener(item -> {
             // Handle item selection here
@@ -119,7 +114,6 @@ public class Filter_page extends AppCompatActivity {
         popupMenu.getMenu().add("Male");
         popupMenu.getMenu().add("Female");
 
-
         // Set an item click listener for the PopupMenu
         popupMenu.setOnMenuItemClickListener(item -> {
             // Handle item selection here
@@ -136,6 +130,4 @@ public class Filter_page extends AppCompatActivity {
         });
         popupMenu.show();
     }
-
-
 }

@@ -10,11 +10,13 @@ import java.util.Calendar;
 public class age_finder
 {
     @RequiresApi(api = Build.VERSION_CODES.O)
+    //this method gets the date of birth as input
+    //and convert it into age like age 17 or 21
     public Integer age_Cals(String dob)
     {
-
+        //This method specifies the certain format for calculation
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        //LocalDate dob_l = LocalDate.parse(dob, formatter);
+        //Splitting the year and date and day
         String[] date =dob.split("/",3);
             int birthYear =Integer.parseInt(date[0]);
             int birthMonth =Integer.parseInt(date[1]);
@@ -40,10 +42,11 @@ public class age_finder
             ageYears--;
             ageMonths += 12;
         }
-
+        //Return the age
         return ageYears;
     }
 
+    //This method is used for checking in what age limit the user falls
     public boolean equals_rt(Integer age12,String choice)
     {
         boolean res=false;

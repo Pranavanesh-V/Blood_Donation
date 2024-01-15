@@ -47,9 +47,11 @@ public class forgot_page extends AppCompatActivity {
         //get the otp here and send it
         otp_generator otp_generator=new otp_generator();
         MESSAGE = otp_generator.generate();
+        //get the username from the previous page for later use
         Intent intent=getIntent();
         String username=intent.getStringExtra("Username");
 
+        //Edittext to get the string value of the number of the user
         EditText E_phone=phone.getEditText();
         assert E_phone != null;
         E_phone.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -67,6 +69,7 @@ public class forgot_page extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                //To make user the number is not greater or less than 10 digits
                 if (s.length() > 10) {
                     s.delete(10, s.length());
                 }
@@ -86,22 +89,28 @@ public class forgot_page extends AppCompatActivity {
         // Check SMS permission
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
             // Permission already granted, send SMS
-            //sendSms();
         } else {
             // Request SMS permission
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION_REQUEST_CODE);
         }
 
+        //Button check if the number is of the respective user
+        //And sends the otp to that number and navigates to the next activity
         submit.setOnClickListener(view -> {
+
+            //Reference of the database
             DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                    //Phone number written in the database
                     String num=datasnapshot.child(username).child("Phone No").getValue(String.class);
+
+                    //check if the number is same
+                    //if same send the otp
                     if (num.equals(S_phone))
                     {
-                        System.out.println(username+" forgot Page");
-                        //send sms
+                        //send otp in sms
                         sendSms();
                         Intent intent1 =new Intent(forgot_page.this, otp_auth.class);
                         intent1.putExtra("number",S_phone);
@@ -111,6 +120,7 @@ public class forgot_page extends AppCompatActivity {
                     }
                     else
                     {
+                        //Invalid number so remove the number written in the TextInputLayout
                         E_phone.setText("");
                         Toast.makeText(forgot_page.this, "Invalid Number", Toast.LENGTH_SHORT).show();
                     }
@@ -119,6 +129,10 @@ public class forgot_page extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
+
+                    //Error Message
+                    Toast.makeText(forgot_page.this, "Password Change Failed", Toast.LENGTH_SHORT).show();
+                    finish();
 
                 }
             });
@@ -133,7 +147,6 @@ public class forgot_page extends AppCompatActivity {
         if (requestCode == SMS_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted, send SMS
-                //sendSms();
             } else {
                 // Permission denied, show a message or handle the situation
                 Toast.makeText(this, "SMS permission denied", Toast.LENGTH_SHORT).show();

@@ -26,6 +26,7 @@ public class Donor_info_pg extends AppCompatActivity {
     String Phone,Email_id,Address,S_Location;
     ImageView p_img;
 
+    //Class is used only for displaying the details of the donars
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +45,13 @@ public class Donor_info_pg extends AppCompatActivity {
         String S_name = intent.getStringExtra("Name");
         String blood = intent.getStringExtra("Blood");
         String Profile_U=intent.getStringExtra("URL_P");
+
+        //sets the profile using uri
         Uri u=Uri.parse(Profile_U);
         T_Name.setText(S_name);
         T_Blood.setText(blood);
+        //if the profile value is no then default image is displayed
+        //else the profile of the donor is shown
         if (Profile_U.equals("No"))
         {
             p_img.setImageResource(R.drawable.user);
@@ -65,10 +70,13 @@ public class Donor_info_pg extends AppCompatActivity {
                     // Parse data from the snapshot
                     String name=snapshot.getKey();
                     if (S_name.equals(name)) {
-                         Email_id = snapshot.child("Email").getValue(String.class);
+                        //Fetch the data from the database
+                        Email_id = snapshot.child("Email").getValue(String.class);
                         Address = snapshot.child("Address").getValue(String.class);
                         Phone = snapshot.child("Phone No").getValue(String.class);
                         S_Location=snapshot.child("City").getValue(String.class);
+
+                        //For displaying the email dynamically according to the size
                         if (!(Email_id.length()<23)) {
                             T_Mail_id.setText(Email_id.substring(0,23)+"\n"+ Email_id.substring(23));
                         }else {
@@ -86,6 +94,7 @@ public class Donor_info_pg extends AppCompatActivity {
 
         back.setOnClickListener(view -> finish());
 
+        //Navigates to the Google maps for the given address
         T_Address.setOnClickListener(view -> {
             String address=T_Address.getText().toString().trim();
             Intent intent1 =new Intent(Intent.ACTION_VIEW,
@@ -93,6 +102,7 @@ public class Donor_info_pg extends AppCompatActivity {
             startActivity(intent1);
         });
 
+        //Navigates to the Dial screen for the displayed Mobile Number
         T_Phone.setOnClickListener(view -> {
             Intent intent12 =new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+Phone));
             startActivity(intent12);

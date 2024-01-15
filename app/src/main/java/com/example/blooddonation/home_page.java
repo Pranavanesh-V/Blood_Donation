@@ -611,6 +611,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         System.out.println(name+"\n"+blood+"\n"+location+"\n"+txt);
     }
 
+    //For Logout
     private void logout() {
         // Clear the saved credentials
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
