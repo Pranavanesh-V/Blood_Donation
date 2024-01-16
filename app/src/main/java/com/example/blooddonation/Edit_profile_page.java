@@ -335,7 +335,7 @@ public class Edit_profile_page extends AppCompatActivity {
         // Add 8 hours to the time
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        calendar.add(Calendar.HOUR_OF_DAY, 8);
+        calendar.add(Calendar.HOUR_OF_DAY, 24);
 
         // Convert the updated time back to a Date
         Date updatedDate = calendar.getTime();
@@ -516,6 +516,28 @@ public class Edit_profile_page extends AppCompatActivity {
                         // Now you can store the downloadUrl in your database or use it as needed
                         if (res)
                         {
+
+                            //The below time related code displays the time limit and time when the user can make changes again
+                            Timestamp firebaseTimestamp = Timestamp.now();
+
+                            // Convert Firebase Timestamp to java.util.Date
+                            Date date = firebaseTimestamp.toDate();
+
+                            // Add 8 hours to the time
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.setTime(date);
+                            calendar.add(Calendar.HOUR_OF_DAY, 24);
+
+                            // Convert the updated time back to a Date
+                            Date updatedDate = calendar.getTime();
+
+                            // Create a formatter for a readable date and time format
+                            @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            // Format and display the original and updated timestamps
+                            String formattedOriginalTimestamp = formatter.format(date);
+                            String formattedUpdatedTimestamp = formatter.format(updatedDate);
+
+                            //Reference to Database
                             DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
                             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
@@ -523,12 +545,16 @@ public class Edit_profile_page extends AppCompatActivity {
                                     // Push data to a new unique key
                                     reference.child(savedUsername).child("Profile").setValue("Yes");
                                     reference.child(savedUsername).child("Profile Value").setValue(downloadUrl);
+                                    databaseReference.child(savedUsername).child("Time uploaded").setValue(formattedOriginalTimestamp);
+                                    databaseReference.child(savedUsername).child("Time Remove").setValue(formattedUpdatedTimestamp);
                                     setResult(RESULT_OK);
                                 }
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {
                                     reference.child(savedUsername).child("Profile").setValue("No");
                                     reference.child(savedUsername).child("Profile Value").setValue("No");
+                                    databaseReference.child(savedUsername).child("Time uploaded").setValue(formattedOriginalTimestamp);
+                                    databaseReference.child(savedUsername).child("Time Remove").setValue(formattedUpdatedTimestamp);
                                     setResult(RESULT_CANCELED);
                                 }
                             });
