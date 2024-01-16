@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Security_page extends AppCompatActivity {
 
+    //Just a Content page displays the security details of the app
     Button back5;
 
     @Override

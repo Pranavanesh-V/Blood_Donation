@@ -13,6 +13,8 @@ import androidx.viewpager.widget.PagerAdapter;
 
 public class ViewPageAdapter extends PagerAdapter
 {
+
+    //Class is used for Intro pages content binding
     Context context;
     int[] Headings ={
             R.string.Heading1,
@@ -40,10 +42,12 @@ public class ViewPageAdapter extends PagerAdapter
     public int getCount() {
         return Headings.length;
     }
+
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
+
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
@@ -80,7 +84,6 @@ public class ViewPageAdapter extends PagerAdapter
 
         }
 
-
         sliderHeading= view.findViewById(R.id.Head1);
         sliderDesc= view.findViewById(R.id.Desc1);
         imageView=view.findViewById(R.id.pages1);
@@ -91,8 +94,6 @@ public class ViewPageAdapter extends PagerAdapter
         container.addView(view);
         return view;
     }
-
-
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((ConstraintLayout)object);

@@ -30,10 +30,13 @@ public class intro_pages extends AppCompatActivity {
         Start=findViewById(R.id.Start);
         Start.setVisibility(View.INVISIBLE);
 
+        //Only visible in the last intro page
         Start.setOnClickListener(v -> {
             Intent intent=new Intent(intro_pages.this, Login_page.class);
             startActivity(intent);
         });
+
+        //For the Bottom Dot animation and View page adapter
         mSlideViewPager= findViewById(R.id.viewpage);
         mDotLayout= findViewById(R.id.indicatorLayout);
 
@@ -51,17 +54,19 @@ public class intro_pages extends AppCompatActivity {
         if(FirstTime.equals("Yes"))
         {
 
-            //if app was opened for the first time
+            //else go to login page
             Intent intent=new Intent(intro_pages.this, Login_page.class);
             startActivity(intent);
         }
         else
         {
+            //if app was opened for the first time
             SharedPreferences.Editor editor= preferences.edit();
             editor.putString("FirstTimeInstall","Yes");
             editor.apply();
         }
 
+        //Skip is clicked skip the intro pages and go to login page
         skip.setOnClickListener(view -> {
             Intent intent=new Intent(intro_pages.this, Login_page.class);
             startActivity(intent);
@@ -69,6 +74,7 @@ public class intro_pages extends AppCompatActivity {
 
     }
 
+    //For the Bottom Dot Animation
     public void setupIndicator(int position)
     {
         dots=new TextView[3];
@@ -85,6 +91,7 @@ public class intro_pages extends AppCompatActivity {
         dots[position].setTextColor(getResources().getColor(R.color.active,getApplicationContext().getTheme()));
     }
 
+    //For intro page animation
     ViewPager.OnPageChangeListener viewListener=new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -96,6 +103,7 @@ public class intro_pages extends AppCompatActivity {
 
             setupIndicator(position);
 
+            //Based on the Position The skip and continue options are visible
             if (position==2)
             {
                 skip.setVisibility(View.INVISIBLE);
@@ -105,13 +113,10 @@ public class intro_pages extends AppCompatActivity {
                 skip.setVisibility(View.VISIBLE);
                 Start.setVisibility(View.INVISIBLE);
             }
-
         }
-
         @Override
         public void onPageScrollStateChanged(int state) {
 
         }
     };
-
 }

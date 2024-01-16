@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Request_donor_info extends AppCompatActivity {
 
+    //Class for Requester information display
     String name,phone_no;
     TextView Blood_group_req,name_req,city_req,reason_req;
     Button donate,back_req;
@@ -38,17 +39,22 @@ public class Request_donor_info extends AppCompatActivity {
         reason_req=findViewById(R.id.reason_req);
         profile_req=findViewById(R.id.profile_req);
 
+        //Get the data from intents
         Intent intent= getIntent();
         name=intent.getStringExtra("Name");
         String blood=intent.getStringExtra("Blood");
         String location= intent.getStringExtra("Location");
         String TXT=intent.getStringExtra("Txt");
         String Profile_U=intent.getStringExtra("URL_P");
+
+        //set the data
         Uri u=Uri.parse(Profile_U);
         Blood_group_req.setText(blood);
         name_req.setText(name);
         city_req.setText(location);
         reason_req.setText(TXT);
+
+        //If profile doesn't exists set default image
         if (Profile_U.equals("No"))
         {
             profile_req.setImageResource(R.drawable.user);
@@ -58,9 +64,13 @@ public class Request_donor_info extends AppCompatActivity {
                     .into(profile_req);
         }
 
+        //Function to fetch the phone number of the Requester
         request_fetch();
 
+        //Finish activity once the user press back button
         back_req.setOnClickListener(view -> finish());
+
+        //Navigate to declaration page
         donate.setOnClickListener(view -> {
             Intent intent1=new Intent(Request_donor_info.this, donation_declaration.class);
             intent1.putExtra("Phone",phone_no);
@@ -69,7 +79,6 @@ public class Request_donor_info extends AppCompatActivity {
         });
 
     }
-
     public void request_fetch()
     {
         // Initialize Firebase Realtime Database

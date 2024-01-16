@@ -22,13 +22,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Register extends AppCompatActivity {
 
+    //This class is for the user who is not willing to become a donor
     Button submit;
-
     TextInputLayout name,email_id,password,conf_pass;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch yes_or_no;
-
-    Boolean checked=false;
     String S_email_id,S_password,S_name,S_conf_pass;
 
     @Override
@@ -77,27 +75,30 @@ public class Register extends AppCompatActivity {
 
         submit.setOnClickListener(view -> {
 
+            //Gets the details and checks if empty or not to create account
             if (E_email_id.getText().toString().trim().isEmpty() || E_password.getText().toString().trim().isEmpty() || E_conf_pass.getText().toString().trim().isEmpty() || E_name.getText().toString().trim().isEmpty()) {
                 Toast.makeText(Register.this, "Empty Credentials", Toast.LENGTH_SHORT).show();
             }
             else {
                 if (S_conf_pass.equals(S_password))
                 {
+                    //For person who wishes to become a Donor
                     if (yes_or_no.isChecked())
                     {
-
+                        //Make database reference to firebase
                         DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
                         reference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
 
+                                //Check if the user already exists
                                 if (datasnapshot.child(S_name).exists())
                                 {
                                     Toast.makeText(Register.this,"\t\tThe user \n Already Exists",Toast.LENGTH_SHORT).show();
                                 }
                                 else
                                 {
-                                    //data's must be passed her to next activity
+                                    //data must be passed here to next activity
                                     //putExtra method to be used
                                     Intent intent=new Intent(Register.this, Declaration_page.class);
                                     intent.putExtra("Password",S_password);
@@ -109,11 +110,11 @@ public class Register extends AppCompatActivity {
                             public void onCancelled(@NonNull DatabaseError error) {
                             }
                         });
-
-
                     }
+                    //This is for person who doesn't want to become a donor
                     else
                     {
+                        //Make database reference to firebase
                         DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
                         reference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -137,7 +138,6 @@ public class Register extends AppCompatActivity {
 
                                 }
                             }
-
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -151,5 +151,4 @@ public class Register extends AppCompatActivity {
             }
         });
     }
-
 }

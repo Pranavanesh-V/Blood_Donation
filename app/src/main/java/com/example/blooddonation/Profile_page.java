@@ -49,15 +49,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Profile_page extends AppCompatActivity {
-
     private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "MyPrefs";
     DatabaseReference databaseReference;
-    String savedUsername;
+    String savedUsername,time="";
     Button back_req4;
     int flag;
     ConstraintLayout layout;
-    String time="";
     TextView blood_Group,name2,mail_id2,Address,Edit;
     ImageView profile;
     ProgressBar progressBar;
@@ -76,15 +74,25 @@ public class Profile_page extends AppCompatActivity {
         Edit=findViewById(R.id.Edit);
         layout=findViewById(R.id.Layout_profile);
         progressBar=findViewById(R.id.progressBar);
+
+        //Download the image
         downloadImage();
+
+        //Get the username from the Shared Preferences
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedUsername = sharedPreferences.getString("username", "");
 
+        //Fetch the data of the current user from the firebase
         fetchDataFromFirebase();
 
         back_req4.setOnClickListener(view -> finish());
 
+        //To edit the details of the current user
         Edit.setOnClickListener(view -> {
+
+            //The below Time functions are used to see if the current user is eligible to edit or not
+            //If eligible then Navigate to Edit page
+            //Else Make a message stating he needs to try later
             Timestamp firebaseTimestamp = Timestamp.now();
 
             // Convert Firebase Timestamp to java.util.Date
@@ -109,13 +117,12 @@ public class Profile_page extends AppCompatActivity {
                     Toast.makeText(Profile_page.this, "You have updated your profile \n Recently wait for some Time", Toast.LENGTH_SHORT).show();
                 }
             }
-
         });
     }
 
+    //Get the time when the user can Edit His details
     public String Time()
     {
-
         // Initialize Firebase Realtime Database
         databaseReference = FirebaseDatabase.getInstance().getReference("Donars");
         databaseReference.addValueEventListener(new ValueEventListener(){
@@ -134,6 +141,7 @@ public class Profile_page extends AppCompatActivity {
         return time;
     }
 
+    //This is for loading Screen which is shown After the editing the details of the current user
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -173,6 +181,7 @@ public class Profile_page extends AppCompatActivity {
         }
     }
 
+    //The details of the Current user displayed and fetched from the firebase database
     private void fetchDataFromFirebase() {
         // Initialize Firebase Realtime Database
 
@@ -206,6 +215,8 @@ public class Profile_page extends AppCompatActivity {
                     }
                     else
                     {
+                        //If the User is only a user not a donor
+                        //Then he consists of email and profile to display
                         if (dataSnapshot.child(savedUsername).child("Email").exists())
                         {
                             String mail = dataSnapshot.child(savedUsername).child("Email").getValue(String.class);
@@ -283,6 +294,5 @@ public class Profile_page extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
     }
 }

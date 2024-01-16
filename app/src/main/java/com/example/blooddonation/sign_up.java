@@ -31,8 +31,6 @@ public class sign_up extends AppCompatActivity {
     TextInputLayout email_id,password;
     String S_Username,S_password;
     int time = 0;
-
-
     TextView forgot;
 
     @Override
@@ -47,7 +45,7 @@ public class sign_up extends AppCompatActivity {
 
         initSharedPreferences();
 
-
+        //Get the String value from the EditText
         EditText E_email_id=email_id.getEditText();
         EditText E_password=password.getEditText();
         assert E_email_id != null;
@@ -71,15 +69,18 @@ public class sign_up extends AppCompatActivity {
         E_email_id.addTextChangedListener(login);
 
 
+        //The button helps to sign in
         submit.setOnClickListener(view -> {
 
+            //Check if the inputs or empty or not
             if (E_email_id.getText().toString().trim().isEmpty() || E_password.getText().toString().trim().isEmpty())
             {
                 Toast.makeText(sign_up.this,"Empty Credentials",Toast.LENGTH_SHORT).show();
             }
+            //If not Check if the user exists or not
             else
             {
-
+                //Establish a firebase reference to use
                 DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Donars");
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -88,12 +89,18 @@ public class sign_up extends AppCompatActivity {
                         String S_password1;
                         if (datasnapshot.child(S_Username).exists())
                         {
+                            //Get the password from the database
                             S_password1 = datasnapshot.child(S_Username).child("Password").getValue(String.class);
+                            //If the password entered is same as the one stored
+                            //Then Navigate to home page
                             if (S_password1.equals(S_password))
                             {
+                                //Once Logged in save it in Shared Preferences
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("username", S_Username);
                                 editor.putString("password", S_password1);
+
+                                //The below code is to check if the user is a donor or not
                                 String val;
                                 if (datasnapshot.child(S_Username).child("Form").exists())
                                 {
@@ -110,6 +117,7 @@ public class sign_up extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
                             }
+                            //If password Doesn't match then show respective message
                             else
                             {
                                 E_password.setText("");
@@ -124,6 +132,7 @@ public class sign_up extends AppCompatActivity {
                                 }
                             }
                         }
+                        //If user doesn't exists then navigate to Register page to create new user
                         else
                         {
                             Toast.makeText(sign_up.this,"\tNew User \n Create Account",Toast.LENGTH_SHORT).show();
@@ -131,7 +140,6 @@ public class sign_up extends AppCompatActivity {
                             finish();
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
@@ -140,10 +148,10 @@ public class sign_up extends AppCompatActivity {
             }
         });
 
+        //Forgot button is to change the password of the user
         forgot.setOnClickListener(view -> {
             if (!Objects.isNull(S_Username)) {
                 Intent intent = new Intent(sign_up.this, forgot_page.class);
-                System.out.println(S_Username+" sign in page");
                 intent.putExtra("Username", S_Username);
                 startActivity(intent);
             }
@@ -152,14 +160,8 @@ public class sign_up extends AppCompatActivity {
                 Toast.makeText(this, "Username Required", Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-
-
     }
     private void initSharedPreferences() {
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }
-
 }

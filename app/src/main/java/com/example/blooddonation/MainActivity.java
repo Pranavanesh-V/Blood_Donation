@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Navigate to the intro page
         Handler handler = new Handler();
         handler.postDelayed(this::navigateToNextActivity, 1200); // Delay in milliseconds (1.20 seconds in this example)
 

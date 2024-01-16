@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class otp_generator
 {
+    //Generate OTP which is sent to the Donor
     public String generate()
     {
         Random random=new Random();

@@ -29,10 +29,10 @@ import java.util.Date;
 
 public class Request_page extends AppCompatActivity {
 
+    //This class is to send Request (i.e) Request in need for blood
     TextInputLayout name,Address,Phone_no,Reason,Desc_Reason,blood_g;
-    Button submit;
+    Button submit,back_req3;
     TextInputEditText B_G;
-    Button back_req3;
     private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "MyPrefs";
     String S_name="",S_address="",S_phone="",S_Reason="",S_Desc_Reason="",S_blood_g="";
@@ -51,14 +51,18 @@ public class Request_page extends AppCompatActivity {
         B_G=findViewById(R.id.B_g);
         back_req3=findViewById(R.id.back7);
 
+        //Get the user name and profile picture url
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String savedUsername=sharedPreferences.getString("username","");
         String profile=sharedPreferences.getString("url","No");
 
-
+        //The PopUp Menu to select Blood Group
         B_G.setOnClickListener(view -> showPopupMenu());
+
+        //Close the current Activity
         back_req3.setOnClickListener(view -> finish());
 
+        //Get the String value from EditText
         EditText E_name=name.getEditText();
         EditText E_Address=Address.getEditText();
         EditText E_Phone=Phone_no.getEditText();
@@ -91,8 +95,8 @@ public class Request_page extends AppCompatActivity {
         E_Reason.addTextChangedListener(login);
         E_Desc_Reason.addTextChangedListener(login);
 
+        //Raises a Request for blood
         submit.setOnClickListener(view -> {
-            System.out.println(S_name + " " + S_address + " " + S_phone + " " + S_Reason + " " + S_Desc_Reason);
 
             if (S_name.isEmpty()||S_address.isEmpty()||S_phone.isEmpty()||S_blood_g.isEmpty()||S_Reason.isEmpty()||S_Desc_Reason.isEmpty())
             {
@@ -104,17 +108,17 @@ public class Request_page extends AppCompatActivity {
                     @SuppressLint("NewApi")
                     @Override
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                        // Push data to a new unique key
 
+                        //Time Denotes how long the Request will be Displayed
                         Timestamp firebaseTimestamp = Timestamp.now();
 
                         // Convert Firebase Timestamp to java.util.Date
                         Date date = firebaseTimestamp.toDate();
 
-                        // Add 8 hours to the time
+                        // Add 24 hours to the time
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTime(date);
-                        calendar.add(Calendar.HOUR_OF_DAY, 8);
+                        calendar.add(Calendar.HOUR_OF_DAY, 24);
 
                         // Convert the updated time back to a Date
                         Date updatedDate = calendar.getTime();
@@ -125,7 +129,7 @@ public class Request_page extends AppCompatActivity {
                         String formattedOriginalTimestamp = formatter.format(date);
                         String formattedUpdatedTimestamp = formatter.format(updatedDate);
 
-
+                        //Store the data into the Firbase Database
                         reference.child(S_name).child("RequesterLocation").setValue(S_address);
                         reference.child(S_name).child("Requester Phone").setValue(S_phone);
                         reference.child(S_name).child("RequesterReason").setValue(S_Reason);
@@ -135,10 +139,11 @@ public class Request_page extends AppCompatActivity {
                         reference.child(S_name).child("Profile").setValue(profile);
                         reference.child(S_name).child("Time Uploaded").setValue(formattedOriginalTimestamp);
                         reference.child(S_name).child("Time Remove").setValue(formattedUpdatedTimestamp);
+
+                        //Send the Request to every donor who has same blood group
                         Sms_sender sms_sender=new Sms_sender();
                         sms_sender.send(S_blood_g,S_name);
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
@@ -149,6 +154,8 @@ public class Request_page extends AppCompatActivity {
             }
         });
     }
+
+    //PopUp Menu for Blood Group
     private void showPopupMenu() {
         PopupMenu popupMenu = new PopupMenu(this, blood_g);
         popupMenu.getMenu().add("O+");

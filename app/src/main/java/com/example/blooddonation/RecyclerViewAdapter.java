@@ -14,10 +14,15 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+
+//RecyclerViewAdapter class for Donor lists
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private List<DataClass> itemList;
     private OnItemClickListener clickListener;
     private Context context;
+
+    //Gets the details of the donor from the home page
+    //This is a constructor
     public RecyclerViewAdapter(List<DataClass> itemList, OnItemClickListener clickListener,Context context)
     {
         this.itemList = itemList;
@@ -25,6 +30,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.context=context;
     }
 
+    //Creates a ViewHolder to Place the data
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -32,6 +38,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return new ViewHolder(view);
     }
 
+    //Bind the data with the View holder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DataClass item = itemList.get(position);
@@ -49,7 +56,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         {
             holder.recImage.setImageResource(R.drawable.logo_blood);
         }
-
     }
     @Override
     public int getItemCount() {
@@ -68,6 +74,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             Location = itemView.findViewById(R.id.recLocation);
             recImage=itemView.findViewById(R.id.recImage);
 
+            //Gets the position to see which item is clicked
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {

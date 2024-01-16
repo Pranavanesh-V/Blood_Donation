@@ -27,6 +27,7 @@ public class Login_page extends AppCompatActivity {
             finish(); // Finish the LoginActivity to prevent going back to it
         }
 
+        //Existing User Then Sign In
         signup.setOnClickListener(view -> {
 
             Intent intent=new Intent(Login_page.this, sign_up.class);
@@ -34,6 +35,8 @@ public class Login_page extends AppCompatActivity {
 
         });
 
+        //If new user is using
+        //Then Register option is clicked
         register.setOnClickListener(view -> {
 
             Intent intent=new Intent(Login_page.this, Register.class);
@@ -41,14 +44,16 @@ public class Login_page extends AppCompatActivity {
 
         });
 
-
     }
+
+    //If User Cancels Close the Application
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         finishAffinity();
     }
 
+    //See if the user is logged in or not
     private boolean isUserLoggedIn() {
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String savedUsername = sharedPreferences.getString("username", "");
@@ -56,7 +61,5 @@ public class Login_page extends AppCompatActivity {
 
         return !savedUsername.isEmpty() && !savedPassword.isEmpty();
     }
-
-
 
 }
