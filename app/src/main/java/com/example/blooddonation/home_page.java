@@ -43,26 +43,20 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
 
     TextInputLayout Search;
     Integer age;
-    String uri="";
+    String uri="",savedUsername,register,S_Blood_G,Age,Gender,inputText="";
     private static final String PREFS_NAME = "MyPrefs";
     private SharedPreferences sharedPreferences;
-    String savedUsername,register;
     TextInputEditText E_search;
     Button request_btn, donate_btn;
     Boolean res=false;
-    ImageView Filter,Menu;
+    ImageView Filter,Menu,user,heading,heading1,empty_res;
     RecyclerView recyclerView,recyclerView1;
     DatabaseReference databaseReference,databaseReference1,databaseReference2;
-    String S_Blood_G,Age,Gender;
-    String inputText="";
-    ImageView empty_res;
     private RecyclerViewAdapter adapter;
     private RecyclerViewAdapter1 adapter1;
     private List<DataClass> itemList;
     private List<DataClass2> itemList1;
     TextView Disp,Disp1;
-    ImageView user,heading,heading1;
-    boolean reg_check;
 
     @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
     @Override
@@ -95,18 +89,23 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedUsername = sharedPreferences.getString("username", "");
 
+        //Download the image for profile only if it exists
         try {
             downloadImage();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+        //Get the data from the intent
         Intent intent=getIntent();
-
         String username=intent.getStringExtra("username");
         Disp.setText(getResources().getText(R.string.hi)+" "+savedUsername);
+
+        //Fetch the Requester details
         request_fetch();
 
+        //These below buttons alternatively change the details in the screen
+        //Request button is for searching Donors
         request_btn.setOnClickListener(view -> {
             request_btn.setBackground(getDrawable(R.drawable.cus_join11));
             donate_btn.setBackground(getDrawable(R.drawable.cus_join2));
@@ -122,6 +121,8 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             empty_res.setVisibility(View.INVISIBLE);
 
         });
+
+        //This button is to see Requester details
         donate_btn.setOnClickListener(view -> {
             request_btn.setBackground(getDrawable(R.drawable.cus_join1));
             donate_btn.setBackground(getDrawable(R.drawable.cus_join22));
@@ -137,17 +138,16 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             Disp.setText(getResources().getText(R.string.hi)+" "+savedUsername);
             request_fetch();
         });
-        E_search.setOnClickListener(view -> {
 
-        });
-
+        //Navigate to the filter page
         Filter.setOnClickListener(view -> {
             Intent intent1 =new Intent(home_page.this, Filter_page.class);
             startActivityForResult(intent1,1);
         });
+
+        //Show the list of menu options
         Menu.setOnClickListener(view -> {
             // Create the floating window
-            //Menu.isFocused()
             showPopupMenuForMenu();
         });
 
@@ -160,19 +160,17 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // Do nothing while typing
+                //Get the string value when text is changed
                 inputText= E_search.getText().toString().trim();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                // The function you want to execute when text changes
-                // This function will be called when the user types in the EditText
-                //inputText= editable.toString().trim();
-                // Check if the end icon was clicked (usually for clearing text)
+
             }
         });
 
+        //End Icon in search TextInputLayout
         Search.setEndIconOnClickListener(view -> fetchDataFromFirebase());
 
 
@@ -193,15 +191,18 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     {
         // Initialize Firebase Realtime Database
         databaseReference1 = FirebaseDatabase.getInstance().getReference("Request");
-
         databaseReference1.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 itemList1.clear(); // Clear the list to avoid duplicates
+                //Empty Result Image set to invisible in default
                 empty_res.setVisibility(View.INVISIBLE);
                 boolean flag=false;
 
+                //The time function are used to see if the time limit is crossed or not
+                //If crossed the node is deleted
+                //Else it is shown
                 Timestamp firebaseTimestamp = Timestamp.now();
 
                 // Convert Firebase Timestamp to java.util.Date
@@ -218,8 +219,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                     String requesterLocation=snapshot.child("RequesterLocation").getValue(String.class);
                     String requesterReason=snapshot.child("RequesterReason").getValue(String.class);
                     if (snapshot.child("Received").exists() && snapshot.child("Profile").exists())      //remember to change the condition
-                    {                                                                                             // meaning remove the timestamp existing condition
-                        if (snapshot.child("Time Remove").exists()) {
+                    {
                             String time = snapshot.child("Time Remove").getValue(String.class);
                             //getting the result to check if the requester to be deleted or not
                             int res = time.compareTo(formattedOriginalTimestamp);
@@ -241,16 +241,10 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                         .addOnFailureListener(e -> {
                                         });
                             }
-                        }
-                        else
-                        {
-                            String url = snapshot.child("Profile").getValue(String.class);
-                            DataClass2 item = new DataClass2(requesterName, requesterLocation, requesterBloodGroup, requesterReason, url);
-                            itemList1.add(item);
-                        }
                         flag = true;
                     }
                 }
+                //check the flags to set empty result image
                 if (!flag)
                 {
                     empty_res.setVisibility(View.VISIBLE);
@@ -267,6 +261,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             }
         });
     }
+    //This is for filter activity and the filter options are got here
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -289,6 +284,8 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             }
         }
     }
+
+    //Download the image from firebase
     public void downloadImage() throws IOException {
 
         //check if profile is present or not
@@ -296,17 +293,19 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                // Push data to a new unique key
+                // Check for the existence
                 if (datasnapshot.child(savedUsername).child("Profile").exists())
                 {
                     String val=datasnapshot.child(savedUsername).child("Profile").getValue(String.class);
                     res= val.equals("Yes");
+                    //If it is present save it in shared preference for later use
                     if (res) {
                         String val_url=datasnapshot.child(savedUsername).child("Profile Value").getValue(String.class);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("url",val_url).apply();
                         Glide.with(home_page.this).load(val_url).into(user);
                     }
+                    //Else set the default user image
                     else
                     {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -315,23 +314,22 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                         Glide.with(home_page.this).load(val1).into(user);
                     }
                 }
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-
         });
-
     }
 
+    //Close the app when in home screen
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         finishAffinity();
     }
 
+    //PopUp Menu for Menu options
     private void showPopupMenuForMenu() {
 
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -339,7 +337,8 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         PopupMenu popupMenu = new PopupMenu(this, Menu);
         popupMenu.getMenu().add("Profile");
         popupMenu.getMenu().add("Request");
-        System.out.println(register);
+        //This is to check if the user is a donor or not
+        //If not show the declaration page and full registration page
         if (register.equals("no"))
         {
             popupMenu.getMenu().add("Registration");
@@ -388,6 +387,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         popupMenu.show();
     }
 
+    //Fetch list of donars based on the filter options
     private void fetchDataFromFirebase() {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
