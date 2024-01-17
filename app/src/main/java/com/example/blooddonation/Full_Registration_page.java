@@ -157,7 +157,7 @@ public class Full_Registration_page extends AppCompatActivity {
                             reference.child(Name).child("DOB").setValue(S_DOB);
                             reference.child(Name).child("Blood Group").setValue(S_blood_g);
                             reference.child(Name).child("Address").setValue(S_address);
-                            reference.child(Name).child("City").setValue(S_city);
+                            reference.child(Name).child("City").setValue(S_city.toLowerCase());
                             reference.child(Name).child("State").setValue(S_state);
                             reference.child(Name).child("Phone No").setValue(S_phone);
                             reference.child(Name).child("Emergency").setValue(S_emergency);

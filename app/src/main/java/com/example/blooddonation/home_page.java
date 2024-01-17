@@ -161,13 +161,13 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                //Get the string value when text is changed
-                inputText= E_search.getText().toString().trim();
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                //Get the string value when text is changed
+                inputText= E_search.getText().toString().trim().toLowerCase();
             }
         });
 
@@ -409,7 +409,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                         //fetch the information of each donor
                         String Blood_g = snapshot.child("Blood Group").getValue(String.class);
                         String S_Gender=snapshot.child("Gender").getValue(String.class);
-                        String S_Location=snapshot.child("City").getValue(String.class);
+                        String S_Location=snapshot.child("City").getValue(String.class).toLowerCase();
                         String S_dob=snapshot.child("DOB").getValue(String.class);
                         String S_profile=snapshot.child("Profile Value").getValue(String.class);
                         age_finder age_finder=new age_finder();
@@ -419,7 +419,8 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                         //The Below if consists of Locations
                         if (!inputText.equals(""))
                         {
-                            if (inputText.equals(S_Location))
+                            boolean res23=S_Location.toLowerCase().contains(inputText);
+                            if (res23)
                             {
                                 if (!Objects.isNull(Age)) {
                                     if (!Objects.isNull(S_Blood_G)) {
