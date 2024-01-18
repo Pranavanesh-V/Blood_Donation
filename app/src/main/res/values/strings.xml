@@ -123,4 +123,8 @@ OWNER                                                                           
     <string name="choose_from_n_device">Choose from \n Device</string>
     <string name="Mic">Mic check 1 2</string>
     <string name="loading">Loading…</string>
+    <string name="have_you_accepted_to_donate">Have you accepted to donate?</string>
+    <string name="yes">yes</string>
+    <string name="no">No</string>
+    <string name="history">History</string>
 </resources>

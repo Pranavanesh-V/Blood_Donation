@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/dd"
     tools:context=".donation_declaration"
     android:theme="@style/page71.Blood_Donation">
 

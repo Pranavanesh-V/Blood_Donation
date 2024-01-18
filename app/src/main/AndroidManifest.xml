@@ -30,6 +30,9 @@
         android:theme="@style/Theme.BloodDonation"
         tools:targetApi="31">
         <activity
+            android:name=".History_page"
+            android:exported="false" />
+        <activity
             android:name=".home_page_Registration"
             android:exported="false" />
         <activity

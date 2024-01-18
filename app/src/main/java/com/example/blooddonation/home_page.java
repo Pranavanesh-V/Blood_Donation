@@ -339,6 +339,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         PopupMenu popupMenu = new PopupMenu(this, Menu);
         popupMenu.getMenu().add("Profile");
         popupMenu.getMenu().add("Request");
+        popupMenu.getMenu().add("History");
         //This is to check if the user is a donor or not
         //If not show the declaration page and full registration page
         if (register.equals("no"))
@@ -362,8 +363,11 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             else if (option.equals("Logout"))
             {
                 logout();
-            }
-            else if (option.equals("Profile"))
+            } else if (option.equals("History"))
+            {
+                Intent intent=new Intent(home_page.this, History_page.class);
+                startActivity(intent);
+            } else if (option.equals("Profile"))
             {
                 Intent intent=new Intent(home_page.this, Profile_page.class);
                 startActivityForResult(intent,2);
