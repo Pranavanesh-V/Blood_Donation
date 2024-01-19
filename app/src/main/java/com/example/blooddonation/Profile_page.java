@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,14 +38,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Profile_page extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
@@ -106,8 +100,6 @@ public class Profile_page extends AppCompatActivity {
             if (!time.isEmpty())
             {
                 int res = time.compareTo(formattedOriginalTimestamp);
-                System.out.println(res);
-                System.out.println(time);
                 if (res < 0) {
                     Intent intent = new Intent(Profile_page.this, Edit_profile_page.class);
                     intent.putExtra("Flag", flag);
@@ -160,14 +152,11 @@ public class Profile_page extends AppCompatActivity {
                 layout.post(() -> popupWindow.showAtLocation(layout, Gravity.CENTER,0,0));
                 ProgressBar progressBar1;
                 progressBar1=popUpView.findViewById(R.id.prof);
-                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressBar1.setVisibility(View.GONE);
-                        popupWindow.dismiss();
-                        Toast.makeText(Profile_page.this, "Successfully Updated", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
+                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                    progressBar1.setVisibility(View.GONE);
+                    popupWindow.dismiss();
+                    Toast.makeText(Profile_page.this, "Successfully Updated", Toast.LENGTH_SHORT).show();
+                    finish();
                 },5000);
 
             }

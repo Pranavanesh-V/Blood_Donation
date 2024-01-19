@@ -26,7 +26,7 @@ public class ViewPageAdapter extends PagerAdapter
             R.string.Desc1,
             R.string.Desc1,
     };
-    int[] img={R.drawable.introimg1,R.drawable.introimg2,R.drawable.introimg3};
+    int[] img={R.drawable.intro1,R.drawable.intro2,R.drawable.intro3};
 
 
     public ViewPageAdapter(Context context)
