@@ -114,7 +114,7 @@ public class Profile_page extends AppCompatActivity {
                     startActivityForResult(intent, 1);
                 }
                 if (res > 0) {
-                    Toast.makeText(Profile_page.this, "You have updated your profile \n Recently wait for some Time", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Profile_page.this, "You have updated your profile \n Recently wait for some Time", Toast.LENGTH_LONG).show();
                 }
             }
         });

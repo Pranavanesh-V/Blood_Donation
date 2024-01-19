@@ -105,7 +105,6 @@ public class Request_page extends AppCompatActivity {
             else {
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Request");
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @SuppressLint("NewApi")
                     @Override
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
 
@@ -129,7 +128,7 @@ public class Request_page extends AppCompatActivity {
                         String formattedOriginalTimestamp = formatter.format(date);
                         String formattedUpdatedTimestamp = formatter.format(updatedDate);
 
-                        //Store the data into the Firbase Database
+                        //Store the data into the Firebase Database
                         reference.child(S_name).child("RequesterLocation").setValue(S_address);
                         reference.child(S_name).child("Requester Phone").setValue(S_phone);
                         reference.child(S_name).child("RequesterReason").setValue(S_Reason);
@@ -143,14 +142,15 @@ public class Request_page extends AppCompatActivity {
                         //Send the Request to every donor who has same blood group
                         Sms_sender sms_sender=new Sms_sender();
                         sms_sender.send(S_blood_g,S_name);
+                        Toast.makeText(Request_page.this,"Request Generated Successfully",Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        Toast.makeText(Request_page.this,"Request Generating Unsuccessfully",Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 });
-                Toast.makeText(Request_page.this,"Request Generated Successfully",Toast.LENGTH_SHORT).show();
-                finish();
             }
         });
     }
