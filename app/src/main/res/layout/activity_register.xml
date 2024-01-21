@@ -45,47 +45,45 @@
 
     <TextView
         android:id="@+id/Reg"
-        android:layout_width="170dp"
-        android:layout_height="54dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:fontFamily="@font/poppins_bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
+        android:fontFamily="@font/poppins_bold"
         android:lineHeight="54sp"
         android:text="@string/register"
         android:textAlignment="center"
         android:textColor="@color/red"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.258"
+        app:layout_constraintBottom_toTopOf="@+id/BTOM"
+        app:layout_constraintEnd_toEndOf="@id/end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/start"
+        app:layout_constraintTop_toTopOf="@id/top"
+        app:layout_constraintVertical_bias="0.5"
         tools:ignore="TextSizeCheck"
         tools:targetApi="p" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name"
         style="@style/page8.Blood_Donation"
-        android:layout_width="360dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:hint="@string/name"
         app:boxStrokeColor="@color/box_col"
-        app:startIconDrawable="@drawable/baseline_person_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/name_bottom"
+        app:layout_constraintEnd_toEndOf="@id/end"
         app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.383">
+        app:layout_constraintStart_toStartOf="@id/start"
+        app:layout_constraintTop_toTopOf="@id/name_top"
+        app:layout_constraintVertical_bias="0.383"
+        app:startIconDrawable="@drawable/baseline_person_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
             style="@style/page8.Blood_Donation"
-            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:inputType="textPersonName"
+            android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
             tools:layout_editor_absoluteX="26dp"
             tools:layout_editor_absoluteY="307dp" />
@@ -94,25 +92,23 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/mail_id"
         style="@style/page8.Blood_Donation"
-        android:layout_width="360dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:hint="@string/email_id"
         app:boxStrokeColor="@color/box_col"
-        app:startIconDrawable="@drawable/baseline_mail_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.484"
-        app:placeholderText="@string/abc_gmail_com">
+        app:layout_constraintBottom_toBottomOf="@id/email_bottom"
+        app:layout_constraintEnd_toEndOf="@id/end"
+        app:layout_constraintStart_toStartOf="@id/start"
+        app:layout_constraintTop_toTopOf="@id/email_top"
+        app:placeholderText="@string/abc_gmail_com"
+        app:startIconDrawable="@drawable/baseline_mail_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
             style="@style/page8.Blood_Donation"
-            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:inputType="textEmailAddress"
+            android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
             tools:layout_editor_absoluteX="25dp"
             tools:layout_editor_absoluteY="385dp" />
@@ -121,50 +117,50 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password"
         style="@style/page8.Blood_Donation"
-        android:layout_width="360dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:hint="@string/password"
         app:boxStrokeColor="@color/box_col"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:startIconDrawable="@drawable/baseline_lock_24"
         app:endIconMode="password_toggle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.583">
+        app:layout_constraintBottom_toBottomOf="@id/password_bottom"
+        app:layout_constraintEnd_toEndOf="@id/end"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="@id/start"
+        app:layout_constraintTop_toTopOf="@id/password_top"
+        app:layout_constraintVertical_bias="0.583"
+        app:startIconDrawable="@drawable/baseline_lock_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
             style="@style/page8.Blood_Donation"
-            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:inputType="textPassword"
+            android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/conf_pass"
         style="@style/page8.Blood_Donation"
-        android:layout_width="360dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:hint="@string/confirm_password"
         app:boxStrokeColor="@color/box_col"
-        app:startIconDrawable="@drawable/baseline_lock_24"
         app:endIconMode="password_toggle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/confirm_bottom"
+        app:layout_constraintEnd_toEndOf="@id/end"
         app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.684">
+        app:layout_constraintStart_toStartOf="@id/start"
+        app:layout_constraintTop_toTopOf="@id/confirm_top"
+        app:layout_constraintVertical_bias="0.684"
+        app:startIconDrawable="@drawable/baseline_lock_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
             style="@style/page8.Blood_Donation"
-            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:inputType="textPassword"
+            android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -172,29 +168,28 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/will_to_be_a_donor"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.773" />
+        app:layout_constraintBottom_toBottomOf="@id/T_top"
+        app:layout_constraintStart_toStartOf="@+id/start"
+        app:layout_constraintTop_toBottomOf="@+id/conf_pass"
+        app:layout_constraintVertical_bias="0.5" />
 
     <Switch
-        style="@style/page8.Blood_Donation"
         android:id="@+id/yes_or_no"
+        style="@style/page8.Blood_Donation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minWidth="48dp"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.82"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.777"
+        app:layout_constraintBottom_toBottomOf="@id/T_top"
+        app:layout_constraintEnd_toStartOf="@+id/end"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/conf_pass"
+        app:layout_constraintVertical_bias="0.5"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Button
@@ -207,12 +202,110 @@
         android:text="@string/submit"
         android:textColor="@color/red"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.913"
+        app:layout_constraintBottom_toBottomOf="@id/T_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/start"
+        app:layout_constraintTop_toTopOf="@id/T_top"
+        app:layout_constraintVertical_bias="0.5"
         tools:ignore="TextContrastCheck" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".045" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".955" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/name_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.36388507" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/name_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.44" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/email_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".46" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/email_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".54" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/password_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".56" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/password_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".64" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/confirm_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".66" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/confirm_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".74" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/T_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".84" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/T_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".93" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".225" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/BTOM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".34" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

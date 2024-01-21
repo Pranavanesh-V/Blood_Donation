@@ -2,15 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dd"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/dd"
-    tools:context=".donation_declaration"
-    android:theme="@style/page71.Blood_Donation">
+    android:theme="@style/page71.Blood_Donation"
+    tools:context=".donation_declaration">
 
     <Button
-        style="@style/blood_img6"
         android:id="@+id/back9"
+        style="@style/blood_img6"
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,38 +18,39 @@
         app:layout_constraintHorizontal_bias="0.088"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.071"
+        app:layout_constraintVertical_bias="0.036"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
-        style="@style/blood_img7"
         android:id="@+id/display_req2"
-        android:layout_width="348dp"
-        android:layout_height="530dp"
+        style="@style/blood_img7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleX="1.2"
         android:src="@drawable/bg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/bottom"
+        app:layout_constraintEnd_toEndOf="@id/end"
+        app:layout_constraintStart_toStartOf="@id/start"
+        app:layout_constraintTop_toTopOf="@id/top"
         app:layout_constraintVertical_bias="0.689"
         tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/logo_home2"
-        android:layout_width="111dp"
-        android:layout_height="110dp"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.021"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/logo_blood"
         tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <Button
-        style="@style/button_attr"
         android:id="@+id/donate2"
+        style="@style/button_attr"
         android:layout_width="200dp"
         android:layout_height="65dp"
         android:background="@drawable/donate_style"
@@ -59,21 +60,21 @@
         android:textColor="@color/red"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.956" />
+        app:layout_constraintEnd_toStartOf="@+id/end1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/start1"
+        app:layout_constraintTop_toTopOf="@+id/bottom"
+        app:layout_constraintVertical_bias="0.5" />
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="286dp"
-        android:layout_height="417dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/bottom1"
+        app:layout_constraintEnd_toEndOf="@id/end1"
         app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/start1"
+        app:layout_constraintTop_toTopOf="@id/top1"
         app:layout_constraintVertical_bias="0.671"
         tools:ignore="SpeakableTextPresentCheck">
 
@@ -93,6 +94,7 @@
                 android:textSize="15sp"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:targetApi="p" />
+
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
@@ -119,8 +121,8 @@
                 app:layout_constraintVertical_bias="0.998">
 
                 <RadioButton
-                    style="@style/radio_attr"
                     android:id="@+id/Agree"
+                    style="@style/radio_attr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/agree"
@@ -133,17 +135,89 @@
 
     <TextView
         android:id="@+id/Declaration_Heading"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/declaration_nto_become_a_donor"
         android:textAlignment="center"
         android:textColor="@color/red"
         android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.186" />
+        app:layout_constraintBottom_toTopOf="@id/hh_Bottom"
+        app:layout_constraintEnd_toEndOf="@id/end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/start"
+        app:layout_constraintTop_toBottomOf="@id/hh_Top"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".92" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="176dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".86" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".18" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".818" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".82" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hh_Top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".13"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hh_Bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".26"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

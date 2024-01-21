@@ -67,7 +67,7 @@
     </style>
 
     <style name="blood_img5" parent="page8.Blood_Donation">
-        <item name="android:src">@drawable/ad</item>
+        <item name="android:src">@drawable/address_dark</item>
     </style>
 
     <style name="blood_img6" parent="page8.Blood_Donation">

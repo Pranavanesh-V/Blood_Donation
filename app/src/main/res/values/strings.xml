@@ -20,13 +20,13 @@
     <string name="successfully_Logged">Successfully Logged In</string>
     <string name="forgot_password">forgot password?</string>
     <string name="forgot_password1">Forgot Password</string>
-    <string name="ops">Opps. It happens to the best of us. Input \nyour Phone Number to fix the issue.</string>
+    <string name="ops">Opps. It happens to the best of us. Input your Phone Number to fix the issue.</string>
     <string name="phone_number">Phone Number</string>
     <string name="authy_verif">Authy Verification</string>
     <string name="cop">Copy the verification code in your authy \napplication to verify this account recovery</string>
     <string name="confirm_password">CONFIRM PASSWORD</string>
     <string name="set_pass">Set new password</string>
-    <string name="new_pass">Enter your new password below and check \nthe hint while setting it.</string>
+    <string name="new_pass">Enter your new password below and check the hint while setting it.</string>
     <string name="user_name">USER NAME</string>
     <string name="name">NAME</string>
     <string name="will_to_be_a_donor">Willing to be a donor?</string>

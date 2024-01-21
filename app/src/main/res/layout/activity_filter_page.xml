@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Filter_page"
-    android:theme="@style/page71.Blood_Donation">
+    android:theme="@style/page71.Blood_Donation"
+    tools:context=".Filter_page">
 
 
     <ImageView
-        style="@style/donor_bg"
         android:id="@+id/Fil"
+        style="@style/donor_bg"
         android:layout_width="290dp"
         android:layout_height="63dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,30 +24,30 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Age"
         style="@style/page8.Blood_Donation"
-        android:layout_width="367dp"
-        android:layout_height="65dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:hint="@string/age"
         app:boxStrokeColor="@color/box_col"
         app:counterEnabled="false"
         app:endIconCheckable="true"
         app:endIconDrawable="@drawable/baseline_keyboard_arrow_down_24"
         app:endIconMode="custom"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35">
+        app:layout_constraintBottom_toBottomOf="@id/age_Bottom"
+        app:layout_constraintEnd_toEndOf="@id/end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/start"
+        app:layout_constraintTop_toTopOf="@id/age_top"
+        app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/E_age"
+            style="@style/page8.Blood_Donation"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:clickable="false"
             android:focusable="false"
-            style="@style/page8.Blood_Donation"
-            android:textSize="18sp"
             android:inputType="textPersonName"
+            android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
             tools:layout_editor_absoluteX="21dp"
             tools:layout_editor_absoluteY="280dp" />
@@ -56,29 +56,29 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Gender"
         style="@style/page8.Blood_Donation"
-        android:layout_width="367dp"
-        android:layout_height="65dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:hint="@string/gender"
         app:boxStrokeColor="@color/box_col"
         app:counterEnabled="false"
         app:endIconCheckable="true"
         app:endIconDrawable="@drawable/baseline_keyboard_arrow_down_24"
         app:endIconMode="custom"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.476">
+        app:layout_constraintBottom_toBottomOf="@id/gender_Bottom"
+        app:layout_constraintEnd_toEndOf="@id/end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/start"
+        app:layout_constraintTop_toTopOf="@id/gender_top"
+        app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/E_Gender"
+            style="@style/page8.Blood_Donation"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:clickable="false"
             android:focusable="false"
             android:inputType="textPersonName"
-            style="@style/page8.Blood_Donation"
             android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -86,29 +86,29 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Blood_group"
         style="@style/page8.Blood_Donation"
-        android:layout_width="367dp"
-        android:layout_height="65dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:hint="@string/blood_group"
         app:boxStrokeColor="@color/box_col"
         app:counterEnabled="false"
         app:endIconCheckable="true"
         app:endIconDrawable="@drawable/baseline_keyboard_arrow_down_24"
         app:endIconMode="custom"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6">
+        app:layout_constraintBottom_toBottomOf="@id/blood_Bottom"
+        app:layout_constraintEnd_toEndOf="@id/end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/start"
+        app:layout_constraintTop_toTopOf="@id/blood_top"
+        app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/E_bg"
+            style="@style/page8.Blood_Donation"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:clickable="false"
             android:focusable="false"
-            android:layout_height="55dp"
             android:inputType="textPersonName"
-            style="@style/page8.Blood_Donation"
             android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -124,12 +124,83 @@
         android:textColor="@color/red"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.828"
+        app:layout_constraintEnd_toStartOf="@+id/end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/start"
+        app:layout_constraintTop_toBottomOf="@+id/Blood_group"
+        app:layout_constraintVertical_bias="0.5"
         tools:ignore="TextContrastCheck" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".06" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".94" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hh_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".14" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hh_Bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".23" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/age_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".33" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/age_Bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".41" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gender_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".45" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gender_Bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".53" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/blood_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".57" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/blood_Bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".65" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
