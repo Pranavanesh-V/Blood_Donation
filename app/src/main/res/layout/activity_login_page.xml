@@ -13,6 +13,7 @@
         android:layout_width="254dp"
         android:layout_height="229dp"
         android:layout_marginBottom="-10dp"
+        android:importantForAccessibility="no"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -20,8 +21,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/corners"
-        tools:ignore="VisualLintBounds,ImageContrastCheck"
-        android:importantForAccessibility="no" />
+        tools:ignore="VisualLintBounds,ImageContrastCheck" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -29,6 +29,7 @@
         android:layout_height="236dp"
         android:layout_marginTop="-10dp"
         android:layout_marginEnd="-10dp"
+        android:importantForAccessibility="no"
         android:rotation="180"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,67 +38,147 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/corners"
-        tools:ignore="ImageContrastCheck,VisualLintBounds"
-        android:importantForAccessibility="no" />
+        tools:ignore="ImageContrastCheck,VisualLintBounds" />
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="285dp"
-        android:layout_height="357dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:foregroundGravity="center"
         android:importantForAccessibility="no"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.37"
-        app:srcCompat="@drawable/log_pg" />
+        app:layout_constraintBottom_toBottomOf="@id/bottom"
+        app:layout_constraintEnd_toEndOf="@id/end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/start"
+        app:layout_constraintTop_toTopOf="@id/top"
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@drawable/login_p" />
 
     <TextView
         android:id="@+id/register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:fontFamily="@font/poppins_bold"
+        android:padding="5dp"
         android:text="@string/register"
+        android:textAlignment="center"
         android:textColor="@color/red"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.393"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.666" />
+        app:layout_constraintBottom_toBottomOf="@id/txt_bottom"
+        app:layout_constraintEnd_toEndOf="@id/reg_end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/reg_start"
+        app:layout_constraintTop_toTopOf="@id/bottom"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/sign_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="-1dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:fontFamily="@font/poppins_bold"
+        android:padding="5dp"
         android:text="@string/sign_in"
+        android:textAlignment="center"
         android:textColor="@color/red"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.624"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.666" />
+        app:layout_constraintBottom_toBottomOf="@id/txt_bottom"
+        app:layout_constraintEnd_toEndOf="@id/sign_in_end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/sign_in_start"
+        app:layout_constraintTop_toTopOf="@id/bottom"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/pip_sys"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/pipe_Sys"
         android:textColor="@color/red"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.666" />
+        app:layout_constraintBottom_toBottomOf="@id/txt_bottom"
+        app:layout_constraintEnd_toEndOf="@id/bar_end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/bar_start"
+        app:layout_constraintTop_toTopOf="@id/bottom"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".16" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".84" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".67" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/reg_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".29" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/reg_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".49" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bar_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".49" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bar_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".51" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/sign_in_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".51" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/sign_in_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".69" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/txt_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".725" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
