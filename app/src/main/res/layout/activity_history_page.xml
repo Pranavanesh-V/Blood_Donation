@@ -23,7 +23,7 @@
     <TextView
         android:id="@+id/textView26"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center"
         android:text="@string/history"
@@ -32,8 +32,8 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@id/hh_bottom"
         app:layout_constraintEnd_toEndOf="@id/end"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toEndOf="@id/history_back"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/start"
         app:layout_constraintTop_toTopOf="@id/hh_top"
         app:layout_constraintVertical_bias="0.5"
         tools:ignore="TextSizeCheck" />
@@ -81,14 +81,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.06"/>
+        app:layout_constraintGuide_percent="0.02"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.94"/>
+        app:layout_constraintGuide_percent="0.98"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hh_top"

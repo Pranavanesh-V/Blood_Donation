@@ -23,15 +23,16 @@
     <TextView
         android:id="@+id/about"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/security"
+        android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/red"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="@id/hh1_bottom"
         app:layout_constraintEnd_toStartOf="@+id/img_end"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/hh2_start"
         app:layout_constraintTop_toTopOf="@id/hh1_top"
         app:layout_constraintVertical_bias="0.5" />
