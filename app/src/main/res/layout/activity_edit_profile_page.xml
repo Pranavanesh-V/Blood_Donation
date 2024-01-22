@@ -21,20 +21,6 @@
         app:layout_constraintVertical_bias="0.5"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/profile2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/user"
-        app:layout_constraintBottom_toBottomOf="@id/profile_bottom"
-        app:layout_constraintEnd_toEndOf="@id/end"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@id/start"
-        app:layout_constraintTop_toTopOf="@id/hh_bottom1"
-        app:layout_constraintVertical_bias="0.5"
-        app:shapeAppearanceOverlay="@style/circular"
-        tools:ignore="ContentDescription,ImageContrastCheck" />
-
     <TextView
         android:id="@+id/heading_pro2"
         android:layout_width="0dp"
@@ -48,6 +34,21 @@
         app:layout_constraintStart_toStartOf="@id/start"
         app:layout_constraintTop_toTopOf="@id/hh_bottom"
         app:layout_constraintVertical_bias="0.5" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profile2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/user"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintBottom_toBottomOf="@id/profile_bottom"
+        app:layout_constraintEnd_toEndOf="@id/end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/start"
+        app:layout_constraintTop_toTopOf="@id/hh_bottom1"
+        app:layout_constraintVertical_bias="0.5"
+        app:shapeAppearanceOverlay="@style/circular"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <ImageView
         android:id="@+id/back11"
@@ -146,11 +147,11 @@
         style="@style/blood_img5"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/address_bottom"
-        app:layout_constraintEnd_toEndOf="@id/end"
+        app:layout_constraintBottom_toTopOf="@id/address_bottom"
+        app:layout_constraintEnd_toStartOf="@id/end"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@id/start"
-        app:layout_constraintTop_toTopOf="@id/address_top"
+        app:layout_constraintStart_toEndOf="@id/start"
+        app:layout_constraintTop_toBottomOf="@id/address_top"
         app:layout_constraintVertical_bias="0.5"
         tools:ignore="ContentDescription" />
 

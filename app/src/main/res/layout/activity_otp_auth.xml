@@ -15,22 +15,20 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:gravity="center_horizontal|top"
-        android:lineSpacingExtra="8sp"
         android:text="@string/authy_verif"
         android:textColor="@color/red"
         android:textSize="35sp"
-        android:translationY="-4sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.205"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.135" />
+        app:layout_constraintBottom_toBottomOf="@id/hh1_bottom"
+        app:layout_constraintEnd_toEndOf="@id/end"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/start"
+        app:layout_constraintTop_toTopOf="@id/hh1_top"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/cop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:gravity="top"
@@ -38,35 +36,34 @@
         android:text="@string/cop"
         android:textColor="@color/red"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/authy_verif"
+        app:layout_constraintBottom_toBottomOf="@id/hh2_bottom"
+        app:layout_constraintEnd_toEndOf="@+id/end"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/authy_verif"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.215" />
+        app:layout_constraintStart_toStartOf="@+id/start"
+        app:layout_constraintTop_toTopOf="@id/hh1_bottom"
+        app:layout_constraintVertical_bias="0.5" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/otp1"
         style="@style/page8.Blood_Donation"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:boxStrokeColor="@color/box_col"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:nextFocusRight="@id/otp2"
-        app:layout_constraintEnd_toStartOf="@+id/otp2"
+        app:boxStrokeColor="@color/box_col"
+        app:layout_constraintBottom_toBottomOf="@id/otp_bottom"
+        app:layout_constraintEnd_toEndOf="@id/otp1_end"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.436">
+        app:layout_constraintStart_toStartOf="@id/start"
+        app:layout_constraintTop_toTopOf="@id/otp_top"
+        app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
+            style="@style/page8.Blood_Donation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:imeOptions="actionNext"
             android:inputType="number"
-            style="@style/page8.Blood_Donation"
             android:textSize="30sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck,SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -74,25 +71,24 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/otp2"
         style="@style/page8.Blood_Donation"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:boxStrokeColor="@color/box_col"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:nextFocusRight="@id/otp3"
-        app:layout_constraintEnd_toStartOf="@+id/otp3"
+        app:boxStrokeColor="@color/box_col"
+        app:layout_constraintBottom_toBottomOf="@id/otp_bottom"
+        app:layout_constraintEnd_toEndOf="@id/otp2_end"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/otp1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.436">
+        app:layout_constraintStart_toEndOf="@+id/otp2_start"
+        app:layout_constraintTop_toTopOf="@id/otp_top"
+        app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
+            style="@style/page8.Blood_Donation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:inputType="number"
-            style="@style/page8.Blood_Donation"
             android:imeOptions="actionNext"
+            android:inputType="number"
             android:textSize="30sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck,SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -100,25 +96,24 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/otp3"
         style="@style/page8.Blood_Donation"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:boxStrokeColor="@color/box_col"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:nextFocusRight="@id/otp4"
-        app:layout_constraintEnd_toStartOf="@+id/otp4"
+        app:boxStrokeColor="@color/box_col"
+        app:layout_constraintBottom_toBottomOf="@id/otp_bottom"
+        app:layout_constraintEnd_toEndOf="@id/otp3_end"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/otp2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.436">
+        app:layout_constraintStart_toEndOf="@+id/otp3_start"
+        app:layout_constraintTop_toTopOf="@id/otp_top"
+        app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
+            style="@style/page8.Blood_Donation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:imeOptions="actionNext"
             android:inputType="number"
-            style="@style/page8.Blood_Donation"
             android:textSize="30sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck,SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -126,44 +121,172 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/otp4"
         style="@style/page8.Blood_Donation"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:boxStrokeColor="@color/box_col"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/otp_bottom"
+        app:layout_constraintEnd_toEndOf="@id/otp4_end"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/otp3"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.436">
+        app:layout_constraintStart_toEndOf="@+id/otp4_start"
+        app:layout_constraintTop_toTopOf="@id/otp_top"
+        app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
+            style="@style/page8.Blood_Donation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:inputType="number"
-            style="@style/page8.Blood_Donation"
             android:textSize="30sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck,SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/submit"
-        android:layout_width="186dp"
         style="@style/button_attr"
-        android:layout_height="61dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/btn_style"
+        android:enabled="true"
         android:fontFamily="@font/poppins_extralight"
         android:text="@string/submit"
         android:textColor="@color/red"
         android:textSize="24sp"
-        android:enabled="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.828"
+        app:layout_constraintBottom_toTopOf="@id/btn_bottom"
+        app:layout_constraintEnd_toStartOf="@id/btn_end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/btn_start"
+        app:layout_constraintTop_toBottomOf="@id/btn_top"
+        app:layout_constraintVertical_bias="0.5"
         tools:ignore="TextContrastCheck" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hh1_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hh1_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hh2_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/otp_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/otp_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".51" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/otp1_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".24" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/otp2_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".28" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/otp2_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".48" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/otp3_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".52" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/otp3_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".72" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/otp4_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".76" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/otp4_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/btn_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".76" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/btn_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".85" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/btn_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".26" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/btn_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".72" />
+
 
 
 

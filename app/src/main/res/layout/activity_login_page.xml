@@ -57,51 +57,53 @@
     <TextView
         android:id="@+id/register"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
-        android:padding="5dp"
+        android:gravity="center"
         android:text="@string/register"
         android:textAlignment="center"
         android:textColor="@color/red"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@id/txt_bottom"
+        app:layout_constraintBottom_toTopOf="@id/txt_bottom"
         app:layout_constraintEnd_toEndOf="@id/reg_end"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/reg_start"
-        app:layout_constraintTop_toTopOf="@id/bottom"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toTopOf="@id/reg_top"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/sign_up"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
-        android:padding="5dp"
+        android:gravity="center"
         android:text="@string/sign_in"
         android:textAlignment="center"
         android:textColor="@color/red"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@id/txt_bottom"
+        app:layout_constraintBottom_toTopOf="@id/txt_bottom"
         app:layout_constraintEnd_toEndOf="@id/sign_in_end"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/sign_in_start"
-        app:layout_constraintTop_toTopOf="@id/bottom"
+        app:layout_constraintTop_toTopOf="@id/reg_top"
         app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/pip_sys"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/pipe_Sys"
         android:textColor="@color/red"
+        android:textAlignment="center"
+        android:gravity="center"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/txt_bottom"
         app:layout_constraintEnd_toEndOf="@id/bar_end"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/bar_start"
-        app:layout_constraintTop_toTopOf="@id/bottom"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toTopOf="@id/reg_top"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/start"
@@ -129,7 +131,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".67" />
+        app:layout_constraintGuide_percent=".65" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/reg_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".65" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/reg_start"
@@ -178,7 +187,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".725" />
+        app:layout_constraintGuide_percent=".7" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

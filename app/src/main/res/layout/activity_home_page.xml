@@ -27,10 +27,10 @@
         android:src="@drawable/baseline_menu_24"
         app:layout_constraintBottom_toTopOf="@+id/hh_Bottom"
         app:layout_constraintEnd_toStartOf="@+id/end"
-        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/start"
         app:layout_constraintTop_toTopOf="@+id/hh_top"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="0.47"
         tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <ImageView
@@ -155,15 +155,14 @@
     <ImageView
         android:id="@+id/heading"
         style="@style/donation_bg"
-        android:src="@drawable/group_75_removebg_preview"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:src="@drawable/group_75_removebg_preview"
         app:layout_constraintBottom_toBottomOf="@id/img_bottom"
         app:layout_constraintEnd_toEndOf="@id/end"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/start"
-        app:layout_constraintTop_toTopOf="@id/img_top"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintTop_toTopOf="@+id/img_top"
         tools:ignore="ContentDescription" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -180,8 +179,8 @@
 
     <Button
         android:id="@+id/request_btn"
-        android:layout_width="92dp"
-        android:layout_height="71dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@drawable/cus_join1"
         app:layout_constraintBottom_toBottomOf="@id/button_bottom"
         app:layout_constraintEnd_toEndOf="@id/button_end"
@@ -193,8 +192,8 @@
 
     <Button
         android:id="@+id/donate_btn"
-        android:layout_width="92dp"
-        android:layout_height="71dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@drawable/cus_join22"
         app:layout_constraintBottom_toBottomOf="@id/button_bottom"
         app:layout_constraintEnd_toEndOf="@id/button2_end"
@@ -223,14 +222,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".04" />
+        app:layout_constraintGuide_percent=".02" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".94" />
+        app:layout_constraintGuide_percent=".98" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hh_top"
@@ -363,14 +362,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".71" />
+        app:layout_constraintGuide_percent=".7" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/button2_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".93" />
+        app:layout_constraintGuide_percent=".92" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/button_top"

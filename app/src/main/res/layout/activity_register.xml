@@ -9,36 +9,33 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="131dp"
-        android:layout_height="117dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:importantForAccessibility="no"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.91"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintBottom_toTopOf="@+id/hh_img_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/end"
+        app:layout_constraintStart_toStartOf="@+id/hh_img_start"
+        app:layout_constraintTop_toTopOf="@+id/hh_img_top"
         app:srcCompat="@drawable/logo_blood"
         tools:ignore="ImageContrastCheck" />
 
     <TextView
         android:id="@+id/blood_donat3"
-        android:layout_width="189dp"
-        android:layout_height="75dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:fontFamily="@font/poppins"
-        android:gravity="top"
-        android:lineHeight="36sp"
         android:text="@string/b_d"
         android:textColor="@color/red"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.207"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.079"
+        app:layout_constraintBottom_toTopOf="@id/hh_img_bottom"
+        app:layout_constraintEnd_toEndOf="@id/hh_txt_end"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/start"
+        app:layout_constraintTop_toTopOf="@id/hh_img_top"
+        app:layout_constraintVertical_bias="0.5"
         tools:ignore="TextSizeCheck"
         tools:targetApi="p" />
 
@@ -47,8 +44,8 @@
         android:id="@+id/Reg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
         android:lineHeight="54sp"
         android:text="@string/register"
         android:textAlignment="center"
@@ -307,5 +304,35 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".34" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hh_txt_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".37" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hh_img_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".65" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hh_img_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hh_img_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".16" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
