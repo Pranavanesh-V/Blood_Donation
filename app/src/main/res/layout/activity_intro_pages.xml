@@ -40,11 +40,11 @@
         android:layout_width="350dp"
         android:layout_height="0dp"
         android:text="@string/continue1"
+        app:layout_constraintBottom_toBottomOf="@id/btn_bottom"
         app:layout_constraintEnd_toEndOf="@id/end"
         app:layout_constraintStart_toStartOf="@id/start"
         app:layout_constraintTop_toBottomOf="@+id/btn_top"
-        app:layout_constraintBottom_toBottomOf="@id/btn_bottom"
-        tools:ignore="TextContrastCheck,VisualLintButtonSize" />
+        tools:ignore="TextContrastCheck,VisualLintButtonSize,TouchTargetSizeCheck" />
 
     <LinearLayout
         android:id="@+id/indicatorLayout"
