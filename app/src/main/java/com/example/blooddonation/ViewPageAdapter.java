@@ -23,8 +23,8 @@ public class ViewPageAdapter extends PagerAdapter
     };
     int[] Description ={
             R.string.Desc1,
-            R.string.Desc1,
-            R.string.Desc1,
+            R.string.Desc2,
+            R.string.Desc3,
     };
     int[] img={R.drawable.intro1,R.drawable.intro2,R.drawable.intro3};
 

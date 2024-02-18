@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/Layout_profile"
     android:theme="@style/page71.Blood_Donation"
     tools:context=".home_page">
 
@@ -81,11 +82,12 @@
     <ImageView
         android:id="@+id/Filter"
         style="@style/bg"
-        android:layout_width="47dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/baseline_filter_list_24"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/search_bottom"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@+id/end"
         app:layout_constraintStart_toEndOf="@+id/Search"
         app:layout_constraintTop_toBottomOf="@id/search_top"
@@ -94,7 +96,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
-        android:layout_height="420dp"
+        android:layout_height="0dp"
         android:scrollbars="vertical"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -157,13 +159,12 @@
         style="@style/donation_bg"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/group_75_removebg_preview"
         app:layout_constraintBottom_toBottomOf="@id/img_bottom"
         app:layout_constraintEnd_toEndOf="@id/end"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/start"
         app:layout_constraintTop_toTopOf="@+id/img_top"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView1"
@@ -222,14 +223,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".02" />
+        app:layout_constraintGuide_percent=".03" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".98" />
+        app:layout_constraintGuide_percent=".97" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hh_top"
@@ -362,7 +363,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".7" />
+        app:layout_constraintGuide_percent=".69" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/button2_end"
@@ -376,7 +377,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".84" />
+        app:layout_constraintGuide_percent=".85" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/button_bottom"

@@ -23,7 +23,7 @@
     <ImageView
         style="@style/blood_img9"
         android:id="@+id/display_req"
-        android:layout_width="387dp"
+        android:layout_width="match_parent"
         android:layout_height="580dp"
         android:src="@drawable/bg"
         app:layout_constraintBottom_toBottomOf="parent"

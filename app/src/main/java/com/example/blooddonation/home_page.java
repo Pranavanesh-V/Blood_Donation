@@ -6,13 +6,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,6 +55,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     String uri="",savedUsername,register,S_Blood_G,Age,Gender,inputText="";
     private static final String PREFS_NAME = "MyPrefs";
     private SharedPreferences sharedPreferences;
+    ConstraintLayout layout;
     TextInputEditText E_search;
     Button request_btn, donate_btn;
     Boolean res=false;
@@ -65,6 +74,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        layout=findViewById(R.id.Layout_profile);
         empty_res=findViewById(R.id.empty_res);
         request_btn =findViewById(R.id.request_btn);
         donate_btn =findViewById(R.id.donate_btn);
@@ -224,6 +234,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                     {
                             String time = snapshot.child("Time Remove").getValue(String.class);
                             //getting the result to check if the requester to be deleted or not
+                        System.out.println(time);
                             int res = time.compareTo(formattedOriginalTimestamp);
                             //check the condition
                             if (res > 0) {
@@ -275,6 +286,36 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                 Age=data.getStringExtra("Age");
                 S_Blood_G=data.getStringExtra("Blood_group");
                 Gender=data.getStringExtra("Gender");
+            }
+        }
+        else if (requestCode==33)
+        {
+            if (resultCode==RESULT_OK)
+            {
+                LayoutInflater inflater=(LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                @SuppressLint("InflateParams") View popUpView=inflater.inflate(R.layout.loading_lay,null);
+
+                int width= ViewGroup.LayoutParams.MATCH_PARENT;
+                int height=ViewGroup.LayoutParams.WRAP_CONTENT;
+                boolean focusable=true;
+                PopupWindow popupWindow=new PopupWindow(popUpView,width,height,focusable);
+                layout.post(() -> popupWindow.showAtLocation(layout, Gravity.CENTER,0,0));
+                ProgressBar progressBar1;
+                progressBar1=popUpView.findViewById(R.id.prof);
+                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                    progressBar1.setVisibility(View.GONE);
+                    popupWindow.dismiss();
+                    finish();
+                },5000);
+                Toast.makeText(home_page.this, "Successfully Uploaded", Toast.LENGTH_SHORT).show();
+            }
+            else if (resultCode==RESULT_CANCELED)
+            {
+                Toast.makeText(this, "UnSuccessfully uploaded", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(this, "shit", Toast.LENGTH_SHORT).show();
             }
         }
         else
@@ -358,7 +399,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             if (option.equals("Request"))
             {
                 Intent intent=new Intent(home_page.this, Request_page.class);
-                startActivity(intent);
+                startActivityForResult(intent,33);
             }
             else if (option.equals("Logout"))
             {
@@ -370,7 +411,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             } else if (option.equals("Profile"))
             {
                 Intent intent=new Intent(home_page.this, Profile_page.class);
-                startActivityForResult(intent,2);
+                startActivity(intent);
             }
             else if (option.equals("About"))
             {

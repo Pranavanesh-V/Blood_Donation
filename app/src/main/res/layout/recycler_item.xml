@@ -1,70 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="80dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/recCard"
-    android:layout_marginStart="12dp"
     android:layout_gravity="center|top"
-    android:layout_marginEnd="12dp"
     android:layout_marginHorizontal="10dp"
     android:layout_marginVertical="10dp"
     app:cardCornerRadius="20dp"
     app:cardElevation="5dp">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/bg1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        style="@style/bg1">
+        android:layout_height="match_parent">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/recImage"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="12dp"
-            android:padding="8dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:scaleType="centerCrop"
             android:src="@drawable/logo_blood"
-            app:shapeAppearanceOverlay="@style/circular"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circular" />
 
         <TextView
             android:id="@+id/recName"
-            android:layout_width="120dp"
-            android:layout_height="30dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="15dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_toEndOf="@id/recImage"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
             android:text="@string/name"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/recBlood"
+            app:layout_constraintEnd_toStartOf="@+id/guideline1"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.2"
+            tools:ignore="RtlSymmetry,TextSizeCheck" />
 
         <TextView
             android:id="@+id/recLocation"
-            android:layout_width="100dp"
-            android:layout_height="31dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="43dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="24dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_toEndOf="@id/recName"
             android:text="@string/location"
+            android:gravity="center"
             android:textAlignment="center"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias=".8"
+            app:layout_constraintStart_toEndOf="@+id/guideline1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.346"
+            tools:ignore="TextSizeCheck" />
 
         <TextView
             android:id="@+id/recBlood"
-            android:layout_width="120dp"
-            android:layout_height="30dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="15dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_toEndOf="@id/recImage"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
             android:text="@string/blood_group"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline1"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/recName"
+            tools:ignore="RtlSymmetry,TextSizeCheck" />
 
-    </RelativeLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".2" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".65" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

@@ -83,10 +83,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/txt_bottom"
         app:layout_constraintEnd_toEndOf="@id/sign_in_end"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/sign_in_start"
         app:layout_constraintTop_toTopOf="@id/reg_top"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/pip_sys"

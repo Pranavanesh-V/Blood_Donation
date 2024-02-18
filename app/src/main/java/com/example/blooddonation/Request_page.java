@@ -2,6 +2,7 @@ package com.example.blooddonation;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -143,7 +144,8 @@ public class Request_page extends AppCompatActivity {
                         Sms_sender sms_sender=new Sms_sender();
                         sms_sender.send(S_blood_g,S_name);
                         Toast.makeText(Request_page.this,"Request Generated Successfully",Toast.LENGTH_SHORT).show();
-                        finish();
+                        setResult(RESULT_OK);
+                        onBackPressed();
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {

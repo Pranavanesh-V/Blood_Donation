@@ -17,14 +17,14 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/blood_donat4"
         app:layout_constraintTop_toTopOf="@id/T_top"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/logo_blood"
         tools:ignore="ImageContrastCheck" />
 
     <TextView
         android:id="@+id/blood_donat4"
         android:layout_width="189dp"
-        android:layout_height="75dp"
+        android:layout_height="0dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:fontFamily="@font/poppins"
@@ -42,10 +42,8 @@
 
     <TextView
         android:id="@+id/reg"
-        android:layout_width="231dp"
-        android:layout_height="57dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center"
         android:lineHeight="54sp"
