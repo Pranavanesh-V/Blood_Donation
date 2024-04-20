@@ -20,6 +20,19 @@
         app:srcCompat="@drawable/logo_blood"
         tools:ignore="ContentDescription,ImageContrastCheck" />
 
+    <Button
+        android:id="@+id/back"
+        style="@style/blood_img6"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@id/hh_bottom"
+        app:layout_constraintEnd_toEndOf="@id/end"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toStartOf="@id/start"
+        app:layout_constraintTop_toTopOf="@id/hh_top"
+        app:layout_constraintVertical_bias="0.5"
+        tools:ignore="SpeakableTextPresentCheck" />
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/p_img"
         android:layout_width="0dp"
@@ -34,19 +47,6 @@
         app:shapeAppearanceOverlay="@style/circular"
         app:srcCompat="@drawable/user"
         tools:ignore="ContentDescription,ImageContrastCheck" />
-
-    <Button
-        android:id="@+id/back"
-        style="@style/blood_img6"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="@id/hh_bottom"
-        app:layout_constraintEnd_toEndOf="@id/end"
-        app:layout_constraintHorizontal_bias="0.025"
-        app:layout_constraintStart_toStartOf="@id/start"
-        app:layout_constraintTop_toTopOf="@id/hh_top"
-        app:layout_constraintVertical_bias="0.5"
-        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
         android:id="@+id/imageView12"
@@ -106,6 +106,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleX="1.1"
+        android:scaleY="1"
         app:layout_constraintBottom_toBottomOf="@id/address_bottom"
         app:layout_constraintEnd_toEndOf="@id/end"
         app:layout_constraintHorizontal_bias="0.5"
@@ -113,6 +114,19 @@
         app:layout_constraintTop_toTopOf="@id/address_top"
         app:layout_constraintVertical_bias="0.5"
         tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/Address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/address_txt_bottom"
+        app:layout_constraintEnd_toEndOf="@+id/address_txt_end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/address_txt_start"
+        app:layout_constraintTop_toTopOf="@+id/address_txt_top"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/Phone_number"
@@ -139,19 +153,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/Name_txt_start"
         app:layout_constraintTop_toTopOf="@id/Name_top"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <TextView
-        android:id="@+id/Address"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/address_txt_bottom"
-        app:layout_constraintEnd_toEndOf="@+id/address_txt_end"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/address_txt_start"
-        app:layout_constraintTop_toTopOf="@+id/address_txt_top"
         app:layout_constraintVertical_bias="0.5" />
 
     <TextView
