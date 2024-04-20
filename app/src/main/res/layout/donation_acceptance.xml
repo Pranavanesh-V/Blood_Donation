@@ -2,24 +2,25 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_gravity="center"
     style="@style/loading_style"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/da1"
-        android:layout_width="360dp"
+        android:layout_width="0dp"
         android:layout_height="270dp"
         android:layout_gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline2"
+        app:layout_constraintStart_toEndOf="@id/guideline1"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:layout_width="85dp"
             android:layout_height="77dp"
+            android:importantForAccessibility="no"
             android:src="@drawable/logo_blood"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            android:importantForAccessibility="no" />
+            tools:ignore="ImageContrastCheck" />
 
         <TextView
             style="@style/Donation_accept"
@@ -44,7 +45,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             style="@style/da2"
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
             android:layout_height="190dp"
             android:layout_gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -86,7 +87,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.714"
-                tools:ignore="VisualLintButtonSize" />
+                tools:ignore="VisualLintButtonSize,TextSizeCheck" />
 
             <Button
                 android:id="@+id/no"
@@ -105,9 +106,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.714"
-                tools:ignore="VisualLintButtonSize" />
+                tools:ignore="VisualLintButtonSize,TextSizeCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".04"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".96" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

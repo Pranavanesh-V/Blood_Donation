@@ -14,11 +14,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.Timestamp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Register extends AppCompatActivity {
 
@@ -126,11 +131,34 @@ public class Register extends AppCompatActivity {
                                 }
                                 else
                                 {
+
+                                    //Once the data is stored the user can change the data for certain time
+                                    Timestamp firebaseTimestamp = Timestamp.now();
+
+                                    // Convert Firebase Timestamp to java.util.Date
+                                    Date date = firebaseTimestamp.toDate();
+
+                                    // Add 8 hours to the time
+                                    Calendar calendar = Calendar.getInstance();
+                                    calendar.setTime(date);
+                                    calendar.add(Calendar.HOUR_OF_DAY, 24);
+
+                                    // Convert the updated time back to a Date
+                                    Date updatedDate = calendar.getTime();
+
+                                    // Create a formatter for a readable date and time format
+                                    @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                    // Format and display the original and updated timestamps
+                                    String formattedOriginalTimestamp = formatter.format(date);
+                                    String formattedUpdatedTimestamp = formatter.format(updatedDate);
+
                                     // Push data to a new unique key
                                     reference.child(S_name).child("Password").setValue(S_password);
                                     reference.child(S_name).child("Email").setValue(S_email_id);
                                     reference.child(S_name).child("Profile").setValue("No");
                                     reference.child(S_name).child("Profile Value").setValue("No");
+                                    reference.child(S_name).child("Time uploaded").setValue(formattedOriginalTimestamp);
+                                    reference.child(S_name).child("Time Remove").setValue(formattedUpdatedTimestamp);
                                     Toast.makeText(Register.this,"Account Created",Toast.LENGTH_SHORT).show();
 
                                     Intent intent=new Intent(Register.this, Login_page.class);

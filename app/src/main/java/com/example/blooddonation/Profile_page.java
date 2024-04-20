@@ -146,7 +146,7 @@ public class Profile_page extends AppCompatActivity {
                 @SuppressLint("InflateParams") View popUpView=inflater.inflate(R.layout.loading_lay,null);
 
                 int width= ViewGroup.LayoutParams.MATCH_PARENT;
-                int height=ViewGroup.LayoutParams.WRAP_CONTENT;
+                int height=ViewGroup.LayoutParams.MATCH_PARENT;
                 boolean focusable=true;
                 PopupWindow popupWindow=new PopupWindow(popUpView,width,height,focusable);
                 layout.post(() -> popupWindow.showAtLocation(layout, Gravity.CENTER,0,0));
@@ -160,9 +160,13 @@ public class Profile_page extends AppCompatActivity {
                 },5000);
 
             }
-            if (resultCode==RESULT_CANCELED)
+            else if (resultCode==RESULT_CANCELED)
             {
                 Toast.makeText(this, "Changes Not Made", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(this, "shit", Toast.LENGTH_SHORT).show();
             }
         }
         else {

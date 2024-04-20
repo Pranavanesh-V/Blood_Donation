@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Blood Donation</string>
     <string name="blood_donation">Blood Donation</string>
-    <string name="register">Register</string>
+    <string name="register">Register\ </string>
     <string name="pipe_Sys">|</string>
     <string name="sign_in">Sign In</string>
     <string name="sing">A single drop of blood can make a huge difference </string>

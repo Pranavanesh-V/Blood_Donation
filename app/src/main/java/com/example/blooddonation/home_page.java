@@ -55,7 +55,6 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
     String uri="",savedUsername,register,S_Blood_G,Age,Gender,inputText="";
     private static final String PREFS_NAME = "MyPrefs";
     private SharedPreferences sharedPreferences;
-    ConstraintLayout layout;
     TextInputEditText E_search;
     Button request_btn, donate_btn;
     Boolean res=false;
@@ -74,7 +73,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        layout=findViewById(R.id.Layout_profile);
+
         empty_res=findViewById(R.id.empty_res);
         request_btn =findViewById(R.id.request_btn);
         donate_btn =findViewById(R.id.donate_btn);
@@ -232,9 +231,12 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                     String requesterReason=snapshot.child("RequesterReason").getValue(String.class);
                     if (snapshot.child("Received").exists() && snapshot.child("Profile").exists())      //remember to change the condition
                     {
-                            String time = snapshot.child("Time Remove").getValue(String.class);
-                            //getting the result to check if the requester to be deleted or not
+
+                        String time = snapshot.child("Time Remove").getValue(String.class);
+                        //getting the result to check if the requester to be deleted or not
                         System.out.println(time);
+                        if (time != null)
+                        {
                             int res = time.compareTo(formattedOriginalTimestamp);
                             //check the condition
                             if (res > 0) {
@@ -254,6 +256,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                                         .addOnFailureListener(e -> {
                                         });
                             }
+                        }
                         flag = true;
                     }
                 }
@@ -288,34 +291,15 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
                 Gender=data.getStringExtra("Gender");
             }
         }
-        else if (requestCode==33)
+        if (requestCode==33)
         {
             if (resultCode==RESULT_OK)
             {
-                LayoutInflater inflater=(LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                @SuppressLint("InflateParams") View popUpView=inflater.inflate(R.layout.loading_lay,null);
-
-                int width= ViewGroup.LayoutParams.MATCH_PARENT;
-                int height=ViewGroup.LayoutParams.WRAP_CONTENT;
-                boolean focusable=true;
-                PopupWindow popupWindow=new PopupWindow(popUpView,width,height,focusable);
-                layout.post(() -> popupWindow.showAtLocation(layout, Gravity.CENTER,0,0));
-                ProgressBar progressBar1;
-                progressBar1=popUpView.findViewById(R.id.prof);
-                new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                    progressBar1.setVisibility(View.GONE);
-                    popupWindow.dismiss();
-                    finish();
-                },5000);
-                Toast.makeText(home_page.this, "Successfully Uploaded", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Successfully Uploaded", Toast.LENGTH_SHORT).show();
             }
-            else if (resultCode==RESULT_CANCELED)
+            if (resultCode==RESULT_CANCELED)
             {
-                Toast.makeText(this, "UnSuccessfully uploaded", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-                Toast.makeText(this, "shit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "UnSuccessfully Uploaded", Toast.LENGTH_SHORT).show();
             }
         }
         else

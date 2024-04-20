@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,7 @@ public class History_page extends AppCompatActivity implements History_interface
     private static final String PREFS_NAME = "MyPrefs";
     private SharedPreferences sharedPreferences;
     String savedUsername;
+    ImageView empty_res;
     DatabaseReference databaseReference;
     @SuppressLint("NotifyDataSetChanged")
     @Override
@@ -42,6 +44,7 @@ public class History_page extends AppCompatActivity implements History_interface
         historyREC=findViewById(R.id.historyREC);
         history_back=findViewById(R.id.history_back);
         load_history=findViewById(R.id.load_history);
+        empty_res=findViewById(R.id.empty_res);
 
         GridLayoutManager gridLayoutManager=new GridLayoutManager(History_page.this,1);
         historyREC.setLayoutManager(gridLayoutManager);
@@ -59,24 +62,35 @@ public class History_page extends AppCompatActivity implements History_interface
         load_history.setVisibility(View.VISIBLE);
 
         // Initialize Firebase Realtime Database
-        databaseReference = FirebaseDatabase.getInstance().getReference("Donars").child(savedUsername).child("History");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Donars").child(savedUsername);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //itemList.clear();
                 load_history.setVisibility(View.INVISIBLE);
+                empty_res.setVisibility(View.INVISIBLE);
                 itemList = new ArrayList<>();
                 adapter = new History_RecyclerViewAdapter(itemList,History_page.this,History_page.this);
                 historyREC.setAdapter(adapter);
 
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                if (dataSnapshot.child("History").exists()) {
+                    if (dataSnapshot.child("History").getChildren() != null) {
+                        for (DataSnapshot snapshot : dataSnapshot.child("History").getChildren()) {
 
-                    String Name = snapshot.getKey();
-                    String Blood=snapshot.child("Blood Group").getValue(String.class);
-                    History_dataClass data = new History_dataClass(Name, Blood);
-                    itemList.add(data);
+                            String Name = snapshot.getKey();
+                            String Blood = snapshot.child("Blood Group").getValue(String.class);
+                            History_dataClass data = new History_dataClass(Name, Blood);
+                            itemList.add(data);
 
+                        }
+                    } else {
+                        empty_res.setVisibility(View.VISIBLE);
+                    }
+                }
+                else
+                {
+                    empty_res.setVisibility(View.VISIBLE);
                 }
             }
             @Override

@@ -1,19 +1,31 @@
 package com.example.blooddonation;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -36,12 +48,16 @@ public class Request_page extends AppCompatActivity {
     TextInputEditText B_G;
     private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "MyPrefs";
+    ConstraintLayout layout;
+    private static final int SMS_PERMISSION_REQUEST_CODE = 1;
     String S_name="",S_address="",S_phone="",S_Reason="",S_Desc_Reason="",S_blood_g="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_page);
+
+        layout=findViewById(R.id.Layout_profile);
         name=findViewById(R.id.name);
         Address=findViewById(R.id.Address);
         Phone_no=findViewById(R.id.Phone_no);
@@ -96,6 +112,16 @@ public class Request_page extends AppCompatActivity {
         E_Reason.addTextChangedListener(login);
         E_Desc_Reason.addTextChangedListener(login);
 
+        // Check SMS permission
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+            // Permission already granted, send SMS
+        } else {
+            // Request SMS permission
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION_REQUEST_CODE);
+        }
+
+
+
         //Raises a Request for blood
         submit.setOnClickListener(view -> {
 
@@ -143,9 +169,25 @@ public class Request_page extends AppCompatActivity {
                         //Send the Request to every donor who has same blood group
                         Sms_sender sms_sender=new Sms_sender();
                         sms_sender.send(S_blood_g,S_name);
-                        Toast.makeText(Request_page.this,"Request Generated Successfully",Toast.LENGTH_SHORT).show();
-                        setResult(RESULT_OK);
-                        onBackPressed();
+
+                        LayoutInflater inflater=(LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                        @SuppressLint("InflateParams") View popUpView=inflater.inflate(R.layout.loading_lay,null);
+
+                        int width= ViewGroup.LayoutParams.MATCH_PARENT;
+                        int height=ViewGroup.LayoutParams.MATCH_PARENT;
+                        boolean focusable=true;
+                        PopupWindow popupWindow=new PopupWindow(popUpView,width,height,focusable);
+                        layout.post(() -> popupWindow.showAtLocation(layout, Gravity.CENTER,0,0));
+                        ProgressBar progressBar1;
+                        progressBar1=popUpView.findViewById(R.id.prof);
+                        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                            progressBar1.setVisibility(View.GONE);
+                            popupWindow.dismiss();
+                            Toast.makeText(Request_page.this,"Request Generated Successfully",Toast.LENGTH_SHORT).show();
+                            setResult(RESULT_OK);
+                            onBackPressed();
+                        },3000);
+
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -178,5 +220,18 @@ public class Request_page extends AppCompatActivity {
             return true;
         });
         popupMenu.show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == SMS_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, send SMS
+            } else {
+                // Permission denied, show a message or handle the situation
+                Toast.makeText(this, "SMS permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

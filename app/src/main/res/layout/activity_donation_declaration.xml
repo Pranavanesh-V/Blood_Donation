@@ -21,19 +21,7 @@
         app:layout_constraintVertical_bias="0.036"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <ImageView
-        android:id="@+id/display_req2"
-        style="@style/blood_img7"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleX="1.2"
-        android:src="@drawable/bg"
-        app:layout_constraintBottom_toBottomOf="@id/bottom"
-        app:layout_constraintEnd_toEndOf="@id/end"
-        app:layout_constraintStart_toStartOf="@id/start"
-        app:layout_constraintTop_toTopOf="@id/top"
-        app:layout_constraintVertical_bias="0.689"
-        tools:ignore="ContentDescription" />
+
 
     <ImageView
         android:id="@+id/logo_home2"
@@ -183,14 +171,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".18" />
+        app:layout_constraintGuide_percent=".12" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/end1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".818" />
+        app:layout_constraintGuide_percent=".88" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top1"

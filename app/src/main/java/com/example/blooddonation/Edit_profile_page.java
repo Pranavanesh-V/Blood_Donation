@@ -69,7 +69,7 @@ public class Edit_profile_page extends AppCompatActivity {
     ConstraintLayout layout;
     ProgressBar progressBar1;
     int[] data={0,0,0};
-
+    Uri resuri=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,6 +219,9 @@ public class Edit_profile_page extends AppCompatActivity {
             }
             else
             {
+                if (resuri!=null) {
+                    uploadImage(resuri);
+                }
                 Intent intent1=new Intent();
                 setResult(RESULT_OK);
                 onBackPressed();
@@ -245,7 +248,7 @@ public class Edit_profile_page extends AppCompatActivity {
 
         //Set the Layout parameters
         int width= ViewGroup.LayoutParams.MATCH_PARENT;
-        int height=ViewGroup.LayoutParams.WRAP_CONTENT;
+        int height=ViewGroup.LayoutParams.MATCH_PARENT;
         boolean focusable=true;
 
         //popup window to access the functions
@@ -486,7 +489,7 @@ public class Edit_profile_page extends AppCompatActivity {
             // Now you can proceed with uploading the cropped image
             if (resultUri != null) {
                 profile2.setImageURI(resultUri);
-                uploadImage(resultUri);
+                resuri=resultUri;
             }
         }
     }
