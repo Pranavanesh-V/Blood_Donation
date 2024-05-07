@@ -130,4 +130,7 @@ OWNER                                                                           
     <string name="no">No</string>
     <string name="history">History</string>
     <string name="blood">blood</string>
+    <string name="name1">Name</string>
+    <string name="email">Email</string>
+    <string name="address2">Address</string>
 </resources>

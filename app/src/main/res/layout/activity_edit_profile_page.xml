@@ -147,6 +147,8 @@
         style="@style/blood_img5"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toTopOf="@id/address_bottom"
         app:layout_constraintEnd_toStartOf="@id/end"
         app:layout_constraintHorizontal_bias="0.5"

@@ -48,141 +48,144 @@
         app:srcCompat="@drawable/user"
         tools:ignore="ContentDescription,ImageContrastCheck" />
 
-    <ImageView
-        android:id="@+id/imageView12"
-        style="@style/blood_img1"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Blood"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        style="@style/page8.Blood_Donation"
+        android:hint="@string/blood_group"
+        android:textColorHint="@color/red"
+        app:boxStrokeColor="@color/box_col"
+        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/blood_bottom"
         app:layout_constraintEnd_toEndOf="@id/end"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/start"
         app:layout_constraintTop_toTopOf="@id/blood_top"
-        app:layout_constraintVertical_bias="0.5"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintVertical_bias="0.5">
 
-    <ImageView
-        android:id="@+id/imageView13"
-        style="@style/blood_img2"
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/page8.Blood_Donation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:enabled="false"
+            android:textSize="20sp"
+            android:focusable="false"
+            android:editable="false"
+            tools:ignore="Deprecated" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Name"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        style="@style/page8.Blood_Donation"
+        android:hint="@string/name1"
+        android:textColorHint="@color/red"
+        app:boxStrokeColor="@color/box_col"
+        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/Name_bottom"
         app:layout_constraintEnd_toEndOf="@id/end"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/start"
         app:layout_constraintTop_toTopOf="@id/Name_top"
-        app:layout_constraintVertical_bias="0.5"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintVertical_bias="0.5">
 
-    <ImageView
-        android:id="@+id/imageView14"
-        style="@style/blood_img3"
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/page8.Blood_Donation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:enabled="false"
+            android:textSize="20sp"
+            android:focusable="false"
+            android:editable="false"
+            tools:ignore="Deprecated" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Mail_id"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        style="@style/page8.Blood_Donation"
+        android:hint="@string/email"
+        android:textColorHint="@color/red"
+        app:boxStrokeColor="@color/box_col"
+        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/Email_bottom"
         app:layout_constraintEnd_toEndOf="@id/end"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/start"
         app:layout_constraintTop_toTopOf="@id/Email_top"
-        app:layout_constraintVertical_bias="0.5"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintVertical_bias="0.5">
 
-    <ImageView
-        android:id="@+id/imageView16"
-        style="@style/blood_img4"
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/page8.Blood_Donation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:enabled="false"
+            android:textSize="18sp"
+            android:scrollbars="vertical"
+            android:focusable="false"
+            android:editable="false"
+            tools:ignore="Deprecated" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Phone_number"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        style="@style/page8.Blood_Donation"
+        android:hint="@string/phone_number"
+        android:textColorHint="@color/red"
+        app:boxStrokeColor="@color/box_col"
+        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/Mobile_bottom"
         app:layout_constraintEnd_toEndOf="@id/end"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/start"
         app:layout_constraintTop_toTopOf="@id/Mobile_top"
-        app:layout_constraintVertical_bias="0.5"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintVertical_bias="0.5">
 
-    <ImageView
-        android:id="@+id/imageView15"
-        style="@style/blood_img5"
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/page8.Blood_Donation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:enabled="false"
+            android:textSize="18sp"
+            android:scrollbars="vertical"
+            android:focusable="false"
+            android:editable="false"
+            tools:ignore="Deprecated" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Address"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleX="1.1"
-        android:scaleY="1"
+        style="@style/page8.Blood_Donation"
+        android:hint="@string/address2"
+        android:textColorHint="@color/red"
+        app:boxStrokeColor="@color/box_col"
+        app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/address_bottom"
         app:layout_constraintEnd_toEndOf="@id/end"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/start"
         app:layout_constraintTop_toTopOf="@id/address_top"
-        app:layout_constraintVertical_bias="0.5"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintVertical_bias="0.5">
 
-    <TextView
-        android:id="@+id/Address"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/address_txt_bottom"
-        app:layout_constraintEnd_toEndOf="@+id/address_txt_end"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/address_txt_start"
-        app:layout_constraintTop_toTopOf="@+id/address_txt_top"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <TextView
-        android:id="@+id/Phone_number"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="@id/Mobile_bottom"
-        app:layout_constraintEnd_toEndOf="@id/phone_txt_end"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@id/phone_txt_start"
-        app:layout_constraintTop_toTopOf="@id/Mobile_top"
-        app:layout_constraintVertical_bias="0.5"
-        tools:ignore="TextSizeCheck" />
-
-    <TextView
-        android:id="@+id/Name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@id/Name_bottom"
-        app:layout_constraintEnd_toEndOf="@id/Name_txt_end"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@id/Name_txt_start"
-        app:layout_constraintTop_toTopOf="@id/Name_top"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <TextView
-        android:id="@+id/Mail_id"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@id/Email_bottom"
-        app:layout_constraintEnd_toEndOf="@id/Email_txt_end"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@id/Email_txt_start"
-        app:layout_constraintTop_toTopOf="@id/Email_top"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <TextView
-        android:id="@+id/Blood_Group"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="@id/blood_bottom"
-        app:layout_constraintEnd_toEndOf="@id/Blood_txt_end"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@id/Blood_txt_start"
-        app:layout_constraintTop_toTopOf="@id/blood_top"
-        app:layout_constraintVertical_bias="0.5"
-        tools:ignore="TextSizeCheck" />
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/page8.Blood_Donation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:enabled="false"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:scrollbars="vertical"
+            android:focusable="false"
+            android:editable="false"
+            tools:ignore="Deprecated" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/start"
