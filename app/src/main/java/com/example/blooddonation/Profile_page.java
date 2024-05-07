@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
@@ -32,6 +33,8 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.Timestamp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,7 +53,9 @@ public class Profile_page extends AppCompatActivity {
     Button back_req4;
     int flag;
     ConstraintLayout layout;
-    TextView blood_Group,name2,mail_id2,Address,Edit;
+    EditText E_blood_Group, E_name2, E_mail_id2, E_Address;
+    TextInputLayout blood_Group,name2,mail_id2,Address;
+    TextView Edit;
     ImageView profile;
     ProgressBar progressBar;
 
@@ -61,13 +66,18 @@ public class Profile_page extends AppCompatActivity {
 
         profile=findViewById(R.id.profile);
         back_req4=findViewById(R.id.back6);
-        blood_Group=findViewById(R.id.blood_Group);
-        name2=findViewById(R.id.name2);
-        mail_id2=findViewById(R.id.mail_id2);
-        Address=findViewById(R.id.address);
+        blood_Group =findViewById(R.id.blood_Group);
+        name2 =findViewById(R.id.name2);
+        mail_id2 =findViewById(R.id.mail_id2);
+        Address =findViewById(R.id.address);
         Edit=findViewById(R.id.Edit);
         layout=findViewById(R.id.Layout_profile);
         progressBar=findViewById(R.id.progressBar);
+
+        E_blood_Group=blood_Group.getEditText();
+        E_name2=name2.getEditText();
+        E_mail_id2=mail_id2.getEditText();
+        E_Address=Address.getEditText();
 
         //Download the image
         downloadImage();
@@ -192,18 +202,18 @@ public class Profile_page extends AppCompatActivity {
                         String address = dataSnapshot.child(savedUsername).child("Address").getValue(String.class);
                         String mail = dataSnapshot.child(savedUsername).child("Email").getValue(String.class);
                         String City = dataSnapshot.child(savedUsername).child("City").getValue(String.class);
-                        name2.setText(savedUsername);
+                        E_name2.setText(savedUsername);
                         if (blood.equals(""))
                         {
-                            blood_Group.setText(R.string.blood_group);
+                            E_blood_Group.setText(R.string.blood_group);
                         }
                         else
                         {
-                            blood_Group.setText(blood);
+                            E_blood_Group.setText(blood);
                         }
 
-                        Address.setText(String.format("%s\n%s", address, City));
-                        mail_id2.setText(mail);
+                        E_Address.setText(String.format("%s\n%s", address, City));
+                        E_mail_id2.setText(mail);
                         flag=1;
                     }
                     else
@@ -213,10 +223,10 @@ public class Profile_page extends AppCompatActivity {
                         if (dataSnapshot.child(savedUsername).child("Email").exists())
                         {
                             String mail = dataSnapshot.child(savedUsername).child("Email").getValue(String.class);
-                            name2.setText(savedUsername);
-                            mail_id2.setText(mail);
-                            blood_Group.setTextColor(Color.GRAY);
-                            Address.setTextColor(Color.GRAY);
+                            E_name2.setText(savedUsername);
+                            E_mail_id2.setText(mail);
+                            E_blood_Group.setTextColor(Color.GRAY);
+                            E_Address.setTextColor(Color.GRAY);
                             flag=0;
                         }
                     }
