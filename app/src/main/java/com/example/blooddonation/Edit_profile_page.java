@@ -21,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,6 +34,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.Timestamp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -57,9 +57,9 @@ public class Edit_profile_page extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "MyPrefs";
     DatabaseReference databaseReference;
-    EditText blood_Group2,mail_id3,address2;
+    EditText E_blood_Group2, E_mail_id3, E_address2,E_name3;
     String S_blood_g="",blood, mail, Address,savedUsername;
-    TextView name3;
+    TextInputLayout name3,blood_Group,mail_id3,address2;
     Boolean res=true;
     Button back10,save,cancel,f_device,camera;
     ImageView profile2;
@@ -76,10 +76,16 @@ public class Edit_profile_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile_page);
 
-        blood_Group2=findViewById(R.id.blood_Group2);
-        name3=findViewById(R.id.name3);
-        mail_id3=findViewById(R.id.mail_id3);
-        address2=findViewById(R.id.address2);
+        blood_Group =findViewById(R.id.blood_Group);
+        name3 =findViewById(R.id.name3);
+        mail_id3 =findViewById(R.id.mail_id3);
+        address2 =findViewById(R.id.address2);
+
+        E_address2=address2.getEditText();
+        E_blood_Group2=blood_Group.getEditText();
+        E_name3=name3.getEditText();
+        E_mail_id3=mail_id3.getEditText();
+
         back10=findViewById(R.id.back10);
         save=findViewById(R.id.Save);
         layout=findViewById(R.id.R_layout);
@@ -100,26 +106,26 @@ public class Edit_profile_page extends AppCompatActivity {
         //Get the username from the shared preference
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedUsername = sharedPreferences.getString("username", "");
-        name3.setText(savedUsername);
+        E_name3.setText(savedUsername);
 
         //This is to check if the user has given address and blood group
         //Using flags
         if (integer==1)
         {
-            blood_Group2.setEnabled(true);
-            address2.setEnabled(true);
-            mail_id3.setEnabled(true);
+            E_blood_Group2.setEnabled(true);
+            E_address2.setEnabled(true);
+            E_mail_id3.setEnabled(true);
         }
         else
         {
-            blood_Group2.setEnabled(false);
-            address2.setEnabled(false);
-            mail_id3.setEnabled(true);
+            E_blood_Group2.setEnabled(false);
+            E_address2.setEnabled(false);
+            E_mail_id3.setEnabled(true);
         }
 
         //Popup box for selecting the blood group
-        blood_Group2.setOnClickListener(view -> {
-            PopupMenu popupMenu = new PopupMenu(Edit_profile_page.this, blood_Group2);
+        E_blood_Group2.setOnClickListener(view -> {
+            PopupMenu popupMenu = new PopupMenu(Edit_profile_page.this, E_blood_Group2);
             popupMenu.getMenu().add("O+");
             popupMenu.getMenu().add("O-");
             popupMenu.getMenu().add("A+");
@@ -134,7 +140,7 @@ public class Edit_profile_page extends AppCompatActivity {
                 // Handle item selection here
                 S_blood_g = item.getTitle().toString();
                 //((TextInputLayout) blood_g.getChildAt(0)).getEditText().setText(selectedText);
-                blood_Group2.setText(S_blood_g);
+                E_blood_Group2.setText(S_blood_g);
                 return true;
             });
             popupMenu.show();
@@ -146,11 +152,11 @@ public class Edit_profile_page extends AppCompatActivity {
             //The below code is for to see the list of possibilities of making changes by the user
             //There are around 8 possibilities
             //Consider the changes and set in list 'data'
-            if(blood_Group2.getText().toString().trim().isEmpty())
+            if(E_blood_Group2.getText().toString().trim().isEmpty())
             {
-                if (mail_id3.getText().toString().trim().isEmpty())
+                if (E_mail_id3.getText().toString().trim().isEmpty())
                 {
-                    if (address2.getText().toString().trim().isEmpty())
+                    if (E_address2.getText().toString().trim().isEmpty())
                     {
                         Log.d("output","No changes");
                     }
@@ -162,7 +168,7 @@ public class Edit_profile_page extends AppCompatActivity {
                 }
                 else
                 {
-                    if (address2.getText().toString().trim().isEmpty())
+                    if (E_address2.getText().toString().trim().isEmpty())
                     {
                         data[1]=1;
                         Log.d("output","Only Mail Id");
@@ -177,9 +183,9 @@ public class Edit_profile_page extends AppCompatActivity {
             }
             else
             {
-                if (mail_id3.getText().toString().trim().isEmpty())
+                if (E_mail_id3.getText().toString().trim().isEmpty())
                 {
-                    if (address2.getText().toString().trim().isEmpty())
+                    if (E_address2.getText().toString().trim().isEmpty())
                     {
                         data[0]=1;
                         Log.d("output","Only Blood Group");
@@ -193,7 +199,7 @@ public class Edit_profile_page extends AppCompatActivity {
                 }
                 else
                 {
-                    if (address2.getText().toString().trim().isEmpty())
+                    if (E_address2.getText().toString().trim().isEmpty())
                     {
                         data[0]=1;
                         data[1]=1;
@@ -361,9 +367,9 @@ public class Edit_profile_page extends AppCompatActivity {
                     if (snapshot.child("Blood Group").exists() && snapshot.child("Address").exists() && snapshot.child("Email").exists()) {
                         //to check if the user doesn't changes the existing data but changes the profile
                         //if he changes the data handel it else just update the profile
-                        Address = address2.getText().toString().trim();
-                        mail = mail_id3.getText().toString().trim();
-                        blood = blood_Group2.getText().toString().trim();
+                        Address = E_address2.getText().toString().trim();
+                        mail = E_mail_id3.getText().toString().trim();
+                        blood = E_blood_Group2.getText().toString().trim();
                         if (d[0] == 0 && d[1] == 0 && d[2] == 1)
                         {
                             databaseReference.child(savedUsername).child("Address").setValue(Address);
@@ -427,7 +433,7 @@ public class Edit_profile_page extends AppCompatActivity {
                         }
                     } else {
                         if (d[1] == 1) {
-                            String mail = mail_id3.getText().toString().trim();
+                            String mail = E_mail_id3.getText().toString().trim();
                             databaseReference.child(savedUsername).child("Email").setValue(mail);
                             databaseReference.child(savedUsername).child("Time uploaded").setValue(formattedOriginalTimestamp);
                             databaseReference.child(savedUsername).child("Time Remove").setValue(formattedUpdatedTimestamp);
@@ -630,7 +636,7 @@ public class Edit_profile_page extends AppCompatActivity {
 
     //PopUp Menu for displaying Blood Groups for Changes
     private void showPopupMenu() {
-        PopupMenu popupMenu = new PopupMenu(this, blood_Group2);
+        PopupMenu popupMenu = new PopupMenu(this, E_blood_Group2);
         popupMenu.getMenu().add("O+");
         popupMenu.getMenu().add("O-");
         popupMenu.getMenu().add("A+");
@@ -647,7 +653,7 @@ public class Edit_profile_page extends AppCompatActivity {
             S_blood_g = item.getTitle().toString();
 
             //((TextInputLayout) blood_g.getChildAt(0)).getEditText().setText(selectedText);
-            blood_Group2.setText(S_blood_g);
+            E_blood_Group2.setText(S_blood_g);
             return true;
 
         });
