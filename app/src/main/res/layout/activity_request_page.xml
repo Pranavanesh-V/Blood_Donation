@@ -52,7 +52,7 @@
         style="@style/page8.Blood_Donation"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:hint="@string/address1"
+        android:hint="@string/city"
         app:boxStrokeColor="@color/box_col"
         app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/address_bottom"

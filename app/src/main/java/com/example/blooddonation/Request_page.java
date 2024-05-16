@@ -249,6 +249,8 @@ public class Request_page extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         onBackPressed();
+                        setResult(RESULT_OK);
+                        Toast.makeText(context, "Requires Network Connection", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .show();

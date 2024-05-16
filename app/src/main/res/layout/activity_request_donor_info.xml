@@ -13,29 +13,13 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/head_bottom"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@id/head_end1"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toEndOf="@id/start"
         app:layout_constraintTop_toBottomOf="@id/head_top"
         app:layout_constraintVertical_bias="0.5"
         tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageView
-        android:id="@+id/display_req"
-        style="@style/blood_img9"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="fitCenter"
-        android:scaleX="1.15"
-        android:scaleY="1.15"
-        android:src="@drawable/bg"
-        app:layout_constraintBottom_toTopOf="@id/bg_bottom"
-        app:layout_constraintEnd_toStartOf="@id/bg_end"
-        app:layout_constraintStart_toEndOf="@id/bg_start"
-        app:layout_constraintTop_toBottomOf="@id/bg_top"
-        app:layout_constraintVertical_bias="0.5"
-        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/logo_home"
@@ -57,12 +41,10 @@
         style="@style/blood_img8"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:translationY="-20dp"
-        android:scaleY="1.2"
-        app:layout_constraintBottom_toBottomOf="@id/bg_bottom1"
-        app:layout_constraintEnd_toStartOf="@id/button_end"
-        app:layout_constraintStart_toEndOf="@id/button_start"
-        app:layout_constraintTop_toBottomOf="@id/bg_top"
+        app:layout_constraintBottom_toTopOf="@id/req_heading_bottom"
+        app:layout_constraintEnd_toStartOf="@id/req_heading_end"
+        app:layout_constraintStart_toEndOf="@id/req_heading_start"
+        app:layout_constraintTop_toBottomOf="@id/req_heading_top"
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="ContentDescription,ImageContrastCheck" />
 
@@ -70,8 +52,8 @@
         android:id="@+id/profile_req"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toTopOf="@id/profile_bottom"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@id/profile_end"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/profile_start"
@@ -80,6 +62,106 @@
         app:shapeAppearanceOverlay="@style/circular"
         app:srcCompat="@drawable/user"
         tools:ignore="ContentDescription,ImageContrastCheck" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/blood_Group"
+        style="@style/page8.Blood_Donation"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="@string/blood_group"
+        android:textColorHint="@color/red"
+        app:boxStrokeColor="@color/box_col"
+        app:hintTextColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@id/ctn_end"
+        app:layout_constraintStart_toEndOf="@id/ctn_start"
+        app:layout_constraintTop_toBottomOf="@id/blood_top"
+        app:layout_constraintBottom_toTopOf="@id/blood_bottom">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/page8.Blood_Donation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:editable="false"
+            android:enabled="false"
+            android:focusable="false"
+            android:textSize="20sp"
+            tools:ignore="Deprecated" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        style="@style/page8.Blood_Donation"
+        android:hint="@string/name1"
+        android:textColorHint="@color/red"
+        app:boxStrokeColor="@color/box_col"
+        app:hintTextColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@id/ctn_end"
+        app:layout_constraintStart_toEndOf="@id/ctn_start"
+        app:layout_constraintTop_toBottomOf="@id/name_top"
+        app:layout_constraintBottom_toTopOf="@id/name_bottom">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/page8.Blood_Donation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:enabled="false"
+            android:textSize="20sp"
+            android:focusable="false"
+            android:editable="false"
+            tools:ignore="Deprecated" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/city"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        style="@style/page8.Blood_Donation"
+        android:hint="@string/city"
+        android:textColorHint="@color/red"
+        app:boxStrokeColor="@color/box_col"
+        app:hintTextColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@id/ctn_end"
+        app:layout_constraintStart_toEndOf="@id/ctn_start"
+        app:layout_constraintTop_toBottomOf="@id/city_top"
+        app:layout_constraintBottom_toTopOf="@id/city_bottom">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/page8.Blood_Donation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:enabled="false"
+            android:textSize="20sp"
+            android:focusable="false"
+            android:editable="false"
+            tools:ignore="Deprecated" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/reason"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        style="@style/page8.Blood_Donation"
+        android:hint="@string/reason"
+        android:textColorHint="@color/red"
+        app:boxStrokeColor="@color/box_col"
+        app:hintTextColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@id/ctn_end"
+        app:layout_constraintStart_toEndOf="@id/ctn_start"
+        app:layout_constraintTop_toBottomOf="@id/reason_top"
+        app:layout_constraintBottom_toTopOf="@id/reason_bottom">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/page8.Blood_Donation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:enabled="false"
+            android:textSize="20sp"
+            android:focusable="false"
+            android:editable="false"
+            tools:ignore="Deprecated" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/donate"
@@ -93,69 +175,11 @@
         android:text="@string/donate"
         android:textColor="@color/red"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@id/button_bottom"
-        app:layout_constraintEnd_toEndOf="@id/button_end"
+        app:layout_constraintBottom_toBottomOf="@id/btn_bottom"
+        app:layout_constraintEnd_toEndOf="@id/req_heading_end"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@id/button_start"
-        app:layout_constraintTop_toTopOf="@id/button_top"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <TextView
-        android:id="@+id/Blood_group_req"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fontFamily="@font/poppins"
-        android:textAlignment="center"
-        android:letterSpacing="-0.01"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/bld_bottom"
-        app:layout_constraintEnd_toStartOf="@id/button_end"
-        app:layout_constraintStart_toEndOf="@id/button_start"
-        app:layout_constraintTop_toBottomOf="@+id/bld_top" />
-
-    <TextView
-        android:id="@+id/name_req"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:textAlignment="center"
-        android:fontFamily="@font/poppins"
-        android:letterSpacing="-0.01"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/name_bottom"
-        app:layout_constraintEnd_toStartOf="@id/button_end"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/button_start"
-        app:layout_constraintTop_toBottomOf="@+id/name_top"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <TextView
-        android:id="@+id/city_req"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fontFamily="@font/poppins"
-        android:textAlignment="center"
-        android:letterSpacing="-0.01"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/city_bottom"
-        app:layout_constraintEnd_toStartOf="@id/button_end"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/button_start"
-        app:layout_constraintTop_toBottomOf="@+id/city_top"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <TextView
-        android:id="@+id/reason_req"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fontFamily="@font/poppins"
-        android:letterSpacing="-0.02"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/reason_bottom"
-        app:layout_constraintEnd_toStartOf="@id/button_end"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/button_start"
-        app:layout_constraintTop_toBottomOf="@+id/reason_top"
+        app:layout_constraintStart_toStartOf="@id/req_heading_start"
+        app:layout_constraintTop_toTopOf="@id/btn_top"
         app:layout_constraintVertical_bias="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -184,7 +208,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".75" />
+        app:layout_constraintGuide_percent=".82" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/head_top"
@@ -201,67 +225,32 @@
         app:layout_constraintGuide_percent=".14" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/button_top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".88" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/button_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".98" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/button_start"
+        android:id="@+id/req_heading_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".25" />
+        app:layout_constraintGuide_percent=".22" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/button_end"
+        android:id="@+id/req_heading_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".75" />
+        app:layout_constraintGuide_percent=".78" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bg_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".15" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bg_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".85" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bg_top"
+        android:id="@+id/req_heading_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".18" />
+        app:layout_constraintGuide_percent=".16" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bg_bottom"
+        android:id="@+id/req_heading_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".84" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bg_bottom1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent=".24" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/profile_top"
@@ -292,18 +281,18 @@
         app:layout_constraintGuide_percent=".65" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bld_top"
+        android:id="@+id/blood_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".47" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bld_bottom"
+        android:id="@+id/blood_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.54" />
+        app:layout_constraintGuide_percent=".55" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/name_top"
@@ -317,21 +306,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.63" />
+        app:layout_constraintGuide_percent=".64" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/city_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".64" />
+        app:layout_constraintGuide_percent=".65" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/city_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.73" />
+        app:layout_constraintGuide_percent=".73" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/reason_top"
@@ -345,6 +334,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.84" />
+        app:layout_constraintGuide_percent=".87" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/btn_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".89" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/btn_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".97" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/ctn_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/ctn_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".9" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
