@@ -2,7 +2,10 @@ package com.example.blooddonation;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,6 +49,10 @@ public class History_page extends AppCompatActivity implements History_interface
         history_back=findViewById(R.id.history_back);
         load_history=findViewById(R.id.load_history);
         empty_res=findViewById(R.id.empty_res);
+
+        if (!isNetworkConnected(this)) {
+            showNoInternetDialog(this);
+        }
 
         GridLayoutManager gridLayoutManager=new GridLayoutManager(History_page.this,1);
         historyREC.setLayoutManager(gridLayoutManager);
@@ -98,6 +106,30 @@ public class History_page extends AppCompatActivity implements History_interface
             }
         });
         // Notify the adapter that data has changed
+    }
+
+    public static boolean isNetworkConnected(Context context) {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isConnected();
+        }
+        return false;
+    }
+
+    public void showNoInternetDialog(Context context) {
+        new AlertDialog.Builder(context)
+                .setTitle("No Internet Connection")
+                .setMessage("Please check your internet connection and try again.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        onBackPressed();
+                    }
+                })
+                .show();
     }
 
 

@@ -2,8 +2,11 @@ package com.example.blooddonation;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +29,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -98,6 +102,10 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
 
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         savedUsername = sharedPreferences.getString("username", "");
+
+        if (!isNetworkConnected(this)) {
+            showNoInternetDialog(this);
+        }
 
         //Download the image for profile only if it exists
         try {
@@ -293,13 +301,9 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         }
         if (requestCode==33)
         {
-            if (resultCode==RESULT_OK)
-            {
-                Toast.makeText(this, "Successfully Uploaded", Toast.LENGTH_SHORT).show();
-            }
             if (resultCode==RESULT_CANCELED)
             {
-                Toast.makeText(this, "UnSuccessfully Uploaded", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Request not made", Toast.LENGTH_SHORT).show();
             }
         }
         else
@@ -656,6 +660,30 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         startActivity(intent);
         System.out.println(name+"\n"+blood+"\n"+location+"\n"+txt);
     }
+
+    public static boolean isNetworkConnected(Context context) {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isConnected();
+        }
+        return false;
+    }
+
+    public void showNoInternetDialog(Context context) {
+        new AlertDialog.Builder(context)
+                .setTitle("No Internet Connection")
+                .setMessage("Please check your internet connection and try again.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
 
     //For Logout
     private void logout() {

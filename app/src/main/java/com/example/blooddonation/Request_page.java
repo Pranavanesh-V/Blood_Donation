@@ -3,8 +3,11 @@ package com.example.blooddonation;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -22,6 +25,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -67,6 +71,10 @@ public class Request_page extends AppCompatActivity {
         submit=findViewById(R.id.submit2);
         B_G=findViewById(R.id.B_g);
         back_req3=findViewById(R.id.back7);
+
+        if (!isNetworkConnected(this)) {
+            showNoInternetDialog(this);
+        }
 
         //Get the user name and profile picture url
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -221,6 +229,31 @@ public class Request_page extends AppCompatActivity {
         });
         popupMenu.show();
     }
+
+    public static boolean isNetworkConnected(Context context) {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isConnected();
+        }
+        return false;
+    }
+
+    public void showNoInternetDialog(Context context) {
+        new AlertDialog.Builder(context)
+                .setTitle("No Internet Connection")
+                .setMessage("Please check your internet connection and try again.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        onBackPressed();
+                    }
+                })
+                .show();
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

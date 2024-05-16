@@ -1,10 +1,15 @@
 package com.example.blooddonation;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Login_page extends AppCompatActivity {
@@ -20,6 +25,10 @@ public class Login_page extends AppCompatActivity {
 
         register=findViewById(R.id.register);
         signup=findViewById(R.id.sign_up);
+
+        if (!isNetworkConnected(this)) {
+            showNoInternetDialog(this);
+        }
 
         if (isUserLoggedIn()) {
             // User is already logged in, navigate to the main activity
@@ -44,6 +53,29 @@ public class Login_page extends AppCompatActivity {
 
         });
 
+    }
+    public static boolean isNetworkConnected(Context context) {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isConnected();
+        }
+        return false;
+    }
+
+    public void showNoInternetDialog(Context context) {
+        new AlertDialog.Builder(context)
+                .setTitle("No Internet Connection")
+                .setMessage("Please check your internet connection and try again.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        onBackPressed();
+                    }
+                })
+                .show();
     }
 
     //If User Cancels Close the Application

@@ -2,10 +2,13 @@ package com.example.blooddonation;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,6 +28,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -73,6 +77,10 @@ public class Profile_page extends AppCompatActivity {
         Edit=findViewById(R.id.Edit);
         layout=findViewById(R.id.Layout_profile);
         progressBar=findViewById(R.id.progressBar);
+
+        if (!isNetworkConnected(this)) {
+            showNoInternetDialog(this);
+        }
 
         E_blood_Group=blood_Group.getEditText();
         E_name2=name2.getEditText();
@@ -298,4 +306,30 @@ public class Profile_page extends AppCompatActivity {
             }
         });
     }
+
+    public static boolean isNetworkConnected(Context context) {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isConnected();
+        }
+        return false;
+    }
+
+    public void showNoInternetDialog(Context context) {
+        new AlertDialog.Builder(context)
+                .setTitle("No Internet Connection")
+                .setMessage("Please check your internet connection and try again.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        onBackPressed();
+                    }
+                })
+                .show();
+    }
+
+
 }
