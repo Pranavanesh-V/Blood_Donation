@@ -1,12 +1,12 @@
 package com.example.blooddonation;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -23,11 +23,14 @@ public class Login_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
+        Log.d("page","Login page which displays options to register new user and sign in existing user");
+
         register=findViewById(R.id.register);
         signup=findViewById(R.id.sign_up);
 
         if (!isNetworkConnected(this)) {
             showNoInternetDialog(this);
+            Log.d("error","No internet access available");
         }
 
         if (isUserLoggedIn()) {
@@ -39,7 +42,7 @@ public class Login_page extends AppCompatActivity {
         //Existing User Then Sign In
         signup.setOnClickListener(view -> {
 
-            Intent intent=new Intent(Login_page.this, sign_up.class);
+            Intent intent=new Intent(Login_page.this, sign_in.class);
             startActivity(intent);
 
         });
@@ -68,12 +71,9 @@ public class Login_page extends AppCompatActivity {
         new AlertDialog.Builder(context)
                 .setTitle("No Internet Connection")
                 .setMessage("Please check your internet connection and try again.")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        onBackPressed();
-                    }
+                .setPositiveButton("OK", (dialog, which) -> {
+                    dialog.dismiss();
+                    onBackPressed();
                 })
                 .show();
     }

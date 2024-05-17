@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
-public class sign_up extends AppCompatActivity {
+public class sign_in extends AppCompatActivity {
 
     Button submit;
     private SharedPreferences sharedPreferences;
@@ -37,6 +38,8 @@ public class sign_up extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        Log.d("page","sign in page for logging in to the application");
 
         submit=findViewById(R.id.submit);
         email_id=findViewById(R.id.mail_id);
@@ -75,7 +78,7 @@ public class sign_up extends AppCompatActivity {
             //Check if the inputs or empty or not
             if (E_email_id.getText().toString().trim().isEmpty() || E_password.getText().toString().trim().isEmpty())
             {
-                Toast.makeText(sign_up.this,"Empty Credentials",Toast.LENGTH_SHORT).show();
+                Toast.makeText(sign_in.this,"Empty Credentials",Toast.LENGTH_SHORT).show();
             }
             //If not Check if the user exists or not
             else
@@ -112,7 +115,7 @@ public class sign_up extends AppCompatActivity {
                                 }
                                 editor.putString("Register", val).apply();
                                 editor.apply();
-                                Intent intent=new Intent(sign_up.this, home_page.class);
+                                Intent intent=new Intent(sign_in.this, home_page.class);
                                 intent.putExtra("username", S_Username);
                                 startActivity(intent);
                                 finish();
@@ -123,11 +126,11 @@ public class sign_up extends AppCompatActivity {
                                 E_password.setText("");
                                 if (time==3)
                                 {
-                                    Toast.makeText(sign_up.this,"\tTry \nForgot password",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(sign_in.this,"\tTry \nForgot password",Toast.LENGTH_SHORT).show();
                                     time=0;
                                 }
                                 else {
-                                    Toast.makeText(sign_up.this,"InCorrect Password",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(sign_in.this,"InCorrect Password",Toast.LENGTH_SHORT).show();
                                     time+=1;
                                 }
                             }
@@ -135,14 +138,15 @@ public class sign_up extends AppCompatActivity {
                         //If user doesn't exists then navigate to Register page to create new user
                         else
                         {
-                            Toast.makeText(sign_up.this,"\tNew User \n Create Account",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(sign_in.this,"\tNew User \n Create Account",Toast.LENGTH_SHORT).show();
                             E_email_id.setText("");
                             finish();
                         }
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        Log.d("output","error while fetching the data from the user's database");
+                        Log.d("error",error.getMessage());
                     }
                 });
             }
@@ -151,7 +155,7 @@ public class sign_up extends AppCompatActivity {
         //Forgot button is to change the password of the user
         forgot.setOnClickListener(view -> {
             if (!Objects.isNull(S_Username)) {
-                Intent intent = new Intent(sign_up.this, forgot_page.class);
+                Intent intent = new Intent(sign_in.this, forgot_page.class);
                 intent.putExtra("Username", S_Username);
                 startActivity(intent);
             }

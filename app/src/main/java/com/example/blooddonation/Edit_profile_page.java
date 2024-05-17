@@ -76,6 +76,8 @@ public class Edit_profile_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile_page);
 
+        Log.d("page","Editing profile page is viewed");
+
         blood_Group =findViewById(R.id.blood_Group);
         name3 =findViewById(R.id.name3);
         mail_id3 =findViewById(R.id.mail_id3);
@@ -93,6 +95,7 @@ public class Edit_profile_page extends AppCompatActivity {
         progressBar1=findViewById(R.id.progressBar1);
 
         //Get the flags and other data from Intents
+        Log.d("output","get flags to see how the user details can be edited");
         Intent intent=getIntent();
         int integer=intent.getIntExtra("Flag",0);
 
@@ -220,6 +223,7 @@ public class Edit_profile_page extends AppCompatActivity {
             boolean res=fetch(data);
             if (res)
             {
+                Log.d("output","validate the results from flags");
                 Toast.makeText(Edit_profile_page.this,"Unsuccessfully updated",Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -438,13 +442,13 @@ public class Edit_profile_page extends AppCompatActivity {
                             databaseReference.child(savedUsername).child("Time uploaded").setValue(formattedOriginalTimestamp);
                             databaseReference.child(savedUsername).child("Time Remove").setValue(formattedUpdatedTimestamp);
                             flag[0] = true;
-                            System.out.println("Email_id");
                         }
                     }
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("output","the changes aren't made");
                 Toast.makeText(Edit_profile_page.this, "Changes Not Made", Toast.LENGTH_SHORT).show();
             }
         });
@@ -525,7 +529,6 @@ public class Edit_profile_page extends AppCompatActivity {
                         // Now you can store the downloadUrl in your database or use it as needed
                         if (res)
                         {
-
                             //The below time related code displays the time limit and time when the user can make changes again
                             Timestamp firebaseTimestamp = Timestamp.now();
 
@@ -574,6 +577,7 @@ public class Edit_profile_page extends AppCompatActivity {
                     res=false;
                     setResult(RESULT_CANCELED);
                     // Handle any errors during upload
+                    Log.d("output","Error occurred while uploading the image to the database");
                 });
     }
     //Crop the image to store in database

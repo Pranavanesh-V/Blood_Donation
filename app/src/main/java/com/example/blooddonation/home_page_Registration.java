@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
@@ -50,6 +51,8 @@ public class home_page_Registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page_registration);
+
+        Log.d("page","Registration page same as the full registration page in the first place of account creation");
 
         submit = findViewById(R.id.submit);
         dob = findViewById(R.id.Dob);
@@ -135,7 +138,6 @@ public class home_page_Registration extends AppCompatActivity {
             }
             else
             {
-
                 //Once the data is stored the user can change the data for certain time
                 Timestamp firebaseTimestamp = Timestamp.now();
 
@@ -188,7 +190,6 @@ public class home_page_Registration extends AppCompatActivity {
                         finish();
 
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         //display it
@@ -196,6 +197,8 @@ public class home_page_Registration extends AppCompatActivity {
                         editor.putString("Register", "no").apply();
                         editor.apply();
                         Toast.makeText(home_page_Registration.this, "Updated UnSuccessfully", Toast.LENGTH_SHORT).show();
+                        Log.d("output","Error while uploading the data to the user's database");
+                        Log.d("error",error.getMessage());
                         finish();
                     }
                 });

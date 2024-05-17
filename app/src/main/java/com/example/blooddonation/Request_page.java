@@ -3,7 +3,6 @@ package com.example.blooddonation;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -13,6 +12,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,6 +74,7 @@ public class Request_page extends AppCompatActivity {
 
         if (!isNetworkConnected(this)) {
             showNoInternetDialog(this);
+            Log.d("error","No internet access available");
         }
 
         //Get the user name and profile picture url
@@ -244,14 +245,11 @@ public class Request_page extends AppCompatActivity {
         new AlertDialog.Builder(context)
                 .setTitle("No Internet Connection")
                 .setMessage("Please check your internet connection and try again.")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        onBackPressed();
-                        setResult(RESULT_OK);
-                        Toast.makeText(context, "Requires Network Connection", Toast.LENGTH_SHORT).show();
-                    }
+                .setPositiveButton("OK", (dialog, which) -> {
+                    dialog.dismiss();
+                    onBackPressed();
+                    setResult(RESULT_OK);
+                    Toast.makeText(context, "Requires Network Connection", Toast.LENGTH_SHORT).show();
                 })
                 .show();
     }

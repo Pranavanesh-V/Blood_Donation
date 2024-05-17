@@ -1,6 +1,7 @@
 package com.example.blooddonation;
 
 import android.telephony.SmsManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -38,7 +39,8 @@ public class Sms_sender {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d("output","Error while fetching the data from the database");
+                Log.d("error",error.getMessage());
             }
         });
     }

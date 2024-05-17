@@ -2,7 +2,6 @@ package com.example.blooddonation;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -13,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +37,6 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.Timestamp;
 import com.google.firebase.database.DataSnapshot;
@@ -68,6 +67,8 @@ public class Profile_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
 
+        Log.d("page","profile page of the user viewed");
+
         profile=findViewById(R.id.profile);
         back_req4=findViewById(R.id.back6);
         blood_Group =findViewById(R.id.blood_Group);
@@ -80,6 +81,7 @@ public class Profile_page extends AppCompatActivity {
 
         if (!isNetworkConnected(this)) {
             showNoInternetDialog(this);
+            Log.d("error","No internet access available");
         }
 
         E_blood_Group=blood_Group.getEditText();
@@ -145,6 +147,8 @@ public class Profile_page extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("output","Error while fetching the data from the database");
+                Log.d("error",error.getMessage());
 
             }
         });
@@ -241,7 +245,8 @@ public class Profile_page extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d("output","Error while fetching the data from the database");
+                Log.d("error",error.getMessage());
             }
         });
     }
@@ -303,6 +308,8 @@ public class Profile_page extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("output","Error while downloading the contents from the database");
+                Log.d("error",error.getMessage());
             }
         });
     }
@@ -321,15 +328,10 @@ public class Profile_page extends AppCompatActivity {
         new AlertDialog.Builder(context)
                 .setTitle("No Internet Connection")
                 .setMessage("Please check your internet connection and try again.")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        onBackPressed();
-                    }
+                .setPositiveButton("OK", (dialog, which) -> {
+                    dialog.dismiss();
+                    onBackPressed();
                 })
                 .show();
     }
-
-
 }

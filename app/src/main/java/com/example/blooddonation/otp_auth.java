@@ -7,6 +7,7 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
+import android.util.Log;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +17,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.ArrayList;
 
 public class otp_auth extends AppCompatActivity {
-
 
     private static String S_otp1,S_otp2,S_otp3,S_otp4;
     Button submit;
@@ -32,6 +32,8 @@ public class otp_auth extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_auth);
+
+        Log.d("page","Otp Authentication page for verifying the otp received");
 
         otp1=findViewById(R.id.otp1);
         otp2=findViewById(R.id.otp2);
@@ -255,7 +257,6 @@ public class otp_auth extends AppCompatActivity {
                 {
                     Toast.makeText(otp_auth.this,"Authentication Successful",Toast.LENGTH_SHORT).show();
                     Intent i=new Intent(otp_auth.this,confirm_password.class);
-                    System.out.println(O_Username+" Otp auth");
                     i.putExtra("Otp_username",O_Username);
                     startActivity(i);
                 }

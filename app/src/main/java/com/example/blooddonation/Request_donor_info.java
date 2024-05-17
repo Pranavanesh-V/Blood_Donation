@@ -4,10 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +33,8 @@ public class Request_donor_info extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_donor_info);
+
+        Log.d("page","Requester details page is viewed");
 
         back_req=findViewById(R.id.back8);
         Blood_group_req=findViewById(R.id.blood_Group);
@@ -91,7 +93,6 @@ public class Request_donor_info extends AppCompatActivity {
     {
         // Initialize Firebase Realtime Database
         databaseReference = FirebaseDatabase.getInstance().getReference("Request");
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -100,6 +101,8 @@ public class Request_donor_info extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("output","error while fetching the data from the requesters database");
+                Log.d("error",error.getMessage());
             }
         });
     }

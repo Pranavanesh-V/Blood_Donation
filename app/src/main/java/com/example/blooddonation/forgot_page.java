@@ -10,6 +10,7 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -34,15 +35,15 @@ public class forgot_page extends AppCompatActivity {
     Button submit;
     private static String MESSAGE;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_page);
 
+        Log.d("page","forgot page is viewed for changing the password");
+
         phone=findViewById(R.id.phone);
         submit=findViewById(R.id.submit);
-
 
         //get the otp here and send it
         otp_generator otp_generator=new otp_generator();
@@ -84,7 +85,6 @@ public class forgot_page extends AppCompatActivity {
             }
         };
         E_phone.addTextChangedListener(login);
-
 
         // Check SMS permission
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
@@ -131,6 +131,7 @@ public class forgot_page extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                     //Error Message
+                    Log.d("output","error while fetching data from database");
                     Toast.makeText(forgot_page.this, "Password Change Failed", Toast.LENGTH_SHORT).show();
                     finish();
 
@@ -139,7 +140,6 @@ public class forgot_page extends AppCompatActivity {
 
         });
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -160,6 +160,6 @@ public class forgot_page extends AppCompatActivity {
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(S_phone, null, MESSAGE, null, null);
         Toast.makeText(this, "SMS sent successfully", Toast.LENGTH_SHORT).show();
+        Log.d("output","Otp is "+MESSAGE);
     }
-
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -38,6 +39,8 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        Log.d("page","Initial register page for registering the user account");
 
         submit = findViewById(R.id.submit);
         email_id = findViewById(R.id.mail_id);
@@ -113,6 +116,8 @@ public class Register extends AppCompatActivity {
                             }
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
+                                Log.d("output","Error while fetching the data from the database");
+                                Log.d("error",error.getMessage());
                             }
                         });
                     }
@@ -168,7 +173,8 @@ public class Register extends AppCompatActivity {
                             }
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
-
+                                Log.d("output","Error while uploading the data into the user's database");
+                                Log.d("error",error.getMessage());
                             }
                         });
                     }

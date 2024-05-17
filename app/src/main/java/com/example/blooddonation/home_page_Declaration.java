@@ -2,6 +2,7 @@ package com.example.blooddonation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -22,6 +23,8 @@ public class home_page_Declaration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page_declaration);
 
+        Log.d("page","Declaration page for the users who can become donors if he doesn't becomes in first place");
+
         agree=findViewById(R.id.Agree);
         decline=findViewById(R.id.Decline);
         submit=findViewById(R.id.pro);
@@ -31,6 +34,8 @@ public class home_page_Declaration extends AppCompatActivity {
         String name=i.getStringExtra("Name");
 
         submit.setOnClickListener(view -> {
+
+            //to see if the form is accepted or not
             if (decline.isChecked())
             {
                 Intent intent=new Intent(home_page_Declaration.this, home_page_Registration.class);
@@ -56,7 +61,5 @@ public class home_page_Declaration extends AppCompatActivity {
                 Toast.makeText(home_page_Declaration.this, "Choose the option", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
-
 }

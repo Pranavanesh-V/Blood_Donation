@@ -2,11 +2,11 @@ package com.example.blooddonation;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -45,6 +45,8 @@ public class History_page extends AppCompatActivity implements History_interface
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_page);
 
+        Log.d("page","History page which displays the people who the user has donated to");
+
         historyREC=findViewById(R.id.historyREC);
         history_back=findViewById(R.id.history_back);
         load_history=findViewById(R.id.load_history);
@@ -52,6 +54,7 @@ public class History_page extends AppCompatActivity implements History_interface
 
         if (!isNetworkConnected(this)) {
             showNoInternetDialog(this);
+            Log.d("error","No internet access available");
         }
 
         GridLayoutManager gridLayoutManager=new GridLayoutManager(History_page.this,1);
@@ -122,12 +125,9 @@ public class History_page extends AppCompatActivity implements History_interface
         new AlertDialog.Builder(context)
                 .setTitle("No Internet Connection")
                 .setMessage("Please check your internet connection and try again.")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        onBackPressed();
-                    }
+                .setPositiveButton("OK", (dialog, which) -> {
+                    dialog.dismiss();
+                    onBackPressed();
                 })
                 .show();
     }

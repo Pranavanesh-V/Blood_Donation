@@ -2,27 +2,19 @@ package com.example.blooddonation;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.PopupWindow;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +23,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -77,6 +68,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        Log.d("page","home page which show the list of requesters and page to find particular donors");
 
         empty_res=findViewById(R.id.empty_res);
         request_btn =findViewById(R.id.request_btn);
@@ -105,6 +97,7 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
 
         if (!isNetworkConnected(this)) {
             showNoInternetDialog(this);
+            Log.d("error","No internet access available");
         }
 
         //Download the image for profile only if it exists
@@ -282,6 +275,9 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                //error while fetching the details of the requesters
+                Log.d("output","error is occurred while fetching the details from the database");
+                Log.d("error",error.getMessage());
             }
         });
     }
@@ -348,7 +344,9 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                //error has occurred while downloading image
+                Log.d("output","error while downloading the profile picture");
+                Log.d("error",error.getMessage());
             }
         });
     }
@@ -621,6 +619,8 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Handle errors
+                Log.d("output","error while fetching the data of the donors");
+                Log.d("error",databaseError.getMessage());
             }
         });
     }
@@ -675,15 +675,9 @@ public class home_page extends AppCompatActivity implements OnItemClickListener{
         new AlertDialog.Builder(context)
                 .setTitle("No Internet Connection")
                 .setMessage("Please check your internet connection and try again.")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
+                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
                 .show();
     }
-
 
     //For Logout
     private void logout() {

@@ -2,6 +2,7 @@ package com.example.blooddonation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.PopupMenu;
 
@@ -21,6 +22,8 @@ public class Filter_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_page);
+
+        Log.d("page","Filter page for filtering the list of donors is viewed");
 
         Gender=findViewById(R.id.Gender);
         E_Gender=findViewById(R.id.E_Gender);

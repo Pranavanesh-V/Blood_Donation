@@ -2,6 +2,8 @@ package com.example.blooddonation;
 
 public class History_dataClass
 {
+    //Data class used for displaying the history of the user
+    //who he has donated to
     private String Name;
     private String Blood_Group;
 

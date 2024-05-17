@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
@@ -45,6 +46,8 @@ public class Full_Registration_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_registration_page);
+
+        Log.d("page","Registration page which is extended registration page for user who has accepted to be a donor");
 
         submit = findViewById(R.id.submit);
         dob = findViewById(R.id.Dob);
@@ -179,7 +182,7 @@ public class Full_Registration_page extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        Log.d("output","error while uploading the details of the user to the database");
                     }
                 });
             }

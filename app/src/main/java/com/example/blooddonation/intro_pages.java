@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -26,6 +27,9 @@ public class intro_pages extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro_pages);
 
+        Log.d("page","intro pages for the application viewed only once after downloading the application");
+
+        //Uses the ViewPageAdapter class to display the intro pages with the contents
         skip=findViewById(R.id.skip);
         Start=findViewById(R.id.Start);
         Start.setVisibility(View.INVISIBLE);

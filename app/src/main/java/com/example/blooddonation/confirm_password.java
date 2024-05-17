@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,17 +23,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Objects;
 
 public class confirm_password extends AppCompatActivity {
-
     Button submit;
     TextInputLayout confirm_pass, new_pass,user_name;
     String S_new_pass,S_conf_pass,S_username;
     Boolean oP,Cp;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_password);
+
+        Log.d("page","Password confirmation page is viewed");
 
         submit=findViewById(R.id.submit);
         user_name=findViewById(R.id.user_name);
@@ -67,7 +67,6 @@ public class confirm_password extends AppCompatActivity {
         };
         E_pass_new.addTextChangedListener(login);
 
-
         //Assign the edittext to get the string value of the new password
         //This is for Confirm Password
         EditText E_conf_pass= confirm_pass.getEditText();
@@ -92,7 +91,6 @@ public class confirm_password extends AppCompatActivity {
         };
         E_conf_pass.addTextChangedListener(login2);
 
-
         //Assign the edittext to get the string value of the Username
         //Get Username
         EditText E_Username= user_name.getEditText();
@@ -112,7 +110,6 @@ public class confirm_password extends AppCompatActivity {
             }
         };
         E_Username.addTextChangedListener(login3);
-
 
         //This submit button is used to change the password
         submit.setOnClickListener(view -> {
@@ -138,39 +135,40 @@ public class confirm_password extends AppCompatActivity {
                                 Toast.makeText(confirm_password.this, "Password Updated", Toast.LENGTH_SHORT).show();
 
                                 //To sign in page
-                                Intent intent = new Intent(confirm_password.this, sign_up.class);
+                                Intent intent = new Intent(confirm_password.this, sign_in.class);
                                 startActivity(intent);
                                 finishAffinity();
 
                             } else {
                                 //Password mismatch message
+                                Log.d("output","Password doesn't Mismatch with the user's credentials");
                                 Toast.makeText(confirm_password.this, "Password MisMatch", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             //User not found message
+                            Log.d("output","The User is not found");
                             Toast.makeText(confirm_password.this, "User Not found", Toast.LENGTH_SHORT).show();
                         }
                     }
                     else
                     {
                         //Empty credentials
+                        Log.d("output","Credentials are not provided");
                         Toast.makeText(confirm_password.this, "Empty Credentials", Toast.LENGTH_SHORT).show();
                     }
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
                     //if the process is canceled
+                    Log.d("output","Process is canceled and the password is not changed");
                     Toast.makeText(confirm_password.this, "Password Not Changed", Toast.LENGTH_SHORT).show();
-                    Intent intent1=new Intent(confirm_password.this, sign_up.class);
+                    Intent intent1=new Intent(confirm_password.this, sign_in.class);
                     startActivity(intent1);
                     finish();
 
                 }
             });
         });
-
-
     }
 }

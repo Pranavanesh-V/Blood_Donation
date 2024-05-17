@@ -2,6 +2,7 @@ package com.example.blooddonation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -23,6 +24,8 @@ public class Declaration_page extends AppCompatActivity {
         decline=findViewById(R.id.Decline);
         submit=findViewById(R.id.pro);
 
+        Log.d("page","Declaration page after the user registration");
+
         //Get the password and username from the intent
         Intent i=getIntent();
         String pass=i.getStringExtra("Password");
@@ -30,6 +33,7 @@ public class Declaration_page extends AppCompatActivity {
 
         submit.setOnClickListener(view -> {
             //check if the user has checked the form and accepted the declaration
+            Log.d("output","See if the user has accepted the declaration");
             if (decline.isChecked())
             {
                 Intent intent=new Intent(Declaration_page.this, Full_Registration_page.class);
@@ -53,7 +57,5 @@ public class Declaration_page extends AppCompatActivity {
                 Toast.makeText(Declaration_page.this, "Choose the option", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
-
 }

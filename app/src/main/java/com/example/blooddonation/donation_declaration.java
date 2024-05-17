@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,8 @@ public class donation_declaration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_declaration);
 
+        Log.d("page","Declaration page after the donor selects a requester");
+
         donate2=findViewById(R.id.donate2);
         back_req2=findViewById(R.id.back9);
         agree=findViewById(R.id.Agree);
@@ -58,6 +61,7 @@ public class donation_declaration extends AppCompatActivity {
         //If donate button clicked navigates to dial screen to call the requester
         donate2.setOnClickListener(view -> {
             //It navigates only if the declaration is agreed
+            Log.d("output","Navigates the user to dial pad of his device if the user accepts to declaration");
             if (agree.isChecked())
             {
                 System.out.println(Phone_number);
@@ -67,6 +71,7 @@ public class donation_declaration extends AppCompatActivity {
             }
             else
             {
+                Log.d("output","Don't navigate if the user didn't agree");
                 Toast.makeText(donation_declaration.this, R.string.please_agree_to_our_declaration, Toast.LENGTH_SHORT).show();
             }
         });
@@ -76,6 +81,9 @@ public class donation_declaration extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        Log.d("output","See if the user is accepted by the requester");
+
+        //display a pop up asking if the user was accepted to donate or not
         if (requestCode==1)
         {
             LayoutInflater inflater=(LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -91,26 +99,24 @@ public class donation_declaration extends AppCompatActivity {
             Button yes,no;
             yes=popUpView.findViewById(R.id.yes);
             no=popUpView.findViewById(R.id.no);
-            yes.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Get();
-                    Toast.makeText(donation_declaration.this, "Thanks for Saving a life!!!", Toast.LENGTH_SHORT).show();
-                    popupWindow.dismiss();
-                    Intent intent=new Intent(donation_declaration.this, home_page.class);
-                    startActivity(intent);
-                    finish();
-                }
+
+            //If yes is selected upload the requester details to the user's database
+            //which will be used to display in history
+            yes.setOnClickListener(v -> {
+                Get();
+                Toast.makeText(donation_declaration.this, "Thanks for Saving a life!!!", Toast.LENGTH_SHORT).show();
+                popupWindow.dismiss();
+                Intent intent=new Intent(donation_declaration.this, home_page.class);
+                startActivity(intent);
+                finish();
             });
-            no.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(donation_declaration.this, "Help Another!!!", Toast.LENGTH_SHORT).show();
-                    popupWindow.dismiss();
-                    Intent intent=new Intent(donation_declaration.this, home_page.class);
-                    startActivity(intent);
-                    finish();
-                }
+            //if no is selected navigate the user to the requester list to make him help others
+            no.setOnClickListener(v -> {
+                Toast.makeText(donation_declaration.this, "Help Another!!!", Toast.LENGTH_SHORT).show();
+                popupWindow.dismiss();
+                Intent intent=new Intent(donation_declaration.this, home_page.class);
+                startActivity(intent);
+                finish();
             });
         }
     }
@@ -118,8 +124,8 @@ public class donation_declaration extends AppCompatActivity {
     private void Get()
     {
         // Initialize Firebase Realtime Database
+        //get the details of the requester to upload to the user's database
         databaseReference = FirebaseDatabase.getInstance().getReference("Request");
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -138,9 +144,9 @@ public class donation_declaration extends AppCompatActivity {
 
     private void push(String blood,String phone,String address,String name) {
 
+        //pass the data to the user's database
         // Initialize Firebase Realtime Database
         databaseReference = FirebaseDatabase.getInstance().getReference("Donars");
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -153,6 +159,5 @@ public class donation_declaration extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
     }
 }

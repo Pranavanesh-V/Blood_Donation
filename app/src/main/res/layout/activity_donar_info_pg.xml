@@ -178,7 +178,7 @@
             style="@style/page8.Blood_Donation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:enabled="false"
+            android:clickable="false"
             android:textAlignment="center"
             android:textSize="20sp"
             android:scrollbars="vertical"
