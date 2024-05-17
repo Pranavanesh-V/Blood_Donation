@@ -11,7 +11,7 @@
         android:id="@+id/back5"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/back_join"
+        style="@style/blood_img6"
         app:layout_constraintBottom_toBottomOf="@id/hh1_bottom"
         app:layout_constraintEnd_toEndOf="@id/hh1_end"
         app:layout_constraintHorizontal_bias="0.5"

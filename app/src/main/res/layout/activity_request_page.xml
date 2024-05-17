@@ -10,9 +10,9 @@
 
     <Button
         android:id="@+id/back7"
+        style="@style/blood_img6"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/back_join"
         app:layout_constraintBottom_toTopOf="@+id/bottom"
         app:layout_constraintEnd_toStartOf="@+id/back_end"
         app:layout_constraintStart_toStartOf="@+id/start"
@@ -38,13 +38,13 @@
         android:id="@+id/req_heading"
         android:layout_width="242dp"
         android:layout_height="0dp"
+        style="@style/req"
         app:layout_constraintBottom_toBottomOf="@id/hh_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/hh_top"
         app:layout_constraintVertical_bias="0.5"
-        app:srcCompat="@drawable/request"
         tools:ignore="ContentDescription" />
 
     <com.google.android.material.textfield.TextInputLayout

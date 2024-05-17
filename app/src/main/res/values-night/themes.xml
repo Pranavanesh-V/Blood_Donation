@@ -41,49 +41,20 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="req" parent="page8.Blood_Donation">
+        <item name="android:background">@drawable/request</item>
+    </style>
+
     <style name="donor_bg" parent="page8.Blood_Donation">
         <item name="android:src">@drawable/filter</item>
-    </style>
-
-    <style name="blood_img1" parent="page8.Blood_Donation">
-        <item name="android:src">@drawable/bld</item>
-    </style>
-
-    <style name="blood_img2" parent="page8.Blood_Donation">
-        <item name="android:src">@drawable/nd</item>
-    </style>
-
-    <style name="blood_img3" parent="page8.Blood_Donation">
-        <item name="android:src">@drawable/ed</item>
-    </style>
-
-    <style name="blood_img4" parent="page8.Blood_Donation">
-        <item name="android:src">@drawable/md</item>
-    </style>
-
-    <style name="edit_hint" parent="page8.Blood_Donation">
-        <item name="hintTextColor">@color/black</item>
-        <item name="backgroundTint">@color/white_bg</item>
-    </style>
-
-    <style name="blood_img5" parent="page8.Blood_Donation">
-        <item name="android:src">@drawable/address_dark</item>
     </style>
 
     <style name="blood_img6" parent="page8.Blood_Donation">
         <item name="android:background">@drawable/back_join</item>
     </style>
 
-    <style name="blood_img7" parent="page8.Blood_Donation">
-        <item name="android:tint">@color/box_col</item>
-    </style>
-
     <style name="blood_img8" parent="page8.Blood_Donation">
         <item name="android:src">@drawable/request_details</item>
-    </style>
-
-    <style name="blood_img9" parent="page8.Blood_Donation">
-        <item name="tint">@color/box_col</item>
     </style>
 
     <style name="bg1" parent="page8.Blood_Donation">
@@ -100,18 +71,12 @@
     </style>
 
     <style name="page71.Blood_Donation" parent="Theme.MaterialComponents.NoActionBar">
-
         <item name="colorPrimary">@color/grey_black</item>
         <item name="hintTextColor">@color/white</item>
         <item name="colorOutline">@color/box_col</item>
         <item name="backgroundColor">@color/grey_black</item>
     </style>
-    <style name="page72.Blood_Donation" parent="Theme.MaterialComponents.NoActionBar">
 
-        <item name="colorPrimary">@color/g</item>
-        <item name="hintTextColor">@color/white</item>
-        <item name="colorOutline">@color/box_col</item>
-    </style>
     <style name="MyTextInputLayout_FloatingLabel" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <!-- Set the color of the floating label text -->
         <item name="android:textColor">@color/white</item>

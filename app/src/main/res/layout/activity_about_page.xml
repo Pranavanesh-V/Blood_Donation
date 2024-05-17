@@ -28,7 +28,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="20dp"
-        android:background="@drawable/back_join"
+        style="@style/blood_img6"
         app:layout_constraintBottom_toBottomOf="@id/hh_Bottom"
         app:layout_constraintStart_toStartOf="@id/start"
         app:layout_constraintTop_toTopOf="@id/hh_Top"
