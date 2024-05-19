@@ -123,31 +123,37 @@ public class confirm_password extends AppCompatActivity {
                     if (!(Objects.isNull(S_username) || Objects.isNull(S_conf_pass) || Objects.isNull(S_new_pass))) {
 
                         //Check if the user exists and the username is correct
-                        if (datasnapshot.child(S_username).exists() && S_username.equals(Username)) {
+                        if (datasnapshot.child(S_username).exists()) {
 
-                            //The new password and confirm password must be same
-                            if (S_new_pass.equals(S_conf_pass)) {
+                            if (S_username.equals(Username)) {
+                                //The new password and confirm password must be same
+                                if (S_new_pass.equals(S_conf_pass)) {
 
-                                // Replace data using set value method
-                                reference.child(S_username).child("Password").setValue(S_conf_pass);
+                                    // Replace data using set value method
+                                    reference.child(S_username).child("Password").setValue(S_conf_pass);
 
-                                //Message confirmation
-                                Toast.makeText(confirm_password.this, "Password Updated", Toast.LENGTH_SHORT).show();
+                                    //Message confirmation
+                                    Toast.makeText(confirm_password.this, "Password Updated", Toast.LENGTH_SHORT).show();
 
-                                //To sign in page
-                                Intent intent = new Intent(confirm_password.this, sign_in.class);
-                                startActivity(intent);
-                                finishAffinity();
+                                    //To sign in page
+                                    Intent intent = new Intent(confirm_password.this, sign_in.class);
+                                    startActivity(intent);
+                                    finishAffinity();
 
-                            } else {
-                                //Password mismatch message
-                                Log.d("output","Password doesn't Mismatch with the user's credentials");
-                                Toast.makeText(confirm_password.this, "Password MisMatch", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    //Password mismatch message
+                                    Log.d("output","Password doesn't Mismatch with the user's credentials");
+                                    Toast.makeText(confirm_password.this, "Password MisMatch", Toast.LENGTH_SHORT).show();
+                                }
+                            }else {
+                                //User not found message
+                                Log.d("output","Not correct username provided");
+                                Toast.makeText(confirm_password.this, "Enter respective username", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             //User not found message
                             Log.d("output","The User is not found");
-                            Toast.makeText(confirm_password.this, "User Not found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(confirm_password.this, "User not found", Toast.LENGTH_SHORT).show();
                         }
                     }
                     else

@@ -1,11 +1,9 @@
 <resources>
     <string name="app_name">Blood Donation</string>
     <string name="blood_donation">Blood Donation</string>
-    <string name="register">Register\ </string>
+    <string name="register">Register</string>
     <string name="pipe_Sys">|</string>
     <string name="sign_in">Sign In</string>
-    <string name="sing">A single drop of blood can make a huge difference </string>
-    <string name="ex_abcd_gma">EX: Abcd@gmail.com</string>
     <string name="email_id">Email ID</string>
     <string name="password">PASSWORD</string>
     <string name="b_d">Blood \nDonation</string>
@@ -19,7 +17,6 @@
     <string name="continue1">Continue</string>
     <string name="todo">todo\n</string>
     <string name="Skip">Skip-></string>
-    <string name="successfully_Logged">Successfully Logged In</string>
     <string name="forgot_password">forgot password?</string>
     <string name="forgot_password1">Forgot Password</string>
     <string name="ops">Opps. It happens to the best of us. Input your Phone Number to fix the issue.</string>
@@ -33,20 +30,8 @@
     <string name="name">NAME</string>
     <string name="will_to_be_a_donor">Willing to be a donor?</string>
     <string name="declaration">Declaration</string>
-    <string name="i_agree_to_the_above_declaration">I Agree to the above Declaration</string>
     <string name="decline">Decline</string>
     <string name="agree">Agree</string>
-    <string name="form">WHEREAS the OWNER herein is absolutely entitled to the property, land and building. bearing Door No.979, Old No.501, P.11. Road, Arumbakkam, Chennai 600 106, and the TENANT herein approached the OWNER to let out a portion of the property, the Second-floor of the said premises with 600, Sq.ft., built up area, more  fully described in the schedule hereunder, On monthly rental basis and the OWNER herein has agreed to let out the same, on the terms and conditions, as agreed by the parties hereto for a period of 2 years (two years), and it is by way of renewal, subject to the terms and conditions set out hereunder.
-NOW THIS RENTAL AGREEMENT WITNESSETH AS FOLLOWS:
-That the property agreed to be let out is the portion of the premises, 2nd floor with 600 Sq.ft., built up area at Door No.979, Old No.501, P.H. Road, Arumbakkam, Chennai-600 106, described in the schedule hereunder.
-That the monthly rent payable shall be at RS.12000/- (Rupees Twelve Thousand only) and the charges for the amenities provided shall be at RS.1000/- (Rupees One Thousand only) and the said consolidated sum of RS.13000/-(Rupees Thirteen Thousand only) shall be payable on or before 15th day of every succeeding English Calendar month.
-That the TENANT has on 26.06.2022, paid a sum of Rs.1,00,000/- (Rupees One Lakh only) paid in cash
-That it is hereby specifically agreed that the Rental Advance Cum Security Deposit shall not carry any interest and the same shall be returnable or adjustable at the time of termination of tenancy or vacating the tenanted premises and handing over vacant possession to the OWNER, whichever is later.
-
-That the TENANT shall not commit any default in payment of monthly rents and further the option shall be with the OWNER to evict/dispossess the TENANT, if they commit default continuously for two months.
-
-OWNER                                                                                                                                                   TENANT
-</string>
     <string name="blood_group">Blood Group</string>
     <string name="address1">Address</string>
     <string name="state">State</string>
@@ -58,11 +43,9 @@ OWNER                                                                           
     <string name="female">Female</string>
     <string name="gender">Gender</string>
     <string name="abc_gmail_com">abc@gmail.com</string>
-    <string name="search">Search</string>
     <string name="done">Done</string>
     <string name="age">Age</string>
     <string name="location">Location</string>
-    <string name="description">Description</string>
     <string name="hi">Hi,</string>
     <string name="join_us_save_lives_together">Join Us,Save Lives \nTogether</string>
     <string name="donate">DONATE</string>
@@ -70,14 +53,9 @@ OWNER                                                                           
     <string name="Declaration">  ⁕Age: Donors are usually required to be at least 17 or 18 years old.\n ⁕Weight: Donors often need to weigh a minimum amount, usually around 50 kg.\n ⁕Health: They should not have any acute or chronic illnesses, infections, or diseases that could be transmitted through blood.\n ⁕Medications: Certain medications can affect blood donation eligibility. Donors should inform the donation center about any medications they are taking.\n ⁕Travel: Travel to certain regions, especially those with a risk of malaria or other bloodborne diseases, may affect eligibility. Some countries or regions have specific deferral periods.\n ⁕Recent Donations: There is usually a waiting period between blood donations to allow the body to recover. This can range from a few weeks to a few months, depending on the type of donation (whole blood, platelets, etc.).\n ⁕Piercings and Tattoos: Some donation centers have specific guidelines regarding recent piercings and tattoos, often requiring a waiting period before donating.\n ⁕Pregnancy: Pregnant individuals are usually not eligible to donate blood. There may also be a waiting period after childbirth.\n ⁕Lifestyle Choices: Certain lifestyle factors, such as recent drug use or high-risk sexual behaviour, may affect eligibility.\n ⁕Medical History: Donors are typically asked about their medical history and risk factors. Honest and accurate answers are crucial to ensuring the safety of the blood supply.\n\n\n </string>
     <string name="declaration_nto_become_a_donor">DECLARATION\nTo Become A Donor</string>
     <string name="agree_to_the_conditions">Agree to the conditions</string>
-    <string name="units">Units</string>
     <string name="descriptive_reason">Descriptive Reason</string>
     <string name="profile">PROFILE</string>
     <string name="edit"><u>Edit</u></string>
-    <string name="name25">Name:</string>
-    <string name="blood_group25">Blood Group:</string>
-    <string name="e_mail">E-mail:</string>
-    <string name="address">Address:</string>
     <string name="about">ABOUT</string>
     <string name="about_our_b"><b>About Our Blood Donation App</b></string>
     <string name="p1">About Our Blood Donation App Welcome to BLOOD DONATION, your trusted partner in saving lives through blood donation. We are passionate about connecting donors with those in need, and we\'re thrilled to share our story with you.</string>
@@ -115,21 +93,15 @@ OWNER                                                                           
     <string name="sp10">Your trust in Blood Donation is our most valuable asset. We are dedicated to maintaining the highest standards of security and privacy in every aspect of our app. If you have any questions or concerns regarding the security of your data, please don\'t hesitate to contact us.</string>
     <string name="sp11">Thank you for being a part of our community and for entrusting us with your information.\n\n\n</string>
     <string name="save">Save</string>
-    <string name="blood_group125">Blood Group</string>
-    <string name="spaces_space_id_entries">spaces/{space_id}/entries</string>
     <string name="choose_from_device">choose from device</string>
-    <string name="camera">Camera</string>
     <string name="cancel">Cancel</string>
     <string name="please_agree_to_our_declaration">Please Agree to Our Declaration</string>
     <string name="delete_profile">Delete Profile</string>
-    <string name="choose_from_n_device">Choose from \n Device</string>
-    <string name="Mic">Mic check 1 2</string>
     <string name="loading">Loading…</string>
     <string name="have_you_accepted_to_donate">Have you accepted to donate?</string>
     <string name="yes">yes</string>
     <string name="no">No</string>
     <string name="history">History</string>
-    <string name="blood">blood</string>
     <string name="name1">Name</string>
     <string name="email">Email</string>
     <string name="address2">Address</string>
