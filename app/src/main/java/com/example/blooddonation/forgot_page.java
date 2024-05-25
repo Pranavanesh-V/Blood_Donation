@@ -33,6 +33,7 @@ public class forgot_page extends AppCompatActivity {
     String S_phone;
     private static final int SMS_PERMISSION_REQUEST_CODE = 1;
     Button submit;
+    boolean flag;
     private static String MESSAGE;
 
     @Override
@@ -86,9 +87,11 @@ public class forgot_page extends AppCompatActivity {
         };
         E_phone.addTextChangedListener(login);
 
+        flag=false;
         // Check SMS permission
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
             // Permission already granted, send SMS
+            flag=true;
         } else {
             // Request SMS permission
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION_REQUEST_CODE);
@@ -111,12 +114,19 @@ public class forgot_page extends AppCompatActivity {
                     if (num.equals(S_phone))
                     {
                         //send otp in sms
-                        sendSms();
-                        Intent intent1 =new Intent(forgot_page.this, otp_auth.class);
-                        intent1.putExtra("number",S_phone);
-                        intent1.putExtra("OTP",MESSAGE);
-                        intent1.putExtra("U_name",username);
-                        startActivity(intent1);
+
+                        if (flag) {
+                            sendSms();
+                            Intent intent1 = new Intent(forgot_page.this, otp_auth.class);
+                            intent1.putExtra("number", S_phone);
+                            intent1.putExtra("OTP", MESSAGE);
+                            intent1.putExtra("U_name", username);
+                            startActivity(intent1);
+                        }
+                        else
+                        {
+                            Toast.makeText(forgot_page.this, "Provide sms permission", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     else
                     {

@@ -177,7 +177,14 @@ public class Request_page extends AppCompatActivity {
 
                         //Send the Request to every donor who has same blood group
                         Sms_sender sms_sender=new Sms_sender();
-                        sms_sender.send(S_blood_g,S_name);
+                        try {
+                            sms_sender.send(S_blood_g,S_name);
+                        }catch (Exception e) {
+                            Toast.makeText(Request_page.this, "Provide sms permission", Toast.LENGTH_SHORT).show();
+                            finish();
+                            
+                        }
+
 
                         LayoutInflater inflater=(LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
                         @SuppressLint("InflateParams") View popUpView=inflater.inflate(R.layout.loading_lay,null);
