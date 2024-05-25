@@ -5,11 +5,11 @@
 
     <!-- Image -->
     <item
-        android:drawable="@drawable/donate"
+        android:drawable="@drawable/home"
         android:top="5dp"
         android:bottom="8dp"
-        android:height="35dp"
         android:width="35dp"
+        android:height="35dp"
         android:left="5dp"
         android:right="8dp"
         android:gravity="center" />

@@ -50,7 +50,7 @@
     </style>
 
     <style name="blood_img6" parent="page8.Blood_Donation">
-        <item name="android:background">@drawable/back_join</item>
+        <item name="android:background">@drawable/black_back</item>
     </style>
 
     <style name="blood_img8" parent="page8.Blood_Donation">
