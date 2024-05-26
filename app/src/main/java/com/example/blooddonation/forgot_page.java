@@ -189,6 +189,6 @@ public class forgot_page extends AppCompatActivity {
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(S_phone, null, MESSAGE, null, null);
         Toast.makeText(this, "SMS sent successfully", Toast.LENGTH_SHORT).show();
-        Log.d("output","Otp is "+MESSAGE);
+        Log.d("output","Your password reset OTP is "+MESSAGE+" - Blood Donation Application");
     }
 }
